@@ -1,0 +1,28 @@
+<div class="navbar">
+  <button mat-button routerLink="/view">View Cwimpies!</button>
+
+  <button mat-button routerLink="/generate">Generate</button>
+
+  <button mat-button routerLink="/schedule">Daily schedule</button>
+
+
+  <button
+    mat-button
+    [matMenuTriggerFor]="profileMenu"
+  >
+    Profile
+  </button>
+  <mat-menu #profileMenu="matMenu" xPosition="before">
+    <button
+      mat-menu-item
+      routerLink="/profile"
+    >
+      Profile
+    </button>
+    <button
+      mat-menu-item
+    >
+      Logout
+    </button>
+  </mat-menu>
+</div>
