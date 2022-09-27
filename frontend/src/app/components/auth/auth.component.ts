@@ -13,14 +13,11 @@ export class AuthComponent implements OnInit {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
     {
-      key: 'email',
+      key: 'username',
       type: 'input',
-      templateOptions: {
-        type: 'email'
-      },
       props: {
-        label: 'Email address',
-        placeholder: 'Email',
+        label: 'Username',
+        placeholder: 'Username',
         required: true,
       }
     },
