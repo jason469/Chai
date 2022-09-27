@@ -1,0 +1,23 @@
+<div *ngIf="isLoading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(authForm)"
+  #authForm="ngForm"
+  *ngIf="!isLoading"
+>
+  <formly-form
+    [form]="form"
+    [fields]="fields"
+  >
+  </formly-form>
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    [disabled]=!authForm.valid
+  >
+    Sign in
+  </button>
+</form>

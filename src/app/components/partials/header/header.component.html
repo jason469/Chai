@@ -1,14 +1,45 @@
 <div class="navbar">
-  <button mat-button routerLink="/view">View Cwimpies!</button>
-
-  <button mat-button routerLink="/generate">Generate</button>
-
-  <button mat-button routerLink="/schedule">Daily schedule</button>
-
+  <button
+    mat-button
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    Chai
+  </button>
+  <button
+    mat-button
+    routerLink="/login"
+    routerLinkActive="active"
+  >
+    Login
+  </button>
+  <button
+    mat-button
+    routerLink="/view-bunnies"
+    routerLinkActive="active"
+  >
+    View Cwimpies!
+  </button>
+  <button
+    mat-button
+    routerLink="/generate"
+    routerLinkActive="active"
+  >
+    Generate
+  </button>
+  <button
+    mat-button
+    routerLink="/schedule"
+    routerLinkActive="active"
+  >
+    Daily schedule
+  </button>
 
   <button
     mat-button
     [matMenuTriggerFor]="profileMenu"
+    routerLinkActive="active"
   >
     Profile
   </button>
@@ -16,11 +47,15 @@
     <button
       mat-menu-item
       routerLink="/profile"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
     >
       Profile
     </button>
     <button
       mat-menu-item
+      routerLink="/profile/logout"
+      routerLinkActive="active"
     >
       Logout
     </button>
