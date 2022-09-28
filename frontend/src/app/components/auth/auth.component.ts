@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormGroupDirective} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-auth',
@@ -36,19 +37,25 @@ export class AuthComponent implements OnInit {
   ];
 
   onSubmit(form: FormGroupDirective) {
-    console.log(form.value);
     if (!form.valid) {
       return;
     }
 
-    const email = form.value.email;
+    const username = form.value.username;
     const password = form.value.password;
 
     this.isLoading = true;
+    this.userService.login({
+      username: username,
+      password: password
+    }).subscribe(() => {
+    })
     form.resetForm();
   }
 
-  constructor() { }
+  constructor(private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
   }

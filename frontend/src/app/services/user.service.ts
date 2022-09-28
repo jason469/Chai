@@ -18,7 +18,7 @@ export class UserService {
   }
 
   login(userLogin: IUserLogin): Observable<User> {
-    this.http.post<User>(
+    return this.http.post<User>(
       USER_LOGIN_URL,
       userLogin
     ).pipe(
@@ -28,13 +28,13 @@ export class UserService {
           this.toastrService.success(
             `Welcome to Chai ${user.name}!`,
             `Your login was successful, well done!`
-          )
+          );
         },
         error: (errorResponse) => {
           this.toastrService.error(
             errorResponse.error,
             `Your login wasn't successful, boo :(`
-          )
+          );
         }
       })
     );

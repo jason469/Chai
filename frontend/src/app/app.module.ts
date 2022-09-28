@@ -8,26 +8,20 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponent} from './components/partials/header/header.component';
 import {ToastrModule} from 'ngx-toastr'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
-import {
-  MatMenuModule,
-} from '@angular/material/menu';
-import {
-  MatIconModule
-} from '@angular/material/icon';
-import {
-  MatButtonModule
-} from "@angular/material/button";
+import {MatMenuModule,} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from "@angular/material/button";
 import {GenerateComponent} from './components/pages/generate/generate.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {ScheduleComponent} from './components/pages/schedule/schedule.component';
-import { ViewAllComponent } from './components/pages/viewBunnies/view-all/view-all.component';
-import { ViewOneBunnyComponent } from './components/pages/viewBunnies/view-one-bunny/view-one-bunny.component';
+import {ViewAllComponent} from './components/pages/viewBunnies/view-all/view-all.component';
+import {ViewOneBunnyComponent} from './components/pages/viewBunnies/view-one-bunny/view-one-bunny.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthComponent} from "./components/auth/auth.component";
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormlyModule} from '@ngx-formly/core';
+import {FormlyMaterialModule} from '@ngx-formly/material';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -57,6 +51,7 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
