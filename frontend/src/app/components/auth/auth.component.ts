@@ -51,6 +51,7 @@ export class AuthComponent implements OnInit {
     }).subscribe(() => {
     })
     form.resetForm();
+    this.isLoading = false;
   }
 
   constructor(private userService: UserService) {
