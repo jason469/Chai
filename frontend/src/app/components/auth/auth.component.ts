@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormGroupDirective, NgForm} from "@angular/forms";
+import {FormGroup, FormGroupDirective} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 
 @Component({

@@ -6,6 +6,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponent} from './components/partials/header/header.component';
+import {ToastrModule} from 'ngx-toastr'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {
   MatMenuModule,
@@ -19,17 +21,13 @@ import {
 import {GenerateComponent} from './components/pages/generate/generate.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {ScheduleComponent} from './components/pages/schedule/schedule.component';
-import {RouterModule, Routes} from "@angular/router";
 import { ViewAllComponent } from './components/pages/viewBunnies/view-all/view-all.component';
 import { ViewOneBunnyComponent } from './components/pages/viewBunnies/view-one-bunny/view-one-bunny.component';
-
-const appRoutes: Routes = [
-  {path: 'generate', component: GenerateComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'schedule', component: ScheduleComponent},
-  {path: 'view', component: ViewAllComponent},
-  {path: 'view/:id', component: ViewOneBunnyComponent},
-]
+import {AppRoutingModule} from "./app-routing.module";
+import {AuthComponent} from "./components/auth/auth.component";
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 @NgModule({
   declarations: [
@@ -40,6 +38,7 @@ const appRoutes: Routes = [
     ScheduleComponent,
     ViewAllComponent,
     ViewOneBunnyComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,11 +48,20 @@ const appRoutes: Routes = [
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule.forRoot(appRoutes)
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      newestOnTop: false
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
