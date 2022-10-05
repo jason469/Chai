@@ -1,2 +1,0 @@
-// Connect to mongoDB from cmd line
-mongosh "mongodb+srv://chaicluster.9efd50d.mongodb.net/ChaiDB" --apiVersion 1 --username Jasonliu215

@@ -1,0 +1,6 @@
+{
+  "/backend": {
+    "target": "http://chai-backend:5000",
+    "secure": false
+  }
+}

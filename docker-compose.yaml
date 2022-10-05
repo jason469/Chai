@@ -1,0 +1,51 @@
+version: "3"
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    container_name: chai-frontend
+    networks:
+      -  chai-net
+    volumes:
+      -  ./frontend/src:/usr/app/src
+      -  ./frontend/public:/usr/app/public
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    container_name: chai-backend
+    networks:
+      - chai-net
+    volumes:
+      - ./backend/src:/usr/app/src
+    depends_on:
+      - db
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-db
+    networks:
+      - chai-net
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  chai-net:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

@@ -1,0 +1,28 @@
+// Connect to mongoDB from cmd line
+mongosh "mongodb+srv://chaicluster.9efd50d.mongodb.net/ChaiDB" --apiVersion 1 --username Jasonliu215
+
+// DOCKER
+
+// Delete all volumes
+docker volume rm $(docker volume ls -q)
+// Delete all images
+docker rmi $(docker images -q)
+// Stop all containers
+docker stop $(docker ps -a -q)
+// Delete all stopped containers
+docker rm $(docker ps -a -q)
+
+// Build images with no cache
+docker-compose build --no-cache
+
+// Start the services
+docker-compose up
+
+// list the services
+docker-compose ps
+
+// list the containers
+docker ps
+
+// stop services
+docker-compose stop

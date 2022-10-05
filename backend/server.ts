@@ -7,7 +7,7 @@ const app = express();
 const authRouter = require('./src/routes/auth');
 import {dbConnect} from './src/config/database.config'
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 dbConnect();
 

@@ -54,8 +54,8 @@ authRouter.post('/api/users/login', async (req, res) => {
                 .json({msg: 'Incorrect password'});
         }
 
-        const token = jwt.sign({id: user._id}, "passwordKey");
-        res.json({token, ...user._doc})
+        const token = jwt.sign({id: user._id}, "passwordKey", {expiresIn: "100 days"});
+        res.json({token, ...user}.lean())
     } catch (e) {
         return res.status(500).json({error: e.message})
     }

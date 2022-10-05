@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormGroupDirective} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
-import {UserService} from "../../services/user.service";
+import {AuthService} from "../../services/auth.service";
+import {Observable} from "rxjs";
+import {AuthResponseData} from "../../shared/interfaces/AuthResponseData";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +14,10 @@ import {UserService} from "../../services/user.service";
 export class AuthComponent implements OnInit {
   isLoading = false;
   error: string = "";
+
+  constructor(private userService: AuthService, private router: Router) {
+  }
+
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
     {
@@ -44,17 +51,24 @@ export class AuthComponent implements OnInit {
     const username = form.value.username;
     const password = form.value.password;
 
+    let user: Observable<AuthResponseData>;
+
     this.isLoading = true;
-    this.userService.login({
+
+    user = this.userService.login({
       username: username,
       password: password
-    }).subscribe(() => {
     })
-    form.resetForm();
-    this.isLoading = false;
-  }
 
-  constructor(private userService: UserService) {
+    user.subscribe(
+      resData => {
+        form.resetForm();
+        this.router.navigate(['/'])
+      }, errorMessage => {
+        console.log('error in login', errorMessage)
+      })
+
+    this.isLoading = false;
 
   }
 
