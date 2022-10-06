@@ -7,7 +7,8 @@
     "start-on-docker": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "remove-analytics": "ng analytics disable"
   },
   "private": true,
   "dependencies": {
@@ -22,16 +23,16 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@angular/service-worker": "^14.2.0",
+    "@ngx-formly/core": "^6.0.0",
+    "@ngx-formly/material": "^6.0.0",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "@ngx-formly/core": "^6.0.0",
-    "@ngx-formly/material": "^6.0.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.3",
-    "@angular/cli": "~14.2.3",
+    "@angular/cli": "^14.2.5",
     "@angular/compiler-cli": "^14.2.0",
     "@ngx-formly/schematics": "^6.0.0",
     "@types/jasmine": "~4.0.0",

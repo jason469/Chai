@@ -4,11 +4,12 @@ FROM node:14-slim
 # Setting Working Directory
 WORKDIR /usr/app
 
-# Copying only package.json
+# Copying json and lock files
 COPY package*.json ./
+COPY yarn.lock ./
 
 # Install Dependencies
-RUN npm install
+RUN yarn install
 
 # Copy rest of the code to container
 COPY . .
@@ -16,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the API on Nodemon
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "run", "dev"]

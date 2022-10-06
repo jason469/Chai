@@ -13,10 +13,10 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
 // Build images with no cache
-docker-compose build --no-cache
+docker-compose -f docker-compose-dev.yaml build --no-cache
 
 // Start the services
-docker-compose up
+docker-compose -f docker-compose-dev.yaml up
 
 // list the services
 docker-compose ps
