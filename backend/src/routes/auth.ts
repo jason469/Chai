@@ -1,17 +1,19 @@
+import {Request, Response} from "express";
+
 const express = require('express');
-const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require('../middlewares/auth.mid');
+const User = require('../models/User')
 
 const authRouter = express.Router();
 
-authRouter.get('/', auth, async (req, res) => {
-    const user = await User.findById(req.user);
-    res.json({...user._doc, token: req.token})
+authRouter.get('/', auth, async (req: Request, res:Response) => {
+    const user = await User.findById(req.body.user);
+    res.json({...user._doc, token: req.body.token})
 })
 
-authRouter.post('/api/users/signup', async (req, res) => {
+authRouter.post('/api/users/signup', async (req: Request, res: Response) => {
     try {
         const {
             name,
@@ -33,13 +35,14 @@ authRouter.post('/api/users/signup', async (req, res) => {
         })
         user = await user.save()
         res.json(user);
-    } catch (e) {
+    } catch (e:any) {
         return res.status(500).json({error: e.message})
     }
 })
 
-authRouter.post('/api/users/login', async (req, res) => {
+authRouter.post('/api/users/login', async (req: Request, res: Response) => {
     try {
+        console.log('login v13')
         const {username, password} = req.body;
         const user = await User.findOne({username});
         if (!user) {
@@ -55,13 +58,14 @@ authRouter.post('/api/users/login', async (req, res) => {
         }
 
         const token = jwt.sign({id: user._id}, "passwordKey", {expiresIn: "100 days"});
-        res.json({token, ...user}.lean())
-    } catch (e) {
+        res.json({token, ...user})
+    } catch (e:any) {
+        console.log(e)
         return res.status(500).json({error: e.message})
     }
 })
 
-authRouter.post('/api/token/tokenIsValid', async (req, res) => {
+authRouter.post('/api/token/tokenIsValid', async (req: Request, res: Response) => {
     try {
         const token = req.header('x-auth-token');
         if (!token) return res.json(false);
@@ -72,7 +76,7 @@ authRouter.post('/api/token/tokenIsValid', async (req, res) => {
         if (!user) return res.json(false);
         res.json(true)
 
-    } catch (e) {
+    } catch (e:any) {
         return res.status(500).json({error: e.message})
     }
 });

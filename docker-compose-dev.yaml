@@ -1,7 +1,7 @@
 version: "3"
 services:
 
-  frontend:
+  angular:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
@@ -14,11 +14,11 @@ services:
       -  ./frontend/src:/usr/app/src
       -  ./frontend/public:/usr/app/public
     depends_on:
-      - backend
+      - nodejs
     stdin_open: true
     tty: true
 
-  backend:
+  nodejs:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -29,10 +29,11 @@ services:
       - chai-net
     volumes:
       - ./backend/src:/usr/app/src
+      - ./backend/nodemon.json:/usr/app/nodemon.json
     depends_on:
-      - db
+      - mongodb
 
-  db:
+  mongodb:
     image: mongo
     ports:
       - 27017:27017

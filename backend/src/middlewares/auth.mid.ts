@@ -1,6 +1,7 @@
-const jwt = require("jsonwebtoken");
+import {NextFunction, Request, Response} from "express";
+const jwt = require('jsonwebtoken');
 
-const authMid = async (req, res, next) => {
+const authMid = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.header("x-auth-token");
         if (!token)
@@ -11,11 +12,10 @@ const authMid = async (req, res, next) => {
             return res
                 .status(401)
                 .json({ msg: "Token verification failed, authorization denied." });
-
-        req.user = verified.id;
-        req.token = token;
+        req.body.user = verified.id;
+        req.body.token = token;
         next();
-    } catch (err) {
+    } catch (err: any) {
         res.status(500).json({ error: err.message });
     }
 };

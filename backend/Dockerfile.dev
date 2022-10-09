@@ -10,6 +10,7 @@ COPY yarn.lock ./
 
 # Install Dependencies
 RUN yarn install
+RUN npm install
 
 # Copy rest of the code to container
 COPY . .

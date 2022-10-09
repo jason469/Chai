@@ -1,15 +1,17 @@
-require('dotenv').config()
-
+import * as dotenv from 'dotenv'
 const express = require('express');
 const cors = require("cors");
 
 const app = express();
 const authRouter = require('./src/routes/auth');
-import {dbConnect} from './src/config/database.config'
+const databaseConfig = require('./src/config/database.config');
+
+dotenv.config()
+require('dotenv').config()
+
+databaseConfig.dbConnect();
 
 const PORT = process.env.PORT || 5000;
-
-dbConnect();
 
 // Middleware
 app.use(express.json());

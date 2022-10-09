@@ -11,12 +11,17 @@ docker rmi $(docker images -q)
 docker stop $(docker ps -a -q)
 // Delete all stopped containers
 docker rm $(docker ps -a -q)
+//Prune
+docker system --prune
 
 // Build images with no cache
 docker-compose -f docker-compose-dev.yaml build --no-cache
 
 // Start the services
 docker-compose -f docker-compose-dev.yaml up
+
+// Build and start containers
+docker-compose -f docker-compose-dev.yaml up --build
 
 // list the services
 docker-compose ps
@@ -26,3 +31,6 @@ docker ps
 
 // stop services
 docker-compose stop
+
+
+// Connect
