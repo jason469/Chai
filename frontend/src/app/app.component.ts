@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('restarted')
     this.authService.autoLogin()
   }
 }

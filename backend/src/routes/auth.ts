@@ -42,7 +42,6 @@ authRouter.post('/api/users/signup', async (req: Request, res: Response) => {
 
 authRouter.post('/api/users/login', async (req: Request, res: Response) => {
     try {
-        console.log('login v13')
         const {username, password} = req.body;
         const user = await User.findOne({username});
         if (!user) {
@@ -58,7 +57,8 @@ authRouter.post('/api/users/login', async (req: Request, res: Response) => {
         }
 
         const token = jwt.sign({id: user._id}, "passwordKey", {expiresIn: "100 days"});
-        res.json({token, ...user})
+        console.log(token)
+        res.json({token, ...user._doc})
     } catch (e:any) {
         console.log(e)
         return res.status(500).json({error: e.message})
@@ -67,7 +67,8 @@ authRouter.post('/api/users/login', async (req: Request, res: Response) => {
 
 authRouter.post('/api/token/tokenIsValid', async (req: Request, res: Response) => {
     try {
-        const token = req.header('x-auth-token');
+        const token = req.body.token;
+        console.log(token)
         if (!token) return res.json(false);
         const isVerified = jwt.verify(token, "passwordKey");
         if (!isVerified) return res.json(false);

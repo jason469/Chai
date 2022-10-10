@@ -1,70 +1,86 @@
 <div class="navbar">
-  <button
-    mat-button
-    routerLink="/"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{exact: true}"
+  <div
     *ngIf="isAuthenticated"
   >
-    Chai
-  </button>
-  <button
-    mat-button
-    routerLink="/login"
-    routerLinkActive="active"
-    *ngIf="!isAuthenticated"
-  >
-    Login
-  </button>
-  <button
-    mat-button
-    routerLink="/view-bunnies"
-    routerLinkActive="active"
-    *ngIf="isAuthenticated"
-  >
-    View Cwimpies!
-  </button>
-  <button
-    mat-button
-    routerLink="/generate"
-    routerLinkActive="active"
-    *ngIf="isAuthenticated"
-  >
-    Generate
-  </button>
-  <button
-    mat-button
-    routerLink="/schedule"
-    routerLinkActive="active"
-    *ngIf="isAuthenticated"
-  >
-    Daily schedule
-  </button>
-
-  <button
-    mat-button
-    [matMenuTriggerFor]="profileMenu"
-    routerLinkActive="active"
-    *ngIf="isAuthenticated"
-  >
-    Profile
-  </button>
-  <mat-menu #profileMenu="matMenu" xPosition="before">
     <button
-      mat-menu-item
-      routerLink="/profile"
+      mat-button
+      routerLink="/"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}"
-      *ngIf="isAuthenticated"
+    >
+      Chai
+    </button>
+  </div>
+
+  <div
+    *ngIf="!isAuthenticated"
+  >
+    <button
+      mat-button
+      routerLink="/login"
+      routerLinkActive="active"
+    >
+      Login
+    </button>
+  </div>
+  <div
+    *ngIf="isAuthenticated"
+  >
+    <button
+      mat-button
+      routerLink="/view-bunnies"
+      routerLinkActive="active"
+    >
+      View Cwimpies!
+    </button>
+  </div>
+  <div
+    *ngIf="isAuthenticated"
+  >
+    <button
+      mat-button
+      routerLink="/generate"
+      routerLinkActive="active"
+    >
+      Generate
+    </button>
+  </div>
+  <div
+    *ngIf="isAuthenticated"
+  >
+    <button
+      mat-button
+      routerLink="/schedule"
+      routerLinkActive="active"
+    >
+      Daily schedule
+    </button>
+  </div>
+  <div
+    *ngIf="isAuthenticated"
+  >
+    <button
+      mat-button
+      [matMenuTriggerFor]="profileMenu"
+      routerLinkActive="active"
     >
       Profile
     </button>
-    <button
-      mat-menu-item
-      *ngIf="isAuthenticated"
-      (click)="onLogout()"
-    >
-      Logout
-    </button>
-  </mat-menu>
+    <mat-menu #profileMenu="matMenu" xPosition="before">
+      <button
+        mat-menu-item
+        routerLink="/profile"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+      >
+        Profile
+      </button>
+      <button
+        mat-menu-item
+        (click)="onLogout()"
+      >
+        Logout
+      </button>
+    </mat-menu>
+  </div>
 </div>

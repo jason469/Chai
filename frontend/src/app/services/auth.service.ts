@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, catchError, Observable, Subject, tap, throwError} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {AuthResponseData} from "../shared/interfaces/AuthResponseData";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {USER_LOGIN_URL} from "../shared/constants/url";
+import {TOKEN_VALID_URL, USER_LOGIN_URL} from "../shared/constants/url";
 import {ToastrService} from "ngx-toastr";
 import {IUserLogin} from "../shared/interfaces/IUserLogin";
 import {User} from "../shared/models/User";
@@ -13,13 +13,14 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   loggedIn = false;
-  user = new BehaviorSubject<User>({} as User)
+  user = new BehaviorSubject<User | null>(null);
 
   constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
-    private router:Router
-  ) {}
+    private router: Router
+  ) {
+  }
 
   login(userLogin: IUserLogin): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -28,7 +29,6 @@ export class AuthService {
     ).pipe(
       tap({
         next: (responseData: AuthResponseData) => {
-          console.log(responseData)
           // const expirationDate = new Date(new Date().getTime() + responseData.expiresIn * 1000)
           const user = new User(
             responseData._id,
@@ -37,7 +37,6 @@ export class AuthService {
             responseData.token,
             // expirationDate
           )
-          console.log(user)
           this.user.next(user)
           this.toastrService.success(
             `Welcome to Chai ${user.name}!`,
@@ -64,22 +63,41 @@ export class AuthService {
       name: string;
       _username: string;
       _token: string;
-
     } = JSON.parse(localStorage.getItem('userData') || '{}');
     if (!userData) {
+      console.log('no data')
       return;
-    }
-    console.log(userData)
-
-    const loadedUser = new User(
-      userData.id,
-      userData.name,
-      userData._username,
-      userData._token
-    )
-
-    if (loadedUser.token) {
-      this.user.next(loadedUser)
+    } else {
+      const loadedUser = new User(
+        userData.id,
+        userData.name,
+        userData._username,
+        userData._token
+      )
+      if (loadedUser.token) {
+        return this.http.post<Boolean>(
+          TOKEN_VALID_URL,
+          {token: loadedUser.token}
+        ).pipe(
+          tap(
+            (isValid: Boolean) => {
+              console.log(isValid)
+              if (isValid) {
+                this.user.next(loadedUser)
+                console.log(this.user)
+                return
+              } else {
+                console.log('need to login')
+                localStorage.removeItem('userData');
+                this.user.next({} as User)
+                return;
+              }
+            }
+          )
+        )
+      } else {
+        return;
+      }
     }
   }
 
@@ -103,9 +121,11 @@ export class AuthService {
 
 
   logOut() {
-    this.user.next({} as User);
+    this.user.next(null);
     this.loggedIn = false;
+    localStorage.removeItem('userData');
     this.router.navigate(['/login'])
+    console.log(this.user)
   }
 
   getLoginStatus() {
