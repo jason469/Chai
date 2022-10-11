@@ -58,6 +58,7 @@ export class AuthService {
   };
 
   autoLogin() {
+    console.log('autologin')
     const userData: {
       id: string;
       name: string;
@@ -85,17 +86,17 @@ export class AuthService {
               if (isValid) {
                 this.user.next(loadedUser)
                 console.log(this.user)
-                return
               } else {
                 console.log('need to login')
                 localStorage.removeItem('userData');
-                this.user.next({} as User)
-                return;
+                this.user.next(null)
               }
             }
           )
         )
       } else {
+        console.log('no token')
+        this.user.next(null)
         return;
       }
     }

@@ -6,6 +6,8 @@ const app = express();
 const authRouter = require('./src/routes/auth');
 const databaseConfig = require('./src/config/database.config');
 
+const Country = require('./src/models/Country')
+
 dotenv.config()
 require('dotenv').config()
 
@@ -20,7 +22,12 @@ app.use(cors({
     origin: ["http://localhost:4200"]
 }))
 app.use(authRouter)
+const country = new Country({
+    name: 'Test country',
+});
 
+country.save()
+console.log(country)
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`connected at port ${PORT}`)

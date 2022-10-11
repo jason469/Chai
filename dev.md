@@ -58,6 +58,7 @@ Run the following command in the terminal to connect to mongoDB <br>
 2. Run `mongosh` so that you can execute mongosh commands
 
 - `show dbs` will show all databases
+- `show collections` will show all collections
 - `db.Users.insertOne({"name": "Jason Liu", "username": "Jasonliu215", "password":"trash can"})` creates default user
 - `db.<collection>.find()` will show all documents within the collection
 </p>

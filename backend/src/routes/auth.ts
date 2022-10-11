@@ -67,16 +67,17 @@ authRouter.post('/api/users/login', async (req: Request, res: Response) => {
 
 authRouter.post('/api/token/tokenIsValid', async (req: Request, res: Response) => {
     try {
+        console.log('token is valid route')
         const token = req.body.token;
-        console.log(token)
         if (!token) return res.json(false);
         const isVerified = jwt.verify(token, "passwordKey");
         if (!isVerified) return res.json(false);
+        console.log('verified')
 
         const user = await User.findById(isVerified.id);
+        console.log(user)
         if (!user) return res.json(false);
         res.json(true)
-
     } catch (e:any) {
         return res.status(500).json({error: e.message})
     }

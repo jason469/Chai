@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-const userSchema = mongoose.Schema(
+const userSchema = new Schema(
     {
         name: {
             required: true,
@@ -22,11 +23,15 @@ const userSchema = mongoose.Schema(
                 message: "Your password needs to be at least 6 characters long"
             }
         },
+        country_id: {  // A user can only have 1 country
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Country'
+        }
     },
     {
         collection: "Users"
     }
 );
 
-const User = mongoose.model('User', userSchema);
+const User = model("User", userSchema);
 module.exports = User;
