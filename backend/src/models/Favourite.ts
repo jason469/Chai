@@ -12,11 +12,7 @@ const FavouriteSchema = new mongoose.Schema({
             required: true,
             enum: Object.values(FavouriteChoices),
             default: FavouriteChoices.Food
-        },
-        cwimpie_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
-        },
+        }
     },
     {
         collection: "Favourites"

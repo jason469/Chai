@@ -12,11 +12,7 @@ const SpeciesSchema = new mongoose.Schema({
             required: true,
             enum: Object.values(SpeciesChoices),
             default: SpeciesChoices.Bunny
-        },
-        cwimpie_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
-        },
+        }
     },
     {
         collection: "Species"

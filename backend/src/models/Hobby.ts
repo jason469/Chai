@@ -8,11 +8,7 @@ const HobbySchema = new mongoose.Schema({
         },
         description: {
             type: String,
-        },
-        cwimpie_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
-        },
+        }
     },
     {
         collection: "Hobbies"

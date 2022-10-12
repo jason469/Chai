@@ -15,11 +15,7 @@ const ProfessionSchema = new mongoose.Schema({
             required: true,
             enum: Object.values(ProfessionTypes),
             default: ProfessionTypes.Main
-        },
-        cwimpie_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
-        },
+        }
     },
     {
         collection: "Professions"

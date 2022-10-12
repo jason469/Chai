@@ -15,11 +15,7 @@ const StampSchema = new mongoose.Schema({
             required: true,
             enum: Object.values(FontChoices),
             default: FontChoices.Arial
-        },
-        cwimpie_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
-        },
+        }
     },
     {
         collection: "Stamps"

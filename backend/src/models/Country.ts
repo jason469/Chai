@@ -9,13 +9,7 @@ const CountrySchema = new mongoose.Schema({
         flag_image: {
             data: Buffer,
             contentType: String
-        },
-        user: [  // A country can belong to many users
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ]
+        }
     },
     {
         collection: "Countries"

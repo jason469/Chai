@@ -12,7 +12,6 @@ const cwimpieSchema = new mongoose.Schema(
             contentType: String
         },
         birthdate: {
-            required: true,
             type: Date
         },
         partner: {
