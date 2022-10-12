@@ -1,4 +1,4 @@
-import {IColour, ISpecies} from "./modelInterfaces";
+import {IColour, IFavourite, IHobby, IProfession, ISpecies} from "./modelInterfaces";
 
 export interface INewCwimpieData {
     name: String,
@@ -7,6 +7,8 @@ export interface INewCwimpieData {
     user ?: String,
     token ?: String,
     // birthdate: String,
-    // favouriteFood: IFavourite,
+    favourites: IFavourite[],
+    professions: IProfession[],
+    hobbies: IHobby[],
     partner_name?: String,
 }

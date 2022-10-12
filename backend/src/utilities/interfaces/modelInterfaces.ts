@@ -12,3 +12,14 @@ export interface IFavourite {
     name: string,
     type: string
 }
+
+export interface IProfession {
+    name: string,
+    type: string,
+    description ?: string,
+}
+
+export interface IHobby {
+    name: string,
+    description ?: string,
+}

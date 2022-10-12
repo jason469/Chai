@@ -1,5 +1,6 @@
 import {ISpecies} from "../utilities/interfaces/modelInterfaces";
-import {SpeciesChoices} from "../utilities/enums/model_enums";
+import {ProfessionTypes, SpeciesChoices} from "../utilities/enums/model_enums";
+import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 
 const Species = require('../models/Species')
 
@@ -19,7 +20,7 @@ module.exports = class SpeciesService {
             if (!species) {
                 species = new Species({
                     name: data.name,
-                    type: Object.values(SpeciesChoices)[Object.keys(SpeciesChoices).indexOf(data.type)]
+                    type: getValueFromEnumWithKey(SpeciesChoices, data.type)
                 })
                 await species.save()
             }

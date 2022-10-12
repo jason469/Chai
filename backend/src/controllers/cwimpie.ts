@@ -19,11 +19,10 @@ module.exports = class CwimpieController {
     static async getCwimpie(req: Request, res: Response) {
         try {
             const cwimpie = await CwimpieService.getCwimpie(req.body.name);
-            console.log(cwimpie)
             if (!cwimpie) {
-                res.status(404).json("This cwimpie is sleeping!")
+                res.status(404).json( `${req.body.name} is sleeping!`)
             }
-            res.json({...cwimpie});
+            res.json({...cwimpie._doc});
         } catch (error) {
             res.status(500).json({error: error})
         }
@@ -37,9 +36,9 @@ module.exports = class CwimpieController {
             if (cwimpie) {
                 res.status(400).json("This cwimpie already exists !")
             } else {
-                cwimpie = CwimpieService.createCwimpie(cwimpieData)
+                cwimpie = await CwimpieService.createCwimpie(cwimpieData)
+                await res.status(200);
             }
-            res.json({...cwimpie});
         } catch (error) {
             res.status(500).json({error: error})
         }
