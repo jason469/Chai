@@ -29,3 +29,12 @@ export interface IStamp {
     accent_colour: IColour,
     font: string
 }
+
+export interface IUser {
+    username: string,
+    name?: string,
+}
+
+export interface ICountry {
+
+}

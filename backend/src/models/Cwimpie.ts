@@ -14,7 +14,7 @@ const cwimpieSchema = new mongoose.Schema(
         birthdate: {
             type: Date
         },
-        partner: {
+        partner_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Cwimpie'
         },

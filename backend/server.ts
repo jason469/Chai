@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import {loadFixtures} from "./src/config/fixtureCommands";
+
 const express = require('express');
 const cors = require("cors");
 
@@ -27,7 +28,6 @@ app.use(cors({
 
 app.use(authRouter)
 app.use(cwimpieRouter)
-
 
 
 app.listen(PORT, "0.0.0.0", () => {

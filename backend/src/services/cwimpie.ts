@@ -9,7 +9,7 @@ const favouriteService = require('../services/favourite')
 const professionService = require('../services/profession')
 const hobbyService = require('../services/hobby')
 const stampService = require('../services/stamp')
-
+const userService = require('../services/user')
 
 module.exports = class CwimpieService {
     static async getAllCwimpies() {
@@ -21,7 +21,7 @@ module.exports = class CwimpieService {
         }
     }
 
-    static async getCwimpie(name: String) {
+    static async getCwimpie(name: string) {
         try {
             const cwimpie = await Cwimpie.findOne({name: name})
                 .populate('colour_id')
@@ -29,15 +29,21 @@ module.exports = class CwimpieService {
                 .populate('favourites')
                 .populate('professions')
                 .populate('hobbies')
-                .populate('stamp_id');
-            return cwimpie;
+                .populate('stamp_id')
+                .populate('partner_id')
+                .populate('primary_parent_id', 'username name')
+            ;
+            if (cwimpie) {
+                return cwimpie;
+            } else {
+                return null;
+            }
         } catch (error) {
             console.log(`Could not fetch cwimpie ${error}`)
         }
     }
 
     static async createCwimpie(cwimpieData: INewCwimpieData) {
-        console.log(cwimpieData)
         var favourites: IFavourite[] = [];
         var professions: IProfession[] = [];
         var hobbies: IHobby[] = [];
@@ -64,8 +70,16 @@ module.exports = class CwimpieService {
             favourites: favourites,
             professions: professions,
             hobbies: hobbies,
-            stamp_id: await stampService.getStampOrCreate(cwimpieData.stamp)
+            stamp_id: await stampService.getStampOrCreate(cwimpieData.stamp),
+            birthdate: new Date(cwimpieData.birthdate),
+            primary_parent_id: await userService.getUser(cwimpieData.primary_parent)
         })
+        if (cwimpieData.partner_name) {
+            const partner_cwimpie = await this.getCwimpie(cwimpieData.partner_name)
+            if (partner_cwimpie) {
+                cwimpie.partner_id = partner_cwimpie
+            }
+        }
         await cwimpie.save()
         return cwimpie
     }

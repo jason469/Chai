@@ -22,7 +22,6 @@ module.exports = class StampService {
         try {
             const primary_colour = await colourService.getColourOrCreate(data.primary_colour)
             const accent_colour = await colourService.getColourOrCreate(data.accent_colour)
-            console.log(primary_colour)
             var stamp = await Stamp.findOne({
                 primary_colour: primary_colour,
                 accent_colour: accent_colour,

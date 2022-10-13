@@ -23,10 +23,10 @@ const userSchema = new Schema(
                 message: "Your password needs to be at least 6 characters long"
             }
         },
-        country_id: [{  // A user can only have 1 country
+        country_id: {  // A user can only have 1 country
             type: mongoose.Schema.Types.ObjectId,
             ref:'Country'
-        }]
+        }
     },
     {
         collection: "Users"

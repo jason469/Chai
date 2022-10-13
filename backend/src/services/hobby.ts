@@ -20,9 +20,10 @@ module.exports = class HobbyService {
                     name: data.name,
                 })
                 if (data.description) {
-                    hobby.update({description: data.description})
+                    hobby.description = data.description
                 }
-                await hobby.save()
+                hobby.save()
+                return hobby
             }
             return hobby
         } catch (error) {

@@ -1,12 +1,11 @@
-const CwimpieService = require('../services/cwimpie')
-
 import {Request, Response} from "express";
+
+const CwimpieService = require('../services/cwimpie')
 
 module.exports = class CwimpieController {
     static async getAllCwimpies(req: Request, res: Response) {
         try {
             const allCwimpies = await CwimpieService.getAllCwimpies();
-            console.log(allCwimpies)
             if (allCwimpies.length == 0) {
                 res.status(404).json("The cwimpies are snoozing :( Check later!")
             }
@@ -20,9 +19,9 @@ module.exports = class CwimpieController {
         try {
             const cwimpie = await CwimpieService.getCwimpie(req.body.name);
             if (!cwimpie) {
-                res.status(404).json( `${req.body.name} is sleeping!`)
+                await res.status(404).json(`${req.body.name} is sleeping!`)
             }
-            res.json({...cwimpie._doc});
+            await res.json({...cwimpie._doc});
         } catch (error) {
             res.status(500).json({error: error})
         }
@@ -34,13 +33,13 @@ module.exports = class CwimpieController {
 
             var cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);
             if (cwimpie) {
-                res.status(400).json("This cwimpie already exists !")
+                await res.status(400).json({msg: `${cwimpieData.name} already exists!`})
             } else {
-                cwimpie = await CwimpieService.createCwimpie(cwimpieData)
-                await res.status(200);
+                await CwimpieService.createCwimpie(cwimpieData)
             }
+            await res.status(200).json({msg: `${cwimpieData.name} has been successfully created`})
         } catch (error) {
-            res.status(500).json({error: error})
+            await res.status(500).json({msg: error})
         }
     }
 };
