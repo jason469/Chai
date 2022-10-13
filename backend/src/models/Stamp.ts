@@ -10,7 +10,7 @@ const StampSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Colour'
         },
-        fonts: {
+        font: {
             type: String,
             required: true,
             enum: Object.values(FontChoices),

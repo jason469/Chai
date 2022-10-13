@@ -8,6 +8,7 @@ const speciesService = require('../services/species')
 const favouriteService = require('../services/favourite')
 const professionService = require('../services/profession')
 const hobbyService = require('../services/hobby')
+const stampService = require('../services/stamp')
 
 
 module.exports = class CwimpieService {
@@ -27,7 +28,8 @@ module.exports = class CwimpieService {
                 .populate('species_id')
                 .populate('favourites')
                 .populate('professions')
-                .populate('hobbies');
+                .populate('hobbies')
+                .populate('stamp_id');
             return cwimpie;
         } catch (error) {
             console.log(`Could not fetch cwimpie ${error}`)
@@ -62,7 +64,7 @@ module.exports = class CwimpieService {
             favourites: favourites,
             professions: professions,
             hobbies: hobbies,
-
+            stamp_id: await stampService.getStampOrCreate(cwimpieData.stamp)
         })
         await cwimpie.save()
         return cwimpie

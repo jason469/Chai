@@ -23,3 +23,9 @@ export interface IHobby {
     name: string,
     description ?: string,
 }
+
+export interface IStamp {
+    primary_colour: IColour,
+    accent_colour: IColour,
+    font: string
+}

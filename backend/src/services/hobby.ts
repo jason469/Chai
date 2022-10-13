@@ -1,6 +1,4 @@
 import {IHobby} from "../utilities/interfaces/modelInterfaces";
-import {ProfessionTypes} from "../utilities/enums/model_enums";
-import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 
 const Hobby = require('../models/Hobby')
 
