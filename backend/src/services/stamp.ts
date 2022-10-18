@@ -1,6 +1,6 @@
 import {IStamp} from "../utilities/interfaces/modelInterfaces";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
-import {FontChoices, ProfessionTypes} from "../utilities/enums/model_enums";
+import {FontChoices, ProfessionTypes} from "../utilities/enums/modelEnums";
 
 const colourService = require('../services/colour')
 
@@ -33,6 +33,7 @@ module.exports = class StampService {
                     accent_colour: accent_colour,
                     font: getValueFromEnumWithKey(FontChoices, data.font),
                 })
+                stamp.name = `${primary_colour.name}_${accent_colour.name}_stamp`
                 await stamp.save()
             }
             return stamp

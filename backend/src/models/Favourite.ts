@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {FavouriteChoices} from "../utilities/enums/model_enums";
+import {FavouriteChoices} from "../utilities/enums/modelEnums";
 
 const FavouriteSchema = new mongoose.Schema({
         name: {

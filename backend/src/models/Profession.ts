@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {ProfessionTypes} from "../utilities/enums/model_enums";
+import {ProfessionTypes} from "../utilities/enums/modelEnums";
 
 const ProfessionSchema = new mongoose.Schema({
         name: {

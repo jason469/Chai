@@ -27,4 +27,19 @@ module.exports = class ColourService {
             console.log(`Could not fetch colour ${error}`)
         }
     }
+
+    static async deleteColour(name:string) {
+        try {
+            Colour.findOneAndDelete({name: name}, function(err:Error, docs:any) {
+                if (err) {
+                    console.log('error',err)
+                } else {
+                    return true
+                }
+            })
+        } catch (error) {
+            console.log(`Could not fetch colour ${error}`)
+            return false
+        }
+    }
 }

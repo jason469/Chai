@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
-import {FontChoices} from "../utilities/enums/model_enums";
+import {FontChoices} from "../utilities/enums/modelEnums";
 
 const StampSchema = new mongoose.Schema({
+        name: String,
         primary_colour: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Colour'

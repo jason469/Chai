@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {SpeciesChoices} from "../utilities/enums/model_enums";
+import {SpeciesChoices} from "../utilities/enums/modelEnums";
 
 const SpeciesSchema = new mongoose.Schema({
         name: {

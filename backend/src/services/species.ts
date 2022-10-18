@@ -1,5 +1,5 @@
 import {ISpecies} from "../utilities/interfaces/modelInterfaces";
-import {ProfessionTypes, SpeciesChoices} from "../utilities/enums/model_enums";
+import {SpeciesChoices} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 
 const Species = require('../models/Species')

@@ -42,4 +42,20 @@ module.exports = class CwimpieController {
             await res.status(500).json({msg: error})
         }
     }
+
+    static async updateCwimpie(req: Request, res: Response) {
+        try {
+            const updateCwimpieData = req.body;
+
+            var cwimpie = await CwimpieService.getCwimpie(updateCwimpieData.name);
+            if (!cwimpie) {
+                await res.status(400).json({msg: `${updateCwimpieData.name} doesn't exists!`})
+            } else {
+                await CwimpieService.updateCwimpie(updateCwimpieData)
+            }
+            await res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
+        } catch (error) {
+            await res.status(500).json({msg: error})
+        }
+    }
 };

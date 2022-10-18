@@ -1,5 +1,7 @@
-import {INewCwimpieData} from "../utilities/interfaces/newCwimpieData";
+import {INewCwimpieData, IUpdateCwimpieData} from "../utilities/interfaces/cwimpieInterfaces";
 import {IFavourite, IHobby, IProfession} from "../utilities/interfaces/modelInterfaces";
+import {getPropertyFromObject} from "../utilities/functions/misc";
+import {getCwimpieProperty} from "../utilities/functions/cwimpies";
 
 const Cwimpie = require('../models/Cwimpie')
 
@@ -14,7 +16,15 @@ const userService = require('../services/user')
 module.exports = class CwimpieService {
     static async getAllCwimpies() {
         try {
-            const allCwimpies = await Cwimpie.find();
+            const allCwimpies = await Cwimpie.find()
+                .populate('colour_id')
+                .populate('species_id')
+                .populate('favourites')
+                .populate('professions')
+                .populate('hobbies')
+                .populate('stamp_id')
+                .populate('partner_id')
+                .populate('primary_parent_id', 'username name');
             return allCwimpies;
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)
@@ -82,5 +92,26 @@ module.exports = class CwimpieService {
         }
         await cwimpie.save()
         return cwimpie
+    }
+
+    static async updateCwimpie(updateData: IUpdateCwimpieData) {
+        let cwimpie = await this.getCwimpie(updateData.name)
+        let cwimpieProperty = await getPropertyFromObject(cwimpie, updateData.property)
+
+        type ObjectKey = keyof typeof cwimpie;
+        const property = updateData.property as ObjectKey;
+
+        if (cwimpieProperty !== undefined) {  // Replace it
+            let newValue = await getCwimpieProperty(cwimpie, updateData.property, updateData.data)
+
+            if (Array.isArray(cwimpieProperty)) {  // Default behaviour is to just add the new value
+                cwimpie[property].push(newValue)
+            } else {
+                cwimpie[property] = newValue
+            }
+            await cwimpie.save()
+        } else {  // Property doesn't exist on the object
+            return null
+        }
     }
 }

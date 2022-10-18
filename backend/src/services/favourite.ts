@@ -1,5 +1,5 @@
 import {IFavourite} from "../utilities/interfaces/modelInterfaces";
-import {FavouriteChoices} from "../utilities/enums/model_enums";
+import {FavouriteChoices} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 
 const Favourite = require('../models/Favourite')

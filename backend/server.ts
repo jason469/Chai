@@ -4,12 +4,14 @@ import {loadFixtures} from "./src/config/fixtureCommands";
 const express = require('express');
 const cors = require("cors");
 
-const app = express();
 const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');
+const colourRouter = require('./src/routes/colour');
+
+const app = express();
+
 const databaseConfig = require('./src/config/database.config');
 
-const Country = require('./src/models/Country')
 
 dotenv.config()
 require('dotenv').config()
@@ -28,6 +30,7 @@ app.use(cors({
 
 app.use(authRouter)
 app.use(cwimpieRouter)
+app.use(colourRouter)
 
 
 app.listen(PORT, "0.0.0.0", () => {

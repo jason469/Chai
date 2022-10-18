@@ -1,3 +1,5 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^8.19.2"
+  }
 }

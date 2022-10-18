@@ -1,5 +1,5 @@
 import {IProfession} from "../utilities/interfaces/modelInterfaces";
-import {ProfessionTypes} from "../utilities/enums/model_enums";
+import {ProfessionTypes} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 
 const Profession = require('../models/Profession')
