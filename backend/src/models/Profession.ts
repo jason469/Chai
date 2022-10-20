@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import {ProfessionTypes} from "../utilities/enums/modelEnums";
+import {cascadeDelete} from "../utilities/functions/misc";
+const Cwimpie = require("./Cwimpie");
 
 const ProfessionSchema = new mongoose.Schema({
         name: {
@@ -21,5 +23,10 @@ const ProfessionSchema = new mongoose.Schema({
         collection: "Professions"
     }
 )
+
+ProfessionSchema.post("deleteOne", { document: true, query: false },async function (profession, next) {
+    await cascadeDelete(Cwimpie, this, "professions");
+})
+
 
 module.exports = mongoose.model('Profession', ProfessionSchema);

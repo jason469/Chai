@@ -8,6 +8,10 @@ const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');
 const colourRouter = require('./src/routes/colour');
 const stampRouter = require('./src/routes/stamp');
+const favouriteRouter = require('./src/routes/favourite');
+const hobbyRouter = require('./src/routes/hobby');
+const professionRouter = require('./src/routes/profession');
+const speciesRouter = require('./src/routes/species');
 
 const app = express();
 
@@ -30,8 +34,12 @@ app.use(cors({
 }))
 
 app.use(authRouter)
-app.use(cwimpieRouter)
 app.use(colourRouter)
+app.use(cwimpieRouter)
+app.use(favouriteRouter)
+app.use(hobbyRouter)
+app.use(professionRouter)
+app.use(speciesRouter)
 app.use(stampRouter)
 
 

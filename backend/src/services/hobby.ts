@@ -1,5 +1,4 @@
 import {IHobby} from "../utilities/interfaces/modelInterfaces";
-
 const Hobby = require('../models/Hobby')
 
 module.exports = class HobbyService {
@@ -28,6 +27,19 @@ module.exports = class HobbyService {
             return hobby
         } catch (error) {
             console.log(`Could not fetch hobby ${error}`)
+        }
+    }
+
+    static async deleteHobby(name: string) {
+        try {
+            const hobby = await Hobby.findOne({name: name})
+            if (hobby) {
+                await hobby.deleteOne()
+            }
+            return true
+        } catch (error) {
+            console.log(`Could not fetch hobby ${error}`)
+            return false
         }
     }
 }

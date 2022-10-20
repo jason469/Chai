@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
+import {cascadeDelete} from "../utilities/functions/misc";
+const DailySchedule = require("./DailySchedule");
 
-const cwimpieSchema = new mongoose.Schema(
+const CwimpieSchema = new mongoose.Schema(
     {
         name: {
             required: true,
@@ -60,5 +62,10 @@ const cwimpieSchema = new mongoose.Schema(
     }
 );
 
-const Cwimpie = mongoose.model('Cwimpie', cwimpieSchema);
+CwimpieSchema.post("deleteOne", { document: true, query: false },async function (cwimpie, next) {
+    await cascadeDelete(DailySchedule, this, "cwimpie_id");
+})
+
+
+const Cwimpie = mongoose.model('Cwimpie', CwimpieSchema);
 module.exports = Cwimpie;

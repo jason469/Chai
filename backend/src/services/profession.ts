@@ -1,11 +1,10 @@
 import {IProfession} from "../utilities/interfaces/modelInterfaces";
 import {ProfessionTypes} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
-
 const Profession = require('../models/Profession')
 
 module.exports = class ProfessionService {
-    static async getAllProfession() {
+    static async getAllProfessions() {
         try {
             const allProfessions = await Profession.find();
             return allProfessions;
@@ -30,6 +29,19 @@ module.exports = class ProfessionService {
             return profession
         } catch (error) {
             console.log(`Could not fetch profession ${error}`)
+        }
+    }
+
+    static async deleteProfession(name: string) {
+        try {
+            const profession = await Profession.findOne({name: name})
+            if (profession) {
+                await profession.deleteOne()
+            }
+            return true
+        } catch (error) {
+            console.log(`Could not fetch profession ${error}`)
+            return false
         }
     }
 }

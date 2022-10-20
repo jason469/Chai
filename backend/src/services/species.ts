@@ -1,7 +1,6 @@
 import {ISpecies} from "../utilities/interfaces/modelInterfaces";
 import {SpeciesChoices} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
-
 const Species = require('../models/Species')
 
 module.exports = class SpeciesService {
@@ -27,6 +26,19 @@ module.exports = class SpeciesService {
             return species;
         } catch (error) {
             console.log(`Could not fetch species ${error}`)
+        }
+    }
+
+    static async deleteSpecies(name: string) {
+        try {
+            const species = await Species.findOne({name: name})
+            if (species) {
+                await species.deleteOne()
+            }
+            return true
+        } catch (error) {
+            console.log(`Could not fetch species ${error}`)
+            return false
         }
     }
 }

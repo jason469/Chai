@@ -1,7 +1,6 @@
 import {IFavourite} from "../utilities/interfaces/modelInterfaces";
 import {FavouriteChoices} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
-
 const Favourite = require('../models/Favourite')
 
 module.exports = class FavouriteService {
@@ -27,6 +26,19 @@ module.exports = class FavouriteService {
             return favourite
         } catch (error) {
             console.log(`Could not fetch favourite ${error}`)
+        }
+    }
+
+    static async deleteFavourite(name: string, type:string) {
+        try {
+            const favourite = await Favourite.findOne({name: name, type: type})
+            if (favourite) {
+                await favourite.deleteOne()
+            }
+            return true
+        } catch (error) {
+            console.log(`Could not fetch favourite ${error}`)
+            return false
         }
     }
 }

@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import {cascadeDelete} from "../utilities/functions/misc";
+
+const DailySchedule = require("./DailySchedule");
 
 const TaskSchema = new mongoose.Schema({
         name: {
@@ -30,5 +33,10 @@ const TaskSchema = new mongoose.Schema({
         collection: "Tasks"
     }
 )
+
+TaskSchema.post("deleteOne", {document: true, query: false}, async function (task, next) {
+    await cascadeDelete(DailySchedule, this, "tasks");
+})
+
 
 module.exports = mongoose.model('Task', TaskSchema);

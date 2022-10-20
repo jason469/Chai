@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import {cascadeDelete} from "../utilities/functions/misc";
+const Cwimpie = require("./Cwimpie");
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
     {
         name: {
             required: true,
@@ -33,5 +35,10 @@ const userSchema = new Schema(
     }
 );
 
-const User = model("User", userSchema);
+UserSchema.post("deleteOne", { document: true, query: false },async function (user, next) {
+    await cascadeDelete(Cwimpie, this, "primary_parent_id");
+})
+
+
+const User = model("User", UserSchema);
 module.exports = User;
