@@ -13,8 +13,10 @@ module.exports = class AuthController {
             const user = await UserService.getUser(req.body.user);
             if (user) {
                 res.json({...user._doc, token: req.body.token})
+                return
             } else {
                 res.json("No user found")
+                return
             }
         } catch (e: any) {
             return res.status(500).json({error: e.message})
@@ -35,14 +37,17 @@ module.exports = class AuthController {
 
             if (user) {
                 res.json(user);
+                return
             } else if (user == "This user already exists") {
-                return res.status(400).json({msg: 'There is already a user with that username!'});
+                res.status(400).json({msg: 'There is already a user with that username!'});
+                return
             } else {
-                return res.status(500).json({msg: 'The user couldnt be created'});
+                res.status(500).json({msg: 'The user couldnt be created'});
+                return
             }
-        } catch
-            (e: any) {
-            return res.status(500).json({error: e.message})
+        } catch (e: any) {
+            res.status(500).json({error: e.message})
+            return
         }
     }
 
@@ -52,23 +57,27 @@ module.exports = class AuthController {
             const {username, password} = req.body;
             const user = await User.findOne({username});
             if (!user) {
-                return res
+                res
                     .status(400)
                     .json({msg: 'User with this username doesnt exist'});
+                return
             }
             const isMatch = await bcryptjs.compare(password, user.password);
             if (!isMatch) {
-                return res
+                res
                     .status(400)
                     .json({msg: 'Incorrect password'});
+                return
             }
 
             const token = jwt.sign({id: user._id}, "passwordKey", {expiresIn: "100 days"});
             res.json({token, ...user._doc})
         } catch (e: any) {
             console.log(e)
-            return res.status(500).json({error: e.message})
+            res.status(500).json({error: e.message})
+            return
         }
+        return
     }
 
     static async checkTokenIsValid(req: Request, res: Response) {
@@ -81,8 +90,10 @@ module.exports = class AuthController {
             const user = await User.findById(isVerified.id);
             if (!user) return res.json(false);
             res.json(true)
+            return
         } catch (e: any) {
-            return res.status(500).json({error: e.message})
+            res.status(500).json({error: e.message})
+            return
         }
     }
 };

@@ -1,4 +1,5 @@
-import {Collection} from "mongoose";
+import {Collection, Model} from "mongoose";
+const Stamp = require('../../models/Stamp')
 
 export function getValueFromEnumWithKey(choices:any, type: string) {
     return Object.values(choices)[Object.keys(choices).indexOf(type)]
@@ -14,16 +15,15 @@ export function getPropertyFromObject(object:Object, naiveProperty:string) {
     }
 }
 
-export async function cascadeDelete(collection:Collection, deletedItem:any, deletedItemProperty:string) {
-    let children = await collection.find({deletedItemProperty: deletedItem._id})
-    console.log(children)
-    await children.forEach(child => {
+export async function cascadeDelete(collection:Model<Collection>, deletedItem:any, deletedItemProperty:string) {
+    let children = await collection.find({[`${deletedItemProperty}`]: deletedItem._id}).lean()
+    children.forEach((child:any) => {
         if (Array.isArray(child[deletedItemProperty])) {
             const index = child[deletedItemProperty].indexOf(deletedItem._id, 0);
             child[deletedItemProperty].splice(index, 1);
         } else {
-            child[deletedItemProperty] = null
+            child[deletedItemProperty] = null;
         }
-        child.save()
+        child.save();
     })
 }

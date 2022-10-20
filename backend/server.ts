@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');
 const colourRouter = require('./src/routes/colour');
+const stampRouter = require('./src/routes/stamp');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(cors({
 app.use(authRouter)
 app.use(cwimpieRouter)
 app.use(colourRouter)
+app.use(stampRouter)
 
 
 app.listen(PORT, "0.0.0.0", () => {

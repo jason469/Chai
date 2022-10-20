@@ -8,10 +8,11 @@ module.exports = class CwimpieController {
             const allCwimpies = await CwimpieService.getAllCwimpies();
             if (allCwimpies.length == 0) {
                 res.status(404).json("The cwimpies are snoozing :( Check later!")
+                return
             }
-            res.json(allCwimpies);
+            return res.json(allCwimpies);
         } catch (error) {
-            res.status(500).json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -20,10 +21,11 @@ module.exports = class CwimpieController {
             const cwimpie = await CwimpieService.getCwimpie(req.body.name);
             if (!cwimpie) {
                 await res.status(404).json(`${req.body.name} is sleeping!`)
+                return
             }
-            await res.json({...cwimpie._doc});
+            return res.json({...cwimpie._doc});
         } catch (error) {
-            res.status(500).json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -34,12 +36,13 @@ module.exports = class CwimpieController {
             var cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);
             if (cwimpie) {
                 await res.status(400).json({msg: `${cwimpieData.name} already exists!`})
+                return
             } else {
                 await CwimpieService.createCwimpie(cwimpieData)
             }
-            await res.status(200).json({msg: `${cwimpieData.name} has been successfully created`})
+            return res.status(200).json({msg: `${cwimpieData.name} has been successfully created`})
         } catch (error) {
-            await res.status(500).json({msg: error})
+            return res.status(500).json({msg: error})
         }
     }
 
@@ -50,12 +53,13 @@ module.exports = class CwimpieController {
             var cwimpie = await CwimpieService.getCwimpie(updateCwimpieData.name);
             if (!cwimpie) {
                 await res.status(400).json({msg: `${updateCwimpieData.name} doesn't exists!`})
+                return
             } else {
                 await CwimpieService.updateCwimpie(updateCwimpieData)
             }
-            await res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
+            return res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
         } catch (error) {
-            await res.status(500).json({msg: error})
+            return res.status(500).json({msg: error});
         }
     }
 };

@@ -12,7 +12,7 @@ module.exports = class ColourService {
         }
     }
 
-    static async getColourOrCreate(data:IColour) {
+    static async getColourOrCreate(data: IColour) {
         try {
             var colour = await Colour.findOne({name: data.name});
             if (!colour) {
@@ -28,15 +28,13 @@ module.exports = class ColourService {
         }
     }
 
-    static async deleteColour(name:string) {
+    static async deleteColour(name: string) {
         try {
-            Colour.findOneAndDelete({name: name}, function(err:Error, docs:any) {
-                if (err) {
-                    console.log('error',err)
-                } else {
-                    return true
-                }
-            })
+            const colour = await Colour.findOne({name: name})
+            if (colour) {
+                await colour.deleteOne()
+            }
+            return true
         } catch (error) {
             console.log(`Could not fetch colour ${error}`)
             return false

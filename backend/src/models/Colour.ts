@@ -20,7 +20,7 @@ const ColourSchema = new mongoose.Schema({
     }
 )
 
-ColourSchema.post('findOneAndDelete', async function (res, next) {
+ColourSchema.post("deleteOne", { document: true, query: false },async function (colour, next) {
     await cascadeDelete(Stamp, this, "primary_colour");
     await cascadeDelete(Stamp, this, "accent_colour");
     await cascadeDelete(Cwimpie, this, "colour_id");
