@@ -3,11 +3,11 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-view-one-bunny',
-  templateUrl: './view-one-bunny.component.html',
-  styleUrls: ['./view-one-bunny.component.scss']
+  selector: 'app-view-one-cwimpie',
+  templateUrl: './view-one-cwimpie.component.html',
+  styleUrls: ['./view-one-cwimpie.component.scss']
 })
-export class ViewOneBunnyComponent implements OnInit, OnDestroy {
+export class ViewOneCwimpieComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription | undefined;
 
   constructor(private route: ActivatedRoute) {

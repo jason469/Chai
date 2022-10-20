@@ -10,6 +10,7 @@ export class ViewAllComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -7,7 +7,7 @@ const CountrySchema = new mongoose.Schema({
         name: {
             type: String,
             required: true,
-            trim: true
+            trim: true,
         },
         flag_image: {
             data: Buffer,

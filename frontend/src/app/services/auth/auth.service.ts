@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, tap} from "rxjs";
-import {AuthResponseData} from "../shared/interfaces/AuthResponseData";
+import {AuthResponseData} from "../../shared/interfaces/AuthResponseData";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {TOKEN_VALID_URL, USER_LOGIN_URL} from "../shared/constants/url";
+import {TOKEN_VALID_URL, USER_LOGIN_URL} from "../../shared/constants/url";
 import {ToastrService} from "ngx-toastr";
-import {IUserLogin} from "../shared/interfaces/IUserLogin";
-import {User} from "../shared/models/User";
+import {IUserLogin} from "../../shared/interfaces/IUserLogin";
+import {User} from "../../shared/models/User";
 import {Router} from "@angular/router";
 
 @Injectable({

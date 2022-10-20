@@ -14,17 +14,17 @@ import {MatButtonModule} from "@angular/material/button";
 import {GenerateComponent} from './components/pages/generate/generate.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {ScheduleComponent} from './components/pages/schedule/schedule.component';
-import {ViewAllComponent} from './components/pages/viewBunnies/view-all/view-all.component';
-import {ViewOneBunnyComponent} from './components/pages/viewBunnies/view-one-bunny/view-one-bunny.component';
+import {ViewAllComponent} from './components/pages/viewCwimpies/view-all/view-all.component';
+import {ViewOneCwimpieComponent} from './components/pages/viewCwimpies/view-one-cwimpie/view-one-cwimpie.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthComponent} from "./components/auth/auth.component";
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyMaterialModule} from '@ngx-formly/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthService} from "./services/auth.service";
-import {AuthGuardService} from "./services/auth-guard.service";
-import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import {AuthService} from "./services/auth/auth.service";
+import {AuthGuardService} from "./services/auth/auth-guard.service";
+import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     ProfileComponent,
     ScheduleComponent,
     ViewAllComponent,
-    ViewOneBunnyComponent,
+    ViewOneCwimpieComponent,
     AuthComponent,
   ],
   imports: [

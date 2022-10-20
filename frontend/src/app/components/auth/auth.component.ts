@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormGroupDirective} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {Observable} from "rxjs";
 import {AuthResponseData} from "../../shared/interfaces/AuthResponseData";
 import {Router} from "@angular/router";
