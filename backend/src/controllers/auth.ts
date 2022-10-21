@@ -89,6 +89,7 @@ module.exports = class AuthController {
 
             const user = await User.findById(isVerified.id);
             if (!user) return res.json(false);
+            console.log('successful')
             res.json(true)
             return
         } catch (e: any) {

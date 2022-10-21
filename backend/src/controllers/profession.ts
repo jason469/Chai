@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 
 const ProfessionService = require('../services/profession')
 
-module.exports = class StampController {
+module.exports = class ProfessionController {
     static async getAllProfessions(req: Request, res: Response) {
         try {
             const allProfessions = await ProfessionService.getAllProfessions();

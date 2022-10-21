@@ -61,7 +61,15 @@ import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
       newestOnTop: false
     }),
   ],
-  providers: [AuthService, AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

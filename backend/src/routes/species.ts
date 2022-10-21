@@ -6,7 +6,7 @@ const speciesCtrl = require('../controllers/species')
 
 const speciesRouter = express.Router();
 
-speciesRouter.get('/api/hobbies', auth, speciesCtrl.getAllHobbies)
-speciesRouter.delete('/api/hobbies', auth, speciesCtrl.deleteHobby)
+speciesRouter.get('/api/hobbies', auth, speciesCtrl.getAllSpecies)
+speciesRouter.delete('/api/hobbies', auth, speciesCtrl.deleteSpecies)
 
 module.exports = speciesRouter

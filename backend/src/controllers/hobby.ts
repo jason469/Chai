@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 
 const HobbyService = require('../services/hobby')
 
-module.exports = class StampController {
+module.exports = class HobbyController {
     static async getAllHobbies(req: Request, res: Response) {
         try {
             const allHobbies = await HobbyService.getAllHobbies();

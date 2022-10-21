@@ -17,12 +17,12 @@ module.exports = class CwimpieService {
     static async getAllCwimpies() {
         try {
             const allCwimpies = await Cwimpie.find()
-                .populate('colour_id')
-                .populate('species_id')
-                .populate('favourites')
-                .populate('professions')
-                .populate('hobbies')
-                .populate('stamp_id')
+                .populate('colour_id', 'hexCode name')
+                .populate('species_id', 'name type')
+                .populate('favourites', 'name type')
+                .populate('professions', 'name type')
+                .populate('hobbies', 'name description')
+                .populate('stamp_id', 'accent_colour primary_colour font name')
                 .populate('partner_id')
                 .populate('primary_parent_id', 'username name');
             return allCwimpies;

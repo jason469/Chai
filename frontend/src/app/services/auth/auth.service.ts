@@ -58,7 +58,6 @@ export class AuthService {
   };
 
   autoLogin() {
-    console.log('autologin')
     const userData: {
       id: string;
       name: string;
@@ -75,6 +74,7 @@ export class AuthService {
         userData._username,
         userData._token
       )
+      console.log(loadedUser.token)
       if (loadedUser.token) {
         return this.http.post<Boolean>(
           TOKEN_VALID_URL,
@@ -82,14 +82,14 @@ export class AuthService {
         ).pipe(
           tap(
             (isValid: Boolean) => {
-              console.log(isValid)
               if (isValid) {
                 this.user.next(loadedUser)
-                console.log(this.user)
+                this.loggedIn = true;
               } else {
                 console.log('need to login')
                 localStorage.removeItem('userData');
                 this.user.next(null)
+                this.loggedIn = false;
               }
             }
           )

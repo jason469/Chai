@@ -8,6 +8,7 @@ module.exports = class ColourController {
             const allColours = await ColourService.getAllColours();
             if (allColours.length == 0) {
                 res.status(404).json("There are no colours")
+                return
             }
             res.json(allColours);
             return
