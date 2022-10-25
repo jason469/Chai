@@ -12,11 +12,11 @@ import {MatMenuModule,} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
-import {GenerateComponent} from './components/pages/generate/generate.component';
+import {GenerateComponent} from './components/pages/cwimpies/generate/generate.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {ScheduleComponent} from './components/pages/schedule/schedule.component';
-import {ViewAllComponent} from './components/pages/viewCwimpies/view-all/view-all.component';
-import {ViewOneCwimpieComponent} from './components/pages/viewCwimpies/view-one-cwimpie/view-one-cwimpie.component';
+import {ViewAllComponent} from './components/pages/cwimpies/viewCwimpies/view-all/view-all.component';
+import {ViewOneCwimpieComponent} from './components/pages/cwimpies/viewCwimpies/view-one-cwimpie/view-one-cwimpie.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthComponent} from "./components/auth/auth.component";
 import {ReactiveFormsModule} from '@angular/forms';
@@ -40,6 +40,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import {FormlyFileField} from "./shared/customFormFields/fileField/fileField";
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CommandmentsComponent } from './components/pages/cwimpies/commandments/commandments.component';
 
 
 @NgModule({
@@ -55,7 +58,8 @@ import {FormlyFileField} from "./shared/customFormFields/fileField/fileField";
     ReducedCwimpieCardComponent,
     FullCwimpieModalComponent,
     AddCwimpieComponent,
-    FormlyFileField
+    FormlyFileField,
+    CommandmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +97,8 @@ import {FormlyFileField} from "./shared/customFormFields/fileField/fileField";
     MatFormFieldModule,
     MatInputModule,
     NgxMatFileInputModule,
+    MatNativeDateModule,
+    FormlyMatDatepickerModule,
   ],
   providers: [
     AuthService,

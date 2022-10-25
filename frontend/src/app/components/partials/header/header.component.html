@@ -23,28 +23,42 @@
       Login
     </button>
   </div>
+
   <div
     *ngIf="isAuthenticated"
   >
     <button
       mat-button
-      routerLink="/view-bunnies"
+      [matMenuTriggerFor]="cwimpieMenu"
       routerLinkActive="active"
     >
-      View Cwimpies!
+      Cwimpies!
     </button>
+    <mat-menu #cwimpieMenu="matMenu" xPosition="before">
+      <button
+        mat-button
+        routerLink="/cwimpies/view-cwimpies"
+        routerLinkActive="active"
+      >
+        View Cwimpies!
+      </button>
+      <button
+        mat-button
+        routerLink="/cwimpies/generate"
+        routerLinkActive="active"
+      >
+        Generate
+      </button>
+      <button
+        mat-button
+        routerLink="/cwimpies/commandments"
+        routerLinkActive="active"
+      >
+        Commandments
+      </button>
+    </mat-menu>
   </div>
-  <div
-    *ngIf="isAuthenticated"
-  >
-    <button
-      mat-button
-      routerLink="/generate"
-      routerLinkActive="active"
-    >
-      Generate
-    </button>
-  </div>
+
   <div
     *ngIf="isAuthenticated"
   >
@@ -56,6 +70,7 @@
       Daily schedule
     </button>
   </div>
+
   <div
     *ngIf="isAuthenticated"
   >

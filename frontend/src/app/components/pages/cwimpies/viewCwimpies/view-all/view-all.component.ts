@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
+import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
-import {IReducedCwimpieCardData} from "../../../../shared/interfaces/IReducedCwimpieCardData";
+import {IReducedCwimpieCardData} from "../../../../../shared/interfaces/IReducedCwimpieCardData";
 
 @Component({
   selector: 'app-view-all',

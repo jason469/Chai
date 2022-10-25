@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
-import {HttpClient} from "@angular/common/http";
 import {
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL,
@@ -50,6 +49,7 @@ export class AddCwimpieComponent implements OnInit {
       templateOptions: {
         label: 'Partner',
         options: [],
+        description: `Lovers ♥ !!`
       },
       hooks: {
         onInit: (field) => this.getPartners(field)
@@ -80,11 +80,11 @@ export class AddCwimpieComponent implements OnInit {
       }
     },
     {
-      key: 'birthdate',
-      type: 'input',
+      key: 'birthday',
+      type: 'datepicker',
       props: {
-        label: 'Birthdate',
-      }
+        label: 'Birthday',
+      },
     },
     {
       key: 'favourites',
