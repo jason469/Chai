@@ -12,6 +12,7 @@ const favouriteRouter = require('./src/routes/favourite');
 const hobbyRouter = require('./src/routes/hobby');
 const professionRouter = require('./src/routes/profession');
 const speciesRouter = require('./src/routes/species');
+const userRouter = require('./src/routes/users');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(cors({
     credentials: true,
     origin: ["http://localhost:4200"]
 }))
+app.use(express.static('public'))
 
 app.use(authRouter)
 app.use(colourRouter)
@@ -41,6 +43,7 @@ app.use(hobbyRouter)
 app.use(professionRouter)
 app.use(speciesRouter)
 app.use(stampRouter)
+app.use(userRouter)
 
 
 app.listen(PORT, "0.0.0.0", () => {

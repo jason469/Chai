@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {SpeciesChoices} from "../utilities/enums/modelEnums";
 import {cascadeDelete} from "../utilities/functions/misc";
+
 const Cwimpie = require("./Cwimpie");
 
 const SpeciesSchema = new mongoose.Schema({
@@ -14,6 +15,9 @@ const SpeciesSchema = new mongoose.Schema({
             required: true,
             enum: Object.values(SpeciesChoices),
             default: SpeciesChoices.Bunny
+        },
+        iconName: {
+            type: String
         }
     },
     {
@@ -21,7 +25,7 @@ const SpeciesSchema = new mongoose.Schema({
     }
 )
 
-SpeciesSchema.post("deleteOne", { document: true, query: false },async function (species, next) {
+SpeciesSchema.post("deleteOne", {document: true, query: false}, async function (species, next) {
     await cascadeDelete(Cwimpie, this, "species_id");
 })
 

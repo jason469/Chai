@@ -18,10 +18,10 @@ module.exports = class CwimpieService {
         try {
             const allCwimpies = await Cwimpie.find()
                 .populate('colour_id', 'hexCode name')
-                .populate('species_id', 'name type')
+                .populate('species_id', 'name type iconName')
                 .populate('favourites', 'name type')
                 .populate('professions', 'name type')
-                .populate('hobbies', 'name description')
+                .populate('hobbies', 'name')
                 .populate('stamp_id', 'accent_colour primary_colour font name')
                 .populate('partner_id')
                 .populate('primary_parent_id', 'username name');

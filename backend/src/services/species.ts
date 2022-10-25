@@ -19,7 +19,8 @@ module.exports = class SpeciesService {
             if (!species) {
                 species = new Species({
                     name: data.name,
-                    type: getValueFromEnumWithKey(SpeciesChoices, data.type)
+                    type: getValueFromEnumWithKey(SpeciesChoices, data.type),
+                    iconName: data.iconName
                 })
                 await species.save()
             }

@@ -5,7 +5,8 @@ export interface IColour {
 
 export interface ISpecies {
     name: string,
-    type: string
+    type: string,
+    iconName: string
 }
 
 export interface IFavourite {

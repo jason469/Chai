@@ -8,7 +8,7 @@ const User = require('../models/User')
 module.exports = class UserService {
     static async getAllUsers() {
         try {
-            const allUsers = await User.find();
+            const allUsers = await User.find().select('-password');
             return allUsers;
         } catch (error) {
             console.log(`Could not fetch users ${error}`)

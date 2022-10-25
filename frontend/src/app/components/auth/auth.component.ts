@@ -3,19 +3,23 @@ import {FormGroup, FormGroupDirective} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {AuthService} from "../../services/auth/auth.service";
 import {Observable} from "rxjs";
-import {AuthResponseData} from "../../shared/interfaces/AuthResponseData";
+import {IAuthResponseData} from "../../shared/interfaces/IAuthResponseData";
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
+  providers: []
 })
 export class AuthComponent implements OnInit {
   isLoading = false;
   error: string = "";
 
-  constructor(private userService: AuthService, private router: Router) {
+  constructor(
+    private userService: AuthService,
+    private router: Router
+  ) {
   }
 
   form = new FormGroup({});
@@ -51,7 +55,7 @@ export class AuthComponent implements OnInit {
     const username = form.value.username;
     const password = form.value.password;
 
-    let user: Observable<AuthResponseData>;
+    let user: Observable<IAuthResponseData>;
 
     this.isLoading = true;
 

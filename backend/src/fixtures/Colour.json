@@ -1,7 +1,22 @@
 [
-    {"name": "Beige", "hexCode": "#c9b3a1"},
-    {"name": "Fern", "hexCode": "#928e71"},
-    {"name": "Cotton Candy", "hexCode": "#e2c2b8"},
-    {"name": "Silver", "hexCode": "#c7c2c0"},
-    {"name": "Buttermilk ", "hexCode": "#f4edd4"}
+  {
+    "name": "Beige",
+    "hexCode": "#c9b3a1"
+  },
+  {
+    "name": "Fern",
+    "hexCode": "#928e71"
+  },
+  {
+    "name": "Cotton Candy",
+    "hexCode": "#e2c2b8"
+  },
+  {
+    "name": "Silver",
+    "hexCode": "#c7c2c0"
+  },
+  {
+    "name": "Buttermilk ",
+    "hexCode": "#f4edd4"
+  }
 ]

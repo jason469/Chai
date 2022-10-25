@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
+import {HttpClient} from "@angular/common/http";
+import {
+  GET_ALL_COLOURS_URL,
+  GET_ALL_CWIMPIES_URL,
+  GET_ALL_SPECIES_URL,
+  GET_ALL_USERS_URL
+} from "../../../../shared/constants/url";
+import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 
 @Component({
   selector: 'app-add-cwimpie',
@@ -8,8 +16,10 @@ import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
   styleUrls: ['./add-cwimpie.component.css']
 })
 export class AddCwimpieComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private cwimpieFormService: CwimpieFormService,
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -35,23 +45,38 @@ export class AddCwimpieComponent implements OnInit {
     },
     {
       key: 'partner',
-      type: 'input',
-      props: {
+      type: 'select',
+      className: 'select-stlyes',
+      templateOptions: {
         label: 'Partner',
+        options: [],
+      },
+      hooks: {
+        onInit: (field) => this.getPartners(field)
       }
     },
     {
       key: 'colour',
-      type: 'input',
-      props: {
+      type: 'select',
+      className: 'select-stlyes',
+      templateOptions: {
         label: 'Colour',
+        options: [],
+      },
+      hooks: {
+        onInit: (field) => this.getColours(field)
       }
     },
     {
       key: 'species',
-      type: 'input',
-      props: {
+      type: 'select',
+      className: 'select-stlyes',
+      templateOptions: {
         label: 'Species',
+        options: [],
+      },
+      hooks: {
+        onInit: (field) => this.getSpecies(field)
       }
     },
     {
@@ -77,12 +102,33 @@ export class AddCwimpieComponent implements OnInit {
     },
     {
       key: 'primary_parent',
-      type: 'input',
-      props: {
+      type: 'select',
+      className: 'select-stlyes',
+      templateOptions: {
         label: 'Primary Parent',
+        options: [],
+      },
+      hooks: {
+        onInit: (field) => this.getUsers(field)
       }
     },
   ];
 
 
+
+  private getPartners(field: FormlyFieldConfig) {
+    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_CWIMPIES_URL, "name", field)
+  }
+
+  private getColours(field: FormlyFieldConfig) {
+    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_COLOURS_URL, "name", field)
+  }
+
+  private getSpecies(field: FormlyFieldConfig) {
+    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_SPECIES_URL, "name", field)
+  }
+
+  private getUsers(field: FormlyFieldConfig) {
+    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_USERS_URL, "name", field)
+  }
 }

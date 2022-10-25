@@ -10,6 +10,7 @@ import {ToastrModule} from 'ngx-toastr'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule,} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
 import {GenerateComponent} from './components/pages/generate/generate.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
@@ -25,6 +26,21 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./services/auth/auth.service";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
 import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
+import {
+  ReducedCwimpieCardComponent
+} from './components/shared/cwimpies/reduced-cwimpie-card/reduced-cwimpie-card.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatTabsModule} from "@angular/material/tabs";
+import {FullCwimpieModalComponent} from './components/shared/cwimpies/full-cwimpie-modal/full-cwimpie-modal.component';
+import {MatRippleModule} from "@angular/material/core";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {AddCwimpieComponent} from './components/forms/cwimpies/add-cwimpie/add-cwimpie.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {NgxMatFileInputModule} from '@angular-material-components/file-input';
+import {FormlyFileField} from "./shared/customFormFields/fileField/fileField";
+
 
 @NgModule({
   declarations: [
@@ -36,6 +52,10 @@ import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
     ViewAllComponent,
     ViewOneCwimpieComponent,
     AuthComponent,
+    ReducedCwimpieCardComponent,
+    FullCwimpieModalComponent,
+    AddCwimpieComponent,
+    FormlyFileField
   ],
   imports: [
     BrowserModule,
@@ -47,7 +67,11 @@ import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
     }),
     AppRoutingModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot({
+      types: [
+        { name: 'file', component: FormlyFileField },
+      ],
+    }),
     FormlyMaterialModule,
     BrowserAnimationsModule,
     MatMenuModule,
@@ -60,6 +84,15 @@ import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
       positionClass: 'toast-bottom-right',
       newestOnTop: false
     }),
+    MatCardModule,
+    MatGridListModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatRippleModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgxMatFileInputModule,
   ],
   providers: [
     AuthService,

@@ -8,9 +8,6 @@ const HobbySchema = new mongoose.Schema({
             required: true,
             trim: true
         },
-        description: {
-            type: String,
-        }
     },
     {
         collection: "Hobbies"

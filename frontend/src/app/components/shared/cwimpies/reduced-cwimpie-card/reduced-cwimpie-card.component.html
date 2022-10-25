@@ -1,0 +1,51 @@
+<div>
+  <mat-card
+    class="card"
+    style="background-color: {{data!.colour.hexCode}}"
+  >
+
+    <div class="openModal click"
+         (click)="openCwimpieModal()"
+         matRipple
+    >
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"
+             style="background-image: url('/assets/icons/species/{{data!.species.iconName}}')">
+        </div>
+        <mat-card-title>{{data!.name}}</mat-card-title>
+        <mat-card-subtitle>{{data!.species.name}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
+    </div>
+    <mat-card-content>
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Job">
+          <div
+            *ngFor="let job of data!.professions"
+            [ngClass]="{main: job!.type === 'Main'}"
+          >
+            {{job!.name}}
+          </div>
+        </mat-tab>
+        <mat-tab label="Hobbies">
+          <div
+            *ngFor="let hobby of data!.hobbies"
+          >
+            {{hobby!.name}}
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-actions
+      class="card_actions"
+    >
+      <button mat-raised-button class="update_button">Update</button>
+      <button mat-mini-fab>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -18,9 +18,6 @@ module.exports = class HobbyService {
                 hobby = new Hobby({
                     name: data.name,
                 })
-                if (data.description) {
-                    hobby.description = data.description
-                }
                 hobby.save()
                 return hobby
             }

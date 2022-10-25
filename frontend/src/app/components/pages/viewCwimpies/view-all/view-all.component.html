@@ -1,1 +1,4 @@
-<p>view-all works!</p>
+<div class="allCwimpies_layout">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <app-reduced-cwimpie-card *ngFor="let cwimpie of allCwimpies" [cwimpieData]="cwimpie"></app-reduced-cwimpie-card>
+</div>

@@ -1,4 +1,4 @@
-export interface AuthResponseData {
+export interface IAuthResponseData {
   _id: string;
   name: string;
   token: string;

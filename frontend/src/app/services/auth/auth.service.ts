@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, tap} from "rxjs";
-import {AuthResponseData} from "../../shared/interfaces/AuthResponseData";
+import {IAuthResponseData} from "../../shared/interfaces/IAuthResponseData";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {TOKEN_VALID_URL, USER_LOGIN_URL} from "../../shared/constants/url";
 import {ToastrService} from "ngx-toastr";
@@ -22,20 +22,18 @@ export class AuthService {
   ) {
   }
 
-  login(userLogin: IUserLogin): Observable<AuthResponseData> {
-    return this.http.post<AuthResponseData>(
+  login(userLogin: IUserLogin): Observable<IAuthResponseData> {
+    return this.http.post<IAuthResponseData>(
       USER_LOGIN_URL,
       userLogin
     ).pipe(
       tap({
-        next: (responseData: AuthResponseData) => {
-          // const expirationDate = new Date(new Date().getTime() + responseData.expiresIn * 1000)
+        next: (responseData: IAuthResponseData) => {
           const user = new User(
             responseData._id,
             responseData.name,
             responseData.username,
             responseData.token,
-            // expirationDate
           )
           this.user.next(user)
           this.toastrService.success(
