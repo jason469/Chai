@@ -17,6 +17,19 @@ module.exports = class FavouriteController {
         }
     }
 
+    static async getFavouriteTypes(req: Request, res: Response) {
+        try {
+            const allFavourites = await FavouriteService.getFavouriteTypes();
+            if (allFavourites.length == 0) {
+                res.status(404).json("There are no favourites")
+            }
+            res.json(allFavourites);
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
 
     static async deleteFavourite(req: Request, res: Response) {
         try {

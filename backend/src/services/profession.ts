@@ -1,5 +1,5 @@
 import {IProfession} from "../utilities/interfaces/modelInterfaces";
-import {ProfessionTypes} from "../utilities/enums/modelEnums";
+import {FavouriteChoices, ProfessionTypes} from "../utilities/enums/modelEnums";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
 const Profession = require('../models/Profession')
 
@@ -10,6 +10,15 @@ module.exports = class ProfessionService {
             return allProfessions;
         } catch (error) {
             console.log(`Could not fetch professions ${error}`)
+        }
+    }
+
+    static async getProfessionTypes() {
+        try {
+            const professionTypes = Object.values(ProfessionTypes);
+            return professionTypes;
+        } catch (error) {
+            console.log(`Could not fetch professionTypes ${error}`)
         }
     }
 

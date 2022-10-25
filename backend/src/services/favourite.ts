@@ -13,6 +13,15 @@ module.exports = class FavouriteService {
         }
     }
 
+    static async getFavouriteTypes() {
+        try {
+            const favouriteChoices = Object.values(FavouriteChoices);
+            return favouriteChoices;
+        } catch (error) {
+            console.log(`Could not fetch favourites ${error}`)
+        }
+    }
+
     static async getFavouriteOrCreate(data: IFavourite) {
         try {
             var favourite = await Favourite.findOne({name: data.name, type: data.type});

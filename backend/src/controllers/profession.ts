@@ -1,5 +1,4 @@
 import {Request, Response} from "express";
-
 const ProfessionService = require('../services/profession')
 
 module.exports = class ProfessionController {
@@ -10,6 +9,20 @@ module.exports = class ProfessionController {
                 res.status(404).json("There are no professions")
             }
             res.json(allProfessions);
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
+
+    static async getProfessionTypes(req: Request, res: Response) {
+        try {
+            const allProfessionTypes = await ProfessionService.getProfessionTypes();
+            if (allProfessionTypes.length == 0) {
+                res.status(404).json("There are no allProfessionTypes")
+            }
+            res.json(allProfessionTypes);
             return
         } catch (error) {
             res.status(500).json({error: error})
