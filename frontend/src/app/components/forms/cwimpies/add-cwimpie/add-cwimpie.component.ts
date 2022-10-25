@@ -94,51 +94,69 @@ export class AddCwimpieComponent implements OnInit {
       props: {label: 'Favourites'},
       fieldGroup: [
         {
-          key: 'favourites',
+          key: 'favouriteGroup1',
+          wrappers: ['panel'],
+          fieldGroup: [
+            {
+              key: 'favourites',
+              type: 'input',
+              props: {
+                label: 'Favourite',
+              }
+            },
+            {
+              key: 'favouritesType',
+              type: 'select',
+              className: 'select-styles',
+              templateOptions: {
+                label: 'Type',
+                options: [],
+              },
+              hooks: {
+                onInit: (field) => this.getFavouriteTypes(field)
+              }
+            },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'professionGroup',
+      wrappers: ['panel'],
+      props: {label: 'Profession'},
+      fieldGroup: [
+        {
+          key: 'profession',
           type: 'input',
           props: {
-            label: 'Favourite',
+            label: 'Profession',
           }
         },
         {
-          key: 'favouritesType',
+          key: 'professionType',
           type: 'select',
-          className: 'select-styles',
+          className: 'select-stlyes',
           templateOptions: {
             label: 'Type',
             options: [],
           },
           hooks: {
-            onInit: (field) => this.getFavouriteTypes(field)
+            onInit: (field) => this.getProfessionTypes(field)
           }
         },
       ],
     },
     {
-      key: 'profession',
-      type: 'input',
-      props: {
-        label: 'Profession',
-      }
-    },
-    {
-      key: 'professionType',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Type',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getProfessionTypes(field)
-      }
-    },
-    {
       key: 'hobbies',
-      type: 'input',
-      props: {
-        label: 'Hobbies',
-      }
+      fieldGroup: [
+        {
+          key: 'hobbies',
+          type: 'input',
+          props: {
+            label: 'Hobbies',
+          }
+        },
+      ]
     },
     {
       key: 'primary_parent',
@@ -179,30 +197,23 @@ export class AddCwimpieComponent implements OnInit {
     return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
   }
 
+  addNewField(groupKey:string){
+    let group:any = this.fields.find((obj) => obj.key === groupKey)
+    let newGroupId: number = group.fieldGroup.length + 1
+    let newGroup = JSON.parse(JSON.stringify(group.fieldGroup[0]))
+    newGroup.key = `favouriteGroup${String(newGroupId)}`
+    group.fieldGroup.push(newGroup)
+  }
+
   addFavouriteField() {
-    let favouriteField: FormlyFieldConfig = {
-      key: 'favourites',
-      type: 'input',
-      props: {
-        label: 'Favourite',
-      }
-    }
-    let favouriteTypeField: FormlyFieldConfig = {
-      key: 'favouritesType',
-      type: 'select',
-      className: 'select-styles',
-      templateOptions: {
-        label: 'Type',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getFavouriteTypes(field)
-      }
-    }
-    let favouriteGroup = this.fields.find((obj) => obj.key === "favouriteGroup")
-    console.log(favouriteGroup)
-    favouriteGroup?.fieldGroup?.push(favouriteField)
-    favouriteGroup?.fieldGroup?.push(favouriteTypeField)
-    console.log(favouriteGroup)
+    this.addNewField("favouriteGroup")
+  }
+
+  addProfessionField() {
+    this.addNewField("professionGroup")
+  }
+
+  addHobbyField() {
+    this.addNewField("hobbies")
   }
 }
