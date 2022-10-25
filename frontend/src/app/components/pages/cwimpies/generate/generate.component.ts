@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormlyFieldConfig} from "@ngx-formly/core";
 
 @Component({
   selector: 'app-generate',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenerateComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

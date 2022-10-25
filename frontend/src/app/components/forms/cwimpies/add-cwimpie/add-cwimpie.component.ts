@@ -3,7 +3,9 @@ import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {
   GET_ALL_COLOURS_URL,
-  GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES, GET_ALL_PROFESSION_TYPES,
+  GET_ALL_CWIMPIES_URL,
+  GET_ALL_FAVOURITE_TYPES,
+  GET_ALL_PROFESSION_TYPES,
   GET_ALL_SPECIES_URL,
   GET_ALL_USERS_URL
 } from "../../../../shared/constants/url";
@@ -87,23 +89,30 @@ export class AddCwimpieComponent implements OnInit {
       },
     },
     {
-      key: 'favourites',
-      type: 'input',
-      props: {
-        label: 'List of favourites',
-      }
-    },
-    {
-      key: 'favouritesType',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Type',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getFavouriteTypes(field)
-      }
+      key: 'favouriteGroup',
+      wrappers: ['panel'],
+      props: {label: 'Favourites'},
+      fieldGroup: [
+        {
+          key: 'favourites',
+          type: 'input',
+          props: {
+            label: 'Favourite',
+          }
+        },
+        {
+          key: 'favouritesType',
+          type: 'select',
+          className: 'select-styles',
+          templateOptions: {
+            label: 'Type',
+            options: [],
+          },
+          hooks: {
+            onInit: (field) => this.getFavouriteTypes(field)
+          }
+        },
+      ],
     },
     {
       key: 'profession',
@@ -146,7 +155,6 @@ export class AddCwimpieComponent implements OnInit {
   ];
 
 
-
   private getPartners(field: FormlyFieldConfig) {
     return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_CWIMPIES_URL, "name", field)
   }
@@ -169,5 +177,32 @@ export class AddCwimpieComponent implements OnInit {
 
   private getProfessionTypes(field: FormlyFieldConfig) {
     return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
+  }
+
+  addFavouriteField() {
+    let favouriteField: FormlyFieldConfig = {
+      key: 'favourites',
+      type: 'input',
+      props: {
+        label: 'Favourite',
+      }
+    }
+    let favouriteTypeField: FormlyFieldConfig = {
+      key: 'favouritesType',
+      type: 'select',
+      className: 'select-styles',
+      templateOptions: {
+        label: 'Type',
+        options: [],
+      },
+      hooks: {
+        onInit: (field) => this.getFavouriteTypes(field)
+      }
+    }
+    let favouriteGroup = this.fields.find((obj) => obj.key === "favouriteGroup")
+    console.log(favouriteGroup)
+    favouriteGroup?.fieldGroup?.push(favouriteField)
+    favouriteGroup?.fieldGroup?.push(favouriteTypeField)
+    console.log(favouriteGroup)
   }
 }
