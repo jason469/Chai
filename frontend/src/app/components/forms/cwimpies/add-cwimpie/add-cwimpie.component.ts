@@ -126,24 +126,30 @@ export class AddCwimpieComponent implements OnInit {
       props: {label: 'Profession'},
       fieldGroup: [
         {
-          key: 'profession',
-          type: 'input',
-          props: {
-            label: 'Profession',
-          }
-        },
-        {
-          key: 'professionType',
-          type: 'select',
-          className: 'select-stlyes',
-          templateOptions: {
-            label: 'Type',
-            options: [],
-          },
-          hooks: {
-            onInit: (field) => this.getProfessionTypes(field)
-          }
-        },
+          key: 'professionGroup1',
+          wrappers: ['panel'],
+          fieldGroup: [
+            {
+              key: 'profession',
+              type: 'input',
+              props: {
+                label: 'Profession',
+              }
+            },
+            {
+              key: 'professionType',
+              type: 'select',
+              className: 'select-stlyes',
+              templateOptions: {
+                label: 'Type',
+                options: [],
+              },
+              hooks: {
+                onInit: (field) => this.getProfessionTypes(field)
+              }
+            },
+          ],
+        }
       ],
     },
     {
@@ -201,8 +207,9 @@ export class AddCwimpieComponent implements OnInit {
     let group:any = this.fields.find((obj) => obj.key === groupKey)
     let newGroupId: number = group.fieldGroup.length + 1
     let newGroup = JSON.parse(JSON.stringify(group.fieldGroup[0]))
-    newGroup.key = `favouriteGroup${String(newGroupId)}`
-    group.fieldGroup.push(newGroup)
+    newGroup.key = `${groupKey}${String(newGroupId)}`
+    group.fieldGroup.splice(1, 0, newGroup)
+    this.fields = this.fields.map(field => field);
   }
 
   addFavouriteField() {
