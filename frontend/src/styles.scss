@@ -12,3 +12,14 @@ body {
 .click {
   cursor: pointer;
 }
+
+// Formly
+.valueType {
+  formly-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+}

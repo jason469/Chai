@@ -1,41 +1,43 @@
-<form
-  [formGroup]="form"
-  #authForm="ngForm"
->
-  <formly-form
-    [form]="form"
-    [fields]="fields"
-    [options]="options"
-    [model]="model"
+<div id="addCwimpieForm">
+  <form
+    [formGroup]="form"
+    #authForm="ngForm"
   >
-  </formly-form>
-  <button
-    mat-raised-button
-    type="submit"
-    color="primary"
-  >
-    Sign in
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="addFavouriteField()"
-  >
-    Add Favourite
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="addProfessionField()"
-  >
-    Add Profession
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="addHobbyField()"
-  >
-    Add Hobby
-  </button>
-</form>
-
+    <formly-form
+      [form]="form"
+      [fields]="fields"
+      [options]="options"
+      [model]="model"
+    >
+    </formly-form>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+    >
+      Sign in
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addFavouriteField()"
+      class="btn"
+    >
+      Add Favourite
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addProfessionField()"
+    >
+      Add Profession
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addHobbyField()"
+    >
+      Add Hobby
+    </button>
+  </form>
+</div>

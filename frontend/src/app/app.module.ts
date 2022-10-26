@@ -42,9 +42,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import {FormlyFileField} from "./shared/customFormElements/fields/fileField";
-import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper";
+import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper/panel-wrapper.component";
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
 import {CommandmentsComponent} from './components/pages/cwimpies/commandments/commandments.component';
+import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {CommandmentsComponent} from './components/pages/cwimpies/commandments/co
     AddCwimpieComponent,
     FormlyFileField,
     CommandmentsComponent,
-    PanelWrapperComponent
+    PanelWrapperComponent,
+    AddNewFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +79,7 @@ import {CommandmentsComponent} from './components/pages/cwimpies/commandments/co
     FormlyModule.forRoot({
       types: [
         {name: 'file', component: FormlyFileField},
+        {name: 'button', component: AddNewFieldComponent},
       ],
       wrappers: [
         {name: 'panel', component: PanelWrapperComponent}

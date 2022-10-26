@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
+import {FormlyFieldConfig, FormlyFieldProps, FormlyFormOptions} from "@ngx-formly/core";
 import {
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL,
@@ -14,7 +14,7 @@ import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.serv
 @Component({
   selector: 'app-add-cwimpie',
   templateUrl: './add-cwimpie.component.html',
-  styleUrls: ['./add-cwimpie.component.css']
+  styleUrls: ['./add-cwimpie.component.scss']
 })
 export class AddCwimpieComponent implements OnInit {
   constructor(
@@ -95,11 +95,12 @@ export class AddCwimpieComponent implements OnInit {
       fieldGroup: [
         {
           key: 'favouriteGroup1',
-          wrappers: ['panel'],
+          className: "valueType",
           fieldGroup: [
             {
               key: 'favourites',
               type: 'input',
+              className: "valueType__input",
               props: {
                 label: 'Favourite',
               }
@@ -107,7 +108,7 @@ export class AddCwimpieComponent implements OnInit {
             {
               key: 'favouritesType',
               type: 'select',
-              className: 'select-styles',
+              className: 'valueType__select',
               templateOptions: {
                 label: 'Type',
                 options: [],
@@ -118,6 +119,15 @@ export class AddCwimpieComponent implements OnInit {
             },
           ],
         },
+        {
+          key: 'addFavouriteType',
+          type: 'button',
+          className: 'btn-primary',
+          props: {
+            label: 'Add Favourite',
+            click: this.addFavouriteField
+          }
+        }
       ],
     },
     {
@@ -127,11 +137,12 @@ export class AddCwimpieComponent implements OnInit {
       fieldGroup: [
         {
           key: 'professionGroup1',
-          wrappers: ['panel'],
+          className: "valueType",
           fieldGroup: [
             {
               key: 'profession',
               type: 'input',
+              className: "valueType__input",
               props: {
                 label: 'Profession',
               }
@@ -139,7 +150,7 @@ export class AddCwimpieComponent implements OnInit {
             {
               key: 'professionType',
               type: 'select',
-              className: 'select-stlyes',
+              className: 'valueType__select',
               templateOptions: {
                 label: 'Type',
                 options: [],
@@ -203,24 +214,84 @@ export class AddCwimpieComponent implements OnInit {
     return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
   }
 
-  addNewField(groupKey:string){
-    let group:any = this.fields.find((obj) => obj.key === groupKey)
+  addNewField(groupKey: string, newGroup: FormlyFieldConfig) {
+    let group: any = this.fields.find((obj) => obj.key === groupKey)
     let newGroupId: number = group.fieldGroup.length + 1
-    let newGroup = JSON.parse(JSON.stringify(group.fieldGroup[0]))
     newGroup.key = `${groupKey}${String(newGroupId)}`
     group.fieldGroup.splice(1, 0, newGroup)
     this.fields = this.fields.map(field => field);
   }
 
   addFavouriteField() {
-    this.addNewField("favouriteGroup")
+    let newGroup = {
+      key: '',
+      className: "valueType",
+      fieldGroup: [
+        {
+          key: 'favourites',
+          type: 'input',
+          className: "valueType__input",
+          props: {
+            label: 'Favourite',
+          }
+        },
+        {
+          key: 'favouritesType',
+          type: 'select',
+          className: "valueType__select",
+          templateOptions: {
+            label: 'Type',
+            options: [],
+          },
+          hooks: {
+            onInit: (field: FormlyFieldConfig<FormlyFieldProps>) => this.getFavouriteTypes(field)
+          }
+        },
+      ],
+    }
+
+    this.addNewField("favouriteGroup", newGroup)
   }
 
   addProfessionField() {
-    this.addNewField("professionGroup")
+    let newGroup = {
+      key: 'professionGroup1',
+      className: "valueType",
+      fieldGroup: [
+        {
+          key: 'profession',
+          type: 'input',
+          className: "valueType__input",
+          props: {
+            label: 'Profession',
+          }
+        },
+        {
+          key: 'professionType',
+          type: 'select',
+          className: "valueType__select",
+          templateOptions: {
+            label: 'Type',
+            options: [],
+          },
+          hooks: {
+            onInit: (field: FormlyFieldConfig<FormlyFieldProps>) => this.getProfessionTypes(field)
+          }
+        },
+      ],
+    }
+    this.addNewField("professionGroup", newGroup)
   }
 
   addHobbyField() {
-    this.addNewField("hobbies")
+    let newHobby = {
+      key: 'hobbies',
+      type: 'input',
+      props: {
+        label: 'Hobbies',
+      }
+    }
+
+    this.addNewField("hobbies", newHobby)
   }
 }
