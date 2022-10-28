@@ -41,14 +41,15 @@ import {AddCwimpieComponent} from './components/forms/cwimpies/add-cwimpie/add-c
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
-import {FormlyFileField} from "./shared/customFormElements/fields/fileField";
+import {FormlyFileField} from "./shared/customFormElements/fields/file-field.component";
 import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper/panel-wrapper.component";
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
 import {CommandmentsComponent} from './components/pages/cwimpies/commandments/commandments.component';
-import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
-import { UpdateCwimpiesComponent } from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
-import { StepperComponent } from './shared/customFormElements/ui/layouts/stepper/stepper.component';
+import {AddNewFieldComponent} from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
+import {UpdateCwimpiesComponent} from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
+import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import {FileFieldComponent} from './shared/customFormElements/fields/file-field/file-field.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     PanelWrapperComponent,
     AddNewFieldComponent,
     UpdateCwimpiesComponent,
-    StepperComponent
+    StepperComponent,
+    FileFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +85,11 @@ import {MatStepperModule} from "@angular/material/stepper";
     ReactiveFormsModule,
     FormlyModule.forRoot({
       types: [
-        {name: 'file', component: FormlyFileField},
-        { name: 'stepper', component: StepperComponent, wrappers: [] },
-        { name: 'repeat', component: AddNewFieldComponent },
+        {name: 'file', component: FileFieldComponent},
+        {name: 'stepper', component: StepperComponent, wrappers: []},
+        {name: 'repeat', component: AddNewFieldComponent},
+        {name: 'password', extends: 'input', defaultOptions: {props: {type: 'password',},},
+        },
       ],
       wrappers: [
         {name: 'panel', component: PanelWrapperComponent}

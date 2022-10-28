@@ -232,10 +232,10 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/forms@^14.2.7":
-  "integrity" "sha512-tEhCIE4mzlD2S0bYE+4e4RG7lOIeRZjjcKw0nlpwE0AneM03gzFlQvbHLDi3qeu8Kc7XkF6C3FJQI/Q7nMiARg=="
-  "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-14.2.7.tgz"
-  "version" "14.2.7"
+"@angular/forms@^14.2.8":
+  "integrity" "sha512-OaL7Gi6STxJza7yn0qgmh6+hV6NVbtGmunpzrn9cR1k5TeE4ZtXu1z7VZesbZ9kZ3F6U9CmygFt0csf7j1d+Ow=="
+  "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-14.2.8.tgz"
+  "version" "14.2.8"
   dependencies:
     "tslib" "^2.3.0"
 

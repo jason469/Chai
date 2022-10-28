@@ -35,10 +35,7 @@ export class AuthComponent implements OnInit {
     },
     {
       key: 'password',
-      type: 'input',
-      templateOptions: {
-        type: 'password'
-      },
+      type: 'password',
       props: {
         label: 'Password',
         placeholder: 'Enter password',

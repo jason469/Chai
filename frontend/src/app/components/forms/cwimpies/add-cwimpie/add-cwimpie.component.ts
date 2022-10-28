@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {FormlyFieldConfig, FormlyFieldProps, FormlyFormOptions} from "@ngx-formly/core";
+import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL,
@@ -26,91 +26,94 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   form = new FormGroup({});
-  model: any = {
-    favourites: [null],
-    professions: [null],
-    hobbies: [null]
-
-  };
+  model: any = {};
   options: FormlyFormOptions = {};
-
   fields: FormlyFieldConfig[] = [
     {
       type: 'stepper',
       fieldGroup: [
         {
+          fieldGroupClassName: 'row',
           props: {label: 'Personal Details'},
           fieldGroup: [
             {
-              key: 'name',
-              type: 'input',
-              props: {
-                label: 'Cwimpie\'s name!',
-                required: true,
-              }
+              className: 'col-6',
+              fieldGroup: [
+                {
+                  key: 'name',
+                  type: 'input',
+                  props: {
+                    label: 'Cwimpie\'s name!',
+                    required: true,
+                  }
+                },
+                {
+                  key: 'photo',
+                  type: 'file',
+                  props: {
+                    label: 'Profile picture',
+                  }
+                },
+                {
+                  key: 'birthday',
+                  type: 'datepicker',
+                  props: {
+                    label: 'Birthday',
+                  },
+                },
+              ]
             },
             {
-              key: 'photo',
-              type: 'file',
-              props: {
-                label: 'Profile picture',
-              }
-            },
-            {
-              key: 'partner',
-              type: 'select',
-              className: 'select-stlyes',
-              templateOptions: {
-                label: 'Partner',
-                options: [],
-                description: `Lovers ♥ !!`
+              className: 'col-6',
+              fieldGroup: [{
+                key: 'partner',
+                type: 'select',
+                className: 'select-stlyes',
+                templateOptions: {
+                  label: 'Partner',
+                  options: [],
+                  description: `Lovers ♥ !!`
+                },
+                hooks: {
+                  onInit: (field) => this.getPartners(field)
+                }
               },
-              hooks: {
-                onInit: (field) => this.getPartners(field)
-              }
-            },
-            {
-              key: 'colour',
-              type: 'select',
-              className: 'select-stlyes',
-              templateOptions: {
-                label: 'Colour',
-                options: [],
-              },
-              hooks: {
-                onInit: (field) => this.getColours(field)
-              }
-            },
-            {
-              key: 'species',
-              type: 'select',
-              className: 'select-stlyes',
-              templateOptions: {
-                label: 'Species',
-                options: [],
-              },
-              hooks: {
-                onInit: (field) => this.getSpecies(field)
-              }
-            },
-            {
-              key: 'birthday',
-              type: 'datepicker',
-              props: {
-                label: 'Birthday',
-              },
-            },
-            {
-              key: 'primary_parent',
-              type: 'select',
-              className: 'select-stlyes',
-              templateOptions: {
-                label: 'Primary Parent',
-                options: [],
-              },
-              hooks: {
-                onInit: (field) => this.getUsers(field)
-              }
+                {
+                  key: 'colour',
+                  type: 'select',
+                  className: 'select-stlyes',
+                  templateOptions: {
+                    label: 'Colour',
+                    options: [],
+                  },
+                  hooks: {
+                    onInit: (field) => this.getColours(field)
+                  }
+                },
+                {
+                  key: 'species',
+                  type: 'select',
+                  className: 'select-stlyes',
+                  templateOptions: {
+                    label: 'Species',
+                    options: [],
+                  },
+                  hooks: {
+                    onInit: (field) => this.getSpecies(field)
+                  }
+                },
+                {
+                  key: 'primary_parent',
+                  type: 'select',
+                  className: 'select-stlyes',
+                  templateOptions: {
+                    label: 'Primary Parent',
+                    options: [],
+                  },
+                  hooks: {
+                    onInit: (field) => this.getUsers(field)
+                  }
+                },]
             },
           ]
         },
@@ -237,5 +240,6 @@ export class AddCwimpieComponent implements OnInit {
 
   submit() {
     console.log(JSON.stringify(this.model));
+    console.log(this.options)
   }
 }
