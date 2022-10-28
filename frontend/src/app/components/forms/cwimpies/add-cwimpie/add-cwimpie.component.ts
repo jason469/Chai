@@ -26,167 +26,188 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   form = new FormGroup({});
+  model: any = {
+    favourites: [null],
+    professions: [null],
+    hobbies: [null]
+
+  };
   options: FormlyFormOptions = {};
-  model = {};
+
   fields: FormlyFieldConfig[] = [
     {
-      key: 'name',
-      type: 'input',
-      props: {
-        label: 'Cwimpie\'s name!',
-        required: true,
-      }
-    },
-    {
-      key: 'photo',
-      type: 'file',
-      props: {
-        label: 'Profile picture',
-      }
-    },
-    {
-      key: 'partner',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Partner',
-        options: [],
-        description: `Lovers ♥ !!`
-      },
-      hooks: {
-        onInit: (field) => this.getPartners(field)
-      }
-    },
-    {
-      key: 'colour',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Colour',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getColours(field)
-      }
-    },
-    {
-      key: 'species',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Species',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getSpecies(field)
-      }
-    },
-    {
-      key: 'birthday',
-      type: 'datepicker',
-      props: {
-        label: 'Birthday',
-      },
-    },
-    {
-      key: 'favouriteGroup',
-      wrappers: ['panel'],
-      props: {label: 'Favourites'},
+      type: 'stepper',
       fieldGroup: [
         {
-          key: 'favouriteGroup1',
-          className: "valueType",
+          props: {label: 'Personal Details'},
           fieldGroup: [
             {
-              key: 'favourites',
+              key: 'name',
               type: 'input',
-              className: "valueType__input",
               props: {
-                label: 'Favourite',
+                label: 'Cwimpie\'s name!',
+                required: true,
               }
             },
             {
-              key: 'favouritesType',
+              key: 'photo',
+              type: 'file',
+              props: {
+                label: 'Profile picture',
+              }
+            },
+            {
+              key: 'partner',
               type: 'select',
-              className: 'valueType__select',
+              className: 'select-stlyes',
               templateOptions: {
-                label: 'Type',
+                label: 'Partner',
+                options: [],
+                description: `Lovers ♥ !!`
+              },
+              hooks: {
+                onInit: (field) => this.getPartners(field)
+              }
+            },
+            {
+              key: 'colour',
+              type: 'select',
+              className: 'select-stlyes',
+              templateOptions: {
+                label: 'Colour',
                 options: [],
               },
               hooks: {
-                onInit: (field) => this.getFavouriteTypes(field)
-              }
-            },
-          ],
-        },
-        {
-          key: 'addFavouriteType',
-          type: 'button',
-          className: 'btn-primary',
-          props: {
-            label: 'Add Favourite',
-            click: this.addFavouriteField
-          }
-        }
-      ],
-    },
-    {
-      key: 'professionGroup',
-      wrappers: ['panel'],
-      props: {label: 'Profession'},
-      fieldGroup: [
-        {
-          key: 'professionGroup1',
-          className: "valueType",
-          fieldGroup: [
-            {
-              key: 'profession',
-              type: 'input',
-              className: "valueType__input",
-              props: {
-                label: 'Profession',
+                onInit: (field) => this.getColours(field)
               }
             },
             {
-              key: 'professionType',
+              key: 'species',
               type: 'select',
-              className: 'valueType__select',
+              className: 'select-stlyes',
               templateOptions: {
-                label: 'Type',
+                label: 'Species',
                 options: [],
               },
               hooks: {
-                onInit: (field) => this.getProfessionTypes(field)
+                onInit: (field) => this.getSpecies(field)
               }
             },
-          ],
-        }
-      ],
-    },
-    {
-      key: 'hobbies',
-      fieldGroup: [
-        {
-          key: 'hobbies',
-          type: 'input',
-          props: {
-            label: 'Hobbies',
-          }
+            {
+              key: 'birthday',
+              type: 'datepicker',
+              props: {
+                label: 'Birthday',
+              },
+            },
+            {
+              key: 'primary_parent',
+              type: 'select',
+              className: 'select-stlyes',
+              templateOptions: {
+                label: 'Primary Parent',
+                options: [],
+              },
+              hooks: {
+                onInit: (field) => this.getUsers(field)
+              }
+            },
+          ]
         },
+        {
+          props: {label: 'Favourites !'},
+          fieldGroup: [
+            {
+              key: 'favouriteGroup',
+              wrappers: ['panel'],
+              props: {
+                label: 'Favourites',
+                description: "Add favourites",
+              },
+              type: 'repeat',
+              fieldGroup: [
+                {
+                  className: "valueType",
+                  fieldGroup: [
+                    {
+                      key: 'favourites',
+                      type: 'input',
+                      className: "valueType__input",
+                      props: {
+                        label: 'Favourite',
+                      }
+                    },
+                    {
+                      key: 'favouritesType',
+                      type: 'select',
+                      className: 'valueType__select',
+                      templateOptions: {
+                        label: 'Type',
+                        options: [],
+                      },
+                      hooks: {
+                        onInit: (field) => this.getFavouriteTypes(field)
+                      }
+                    },
+                  ],
+                },
+              ],
+            },
+          ]
+        },
+        {
+          props: {label: 'What do they do with their spare time?'},
+          fieldGroup: [
+            {
+              key: 'professionGroup',
+              wrappers: ['panel'],
+              props: {label: 'Profession'},
+              type: 'repeat',
+              fieldGroup: [
+                {
+                  className: "valueType",
+                  fieldGroup: [
+                    {
+                      key: 'profession',
+                      type: 'input',
+                      className: "valueType__input",
+                      props: {
+                        label: 'Profession',
+                      }
+                    },
+                    {
+                      key: 'professionType',
+                      type: 'select',
+                      className: 'valueType__select',
+                      templateOptions: {
+                        label: 'Type',
+                        options: [],
+                      },
+                      hooks: {
+                        onInit: (field) => this.getProfessionTypes(field)
+                      }
+                    },
+                  ],
+                }
+              ],
+            },
+            {
+              key: 'hobbies',
+              type: 'repeat',
+              fieldGroup: [
+                {
+                  key: 'hobbies',
+                  type: 'input',
+                  props: {
+                    label: 'Hobbies',
+                  }
+                },
+              ]
+            },
+          ]
+        }
       ]
-    },
-    {
-      key: 'primary_parent',
-      type: 'select',
-      className: 'select-stlyes',
-      templateOptions: {
-        label: 'Primary Parent',
-        options: [],
-      },
-      hooks: {
-        onInit: (field) => this.getUsers(field)
-      }
-    },
+    }
   ];
 
 
@@ -214,84 +235,7 @@ export class AddCwimpieComponent implements OnInit {
     return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
   }
 
-  addNewField(groupKey: string, newGroup: FormlyFieldConfig) {
-    let group: any = this.fields.find((obj) => obj.key === groupKey)
-    let newGroupId: number = group.fieldGroup.length + 1
-    newGroup.key = `${groupKey}${String(newGroupId)}`
-    group.fieldGroup.splice(1, 0, newGroup)
-    this.fields = this.fields.map(field => field);
-  }
-
-  addFavouriteField() {
-    let newGroup = {
-      key: '',
-      className: "valueType",
-      fieldGroup: [
-        {
-          key: 'favourites',
-          type: 'input',
-          className: "valueType__input",
-          props: {
-            label: 'Favourite',
-          }
-        },
-        {
-          key: 'favouritesType',
-          type: 'select',
-          className: "valueType__select",
-          templateOptions: {
-            label: 'Type',
-            options: [],
-          },
-          hooks: {
-            onInit: (field: FormlyFieldConfig<FormlyFieldProps>) => this.getFavouriteTypes(field)
-          }
-        },
-      ],
-    }
-
-    this.addNewField("favouriteGroup", newGroup)
-  }
-
-  addProfessionField() {
-    let newGroup = {
-      key: 'professionGroup1',
-      className: "valueType",
-      fieldGroup: [
-        {
-          key: 'profession',
-          type: 'input',
-          className: "valueType__input",
-          props: {
-            label: 'Profession',
-          }
-        },
-        {
-          key: 'professionType',
-          type: 'select',
-          className: "valueType__select",
-          templateOptions: {
-            label: 'Type',
-            options: [],
-          },
-          hooks: {
-            onInit: (field: FormlyFieldConfig<FormlyFieldProps>) => this.getProfessionTypes(field)
-          }
-        },
-      ],
-    }
-    this.addNewField("professionGroup", newGroup)
-  }
-
-  addHobbyField() {
-    let newHobby = {
-      key: 'hobbies',
-      type: 'input',
-      props: {
-        label: 'Hobbies',
-      }
-    }
-
-    this.addNewField("hobbies", newHobby)
+  submit() {
+    console.log(JSON.stringify(this.model));
   }
 }

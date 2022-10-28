@@ -46,6 +46,9 @@ import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/pan
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
 import {CommandmentsComponent} from './components/pages/cwimpies/commandments/commandments.component';
 import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
+import { UpdateCwimpiesComponent } from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
+import { StepperComponent } from './shared/customFormElements/ui/layouts/stepper/stepper.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 @NgModule({
@@ -64,7 +67,9 @@ import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add
     FormlyFileField,
     CommandmentsComponent,
     PanelWrapperComponent,
-    AddNewFieldComponent
+    AddNewFieldComponent,
+    UpdateCwimpiesComponent,
+    StepperComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add
     FormlyModule.forRoot({
       types: [
         {name: 'file', component: FormlyFileField},
-        {name: 'button', component: AddNewFieldComponent},
+        { name: 'stepper', component: StepperComponent, wrappers: [] },
+        { name: 'repeat', component: AddNewFieldComponent },
       ],
       wrappers: [
         {name: 'panel', component: PanelWrapperComponent}
@@ -108,6 +114,7 @@ import { AddNewFieldComponent } from './shared/customFormElements/ui/buttons/add
     NgxMatFileInputModule,
     MatNativeDateModule,
     FormlyMatDatepickerModule,
+    MatStepperModule,
   ],
   providers: [
     AuthService,
