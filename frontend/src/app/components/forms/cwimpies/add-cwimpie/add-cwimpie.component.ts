@@ -26,18 +26,30 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   form = new FormGroup({});
-  model: any = {};
+  model: any = {
+    name: "",
+    photo: null,
+    birthday: Date.now(),
+    partner: null,
+    colour: null,
+    species: null,
+    primary_parent: null,
+    favouriteGroup: [],
+    professionGroup: [],
+    hobbies: [],
+
+  };
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
     {
       type: 'stepper',
       fieldGroup: [
         {
-          fieldGroupClassName: 'row',
+          fieldGroupClassName: 'addCwimpies_page1',
           props: {label: 'Personal Details'},
           fieldGroup: [
             {
-              className: 'col-6',
+              className: 'addCwimpies_page1__left',
               fieldGroup: [
                 {
                   key: 'name',
@@ -64,11 +76,10 @@ export class AddCwimpieComponent implements OnInit {
               ]
             },
             {
-              className: 'col-6',
+              className: 'addCwimpies_page1__right',
               fieldGroup: [{
                 key: 'partner',
                 type: 'select',
-                className: 'select-stlyes',
                 templateOptions: {
                   label: 'Partner',
                   options: [],
@@ -81,7 +92,6 @@ export class AddCwimpieComponent implements OnInit {
                 {
                   key: 'colour',
                   type: 'select',
-                  className: 'select-stlyes',
                   templateOptions: {
                     label: 'Colour',
                     options: [],
@@ -93,7 +103,6 @@ export class AddCwimpieComponent implements OnInit {
                 {
                   key: 'species',
                   type: 'select',
-                  className: 'select-stlyes',
                   templateOptions: {
                     label: 'Species',
                     options: [],
@@ -105,7 +114,6 @@ export class AddCwimpieComponent implements OnInit {
                 {
                   key: 'primary_parent',
                   type: 'select',
-                  className: 'select-stlyes',
                   templateOptions: {
                     label: 'Primary Parent',
                     options: [],
@@ -130,6 +138,7 @@ export class AddCwimpieComponent implements OnInit {
               type: 'repeat',
               fieldGroup: [
                 {
+                  key: 'favouriteInputs0',
                   className: "valueType",
                   fieldGroup: [
                     {
@@ -168,6 +177,7 @@ export class AddCwimpieComponent implements OnInit {
               type: 'repeat',
               fieldGroup: [
                 {
+                  key: "professionInputs0",
                   className: "valueType",
                   fieldGroup: [
                     {
@@ -199,7 +209,7 @@ export class AddCwimpieComponent implements OnInit {
               type: 'repeat',
               fieldGroup: [
                 {
-                  key: 'hobbies',
+                  key: 'hobbyInput0',
                   type: 'input',
                   props: {
                     label: 'Hobbies',
@@ -239,7 +249,7 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   submit() {
-    console.log(JSON.stringify(this.model));
+    console.log(this.model);
     console.log(this.options)
   }
 }
