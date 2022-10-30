@@ -17,7 +17,7 @@ module.exports = class UserService {
 
     static async getUser(data:IUser) {
         try {
-            var user = await User.findOne({username: data.username});
+            var user = await User.findOne({name: data.name});
             return user;
         } catch (error) {
             console.log(`Could not fetch user ${error}`)

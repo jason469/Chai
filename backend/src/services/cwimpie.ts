@@ -84,8 +84,8 @@ module.exports = class CwimpieService {
             birthdate: new Date(cwimpieData.birthdate),
             primaryParent_id: await userService.getUser(cwimpieData.primaryParent)
         })
-        if (cwimpieData.partner_name) {
-            const partner_cwimpie = await this.getCwimpie(cwimpieData.partner_name)
+        if (cwimpieData.partnerName) {
+            const partner_cwimpie = await this.getCwimpie(cwimpieData.partnerName)
             if (partner_cwimpie) {
                 cwimpie.partner_id = partner_cwimpie
             }

@@ -35,6 +35,7 @@ module.exports = class CwimpieController {
 
     static async addCwimpie(req: Request, res: Response) {
         try {
+            console.log('add cwimpie data is ', req.body)
             const cwimpieData = req.body;
 
             var cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);

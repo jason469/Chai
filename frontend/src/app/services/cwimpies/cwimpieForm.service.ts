@@ -3,11 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {
+  CREATE_CWIMPIE_URL,
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES, GET_ALL_PROFESSION_TYPES,
   GET_ALL_SPECIES_URL,
   GET_ALL_USERS_URL
 } from "../../shared/constants/url";
+import {IAddCwimpieData} from "../../shared/interfaces/IAddCwimpieData";
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +76,10 @@ export class CwimpieFormService {
 
   getProfessionTypes(field: FormlyFieldConfig) {
     return this.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
+  }
+
+  postCwimpieData(data: IAddCwimpieData) {
+    return this.http.post(CREATE_CWIMPIE_URL, data)
   }
 
 }

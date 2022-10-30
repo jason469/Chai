@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
+import {IAddCwimpieData} from "../../../../shared/interfaces/IAddCwimpieData";
 
 @Component({
   selector: 'app-add-cwimpie',
@@ -18,17 +19,29 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   form = new FormGroup({});
-  model: any = {
+  model: IAddCwimpieData = {
     name: "",
-    photo: null,
-    birthday: Date.now(),
-    partner: null,
-    colour: null,
-    species: null,
-    primaryParent: null,
-    favouriteGroup: [],
-    professionGroup: [],
-    hobbies: [],
+    photo: "",
+    birthdate: String(Date.now()),
+    partnerName: "",
+    colour: {
+      "name": ""
+    },
+    species: {
+      "name": ""
+    },
+    primaryParent: {
+      "name": ""
+    },
+    favourites: [{
+      "name": ""
+    }],
+    professions: [{
+      "name": ""
+    }],
+    hobbies: [{
+      "name": ""
+    }],
 
   };
   options: FormlyFormOptions = {};
@@ -59,7 +72,7 @@ export class AddCwimpieComponent implements OnInit {
                   }
                 },
                 {
-                  key: 'birthday',
+                  key: 'birthdate',
                   type: 'datepicker',
                   props: {
                     label: 'Birthday',
@@ -71,7 +84,7 @@ export class AddCwimpieComponent implements OnInit {
             {
               className: 'addCwimpies_page1__right',
               fieldGroup: [{
-                key: 'partner',
+                key: 'partnerName',
                 type: 'select',
                 templateOptions: {
                   label: 'Partner',
@@ -85,39 +98,54 @@ export class AddCwimpieComponent implements OnInit {
               },
                 {
                   key: 'colour',
-                  type: 'select',
-                  templateOptions: {
-                    label: 'Colour',
-                    options: [],
-                    required: true,
-                  },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getColours(field)
-                  }
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'select',
+                      templateOptions: {
+                        label: 'Colour',
+                        options: [],
+                        required: true,
+                      },
+                      hooks: {
+                        onInit: (field) => this.cwimpieFormService.getColours(field)
+                      }
+                    }
+                  ],
                 },
                 {
                   key: 'species',
-                  type: 'select',
-                  templateOptions: {
-                    label: 'Species',
-                    options: [],
-                    required: true,
-                  },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getSpecies(field)
-                  }
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'select',
+                      templateOptions: {
+                        label: 'Species',
+                        options: [],
+                        required: true,
+                      },
+                      hooks: {
+                        onInit: (field) => this.cwimpieFormService.getSpecies(field)
+                      }
+                    }
+                  ],
                 },
                 {
                   key: 'primaryParent',
-                  type: 'select',
-                  templateOptions: {
-                    label: 'Primary Parent',
-                    options: [],
-                    required: true,
-                  },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getUsers(field)
-                  }
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'select',
+                      templateOptions: {
+                        label: 'Primary Parent',
+                        options: [],
+                        required: true,
+                      },
+                      hooks: {
+                        onInit: (field) => this.cwimpieFormService.getUsers(field)
+                      }
+                    }
+                  ],
                 },
               ]
             },
@@ -127,7 +155,7 @@ export class AddCwimpieComponent implements OnInit {
           props: {label: 'Favourites !'},
           fieldGroup: [
             {
-              key: 'favouriteGroup',
+              key: 'favourites',
               wrappers: ['panel'],
               props: {
                 label: 'Favourites',
@@ -141,7 +169,7 @@ export class AddCwimpieComponent implements OnInit {
               fieldArray: {
                 fieldGroup: [
                   {
-                    key: 'favourites',
+                    key: 'name',
                     type: 'input',
                     className: "valueType__input",
                     props: {
@@ -150,7 +178,7 @@ export class AddCwimpieComponent implements OnInit {
                     }
                   },
                   {
-                    key: 'favouritesType',
+                    key: 'type',
                     type: 'select',
                     className: 'valueType__select',
                     templateOptions: {
@@ -171,7 +199,7 @@ export class AddCwimpieComponent implements OnInit {
           props: {label: 'What do they do with their spare time?'},
           fieldGroup: [
             {
-              key: 'professionGroup',
+              key: 'professions',
               wrappers: ['panel'],
               props: {label: 'Profession'},
               type: 'repeat',
@@ -182,7 +210,7 @@ export class AddCwimpieComponent implements OnInit {
               fieldArray: {
                 fieldGroup: [
                   {
-                    key: 'profession',
+                    key: 'name',
                     type: 'input',
                     className: "valueType__input",
                     props: {
@@ -191,7 +219,7 @@ export class AddCwimpieComponent implements OnInit {
                     }
                   },
                   {
-                    key: 'professionType',
+                    key: 'type',
                     type: 'select',
                     className: 'valueType__select',
                     templateOptions: {
@@ -220,7 +248,7 @@ export class AddCwimpieComponent implements OnInit {
               fieldArray: {
                 fieldGroup: [
                   {
-                    key: 'hobbyInput0',
+                    key: 'name',
                     type: 'input',
                     props: {
                       label: 'Hobbies',
@@ -237,6 +265,13 @@ export class AddCwimpieComponent implements OnInit {
   ];
 
   submit() {
-    console.log(this.model);
+    console.log(JSON.stringify(this.model));
+    this.cwimpieFormService.postCwimpieData(
+      this.model
+    ).subscribe(
+      responseData => {
+        console.log(responseData)
+      }
+    )
   }
 }
