@@ -32,7 +32,7 @@ export function getCwimpieProperty(object:Object, propertyName:string,
                 return professionService.getProfessionOrCreate(<IProfession>newPropertyValue)
             case "hobbies":
                 return hobbyService.getHobbyOrCreate(<IHobby>newPropertyValue)
-            case "primary_parent_id":
+            case "primaryParent_id":
                 return userService.getUser(<IUser>newPropertyValue)
             case "stamp_id":
                 return stampService.getStampOrCreate(<IStamp>newPropertyValue)

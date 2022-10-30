@@ -24,7 +24,7 @@ module.exports = class CwimpieService {
                 .populate('hobbies', 'name')
                 .populate('stamp_id', 'accent_colour primary_colour font name')
                 .populate('partner_id')
-                .populate('primary_parent_id', 'username name');
+                .populate('primaryParent_id', 'username name');
             return allCwimpies;
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)
@@ -41,7 +41,7 @@ module.exports = class CwimpieService {
                 .populate('hobbies')
                 .populate('stamp_id')
                 .populate('partner_id')
-                .populate('primary_parent_id', 'username name')
+                .populate('primaryParent_id', 'username name')
             ;
             if (cwimpie) {
                 return cwimpie;
@@ -82,7 +82,7 @@ module.exports = class CwimpieService {
             hobbies: hobbies,
             stamp_id: await stampService.getStampOrCreate(cwimpieData.stamp),
             birthdate: new Date(cwimpieData.birthdate),
-            primary_parent_id: await userService.getUser(cwimpieData.primary_parent)
+            primaryParent_id: await userService.getUser(cwimpieData.primaryParent)
         })
         if (cwimpieData.partner_name) {
             const partner_cwimpie = await this.getCwimpie(cwimpieData.partner_name)

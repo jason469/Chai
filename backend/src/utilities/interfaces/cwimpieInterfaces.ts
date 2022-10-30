@@ -11,7 +11,7 @@ export interface INewCwimpieData {
     professions: IProfession[],
     hobbies: IHobby[],
     stamp: IStamp,
-    primary_parent: IUser,
+    primaryParent: IUser,
     partner_name?: string,
 }
 

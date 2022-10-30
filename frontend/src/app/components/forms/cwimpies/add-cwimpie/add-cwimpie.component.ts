@@ -1,14 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
-import {
-  GET_ALL_COLOURS_URL,
-  GET_ALL_CWIMPIES_URL,
-  GET_ALL_FAVOURITE_TYPES,
-  GET_ALL_PROFESSION_TYPES,
-  GET_ALL_SPECIES_URL,
-  GET_ALL_USERS_URL
-} from "../../../../shared/constants/url";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 
 @Component({
@@ -33,7 +25,7 @@ export class AddCwimpieComponent implements OnInit {
     partner: null,
     colour: null,
     species: null,
-    primary_parent: null,
+    primaryParent: null,
     favouriteGroup: [],
     professionGroup: [],
     hobbies: [],
@@ -71,6 +63,7 @@ export class AddCwimpieComponent implements OnInit {
                   type: 'datepicker',
                   props: {
                     label: 'Birthday',
+                    required: true,
                   },
                 },
               ]
@@ -83,10 +76,11 @@ export class AddCwimpieComponent implements OnInit {
                 templateOptions: {
                   label: 'Partner',
                   options: [],
-                  description: `Lovers ♥ !!`
+                  description: `Lovers ♥ !!`,
+                  required: true,
                 },
                 hooks: {
-                  onInit: (field) => this.getPartners(field)
+                  onInit: (field) => this.cwimpieFormService.getPartners(field)
                 }
               },
                 {
@@ -95,9 +89,10 @@ export class AddCwimpieComponent implements OnInit {
                   templateOptions: {
                     label: 'Colour',
                     options: [],
+                    required: true,
                   },
                   hooks: {
-                    onInit: (field) => this.getColours(field)
+                    onInit: (field) => this.cwimpieFormService.getColours(field)
                   }
                 },
                 {
@@ -106,22 +101,25 @@ export class AddCwimpieComponent implements OnInit {
                   templateOptions: {
                     label: 'Species',
                     options: [],
+                    required: true,
                   },
                   hooks: {
-                    onInit: (field) => this.getSpecies(field)
+                    onInit: (field) => this.cwimpieFormService.getSpecies(field)
                   }
                 },
                 {
-                  key: 'primary_parent',
+                  key: 'primaryParent',
                   type: 'select',
                   templateOptions: {
                     label: 'Primary Parent',
                     options: [],
+                    required: true,
                   },
                   hooks: {
-                    onInit: (field) => this.getUsers(field)
+                    onInit: (field) => this.cwimpieFormService.getUsers(field)
                   }
-                },]
+                },
+              ]
             },
           ]
         },
@@ -136,34 +134,36 @@ export class AddCwimpieComponent implements OnInit {
                 description: "Add favourites",
               },
               type: 'repeat',
-              fieldGroup: [
-                {
-                  key: 'favouriteInputs0',
-                  className: "valueType",
-                  fieldGroup: [
-                    {
-                      key: 'favourites',
-                      type: 'input',
-                      className: "valueType__input",
-                      props: {
-                        label: 'Favourite',
-                      }
+              templateOptions: {
+                addText: 'Add another investment',
+              },
+              className: "valueType",
+              fieldArray: {
+                fieldGroup: [
+                  {
+                    key: 'favourites',
+                    type: 'input',
+                    className: "valueType__input",
+                    props: {
+                      label: 'Favourite',
+                      required: true,
+                    }
+                  },
+                  {
+                    key: 'favouritesType',
+                    type: 'select',
+                    className: 'valueType__select',
+                    templateOptions: {
+                      label: 'Type',
+                      options: [],
+                      required: true,
                     },
-                    {
-                      key: 'favouritesType',
-                      type: 'select',
-                      className: 'valueType__select',
-                      templateOptions: {
-                        label: 'Type',
-                        options: [],
-                      },
-                      hooks: {
-                        onInit: (field) => this.getFavouriteTypes(field)
-                      }
-                    },
-                  ],
-                },
-              ],
+                    hooks: {
+                      onInit: (field) => this.cwimpieFormService.getFavouriteTypes(field)
+                    }
+                  },
+                ],
+              },
             },
           ]
         },
@@ -175,47 +175,60 @@ export class AddCwimpieComponent implements OnInit {
               wrappers: ['panel'],
               props: {label: 'Profession'},
               type: 'repeat',
-              fieldGroup: [
-                {
-                  key: "professionInputs0",
-                  className: "valueType",
-                  fieldGroup: [
-                    {
-                      key: 'profession',
-                      type: 'input',
-                      className: "valueType__input",
-                      props: {
-                        label: 'Profession',
-                      }
+              templateOptions: {
+                addText: 'Add another investment',
+              },
+              className: "valueType",
+              fieldArray: {
+                fieldGroup: [
+                  {
+                    key: 'profession',
+                    type: 'input',
+                    className: "valueType__input",
+                    props: {
+                      label: 'Profession',
+                      required: true,
+                    }
+                  },
+                  {
+                    key: 'professionType',
+                    type: 'select',
+                    className: 'valueType__select',
+                    templateOptions: {
+                      label: 'Type',
+                      options: [],
+                      required: true,
                     },
-                    {
-                      key: 'professionType',
-                      type: 'select',
-                      className: 'valueType__select',
-                      templateOptions: {
-                        label: 'Type',
-                        options: [],
-                      },
-                      hooks: {
-                        onInit: (field) => this.getProfessionTypes(field)
-                      }
-                    },
-                  ],
-                }
-              ],
+                    hooks: {
+                      onInit: (field) => this.cwimpieFormService.getProfessionTypes(field)
+                    }
+                  },
+                ],
+              },
             },
             {
               key: 'hobbies',
+              wrappers: ['panel'],
+              props: {
+                label: 'Hobbies',
+                description: "Add hobbies",
+              },
               type: 'repeat',
-              fieldGroup: [
-                {
-                  key: 'hobbyInput0',
-                  type: 'input',
-                  props: {
-                    label: 'Hobbies',
-                  }
-                },
-              ]
+              templateOptions: {
+                addText: 'Add another investment',
+              },
+              fieldArray: {
+                fieldGroup: [
+                  {
+                    key: 'hobbyInput0',
+                    type: 'input',
+                    props: {
+                      label: 'Hobbies',
+                      required: true,
+                    }
+                  },
+                ]
+              },
             },
           ]
         }
@@ -223,33 +236,7 @@ export class AddCwimpieComponent implements OnInit {
     }
   ];
 
-
-  private getPartners(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_CWIMPIES_URL, "name", field)
-  }
-
-  private getColours(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_COLOURS_URL, "name", field)
-  }
-
-  private getSpecies(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_SPECIES_URL, "name", field)
-  }
-
-  private getUsers(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldOptions(GET_ALL_USERS_URL, "name", field)
-  }
-
-  private getFavouriteTypes(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_FAVOURITE_TYPES, field)
-  }
-
-  private getProfessionTypes(field: FormlyFieldConfig) {
-    return this.cwimpieFormService.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
-  }
-
   submit() {
     console.log(this.model);
-    console.log(this.options)
   }
 }

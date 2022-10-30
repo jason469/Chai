@@ -1,11 +1,11 @@
-<div class="mb-3">
+<div>
+  <div>
+    <button type="button" (click)="addField()">+</button>
+  </div>
   <div *ngFor="let singleField of field.fieldGroup; let i = index" class="row align-items-baseline field">
     <div>
-      <button *ngIf="field.fieldGroup?.length !== 1" color="warn" type="button" (click)="removeField(i)">-</button>
+      <button *ngIf="field.fieldGroup?.length !== 1" type="button" (click)="removeField(i)">-</button>
     </div>
-    <formly-field class="col" [field]="singleField"></formly-field>
-    <div>
-      <button *ngIf="(i+1) === field.fieldGroup?.length" color="primary" type="button" (click)="addField()">+</button>
-    </div>
+    <formly-field [field]="singleField"></formly-field>
   </div>
 </div>

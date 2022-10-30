@@ -7,7 +7,7 @@ export interface IReducedCwimpieCardData {
   favourites: IFavourite[],
   professions: IProfession[],
   hobbies: IHobby[],
-  primary_parent: IUser
+  primaryParent: IUser
 }
 
 export interface IColour {

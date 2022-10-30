@@ -165,7 +165,7 @@ export class UpdateCwimpiesComponent implements OnInit {
       ]
     },
     {
-      key: 'primary_parent',
+      key: 'primaryParent',
       type: 'select',
       className: 'select-stlyes',
       templateOptions: {

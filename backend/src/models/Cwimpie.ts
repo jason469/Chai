@@ -48,7 +48,7 @@ const CwimpieSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref:'Hobby'
         }],
-        primary_parent_id: {
+        primaryParent_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'User'
         },

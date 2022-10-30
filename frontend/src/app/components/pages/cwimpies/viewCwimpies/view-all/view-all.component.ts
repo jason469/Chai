@@ -31,7 +31,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
           favourites: data.favourites,
           professions: data.professions,
           hobbies: data.hobbies,
-          primary_parent: data.primary_parent_id
+          primaryParent: data.primaryParent_id
         }
         this.allCwimpies.push(cwimpieData)
       }
