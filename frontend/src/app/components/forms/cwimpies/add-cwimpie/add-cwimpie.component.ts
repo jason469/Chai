@@ -270,7 +270,10 @@ export class AddCwimpieComponent implements OnInit {
       this.model
     ).subscribe(
       responseData => {
+        this.form.reset()
         console.log(responseData)
+      }, errorMessage => {
+        console.log('error in creating cwimpie', errorMessage)
       }
     )
   }

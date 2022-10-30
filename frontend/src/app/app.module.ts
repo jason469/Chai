@@ -88,11 +88,15 @@ import {FileFieldComponent} from './shared/customFormElements/fields/file-field/
         {name: 'file', component: FileFieldComponent},
         {name: 'stepper', component: StepperComponent, wrappers: []},
         {name: 'repeat', component: AddNewFieldComponent},
-        {name: 'password', extends: 'input', defaultOptions: {props: {type: 'password',},},
+        {
+          name: 'password', extends: 'input', defaultOptions: {props: {type: 'password',},},
         },
       ],
       wrappers: [
         {name: 'panel', component: PanelWrapperComponent}
+      ],
+      validationMessages: [
+        {name: 'required', message: 'This field is requiredddd'},
       ],
     }),
     FormlyMaterialModule,
