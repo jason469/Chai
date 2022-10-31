@@ -53,9 +53,11 @@ export class AddCwimpieComponent implements OnInit {
                   {
                     key: 'birthdate',
                     type: 'datepicker',
+                    defaultValue: new Date(),
                     props: {
                       label: 'Birthday',
                       required: true,
+                      description: "DD/MM/YYYY"
                     },
                   },
                 ]
@@ -98,6 +100,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'select',
+                        defaultValue: 'Bunny',
                         templateOptions: {
                           label: 'Species',
                           options: [],
@@ -115,6 +118,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'select',
+                        defaultValue: 'Sue Liu',
                         templateOptions: {
                           label: 'Primary Parent',
                           options: [],
@@ -142,7 +146,7 @@ export class AddCwimpieComponent implements OnInit {
                 },
                 type: 'repeat',
                 templateOptions: {
-                  addText: 'Add another investment',
+                  addText: 'Add another favourite',
                 },
                 className: "valueType",
                 fieldArray: {
@@ -160,6 +164,7 @@ export class AddCwimpieComponent implements OnInit {
                       key: 'type',
                       type: 'select',
                       className: 'valueType__select',
+                      defaultValue: "Food",
                       templateOptions: {
                         label: 'Type',
                         options: [],
@@ -201,6 +206,7 @@ export class AddCwimpieComponent implements OnInit {
                       key: 'type',
                       type: 'select',
                       className: 'valueType__select',
+                      defaultValue: "Main",
                       templateOptions: {
                         label: 'Type',
                         options: [],
