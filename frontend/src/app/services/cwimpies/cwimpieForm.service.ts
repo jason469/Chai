@@ -10,6 +10,7 @@ import {
   GET_ALL_USERS_URL
 } from "../../shared/constants/url";
 import {IAddCwimpieData} from "../../shared/interfaces/IAddCwimpieData";
+import {Cwimpie} from "../../shared/models/Cwimpie";
 
 @Injectable({
   providedIn: 'root'
@@ -78,7 +79,7 @@ export class CwimpieFormService {
     return this.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES, field)
   }
 
-  postCwimpieData(data: IAddCwimpieData) {
+  postCwimpieData(data: Cwimpie) {
     return this.http.post(CREATE_CWIMPIE_URL, data)
   }
 

@@ -1,27 +1,28 @@
 export class Cwimpie {
-  constructor(
-    private name: string,
-    private photo: string,
-    private birthdate: string,
-    private partnerName: string,
-    private colour: {
-      "name": string
-    },
-    private species: {
-      "name": string
-    },
-    private primaryParent: {
-      "name": string
-    },
-    private favourites: [{
-      "name": string
-    }],
-    private professions: [{
-      "name": string
-    }],
-    private hobbies: [{
-      "name": string
-    }],
-  ) {
+  name?: string;
+  photo?: string;
+  birthdate?: string;
+  partnerName?: string;
+  colour?: {
+    "name": string
+  };
+  species?: {
+    "name": string
+  };
+  primaryParent?: {
+    "name": string
+  };
+  favourites?: [{
+    "name": string
+  }];
+  professions?: [{
+    "name": string
+  }];
+  hobbies?: [{
+    "name": string
+  }];
+
+  constructor() {
   }
+
 }

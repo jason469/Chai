@@ -50,6 +50,7 @@ import {UpdateCwimpiesComponent} from './components/forms/cwimpies/update-cwimpi
 import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {FileFieldComponent} from './shared/customFormElements/fields/file-field/file-field.component';
+import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 
 
 @NgModule({
@@ -131,7 +132,8 @@ import {FileFieldComponent} from './shared/customFormElements/fields/file-field/
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    CwimpieFormService,
   ],
   bootstrap: [AppComponent]
 })
