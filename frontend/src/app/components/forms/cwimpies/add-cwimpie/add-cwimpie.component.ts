@@ -43,13 +43,13 @@ export class AddCwimpieComponent implements OnInit {
                       required: true,
                     }
                   },
-                  {
-                    key: 'photo',
-                    type: 'file',
-                    props: {
-                      label: 'Profile picture',
-                    }
-                  },
+                  // {
+                  //   key: 'photo',
+                  //   type: 'file',
+                  //   templateOptions: {
+                  //     multiple: true
+                  //   },
+                  // },
                   {
                     key: 'birthdate',
                     type: 'datepicker',
@@ -91,7 +91,33 @@ export class AddCwimpieComponent implements OnInit {
                         hooks: {
                           onInit: (field) => this.cwimpieFormService.getColours(field)
                         }
-                      }
+                      },
+                    ],
+                  },
+                  {
+                    key: 'newColour',
+                    className: "valueType",
+                    fieldGroup: [
+                      {
+                        key: 'name',
+                        type: 'input',
+                        templateOptions: {
+                          label: 'New colour\'s name',
+                        },
+                        expressionProperties: {
+                          'templateOptions.disabled': "true",
+                        },
+                      },
+                      {
+                        key: 'hexCode',
+                        type: 'input',
+                        templateOptions: {
+                          label: 'New colour\'s hex code',
+                        },
+                        expressionProperties: {
+                          'templateOptions.disabled': "true",
+                        },
+                      },
                     ],
                   },
                   {
@@ -248,11 +274,17 @@ export class AddCwimpieComponent implements OnInit {
         ]
       }
     ];
+  }
 
+  addNewColour() {
+    this.form.controls['colour'].disable();
+    this.form.controls['colour'].setValue("");
+    this.form.controls['newColour'].enable();
   }
 
 
   submit() {
+    console.log(this.model)
     this.cwimpieFormService.postCwimpieData(
       this.model
     ).subscribe(

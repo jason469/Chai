@@ -1,10 +1,11 @@
 export class Cwimpie {
   name?: string;
-  photo?: string;
+  photo?: object;
   birthdate?: string;
   partnerName?: string;
   colour?: {
-    "name": string
+    "name": string;
+    "hexCode": string
   };
   species?: {
     "name": string

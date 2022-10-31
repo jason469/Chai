@@ -41,7 +41,6 @@ import {AddCwimpieComponent} from './components/forms/cwimpies/add-cwimpie/add-c
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
-import {FormlyFileField} from "./shared/customFormElements/fields/file-field.component";
 import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper/panel-wrapper.component";
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
 import {CommandmentsComponent} from './components/pages/cwimpies/commandments/commandments.component';
@@ -51,6 +50,7 @@ import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/s
 import {MatStepperModule} from "@angular/material/stepper";
 import {FileFieldComponent} from './shared/customFormElements/fields/file-field/file-field.component';
 import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
+import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/file-value-accessor";
 
 
 @NgModule({
@@ -66,13 +66,13 @@ import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
     ReducedCwimpieCardComponent,
     FullCwimpieModalComponent,
     AddCwimpieComponent,
-    FormlyFileField,
     CommandmentsComponent,
     PanelWrapperComponent,
     AddNewFieldComponent,
     UpdateCwimpiesComponent,
     StepperComponent,
-    FileFieldComponent
+    FileFieldComponent,
+    FileValueAccessor
   ],
   imports: [
     BrowserModule,
@@ -86,7 +86,7 @@ import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
     ReactiveFormsModule,
     FormlyModule.forRoot({
       types: [
-        {name: 'file', component: FileFieldComponent},
+        {name: 'file', component: FileFieldComponent, wrappers: ['form-field']},
         {name: 'stepper', component: StepperComponent, wrappers: []},
         {name: 'repeat', component: AddNewFieldComponent},
         {
