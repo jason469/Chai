@@ -1,4 +1,8 @@
 <div class="allCwimpies_layout">
   <mat-spinner *ngIf="loading"></mat-spinner>
-  <app-reduced-cwimpie-card *ngFor="let cwimpie of allCwimpies" [cwimpieData]="cwimpie"></app-reduced-cwimpie-card>
+  <app-reduced-cwimpie-card
+    *ngFor="let cwimpie of allCwimpies"
+    [cwimpieData]="cwimpie"
+    (deletedCwimpieName)="refreshAllCwimpies($event)"
+  ></app-reduced-cwimpie-card>
 </div>

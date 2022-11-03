@@ -41,11 +41,11 @@
     >
       <button mat-raised-button class="update_button">Update</button>
       <button mat-mini-fab>
-        <mat-icon>clear</mat-icon>
+        <mat-icon (click)="deleteCwimpie(data!.name)">clear</mat-icon>
       </button>
     </mat-card-actions>
     <mat-card-footer>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<!--      <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
     </mat-card-footer>
   </mat-card>
 </div>

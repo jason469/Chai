@@ -17,10 +17,12 @@ export class AddCwimpieComponent implements OnInit {
   model: Cwimpie;
   options: FormlyFormOptions;
   fields: Array<FormlyFieldConfig>
+  hideColour: boolean
 
   constructor(
     private cwimpieFormService: CwimpieFormService,
   ) {
+    this.hideColour = false;
     this.form = new FormGroup({});
     this.model = new Cwimpie()
     this.options = {}
@@ -71,7 +73,6 @@ export class AddCwimpieComponent implements OnInit {
                     label: 'Partner',
                     options: [],
                     description: `Lovers ♥ !!`,
-                    required: true,
                   },
                   hooks: {
                     onInit: (field) => this.cwimpieFormService.getPartners(field)
@@ -90,36 +91,40 @@ export class AddCwimpieComponent implements OnInit {
                         },
                         hooks: {
                           onInit: (field) => this.cwimpieFormService.getColours(field)
-                        }
+                        },
+                        // hideExpression: function ($viewValue, $modelValue, scope) {
+                        // }
                       },
                     ],
                   },
-                  {
-                    key: 'newColour',
-                    className: "valueType",
-                    fieldGroup: [
-                      {
-                        key: 'name',
-                        type: 'input',
-                        templateOptions: {
-                          label: 'New colour\'s name',
-                        },
-                        expressionProperties: {
-                          'templateOptions.disabled': "true",
-                        },
-                      },
-                      {
-                        key: 'hexCode',
-                        type: 'input',
-                        templateOptions: {
-                          label: 'New colour\'s hex code',
-                        },
-                        expressionProperties: {
-                          'templateOptions.disabled': "true",
-                        },
-                      },
-                    ],
-                  },
+                  // {
+                  //   key: 'newColour',
+                  //   className: "valueType",
+                  //   fieldGroup: [
+                  //     {
+                  //       key: 'name',
+                  //       type: 'input',
+                  //       templateOptions: {
+                  //         label: 'New colour\'s name',
+                  //         required: false,
+                  //       },
+                  //       expressionProperties: {
+                  //         'templateOptions.disabled': "true",
+                  //       },
+                  //     },
+                  //     {
+                  //       key: 'hexCode',
+                  //       type: 'input',
+                  //       templateOptions: {
+                  //         label: 'New colour\'s hex code',
+                  //         required: false,
+                  //       },
+                  //       expressionProperties: {
+                  //         'templateOptions.disabled': "true",
+                  //       },
+                  //     },
+                  //   ],
+                  // },
                   {
                     key: 'species',
                     fieldGroup: [
@@ -144,7 +149,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'select',
-                        defaultValue: 'Sue Liu',
+                        defaultValue: 'Jason Liu',
                         templateOptions: {
                           label: 'Primary Parent',
                           options: [],
@@ -278,8 +283,9 @@ export class AddCwimpieComponent implements OnInit {
 
   addNewColour() {
     this.form.controls['colour'].disable();
-    this.form.controls['colour'].setValue("");
+    this.form.controls['colour'].setValue(null);
     this.form.controls['newColour'].enable();
+    this.hideColour = true
   }
 
 

@@ -21,22 +21,30 @@ export class ViewAllComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
-      for (let data of allData) {
-        let cwimpieData:IReducedCwimpieCardData = {
-          cwimpieId: data._id,
-          name: data.name,
-          birthdate: data.birthdate,
-          colour: data.colour_id,
-          species: data.species_id,
-          favourites: data.favourites,
-          professions: data.professions,
-          hobbies: data.hobbies,
-          primaryParent: data.primaryParent_id
+      if (allData.length != 0) {
+        for (let data of allData) {
+          let cwimpieData: IReducedCwimpieCardData = {
+            cwimpieId: data._id,
+            name: data.name,
+            birthdate: data.birthdate,
+            colour: data.colour_id,
+            species: data.species_id,
+            favourites: data.favourites,
+            professions: data.professions,
+            hobbies: data.hobbies,
+            primaryParent: data.primaryParent_id
+          }
+          this.allCwimpies.push(cwimpieData)
         }
-        this.allCwimpies.push(cwimpieData)
       }
       this.loading = false;
     })
+    console.log(this.allCwimpies)
+  }
+
+  refreshAllCwimpies(deleteCwimpieName:string) {
+    let deletedCwimpieIndex = this.allCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
+    this.allCwimpies.splice(deletedCwimpieIndex, 1);
   }
 
   ngOnDestroy() {

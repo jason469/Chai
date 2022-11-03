@@ -114,4 +114,12 @@ module.exports = class CwimpieService {
             return null
         }
     }
+
+    static async deleteCwimpie(name: string) {
+        try {
+            await Cwimpie.deleteOne({name: name});
+        } catch (error) {
+            console.log(`Could not delete cwimpie ${error}`)
+        }
+    }
 }

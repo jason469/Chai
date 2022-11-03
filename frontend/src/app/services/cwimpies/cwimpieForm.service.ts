@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {
-  CREATE_CWIMPIE_URL,
+  CREATE_CWIMPIE_URL, DELETE_CWIMPIE_URL,
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES, GET_ALL_PROFESSION_TYPES,
   GET_ALL_SPECIES_URL,
@@ -11,6 +11,7 @@ import {
 } from "../../shared/constants/url";
 import {IAddCwimpieData} from "../../shared/interfaces/IAddCwimpieData";
 import {Cwimpie} from "../../shared/models/Cwimpie";
+import {DELETE} from "@angular/cdk/keycodes";
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +83,4 @@ export class CwimpieFormService {
   postCwimpieData(data: Cwimpie) {
     return this.http.post(CREATE_CWIMPIE_URL, data)
   }
-
 }

@@ -38,13 +38,14 @@ module.exports = class CwimpieController {
             console.log('add cwimpie data is ', req.body)
             const cwimpieData = req.body;
 
-            var cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);
+            let cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);
             if (cwimpie) {
                 res.status(400).json({msg: `${cwimpieData.name} already exists!`})
                 return
             } else {
                 await CwimpieService.createCwimpie(cwimpieData)
             }
+            console.log(cwimpie)
             res.status(200).json({msg: `${cwimpieData.name} has been successfully created`})
             return
         } catch (error) {
@@ -68,6 +69,17 @@ module.exports = class CwimpieController {
             return
         } catch (error) {
             res.status(500).json({msg: error});
+            return
+        }
+    }
+
+    static async deleteCwimpie(req: Request, res: Response) {
+        try {
+            await CwimpieService.deleteCwimpie(req.params.cwimpieName);
+            res.status(200).json(`${req.params.cwimpieName} was deleted!`)
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
             return
         }
     }

@@ -15,3 +15,6 @@ export const GET_ALL_PROFESSION_TYPES = BASE_URL + '/api/profession-types'
 // URLs to create cwimpies
 export const CREATE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/add'
 
+// URLs to delete cwimpies
+export const DELETE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/'
+
