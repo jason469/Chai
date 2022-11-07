@@ -17,15 +17,12 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private cwimpieModalDataService: CwimpieModalDataService,
-    private modalService: BsModalService
   ) {
   }
 
   ngOnInit(): void {
     this.cwimpieModalDataServiceSubscription = this.cwimpieModalDataService.getData().subscribe({
       next: (data:ICwimpieCardData) => {
-        console.log('subscription')
-        console.log(data)
         this.data = data
       }
     });

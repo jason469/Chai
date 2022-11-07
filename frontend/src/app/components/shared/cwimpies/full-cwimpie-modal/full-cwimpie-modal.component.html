@@ -1,9 +1,44 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left" id="my-modal-title">Modal title</h4>
-    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  <h4 class="modal-title pull-left" id="my-modal-title">{{data.name}}</h4>
+  <span aria-hidden="true" class="visually-hidden">&times;</span>
 </div>
 <div class="modal-body">
   <div id="my-modal-description">
-    {{data}}
+    <div id="birthday">
+      Birthday: {{data.birthdate}}
+    </div>
+    <div id="colour">
+      Colour: {{data.colour.name}}
+      <div id="colour__hexcode">
+        Hex code: {{data.colour.hexCode}}
+      </div>
+    </div>
+    <div id="species">
+      Species: {{data.species.name}}
+    </div>
+    <div id="favourites">
+      <div
+        *ngFor="let favourite of data!.favourites"
+      >
+        Favourite {{favourite.type}} is {{favourite.name}}
+      </div>
+    </div>
+    <div id="professions">
+      <div
+        *ngFor="let profession of data!.professions"
+      >
+        Favourite {{profession.type}} is {{profession.name}}
+      </div>
+    </div>
+    <div id="hobbies">
+      <div
+        *ngFor="let hobby of data.hobbies"
+      >
+        Hobby: {{hobby.name}}
+      </div>
+    </div>
+    <div id="primaryParent">
+      Primary Parent: {{data.primaryParent.name}}
+    </div>
   </div>
 </div>
