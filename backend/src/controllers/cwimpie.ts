@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
+import {activityNames, cwimpieNames, favouriteNames} from "../utilities/randomValues/cwimpieValues";
 
 const CwimpieService = require('../services/cwimpie')
+const _ = require('lodash');
 
 module.exports = class CwimpieController {
     static async getAllCwimpies(req: Request, res: Response) {
@@ -73,6 +75,30 @@ module.exports = class CwimpieController {
         try {
             await CwimpieService.deleteCwimpie(req.params.cwimpieName);
             res.status(200).json(`${req.params.cwimpieName} was deleted!`)
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
+
+    static async getRandomCwimpieValues(req: Request, res: Response) {
+        try {
+            let valueType = req.params.valueType;
+            let randomValue = ""
+            switch(valueType) {
+                case "name":
+                    randomValue = _.sample(cwimpieNames);
+                    break
+                case "favourites":
+                    randomValue = _.sample(favouriteNames);
+                    break
+                case "professions":
+                case "hobbies":
+                    randomValue = _.sample(activityNames);
+                    break
+            }
+            res.status(200).json(randomValue)
             return
         } catch (error) {
             res.status(500).json({error: error})
