@@ -11,6 +11,7 @@ export class AddNewFieldComponent extends FieldArrayType implements OnInit{
   ngOnInit() {
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
+    this.add()  // Add first field
   }
 
   removeField(itemIndex: number) {

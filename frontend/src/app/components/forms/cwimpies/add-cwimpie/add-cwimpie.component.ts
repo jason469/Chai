@@ -190,6 +190,7 @@ export class AddCwimpieComponent implements OnInit {
                       key: 'name',
                       type: 'input',
                       className: "valueType__input",
+                      defaultValue: "",
                       props: {
                         label: 'Favourite',
                         required: true,
