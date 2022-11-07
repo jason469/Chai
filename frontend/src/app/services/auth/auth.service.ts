@@ -72,7 +72,6 @@ export class AuthService {
         userData._username,
         userData._token
       )
-      console.log(loadedUser.token)
       if (loadedUser.token) {
         return this.http.post<Boolean>(
           TOKEN_VALID_URL,

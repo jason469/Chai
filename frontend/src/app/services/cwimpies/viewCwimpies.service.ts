@@ -10,7 +10,6 @@ import {map} from "rxjs";
 export class ViewCwimpiesService {
   constructor(
     private http: HttpClient,
-    private router: Router
   ) {
   }
 
@@ -18,7 +17,6 @@ export class ViewCwimpiesService {
     return this.http.get(GET_ALL_CWIMPIES_URL)
       .pipe(
         map(responseData => {
-            console.log(responseData)
             return Object.values(responseData)
           }
         )

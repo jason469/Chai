@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
-import {IReducedCwimpieCardData} from "../../../../../shared/interfaces/IReducedCwimpieCardData";
+import {ICwimpieCardData} from "../../../../../shared/interfaces/ICwimpieCardData";
 
 @Component({
   selector: 'app-view-all',
@@ -12,7 +12,7 @@ import {IReducedCwimpieCardData} from "../../../../../shared/interfaces/IReduced
 export class ViewAllComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getAllCwimpiesSub: Subscription | undefined;
-  allCwimpies: IReducedCwimpieCardData[] = [];
+  allCwimpies: ICwimpieCardData[] = [];
 
   constructor(
     private viewCwimpiesService: ViewCwimpiesService
@@ -23,7 +23,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
         for (let data of allData) {
-          let cwimpieData: IReducedCwimpieCardData = {
+          let cwimpieData: ICwimpieCardData = {
             cwimpieId: data._id,
             name: data.name,
             birthdate: data.birthdate,
@@ -39,7 +39,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
       }
       this.loading = false;
     })
-    console.log(this.allCwimpies)
   }
 
   refreshAllCwimpies(deleteCwimpieName:string) {

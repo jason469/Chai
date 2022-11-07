@@ -51,6 +51,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {FileFieldComponent} from './shared/customFormElements/fields/file-field/file-field.component';
 import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/file-value-accessor";
+import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -124,6 +125,7 @@ import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/f
     MatNativeDateModule,
     FormlyMatDatepickerModule,
     MatStepperModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -134,6 +136,7 @@ import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/f
       multi: true
     },
     CwimpieFormService,
+    BsModalService,
   ],
   bootstrap: [AppComponent]
 })
