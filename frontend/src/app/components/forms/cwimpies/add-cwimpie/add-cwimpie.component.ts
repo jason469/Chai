@@ -17,12 +17,12 @@ export class AddCwimpieComponent implements OnInit {
   model: Cwimpie;
   options: FormlyFormOptions;
   fields: Array<FormlyFieldConfig>
-  hideColour: boolean
+  addNewColour: boolean
 
   constructor(
     private cwimpieFormService: CwimpieFormService,
   ) {
-    this.hideColour = false;
+    this.addNewColour = false;
     this.form = new FormGroup({});
     this.model = new Cwimpie()
     this.options = {}
@@ -87,44 +87,41 @@ export class AddCwimpieComponent implements OnInit {
                         templateOptions: {
                           label: 'Colour',
                           options: [],
-                          required: true,
                         },
                         hooks: {
                           onInit: (field) => this.cwimpieFormService.getColours(field)
                         },
-                        // hideExpression: function ($viewValue, $modelValue, scope) {
-                        // }
                       },
                     ],
                   },
-                  // {
-                  //   key: 'newColour',
-                  //   className: "valueType",
-                  //   fieldGroup: [
-                  //     {
-                  //       key: 'name',
-                  //       type: 'input',
-                  //       templateOptions: {
-                  //         label: 'New colour\'s name',
-                  //         required: false,
-                  //       },
-                  //       expressionProperties: {
-                  //         'templateOptions.disabled': "true",
-                  //       },
-                  //     },
-                  //     {
-                  //       key: 'hexCode',
-                  //       type: 'input',
-                  //       templateOptions: {
-                  //         label: 'New colour\'s hex code',
-                  //         required: false,
-                  //       },
-                  //       expressionProperties: {
-                  //         'templateOptions.disabled': "true",
-                  //       },
-                  //     },
-                  //   ],
-                  // },
+                  {
+                    key: 'newColour',
+                    className: "valueType",
+                    fieldGroup: [
+                      {
+                        key: 'name',
+                        type: 'input',
+                        templateOptions: {
+                          label: 'New colour\'s name',
+                          required: false,
+                        },
+                        expressionProperties: {
+                          'templateOptions.disabled': "true",
+                        },
+                      },
+                      {
+                        key: 'hexCode',
+                        type: 'input',
+                        templateOptions: {
+                          label: 'New colour\'s hex code',
+                          required: false,
+                        },
+                        expressionProperties: {
+                          'templateOptions.disabled': "true",
+                        },
+                      },
+                    ],
+                  },
                   {
                     key: 'species',
                     fieldGroup: [
@@ -281,16 +278,31 @@ export class AddCwimpieComponent implements OnInit {
     ];
   }
 
-  addNewColour() {
-    this.form.controls['colour'].disable();
-    this.form.controls['colour'].setValue(null);
-    this.form.controls['newColour'].enable();
-    this.hideColour = true
+  toggleNewColour() {
+    // @ts-ignore
+    let firstPage = this.fields[0].fieldGroup[0].fieldGroup[1].fieldGroup
+    let colourField = firstPage!.find(obj => obj.key == "colour")
+    let newColourGroup = firstPage!.find(obj => obj.key == "newColour")
+    if (this.addNewColour) { // If addNewColour is true, then we don't want to add a new colour
+      colourField!.formControl!.patchValue({name: ""})
+      colourField!.templateOptions!.disabled = false
+      newColourGroup!.fieldGroup?.forEach((field) => {
+        field.formControl?.patchValue("")
+        field.templateOptions!.disabled = true
+      })
+      this.addNewColour = false
+    } else {  // We do want to add a new colour
+      colourField!.formControl!.patchValue({name: ""})
+      colourField!.templateOptions!.disabled = true
+      newColourGroup!.fieldGroup?.forEach((field) => field.templateOptions!.disabled = false)
+      this.addNewColour = true
+    }
+
+    // console.log(this)
   }
 
 
   submit() {
-    console.log(this.model)
     this.cwimpieFormService.postCwimpieData(
       this.model
     ).subscribe(

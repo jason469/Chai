@@ -9,7 +9,6 @@ import {FieldArrayType} from "@ngx-formly/core";
 
 export class AddNewFieldComponent extends FieldArrayType implements OnInit{
   ngOnInit() {
-    console.log(this)
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
   }

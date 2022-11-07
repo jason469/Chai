@@ -20,9 +20,9 @@
       mat-raised-button
       type="button"
       color="primary"
-      (click)="addNewColour()"
+      (click)="toggleNewColour()"
     >
-      Add new colour
+      {{addNewColour ? "Don't add new colour" : "Add new colour"}}
     </button>
   </form>
 </div>
