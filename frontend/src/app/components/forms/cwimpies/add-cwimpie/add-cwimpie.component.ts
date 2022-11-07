@@ -3,7 +3,8 @@ import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 import {Cwimpie} from "../../../../shared/models/Cwimpie";
-import {validateAllFormFields} from "../../../../shared/functions/fileValidation";
+import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-cwimpie',
@@ -22,6 +23,8 @@ export class AddCwimpieComponent implements OnInit {
 
   constructor(
     private cwimpieFormService: CwimpieFormService,
+    private toastrService: ToastrService,
+
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -309,6 +312,51 @@ export class AddCwimpieComponent implements OnInit {
     }
   }
 
+  fillDefaultValues(field: any, valueType: string) {
+    let getRandomValueSubscription:Subscription = this.cwimpieFormService.getRandomValues(valueType).subscribe(
+      (randomValue) => {
+        if (field.formControl!.value == undefined) {
+          field.formControl!.patchValue(randomValue)
+        }
+      }, errorMessage => {
+        console.log('error in fetching random value', errorMessage)
+      }, () => {
+        getRandomValueSubscription.unsubscribe()
+      }
+    )
+  }
+
+  insertRandomValues() {
+    console.log(this.fields)
+    let firstPageLeft = this.fields[0].fieldGroup![0].fieldGroup![0].fieldGroup
+    let secondPage = this.fields[0].fieldGroup![1].fieldGroup
+    let thirdPage = this.fields[0].fieldGroup![2].fieldGroup
+    let nameField = firstPageLeft!.find(obj => obj.key == "name")
+    let favouriteFields = secondPage!.find(obj => obj.key == "favourites")
+    let professionFields = thirdPage!.find(obj => obj.key == "professions")
+    let hobbyFields = thirdPage!.find(obj => obj.key == "hobbies")
+    let nestedFieldsToInsert = [
+      {
+        "valueType": "favourites",
+        "fields": favouriteFields
+      },
+      {
+        "valueType": "professions",
+        "fields": professionFields
+      },
+      {
+        "valueType": "hobbies",
+        "fields": hobbyFields
+      }]
+    for (let currentFields of nestedFieldsToInsert) {
+      for (let currentField of currentFields.fields!.fieldGroup!) {
+        let field = currentField.fieldGroup![0]
+        this.fillDefaultValues(field, currentFields.valueType)
+      }
+    }
+    this.fillDefaultValues(nameField, "name")
+  }
+
 
   submit() {
     if (this.addNewColour) {
@@ -319,11 +367,17 @@ export class AddCwimpieComponent implements OnInit {
       this.cwimpieFormService.postCwimpieData(
         this.model
       ).subscribe(
-        responseData => {
+        (responseData:any) => {
           this.form.reset()
-          console.log(responseData)
+          this.toastrService.success(
+            `Yayyy well done`,
+            `${responseData.name} was created`
+          );
         }, errorMessage => {
-          console.log('error in creating cwimpie', errorMessage)
+          this.toastrService.warning(
+            `${JSON.stringify(errorMessage)}`,
+            `There was an error in making the cwimpie :(`
+          );
         }
       )
     }

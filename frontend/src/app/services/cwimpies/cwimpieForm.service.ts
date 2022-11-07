@@ -7,7 +7,7 @@ import {
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES, GET_ALL_PROFESSION_TYPES,
   GET_ALL_SPECIES_URL,
-  GET_ALL_USERS_URL
+  GET_ALL_USERS_URL, GET_RANDOM_VALUES
 } from "../../shared/constants/url";
 import {IAddCwimpieData} from "../../shared/interfaces/IAddCwimpieData";
 import {Cwimpie} from "../../shared/models/Cwimpie";
@@ -82,5 +82,9 @@ export class CwimpieFormService {
 
   postCwimpieData(data: Cwimpie) {
     return this.http.post(CREATE_CWIMPIE_URL, data)
+  }
+
+  getRandomValues(valueType:string) {
+    return this.http.get(GET_RANDOM_VALUES + valueType)
   }
 }
