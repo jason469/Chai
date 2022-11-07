@@ -13,12 +13,17 @@ module.exports = class ColourService {
     }
 
     static async getColourOrCreate(data: IColour) {
+
         try {
             var colour = await Colour.findOne({name: data.name});
             if (!colour) {
+                let hexCode = data.hexCode
+                if (data.hexCode?.slice(0, 1) !== "#") {
+                    hexCode = "#" + data.hexCode
+                }
                 colour = new Colour({
                     name: data.name,
-                    hexCode: data.hexCode
+                    hexCode: hexCode
                 })
                 await colour.save()
             }

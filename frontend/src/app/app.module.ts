@@ -52,6 +52,7 @@ import {FileFieldComponent} from './shared/customFormElements/fields/file-field/
 import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {hexCodeValidator} from "./shared/functions/fileValidation";
 
 
 @NgModule({
@@ -97,8 +98,12 @@ import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
       wrappers: [
         {name: 'panel', component: PanelWrapperComponent}
       ],
+      validators: [
+        {name: "VHexCode", validation: hexCodeValidator}
+      ],
       validationMessages: [
         {name: 'required', message: 'This field is requiredddd'},
+        {name: 'VHexCode', message: 'The value isn\'t a valid hex codeeeee'}
       ],
     }),
     FormlyMaterialModule,

@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('restarted')
     this.authService.autoLogin()?.subscribe()
   }
 

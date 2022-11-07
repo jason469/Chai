@@ -5,7 +5,10 @@ export class Cwimpie {
   partnerName?: string;
   colour?: {
     "name": string;
-    "hexCode": string
+  };
+  newColour?: {
+    "name": string;
+    "hexCode": string;
   };
   species?: {
     "name": string

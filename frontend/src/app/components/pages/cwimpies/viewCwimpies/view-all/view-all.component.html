@@ -5,4 +5,7 @@
     [cwimpieData]="cwimpie"
     (deletedCwimpieName)="refreshAllCwimpies($event)"
   ></app-reduced-cwimpie-card>
+  <h1
+    *ngIf="allCwimpies.length == 0"
+  >All the cwimpies are sleeping :(</h1>
 </div>

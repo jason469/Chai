@@ -6,10 +6,6 @@ module.exports = class CwimpieController {
     static async getAllCwimpies(req: Request, res: Response) {
         try {
             const allCwimpies = await CwimpieService.getAllCwimpies();
-            if (allCwimpies.length == 0) {
-                res.status(404).json("The cwimpies are snoozing :( Check later!")
-                return
-            }
             res.json(allCwimpies);
             return
         } catch (error) {

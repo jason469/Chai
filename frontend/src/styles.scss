@@ -32,3 +32,7 @@ body {
   gap: 2rem;
 }
 
+.mat-stepper-next, .mat-stepper-previous{
+  display: none;
+}
+

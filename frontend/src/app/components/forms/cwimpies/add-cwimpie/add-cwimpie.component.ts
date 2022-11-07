@@ -3,6 +3,7 @@ import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 import {Cwimpie} from "../../../../shared/models/Cwimpie";
+import {validateAllFormFields} from "../../../../shared/functions/fileValidation";
 
 @Component({
   selector: 'app-add-cwimpie',
@@ -59,7 +60,7 @@ export class AddCwimpieComponent implements OnInit {
                     props: {
                       label: 'Birthday',
                       required: true,
-                      description: "DD/MM/YYYY"
+                      description: "MM/DD/YYYY"
                     },
                   },
                 ]
@@ -119,6 +120,9 @@ export class AddCwimpieComponent implements OnInit {
                         expressionProperties: {
                           'templateOptions.disabled': "true",
                         },
+                        validators: {
+                          validation: ["VHexCode"]
+                        }
                       },
                     ],
                   },
@@ -286,32 +290,45 @@ export class AddCwimpieComponent implements OnInit {
     if (this.addNewColour) { // If addNewColour is true, then we don't want to add a new colour
       colourField!.formControl!.patchValue({name: ""})
       colourField!.templateOptions!.disabled = false
+      colourField!.templateOptions!.required = true
       newColourGroup!.fieldGroup?.forEach((field) => {
         field.formControl?.patchValue("")
         field.templateOptions!.disabled = true
+        field.templateOptions!.required = false
       })
       this.addNewColour = false
     } else {  // We do want to add a new colour
       colourField!.formControl!.patchValue({name: ""})
       colourField!.templateOptions!.disabled = true
-      newColourGroup!.fieldGroup?.forEach((field) => field.templateOptions!.disabled = false)
+      colourField!.templateOptions!.required = false
+      newColourGroup!.fieldGroup?.forEach((field) => {
+        field.templateOptions!.disabled = false
+        field.templateOptions!.required = true
+      })
       this.addNewColour = true
     }
-
-    // console.log(this)
   }
 
 
   submit() {
-    this.cwimpieFormService.postCwimpieData(
-      this.model
-    ).subscribe(
-      responseData => {
-        this.form.reset()
-        console.log(responseData)
-      }, errorMessage => {
-        console.log('error in creating cwimpie', errorMessage)
-      }
-    )
+    if (this.addNewColour) {
+      this.model.colour = this.model.newColour
+    }
+    delete this.model.newColour
+    if (this.form.valid) {
+      this.cwimpieFormService.postCwimpieData(
+        this.model
+      ).subscribe(
+        responseData => {
+          this.form.reset()
+          console.log(responseData)
+        }, errorMessage => {
+          console.log('error in creating cwimpie', errorMessage)
+        }
+      )
+    }
+    // else {
+    //   validateAllFormFields(this.form)
+    // }
   }
 }
