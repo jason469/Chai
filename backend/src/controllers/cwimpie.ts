@@ -44,7 +44,7 @@ module.exports = class CwimpieController {
                 await CwimpieService.createCwimpie(cwimpieData)
             }
             console.log(cwimpie)
-            res.status(200).json({msg: `${cwimpieData.name} has been successfully created`})
+            res.status(200).json({name: `${cwimpieData.name}`})
             return
         } catch (error) {
             res.status(500).json({msg: error})
