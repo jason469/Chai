@@ -2,12 +2,13 @@ import {Request, Response} from "express";
 
 const SpeciesService = require('../services/species')
 
-module.exports = class StampController {
+module.exports = class SpeciesController {
     static async getAllSpecies(req: Request, res: Response) {
         try {
             const allSpecies = await SpeciesService.getAllSpecies();
             if (allSpecies.length == 0) {
                 res.status(404).json("There are no species")
+                return
             }
             res.json(allSpecies);
             return

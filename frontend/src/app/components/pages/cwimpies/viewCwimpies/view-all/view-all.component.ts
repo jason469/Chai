@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
-import {ICwimpieCardData} from "../../../../../shared/interfaces/ICwimpieCardData";
+import {Cwimpie} from "../../../../../shared/models/models";
 
 @Component({
   selector: 'app-view-all',
@@ -12,7 +12,7 @@ import {ICwimpieCardData} from "../../../../../shared/interfaces/ICwimpieCardDat
 export class ViewAllComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getAllCwimpiesSub: Subscription | undefined;
-  allCwimpies: ICwimpieCardData[] = [];
+  allCwimpies: Cwimpie[] = [];
 
   constructor(
     private viewCwimpiesService: ViewCwimpiesService
@@ -23,7 +23,8 @@ export class ViewAllComponent implements OnInit, OnDestroy {
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
         for (let data of allData) {
-          let cwimpieData: ICwimpieCardData = {
+          console.log(data)
+          let cwimpieData: Cwimpie = {
             cwimpieId: data._id,
             name: data.name,
             birthdate: data.birthdate,
@@ -32,10 +33,12 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             favourites: data.favourites,
             professions: data.professions,
             hobbies: data.hobbies,
-            primaryParent: data.primaryParent_id
+            primaryParent: data.primaryParent_id,
+          }
+          if (data.partner_id) {
+            cwimpieData.partnerName = data.partner_id.name
           }
           this.allCwimpies.push(cwimpieData)
-          console.log(cwimpieData)
         }
       }
       this.loading = false;

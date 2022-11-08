@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
-import {Cwimpie} from "../../../../shared/models/Cwimpie";
+import {Cwimpie} from "../../../../shared/models/models";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpdateData.service";

@@ -1,22 +1,22 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {ICwimpieCardData,} from "../../shared/interfaces/ICwimpieCardData";
+import {Cwimpie} from "../../shared/models/models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CwimpieModalDataService {
-  private data: Subject<ICwimpieCardData> = new BehaviorSubject<ICwimpieCardData>(new ICwimpieCardData());
+  private data: Subject<Cwimpie> = new BehaviorSubject<Cwimpie>(new Cwimpie());
   currentData = this.data.asObservable()
 
   constructor() {
   }
 
-  changeData(data: ICwimpieCardData) {
+  changeData(data: Cwimpie) {
     this.data.next(data)
   }
 
-  getData(): Observable<ICwimpieCardData> {
+  getData(): Observable<Cwimpie> {
     return this.currentData
   }
 

@@ -1,4 +1,4 @@
-const Colour = require('../../models/Colour')
+const Colour = require('../../models/Colours')
 const Country = require('../../models/Country')
 const Cwimpie = require('../../models/Cwimpie')
 const DailySchedule = require('../../models/DailySchedule')

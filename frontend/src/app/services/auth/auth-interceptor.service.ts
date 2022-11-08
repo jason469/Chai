@@ -16,7 +16,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           return next.handle(req)
         }
         const modifiedReq = req.clone({
-          headers: req.headers.append('x-auth-token', user.token)
+          headers: req.headers.append('x-auth-token', user.token!)
         })
         return next.handle(modifiedReq);
       })

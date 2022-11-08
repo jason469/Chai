@@ -7,11 +7,11 @@ const StampSchema = new mongoose.Schema({
         name: String,
         primary_colour: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Colour'
+            ref: 'Colours'
         },
         accent_colour: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Colour'
+            ref: 'Colours'
         },
         font: {
             type: String,

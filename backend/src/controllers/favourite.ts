@@ -5,6 +5,7 @@ const FavouriteService = require('../services/favourite')
 module.exports = class FavouriteController {
     static async getAllFavourites(req: Request, res: Response) {
         try {
+            console.log('favourites')
             const allFavourites = await FavouriteService.getAllFavourites();
             if (allFavourites.length == 0) {
                 res.status(404).json("There are no favourites")

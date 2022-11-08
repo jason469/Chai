@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {Cwimpie} from "../../shared/models/Cwimpie";
+import {Cwimpie} from "../../shared/models/models";
 
 @Injectable({
   providedIn: 'root'

@@ -9,7 +9,7 @@ import {
   GET_ALL_SPECIES_URL,
   GET_ALL_USERS_URL, GET_RANDOM_VALUES_URL
 } from "../../shared/constants/url";
-import {Cwimpie} from "../../shared/models/Cwimpie";
+import {Cwimpie} from "../../shared/models/models";
 
 @Injectable({
   providedIn: 'root'

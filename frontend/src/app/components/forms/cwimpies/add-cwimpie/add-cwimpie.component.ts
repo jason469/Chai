@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
-import {Cwimpie} from "../../../../shared/models/Cwimpie";
+import {Cwimpie} from "../../../../shared/models/models";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 
@@ -24,6 +24,7 @@ export class AddCwimpieComponent implements OnInit {
   constructor(
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
+    private cdr: ChangeDetectorRef
 
   ) {
     this.addNewColour = false;
@@ -135,7 +136,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'select',
-                        defaultValue: 'Bunny',
+                        defaultValue: "Bunny",
                         templateOptions: {
                           label: 'Species',
                           options: [],
@@ -153,7 +154,6 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'select',
-                        defaultValue: 'Jason Liu',
                         templateOptions: {
                           label: 'Primary Parent',
                           options: [],
@@ -190,7 +190,6 @@ export class AddCwimpieComponent implements OnInit {
                       key: 'name',
                       type: 'input',
                       className: "valueType__input",
-                      defaultValue: "",
                       props: {
                         label: 'Favourite',
                         required: true,
@@ -286,6 +285,10 @@ export class AddCwimpieComponent implements OnInit {
     ];
   }
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
   toggleNewColour() {
     // @ts-ignore
     let firstPage = this.fields[0].fieldGroup[0].fieldGroup[1].fieldGroup
@@ -316,7 +319,7 @@ export class AddCwimpieComponent implements OnInit {
   fillDefaultValues(field: any, valueType: string) {
     let getRandomValueSubscription:Subscription = this.cwimpieFormService.getRandomValues(valueType).subscribe(
       (randomValue) => {
-        if (field.formControl!.value == undefined) {
+        if (field.formControl!.value === "" || field.formControl!.value === undefined) {
           field.formControl!.patchValue(randomValue)
         }
       }, errorMessage => {

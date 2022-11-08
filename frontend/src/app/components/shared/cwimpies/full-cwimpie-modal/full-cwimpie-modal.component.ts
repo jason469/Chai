@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal';
 import {CwimpieModalDataService} from "../../../../services/cwimpies/cwimpieModalData.service";
 import {Subscription} from "rxjs";
-import {ICwimpieCardData} from "../../../../shared/interfaces/ICwimpieCardData";
+import {Cwimpie} from "../../../../shared/models/models";
 
 @Component({
   selector: 'app-full-cwimpie-modal',
@@ -10,7 +10,7 @@ import {ICwimpieCardData} from "../../../../shared/interfaces/ICwimpieCardData";
   styleUrls: ['./full-cwimpie-modal.component.css']
 })
 export class FullCwimpieModalComponent implements OnInit, OnDestroy {
-  data!: ICwimpieCardData;
+  data!: Cwimpie;
   @Input('cwimpieData') public modalRef!: BsModalRef;
   cwimpieModalDataServiceSubscription!: Subscription
 
@@ -22,7 +22,7 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cwimpieModalDataServiceSubscription = this.cwimpieModalDataService.getData().subscribe({
-      next: (data:ICwimpieCardData) => {
+      next: (data:Cwimpie) => {
         this.data = data
       }
     });

@@ -1,12 +1,12 @@
 import {IColour} from "../utilities/interfaces/modelInterfaces";
 
-const Colour = require('../models/Colour')
+const Colours = require('../models/Colours')
 
 module.exports = class ColourService {
     static async getAllColours() {
         try {
-            const allColours = await Colour.find();
-            return allColours;
+            const allColours = await Colours.find();
+            return await allColours;
         } catch (error) {
             console.log(`Could not fetch colours ${error}`)
         }
@@ -15,13 +15,13 @@ module.exports = class ColourService {
     static async getColourOrCreate(data: IColour) {
 
         try {
-            var colour = await Colour.findOne({name: data.name});
+            var colour = await Colours.findOne({name: data.name});
             if (!colour) {
                 let hexCode = data.hexCode
                 if (data.hexCode?.slice(0, 1) !== "#") {
                     hexCode = "#" + data.hexCode
                 }
-                colour = new Colour({
+                colour = new Colours({
                     name: data.name,
                     hexCode: hexCode
                 })
@@ -35,7 +35,7 @@ module.exports = class ColourService {
 
     static async deleteColour(name: string) {
         try {
-            const colour = await Colour.findOne({name: name})
+            const colour = await Colours.findOne({name: name})
             if (colour) {
                 await colour.deleteOne()
             }

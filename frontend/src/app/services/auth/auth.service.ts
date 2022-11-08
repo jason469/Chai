@@ -5,7 +5,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {TOKEN_VALID_URL, USER_LOGIN_URL} from "../../shared/constants/url";
 import {ToastrService} from "ngx-toastr";
 import {IUserLogin} from "../../shared/interfaces/IUserLogin";
-import {User} from "../../shared/models/User";
+import {User} from "../../shared/models/models";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -29,12 +29,12 @@ export class AuthService {
     ).pipe(
       tap({
         next: (responseData: IAuthResponseData) => {
-          const user = new User(
-            responseData._id,
-            responseData.name,
-            responseData.username,
-            responseData.token,
-          )
+          const user = new User()
+          user.name = responseData.name;
+          user.id = responseData._id;
+          user.username = responseData.username;
+          user.token = responseData.token;
+
           this.user.next(user)
           this.toastrService.success(
             `Welcome to Chai ${user.name}!`,
@@ -59,19 +59,19 @@ export class AuthService {
     const userData: {
       id: string;
       name: string;
-      _username: string;
-      _token: string;
+      username: string;
+      token: string;
     } = JSON.parse(localStorage.getItem('userData') || '{}');
     if (!userData) {
       console.log('no data')
       return;
     } else {
-      const loadedUser = new User(
-        userData.id,
-        userData.name,
-        userData._username,
-        userData._token
-      )
+      const loadedUser = new User()
+      loadedUser.name = userData.name;
+      loadedUser.id = userData.id;
+      loadedUser.username = userData.username;
+      loadedUser.token = userData.token;
+
       if (loadedUser.token) {
         return this.http.post<Boolean>(
           TOKEN_VALID_URL,

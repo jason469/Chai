@@ -26,4 +26,4 @@ ColourSchema.post("deleteOne", { document: true, query: false },async function (
     await cascadeDelete(Cwimpie, this, "colour_id");
 })
 
-module.exports = mongoose.model('Colour', ColourSchema);
+module.exports = mongoose.model('Colours', ColourSchema);

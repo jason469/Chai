@@ -28,7 +28,7 @@ const CwimpieSchema = new mongoose.Schema(
         ],
         colour_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Colour'
+            ref:'Colours'
         },
         species_id: {
             type: mongoose.Schema.Types.ObjectId,
