@@ -34,6 +34,7 @@ export class UpdateCwimpiesComponent implements OnInit {
       {
         fieldGroupClassName: 'addCwimpies_page1',
         props: {label: 'Personal Details'},
+        wrappers: ['panel'],
         fieldGroup: [
           {
             className: 'addCwimpies_page1__left',
@@ -62,6 +63,68 @@ export class UpdateCwimpiesComponent implements OnInit {
                   required: true,
                   description: "MM/DD/YYYY"
                 },
+              },
+              {
+                key: 'stamp',
+                wrappers: ['panel'],
+                props: {
+                  label: 'Stamps',
+                  description: "Add stamp",
+                },
+                fieldGroup: [
+                  {
+                    key: 'primary_colour',
+                    fieldGroup: [
+                      {
+                        key: 'name',
+                        type: 'select',
+                        templateOptions: {
+                          options: [],
+                        },
+                        props: {
+                          label: 'Primary Colour',
+                          required: true,
+                        },
+                        hooks: {
+                          onInit: (field) => this.cwimpieFormService.getColours(field)
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    key: 'accent_colour',
+                    fieldGroup: [
+                      {
+                        key: 'name',
+                        type: 'select',
+                        templateOptions: {
+                          options: [],
+                        },
+                        props: {
+                          label: 'Accent Colour',
+                          required: true,
+                        },
+                        hooks: {
+                          onInit: (field) => this.cwimpieFormService.getColours(field)
+                        },
+                      }
+                    ]
+                  },
+                  {
+                    key: 'font',
+                    type: 'select',
+                    templateOptions: {
+                      options: [],
+                    },
+                    props: {
+                      label: 'Font',
+                      required: true,
+                    },
+                    hooks: {
+                      onInit: (field) => this.cwimpieFormService.getFonts(field)
+                    },
+                  },
+                ]
               },
             ]
           },
@@ -164,136 +227,149 @@ export class UpdateCwimpiesComponent implements OnInit {
               },
             ]
           },
+          {
+            fieldGroup: [
+              {
+                key: 'favourites',
+                wrappers: ['panel'],
+                props: {
+                  label: 'Favourites',
+                  description: "Add favourites",
+                },
+                type: 'repeat',
+                templateOptions: {
+                  addText: 'Add another favourite',
+                },
+                className: "valueType",
+                fieldArray: {
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'input',
+                      className: "valueType__input",
+                      defaultValue: "",
+                      props: {
+                        label: 'Favourite',
+                        required: true,
+                      }
+                    },
+                    {
+                      key: 'type',
+                      type: 'select',
+                      className: 'valueType__select',
+                      defaultValue: "Food",
+                      templateOptions: {
+                        label: 'Type',
+                        options: [],
+                        required: true,
+                      },
+                      hooks: {
+                        onInit: (field) => this.cwimpieFormService.getFavouriteTypes(field)
+                      }
+                    },
+                  ],
+                },
+              },
+            ]
+          },
+          {
+            fieldGroup: [
+              {
+                key: 'professions',
+                wrappers: ['panel'],
+                props: {label: 'Profession'},
+                type: 'repeat',
+                templateOptions: {
+                  addText: 'Add another investment',
+                },
+                className: "valueType",
+                fieldArray: {
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'input',
+                      className: "valueType__input",
+                      props: {
+                        label: 'Profession',
+                        required: true,
+                      }
+                    },
+                    {
+                      key: 'type',
+                      type: 'select',
+                      className: 'valueType__select',
+                      defaultValue: "Main",
+                      templateOptions: {
+                        label: 'Type',
+                        options: [],
+                        required: true,
+                      },
+                      hooks: {
+                        onInit: (field) => this.cwimpieFormService.getProfessionTypes(field)
+                      }
+                    },
+                  ],
+                },
+              },
+              {
+                key: 'hobbies',
+                wrappers: ['panel'],
+                props: {
+                  label: 'Hobbies',
+                  description: "Add hobbies",
+                },
+                type: 'repeat',
+                templateOptions: {
+                  addText: 'Add another investment',
+                },
+                fieldArray: {
+                  fieldGroup: [
+                    {
+                      key: 'name',
+                      type: 'input',
+                      props: {
+                        label: 'Hobbies',
+                        required: true,
+                      }
+                    },
+                  ]
+                },
+              },
+            ]
+          }
         ]
       },
-      {
-        props: {label: 'Favourites !'},
-        fieldGroup: [
-          {
-            key: 'favourites',
-            wrappers: ['panel'],
-            props: {
-              label: 'Favourites',
-              description: "Add favourites",
-            },
-            type: 'repeat',
-            templateOptions: {
-              addText: 'Add another favourite',
-            },
-            className: "valueType",
-            fieldArray: {
-              fieldGroup: [
-                {
-                  key: 'name',
-                  type: 'input',
-                  className: "valueType__input",
-                  defaultValue: "",
-                  props: {
-                    label: 'Favourite',
-                    required: true,
-                  }
-                },
-                {
-                  key: 'type',
-                  type: 'select',
-                  className: 'valueType__select',
-                  defaultValue: "Food",
-                  templateOptions: {
-                    label: 'Type',
-                    options: [],
-                    required: true,
-                  },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getFavouriteTypes(field)
-                  }
-                },
-              ],
-            },
-          },
-        ]
-      },
-      {
-        props: {label: 'What do they do with their spare time?'},
-        fieldGroup: [
-          {
-            key: 'professions',
-            wrappers: ['panel'],
-            props: {label: 'Profession'},
-            type: 'repeat',
-            templateOptions: {
-              addText: 'Add another investment',
-            },
-            className: "valueType",
-            fieldArray: {
-              fieldGroup: [
-                {
-                  key: 'name',
-                  type: 'input',
-                  className: "valueType__input",
-                  props: {
-                    label: 'Profession',
-                    required: true,
-                  }
-                },
-                {
-                  key: 'type',
-                  type: 'select',
-                  className: 'valueType__select',
-                  defaultValue: "Main",
-                  templateOptions: {
-                    label: 'Type',
-                    options: [],
-                    required: true,
-                  },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getProfessionTypes(field)
-                  }
-                },
-              ],
-            },
-          },
-          {
-            key: 'hobbies',
-            wrappers: ['panel'],
-            props: {
-              label: 'Hobbies',
-              description: "Add hobbies",
-            },
-            type: 'repeat',
-            templateOptions: {
-              addText: 'Add another investment',
-            },
-            fieldArray: {
-              fieldGroup: [
-                {
-                  key: 'name',
-                  type: 'input',
-                  props: {
-                    label: 'Hobbies',
-                    required: true,
-                  }
-                },
-              ]
-            },
-          },
-        ]
-      }
     ];
   }
 
   ngOnInit(): void {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
-      next: (data:Cwimpie) => {
+      next: (data: Cwimpie) => {
         this.initialData = data
-        console.log(data)
+        let allSections = this.fields[0].fieldGroup
+        for (const [key, value] of Object.entries(this.initialData)) {
+          for (let section of allSections!) {
+            for (let field of section.fieldGroup!) {
+              if (field.key == key) {
+                if (field.fieldGroup) {
+
+                } else {
+                  console.log(field)
+                  field.formControl!.patchValue(value)
+                }
+                break
+              }
+            }
+
+          }
+        }
       }
     });
   }
 
 
   toggleNewColour() {
-    // @ts-ignore
-    let firstPage = this.fields[0].fieldGroup[0].fieldGroup[1].fieldGroup
+    let firstPage = this.fields[0].fieldGroup![0].fieldGroup![1].fieldGroup
     let colourField = firstPage!.find(obj => obj.key == "colour")
     let newColourGroup = firstPage!.find(obj => obj.key == "newColour")
     if (this.addNewColour) { // If addNewColour is true, then we don't want to add a new colour
