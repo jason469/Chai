@@ -12,6 +12,7 @@ export const GET_ALL_SPECIES_URL = BASE_URL + '/api/species/'
 export const GET_ALL_USERS_URL = BASE_URL + '/api/users/'
 export const GET_ALL_FAVOURITE_TYPES_URL = BASE_URL + '/api/favourite-types/'
 export const GET_ALL_PROFESSION_TYPES_URL = BASE_URL + '/api/profession-types/'
+export const GET_ALL_FONTS_URL = BASE_URL + '/api/fonts/'
 export const GET_RANDOM_VALUES_URL = BASE_URL + '/api/cwimpies/random-values/'
 
 // URLs to create cwimpies

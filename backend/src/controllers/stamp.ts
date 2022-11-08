@@ -29,4 +29,18 @@ module.exports = class StampController {
             return
         }
     }
+
+    static async getAllFonts(req: Request, res: Response) {
+        try {
+            const allFonts = await StampService.getAllFonts();
+            if (allFonts.length == 0) {
+                res.status(404).json("There are no fonts")
+            }
+            res.json(allFonts);
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
 };

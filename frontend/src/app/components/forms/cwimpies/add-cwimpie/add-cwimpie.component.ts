@@ -25,7 +25,6 @@ export class AddCwimpieComponent implements OnInit {
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
     private cdr: ChangeDetectorRef
-
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -67,22 +66,85 @@ export class AddCwimpieComponent implements OnInit {
                       description: "MM/DD/YYYY"
                     },
                   },
+                  {
+                    key: 'stamp',
+                    wrappers: ['panel'],
+                    props: {
+                      label: 'Stamps',
+                      description: "Add stamp",
+                    },
+                    fieldGroup: [
+                      {
+                        key: 'primary_colour',
+                        fieldGroup: [
+                          {
+                            key: 'name',
+                            type: 'select',
+                            templateOptions: {
+                              options: [],
+                            },
+                            props: {
+                              label: 'Primary Colour',
+                              required: true,
+                            },
+                            hooks: {
+                              onInit: (field) => this.cwimpieFormService.getColours(field)
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        key: 'accent_colour',
+                        fieldGroup: [
+                          {
+                            key: 'name',
+                            type: 'select',
+                            templateOptions: {
+                              options: [],
+                            },
+                            props: {
+                              label: 'Accent Colour',
+                              required: true,
+                            },
+                            hooks: {
+                              onInit: (field) => this.cwimpieFormService.getColours(field)
+                            },
+                          }
+                        ]
+                      },
+                      {
+                        key: 'font',
+                        type: 'select',
+                        templateOptions: {
+                          options: [],
+                        },
+                        props: {
+                          label: 'Font',
+                          required: true,
+                        },
+                        hooks: {
+                          onInit: (field) => this.cwimpieFormService.getFonts(field)
+                        },
+                      },
+                    ]
+                  },
                 ]
               },
               {
                 className: 'addCwimpies_page1__right',
-                fieldGroup: [{
-                  key: 'partnerName',
-                  type: 'select',
-                  templateOptions: {
-                    label: 'Partner',
-                    options: [],
-                    description: `Lovers ♥ !!`,
+                fieldGroup: [
+                  {
+                    key: 'partnerName',
+                    type: 'select',
+                    templateOptions: {
+                      label: 'Partner',
+                      options: [],
+                      description: `Lovers ♥ !!`,
+                    },
+                    hooks: {
+                      onInit: (field) => this.cwimpieFormService.getPartners(field)
+                    }
                   },
-                  hooks: {
-                    onInit: (field) => this.cwimpieFormService.getPartners(field)
-                  }
-                },
                   {
                     key: 'colour',
                     fieldGroup: [
@@ -317,7 +379,7 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   fillDefaultValues(field: any, valueType: string) {
-    let getRandomValueSubscription:Subscription = this.cwimpieFormService.getRandomValues(valueType).subscribe(
+    let getRandomValueSubscription: Subscription = this.cwimpieFormService.getRandomValues(valueType).subscribe(
       (randomValue) => {
         if (field.formControl!.value === "" || field.formControl!.value === undefined) {
           field.formControl!.patchValue(randomValue)
@@ -370,7 +432,7 @@ export class AddCwimpieComponent implements OnInit {
       this.cwimpieFormService.postCwimpieData(
         this.model
       ).subscribe(
-        (responseData:any) => {
+        (responseData: any) => {
           this.form.reset()
           this.toastrService.success(
             `Yayyy well done`,

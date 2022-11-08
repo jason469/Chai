@@ -11,7 +11,7 @@ export class Cwimpie {
   hobbies: Hobby[] = [];
   primaryParent: User = new User();
   partnerName?: string = "";
-
+  stamp?: Stamp = new Stamp()
   constructor() {
   }
 
@@ -50,8 +50,6 @@ export class Hobby {
 }
 
 export class Stamp {
-  _id?: string = "";
-  name: string = "";
   primary_colour?: Colour = new Colour();
   accent_colour?: Colour = new Colour();
   font?: string = "";

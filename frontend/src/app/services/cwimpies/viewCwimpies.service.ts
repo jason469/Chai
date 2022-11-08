@@ -24,15 +24,10 @@ export class ViewCwimpiesService {
       )
   }
 
-  // getCwimpie(name:string) {
-  //   return this.http.get(`${GET_CWIMPIE_URL}${name}`)
-  //     .pipe(
-  //       map((responseData:Cwimpie[]) => {
-  //           return Object.values(responseData)
-  //         }
-  //       )
-  //     )
-  // }
+  getCwimpie(name:string) {
+    let url = GET_CWIMPIE_URL + name
+    return this.http.get(url)
+  }
 
   deleteCwimpie(name: string) {
     let url = DELETE_CWIMPIE_URL + name

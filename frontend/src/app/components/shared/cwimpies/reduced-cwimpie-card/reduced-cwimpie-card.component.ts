@@ -32,30 +32,36 @@ export class ReducedCwimpieCardComponent implements OnInit {
 
   public updateCwimpieModal(): void {
     let cwimpie = new Cwimpie()
-    // let getCwimpieSub = this.viewCwimpiesService.getCwimpie(this.data.name).subscribe((cwimpieData) => {
-    //     console.log(cwimpieData)
-    //     cwimpie.name = cwimpieData.name
-    //     cwimpie.photo = cwimpieData.photo
-    //     cwimpie.birthdate = cwimpieData.birthdate
-    //     cwimpie.partnerName = cwimpieData.partnerName
-    //     cwimpie.colour = cwimpieData.colour
-    //     cwimpie.species = cwimpieData.species
-    //     cwimpie.primaryParent = cwimpieData.primaryParent
-    //     cwimpie.favourites = cwimpieData.favourites
-    //     cwimpie.professions = cwimpieData.professions
-    //     cwimpie.hobbies = cwimpieData.hobbies
-    //   }
-    // )
-    // this.cwimpieUpdateDataService.changeData(cwimpie)
-    // this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
-    // getCwimpieSub.unsubscribe()
+    let getCwimpieSub = this.viewCwimpiesService.getCwimpie(this.data.name).subscribe((cwimpieData: any) => {
+        console.log(cwimpieData)
+        cwimpie.name = cwimpieData.name
+        cwimpie.photo = cwimpieData.photo
+        cwimpie.birthdate = cwimpieData.birthdate
+        cwimpie.colour = cwimpieData.colour_id
+        cwimpie.species = cwimpieData.species_id
+        cwimpie.primaryParent = cwimpieData.primaryParent_id
+        cwimpie.favourites = cwimpieData.favourites
+        cwimpie.professions = cwimpieData.professions
+        cwimpie.hobbies = cwimpieData.hobbies
+        cwimpie.stamp = cwimpieData.stamp
+
+        if (cwimpieData.partner_id) {
+          cwimpie.partnerName = cwimpieData.partner_id.name
+        }
+
+        this.cwimpieUpdateDataService.changeData(cwimpie)
+        this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
+        getCwimpieSub.unsubscribe()
+      }
+    )
   }
 
   deleteCwimpie(name: string): void {
     console.log(`deleting ${name}`)
     this.viewCwimpiesService.deleteCwimpie(name).subscribe(response => {
-      this.deletedCwimpieName.emit(name)
-    })
+        this.deletedCwimpieName.emit(name)
+      }
+    )
   }
 
   ngOnInit(): void {

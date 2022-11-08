@@ -13,6 +13,7 @@ export class CwimpieUpdateDataService {
   }
 
   changeData(data: Cwimpie) {
+    console.log(data)
     this.data.next(data)
   }
 

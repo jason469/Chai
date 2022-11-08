@@ -4,7 +4,6 @@ import {cascadeDelete} from "../utilities/functions/misc";
 const Cwimpie = require("./Cwimpie");
 
 const StampSchema = new mongoose.Schema({
-        name: String,
         primary_colour: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Colours'

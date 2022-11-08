@@ -23,7 +23,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
         for (let data of allData) {
-          console.log(data)
           let cwimpieData: Cwimpie = {
             cwimpieId: data._id,
             name: data.name,
@@ -34,6 +33,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             professions: data.professions,
             hobbies: data.hobbies,
             primaryParent: data.primaryParent_id,
+            stamp: data.stamp_id,
           }
           if (data.partner_id) {
             cwimpieData.partnerName = data.partner_id.name

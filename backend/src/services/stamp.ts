@@ -1,10 +1,9 @@
 import {IStamp} from "../utilities/interfaces/modelInterfaces";
 import {getValueFromEnumWithKey} from "../utilities/functions/misc";
-import {FontChoices, ProfessionTypes} from "../utilities/enums/modelEnums";
+import {FontChoices} from "../utilities/enums/modelEnums";
+const Stamp = require('../models/Stamp')
 
 const colourService = require('../services/colour')
-
-const Stamp = require('../models/Stamp')
 
 module.exports = class StampService {
     static async getAllStamps() {
@@ -22,7 +21,7 @@ module.exports = class StampService {
         try {
             const primary_colour = await colourService.getColourOrCreate(data.primary_colour)
             const accent_colour = await colourService.getColourOrCreate(data.accent_colour)
-            var stamp = await Stamp.findOne({
+            let stamp = await Stamp.findOne({
                 primary_colour: primary_colour,
                 accent_colour: accent_colour,
                 font: data.font
@@ -33,12 +32,20 @@ module.exports = class StampService {
                     accent_colour: accent_colour,
                     font: getValueFromEnumWithKey(FontChoices, data.font),
                 })
-                stamp.name = `${primary_colour.name}_${accent_colour.name}_stamp`
                 await stamp.save()
             }
             return stamp
         } catch (error) {
             console.log(`Could not create stamp ${error}`)
+        }
+    }
+
+    static async getAllFonts() {
+        try {
+            const allFonts = Stamp.schema.path('font').enumValues
+            return allFonts;
+        } catch (error) {
+            console.log(`Could not fetch fonts ${error}`)
         }
     }
 }

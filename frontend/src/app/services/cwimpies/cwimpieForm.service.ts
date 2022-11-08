@@ -5,7 +5,7 @@ import {FormlyFieldConfig} from "@ngx-formly/core";
 import {
   CREATE_CWIMPIE_URL,
   GET_ALL_COLOURS_URL,
-  GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES_URL, GET_ALL_PROFESSION_TYPES_URL,
+  GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES_URL, GET_ALL_FONTS_URL, GET_ALL_PROFESSION_TYPES_URL,
   GET_ALL_SPECIES_URL,
   GET_ALL_USERS_URL, GET_RANDOM_VALUES_URL
 } from "../../shared/constants/url";
@@ -76,6 +76,10 @@ export class CwimpieFormService {
 
   getProfessionTypes(field: FormlyFieldConfig) {
     return this.getSelectFieldTypeOptions(GET_ALL_PROFESSION_TYPES_URL, field)
+  }
+
+  getFonts(field: FormlyFieldConfig) {
+    return this.getSelectFieldTypeOptions(GET_ALL_FONTS_URL, field)
   }
 
   postCwimpieData(data: Cwimpie) {

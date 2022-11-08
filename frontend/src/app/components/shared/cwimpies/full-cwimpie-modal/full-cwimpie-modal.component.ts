@@ -23,6 +23,7 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cwimpieModalDataServiceSubscription = this.cwimpieModalDataService.getData().subscribe({
       next: (data:Cwimpie) => {
+        console.log(data)
         this.data = data
       }
     });

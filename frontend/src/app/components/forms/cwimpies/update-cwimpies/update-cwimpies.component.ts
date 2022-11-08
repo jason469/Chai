@@ -285,6 +285,7 @@ export class UpdateCwimpiesComponent implements OnInit {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data:Cwimpie) => {
         this.initialData = data
+        console.log(data)
       }
     });
   }

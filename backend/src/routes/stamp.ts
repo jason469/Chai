@@ -6,6 +6,7 @@ const stampCtrl = require('../controllers/stamp')
 
 const stampRouter = express.Router();
 
+stampRouter.get('/api/fonts', auth, stampCtrl.getAllFonts)
 stampRouter.get('/api/stamps', auth, stampCtrl.getAllStamps)
 stampRouter.delete('/api/stamps', auth, stampCtrl.deleteStamp)
 
