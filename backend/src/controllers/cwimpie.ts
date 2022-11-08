@@ -18,7 +18,7 @@ module.exports = class CwimpieController {
 
     static async getCwimpie(req: Request, res: Response) {
         try {
-            const cwimpie = await CwimpieService.getCwimpie(req.body.name);
+            const cwimpie = await CwimpieService.getCwimpie(req.params.name);
             if (!cwimpie) {
                 res.status(404).json(`${req.body.name} is sleeping!`)
                 return

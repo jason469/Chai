@@ -328,7 +328,6 @@ export class AddCwimpieComponent implements OnInit {
   }
 
   insertRandomValues() {
-    console.log(this.fields)
     let firstPageLeft = this.fields[0].fieldGroup![0].fieldGroup![0].fieldGroup
     let secondPage = this.fields[0].fieldGroup![1].fieldGroup
     let thirdPage = this.fields[0].fieldGroup![2].fieldGroup

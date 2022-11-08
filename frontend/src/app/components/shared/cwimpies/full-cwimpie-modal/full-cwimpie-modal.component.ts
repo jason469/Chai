@@ -35,7 +35,6 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.cwimpieModalDataServiceSubscription) {
       this.cwimpieModalDataServiceSubscription.unsubscribe()
-      console.log('unsubscribe')
     }
   }
 }

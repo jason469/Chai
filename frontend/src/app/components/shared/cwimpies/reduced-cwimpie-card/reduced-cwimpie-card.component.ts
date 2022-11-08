@@ -1,9 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICwimpieCardData} from "../../../../shared/interfaces/ICwimpieCardData";
 import {FullCwimpieModalComponent} from "../full-cwimpie-modal/full-cwimpie-modal.component";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {CwimpieModalDataService} from "../../../../services/cwimpies/cwimpieModalData.service";
+import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpdateData.service";
+import {UpdateCwimpiesComponent} from "../../../forms/cwimpies/update-cwimpies/update-cwimpies.component";
+import {Cwimpie} from "../../../../shared/models/Cwimpie";
 
 @Component({
   selector: 'app-reduced-cwimpie-card',
@@ -18,6 +21,7 @@ export class ReducedCwimpieCardComponent implements OnInit {
   constructor(
     private viewCwimpiesService: ViewCwimpiesService,
     private cwimpieModalDataService: CwimpieModalDataService,
+    private cwimpieUpdateDataService: CwimpieUpdateDataService,
     private modalService: BsModalService,
   ) {
   }
@@ -25,6 +29,29 @@ export class ReducedCwimpieCardComponent implements OnInit {
   public openCwimpieModal(): void {
     this.cwimpieModalDataService.changeData(this.data)
     this.modalRef = this.modalService.show(FullCwimpieModalComponent)
+  }
+
+  public updateCwimpieModal(): void {
+    let cwimpie = new Cwimpie()
+    let getCwimpieSub = this.viewCwimpiesService.getCwimpie(this.data.name).subscribe((allCwimpieData: Cwimpie[]) => {
+        for (let cwimpieData of allCwimpieData) {
+          console.log(cwimpieData)
+          cwimpie.name = cwimpieData.name
+          cwimpie.photo = cwimpieData.photo
+          cwimpie.birthdate = cwimpieData.birthdate
+          cwimpie.partnerName = cwimpieData.partnerName
+          cwimpie.colour = cwimpieData.colour
+          cwimpie.species = cwimpieData.species
+          cwimpie.primaryParent = cwimpieData.primaryParent
+          cwimpie.favourites = cwimpieData.favourites
+          cwimpie.professions = cwimpieData.professions
+          cwimpie.hobbies = cwimpieData.hobbies
+        }
+      }
+    )
+    this.cwimpieUpdateDataService.changeData(cwimpie)
+    this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
+    getCwimpieSub.unsubscribe()
   }
 
   deleteCwimpie(name: string): void {

@@ -1,7 +1,7 @@
 <div>
   <mat-card
     class="card"
-    style="background-color:{{data!.colour.hexCode}}"
+    style="background-color:{{data!.colour?.hexCode}}"
   >
     <div class="openModal click"
          (click)="openCwimpieModal()"
@@ -38,7 +38,13 @@
     <mat-card-actions
       class="card_actions"
     >
-      <button mat-raised-button class="update_button">Update</button>
+      <button
+        mat-raised-button
+        class="update_button"
+        (click)="updateCwimpieModal()"
+      >
+        Update
+      </button>
       <button mat-mini-fab>
         <mat-icon (click)="deleteCwimpie(data!.name)">clear</mat-icon>
       </button>

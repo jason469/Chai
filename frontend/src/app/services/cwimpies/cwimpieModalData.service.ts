@@ -1,13 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {
-  IColour,
-  ICwimpieCardData,
-  IFavourite,
-  IHobby,
-  IProfession,
-  ISpecies, IUser
-} from "../../shared/interfaces/ICwimpieCardData";
+import {ICwimpieCardData,} from "../../shared/interfaces/ICwimpieCardData";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +16,7 @@ export class CwimpieModalDataService {
     this.data.next(data)
   }
 
-  getData(): Observable<any> {
+  getData(): Observable<ICwimpieCardData> {
     return this.currentData
   }
 

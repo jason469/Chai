@@ -35,6 +35,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             primaryParent: data.primaryParent_id
           }
           this.allCwimpies.push(cwimpieData)
+          console.log(cwimpieData)
         }
       }
       this.loading = false;
