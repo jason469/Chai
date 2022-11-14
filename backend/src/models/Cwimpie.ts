@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {cascadeDelete} from "../utilities/functions/misc";
 const DailySchedule = require("./DailySchedule");
+const Stamp = require("./Stamp");
 
 const CwimpieSchema = new mongoose.Schema(
     {
@@ -64,6 +65,7 @@ const CwimpieSchema = new mongoose.Schema(
 
 CwimpieSchema.post("deleteOne", { document: true, query: false },async function (cwimpie, next) {
     await cascadeDelete(DailySchedule, this, "cwimpie_id");
+    await cascadeDelete(Stamp, this, "stamp_id");
 })
 
 

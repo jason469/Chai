@@ -53,6 +53,7 @@ import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
+import { LocationComponent } from './components/pages/cwimpies/location/location.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {hexCodeValidator} from "./shared/functions/fileValidation";
     UpdateCwimpiesComponent,
     StepperComponent,
     FileFieldComponent,
-    FileValueAccessor
+    FileValueAccessor,
+    LocationComponent
   ],
   imports: [
     BrowserModule,

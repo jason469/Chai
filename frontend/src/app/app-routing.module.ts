@@ -3,6 +3,7 @@ import {Routes, RouterModule} from "@angular/router";
 import {AuthComponent} from "./components/auth/auth.component";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
 
+import {LocationComponent} from "./components/pages/cwimpies/location/location.component";
 import {GenerateComponent} from "./components/pages/cwimpies/generate/generate.component";
 import {ProfileComponent} from "./components/pages/profile/profile.component";
 import {ScheduleComponent} from "./components/pages/schedule/schedule.component";
@@ -12,6 +13,7 @@ import {CommandmentsComponent} from "./components/pages/cwimpies/commandments/co
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthComponent},
+  {path: 'cwimpies/locations', canActivate: [AuthGuardService], component: LocationComponent},
   {path: 'cwimpies/generate', canActivate: [AuthGuardService], component: GenerateComponent},
   {path: 'cwimpies/commandments', canActivate: [AuthGuardService], component: CommandmentsComponent},
   {path: 'cwimpies/view-cwimpies', canActivate: [AuthGuardService], component: ViewAllComponent},

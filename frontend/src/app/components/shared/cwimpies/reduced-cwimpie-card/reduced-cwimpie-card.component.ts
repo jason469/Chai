@@ -33,6 +33,7 @@ export class ReducedCwimpieCardComponent implements OnInit {
   public updateCwimpieModal(): void {
     let cwimpie = new Cwimpie()
     let getCwimpieSub = this.viewCwimpiesService.getCwimpie(this.data.name).subscribe((cwimpieData: any) => {
+        console.log(cwimpieData)
         cwimpie.photo = cwimpieData.photo
         cwimpie.birthdate = cwimpieData.birthdate
         cwimpie.colour = cwimpieData.colour_id

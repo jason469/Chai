@@ -25,7 +25,9 @@ module.exports = class StampService {
                 primary_colour: primary_colour,
                 accent_colour: accent_colour,
                 font: data.font
-            });
+            })
+                .populate('primary_colour')
+                .populate('accent_colour');
             if (!stamp) {
                 stamp = new Stamp({
                     primary_colour: primary_colour,

@@ -32,7 +32,6 @@ export class UpdateCwimpiesComponent implements OnInit {
     this.options = {}
     this.fields = [
       {
-        fieldGroupClassName: 'addCwimpies_page1',
         props: {label: 'Personal Details'},
         wrappers: ['panel'],
         fieldGroup: [
@@ -130,18 +129,19 @@ export class UpdateCwimpiesComponent implements OnInit {
           },
           {
             className: 'addCwimpies_page1__right',
-            fieldGroup: [{
-              key: 'partnerName',
-              type: 'select',
-              templateOptions: {
-                label: 'Partner',
-                options: [],
-                description: `Lovers ♥ !!`,
+            fieldGroup: [
+              {
+                key: 'partnerName',
+                type: 'select',
+                templateOptions: {
+                  label: 'Partner',
+                  options: [],
+                  description: `Lovers ♥ !!`,
+                },
+                hooks: {
+                  onInit: (field) => this.cwimpieFormService.getPartners(field)
+                }
               },
-              hooks: {
-                onInit: (field) => this.cwimpieFormService.getPartners(field)
-              }
-            },
               {
                 key: 'colour',
                 fieldGroup: [
@@ -342,25 +342,56 @@ export class UpdateCwimpiesComponent implements OnInit {
     ];
   }
 
+  fill_update_field(field: any, value: any) {
+    if (field.fieldGroup) {
+      this.fill_update_field(field.fieldGroup[0], value)
+    } else {
+      if (field.formControl != undefined) {
+        if (typeof value == "object") {
+          if (value[field.key] == undefined) {
+            field.formControl!.patchValue(value[0][field.key])
+          }
+          field.formControl!.patchValue(value[field.key])
+        } else if (typeof value == "string") {
+          field.formControl!.patchValue(value)
+        }
+      } else {
+        console.log(`${field} formControl is undefined`)
+      }
+    }
+  }
+
+
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
         this.initialData = data
+        // console.log(this.initialData)
         let allSections = this.fields[0].fieldGroup
         for (const [key, value] of Object.entries(this.initialData)) {
-          for (let section of allSections!) {
-            for (let field of section.fieldGroup!) {
-              if (field.key == key) {
-                if (field.fieldGroup) {
-
-                } else {
-                  console.log(field)
-                  field.formControl!.patchValue(value)
+          if (Array.isArray(value)) {
+            for (let valueObj of value) {
+              for (let section of allSections!) {
+                for (let field of section.fieldGroup!) {
+                  let fieldKey = field.key
+                  if ((fieldKey == key) && (fieldKey != "newColour")) {
+                    this.fill_update_field(field, valueObj)
+                  }
                 }
-                break
               }
             }
-
+          } else {
+            for (let section of allSections!) {
+              for (let field of section.fieldGroup!) {
+                let fieldKey = field.key
+                if ((fieldKey == key) && (fieldKey != "newColour")) {
+                  this.fill_update_field(field, value)
+                }
+              }
+            }
           }
         }
       }
@@ -369,7 +400,7 @@ export class UpdateCwimpiesComponent implements OnInit {
 
 
   toggleNewColour() {
-    let firstPage = this.fields[0].fieldGroup![0].fieldGroup![1].fieldGroup
+    let firstPage = this.fields[0].fieldGroup![1].fieldGroup
     let colourField = firstPage!.find(obj => obj.key == "colour")
     let newColourGroup = firstPage!.find(obj => obj.key == "newColour")
     if (this.addNewColour) { // If addNewColour is true, then we don't want to add a new colour
@@ -392,20 +423,6 @@ export class UpdateCwimpiesComponent implements OnInit {
       })
       this.addNewColour = true
     }
-  }
-
-  fillDefaultValues(field: any, valueType: string) {
-    let getRandomValueSubscription: Subscription = this.cwimpieFormService.getRandomValues(valueType).subscribe(
-      (randomValue) => {
-        if (field.formControl!.value == undefined) {
-          field.formControl!.patchValue(randomValue)
-        }
-      }, errorMessage => {
-        console.log('error in fetching random value', errorMessage)
-      }, () => {
-        getRandomValueSubscription.unsubscribe()
-      }
-    )
   }
 
   submit() {
@@ -441,4 +458,5 @@ export class UpdateCwimpiesComponent implements OnInit {
       this.cwimpieUpdateDataServiceSubscription.unsubscribe()
     }
   }
+
 }

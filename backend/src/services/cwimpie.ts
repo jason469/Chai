@@ -22,7 +22,16 @@ module.exports = class CwimpieService {
                 .populate('favourites', 'name type')
                 .populate('professions', 'name type')
                 .populate('hobbies', 'name')
-                .populate('stamp_id', 'accent_colour primary_colour font name')
+                .populate({
+                    path: 'stamp_id',
+                    populate: [
+                        {
+                            path: 'primary_colour'
+                        }, {
+                            path: 'accent_colour'
+                        }
+                    ],
+                })
                 .populate('partner_id')
                 .populate('primaryParent_id', 'username name');
             return allCwimpies;
