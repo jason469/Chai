@@ -27,16 +27,16 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             cwimpieId: data._id,
             name: data.name,
             birthdate: data.birthdate,
-            colour: data.colour_id,
-            species: data.species_id,
+            colour: data.colourId,
+            species: data.speciesId,
             favourites: data.favourites,
             professions: data.professions,
             hobbies: data.hobbies,
-            primaryParent: data.primaryParent_id,
-            stamp: data.stamp_id,
+            primaryParent: data.primaryParentId,
+            stamp: data.stampId,
           }
-          if (data.partner_id) {
-            cwimpieData.partnerName = data.partner_id.name
+          if (data.partnerId) {
+            cwimpieData.partnerName = data.partnerId.name
           }
           this.allCwimpies.push(cwimpieData)
         }

@@ -1,3 +1,18 @@
+export interface ICwimpie {
+    name: string,
+    photo?: string,
+    birthdate: Date,
+    partnerId: ICwimpie,
+    dailyScheduleId: IDailySchedule[],
+    colourId: IColour,
+    speciesId: ISpecies,
+    favourites: IFavourite[],
+    professions: IProfession[],
+    hobbies: IHobby[],
+    primaryParentId: IUser,
+    stampId: IStamp
+}
+
 export interface IColour {
     name: string,
     hexCode?: string
@@ -39,4 +54,20 @@ export interface IUser {
 
 export interface ICountry {
 
+}
+
+export interface IDailySchedule {
+    date: Date,
+    cwimpieId: ICwimpie,
+    tasks: ITask[],
+}
+
+export interface ITask {
+    name: string, 
+    description: string, 
+    startTime: Date,
+    endTime: Date,
+    durationMinutes: Number,
+    isCompleted: boolean,
+    dailyScheduleId: IDailySchedule
 }

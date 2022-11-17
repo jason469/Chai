@@ -36,7 +36,7 @@ const UserSchema = new Schema(
 );
 
 UserSchema.post("deleteOne", { document: true, query: false },async function (user, next) {
-    await cascadeDelete(Cwimpie, this, "primaryParent_id");
+    await cascadeDelete(Cwimpie, this, "primaryParentId");
 })
 
 

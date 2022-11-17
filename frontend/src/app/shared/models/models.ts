@@ -50,6 +50,7 @@ export class Hobby {
 }
 
 export class Stamp {
+  _id?: string = "";
   primary_colour?: Colour = new Colour();
   accent_colour?: Colour = new Colour();
   font?: string = "";

@@ -26,7 +26,7 @@ const SpeciesSchema = new mongoose.Schema({
 )
 
 SpeciesSchema.post("deleteOne", {document: true, query: false}, async function (species, next) {
-    await cascadeDelete(Cwimpie, this, "species_id");
+    await cascadeDelete(Cwimpie, this, "speciesId");
 })
 
 module.exports = mongoose.model('Species', SpeciesSchema);

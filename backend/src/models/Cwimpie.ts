@@ -17,21 +17,21 @@ const CwimpieSchema = new mongoose.Schema(
         birthdate: {
             type: Date
         },
-        partner_id: {
+        partnerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Cwimpie'
         },
-        dailySchedule_id: [  // A cwimpie can have many schedules
+        dailyScheduleId: [  // A cwimpie can have many schedules
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'DailySchedule'
             }
         ],
-        colour_id: {
+        colourId: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'Colours'
         },
-        species_id: {
+        speciesId: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'Species'
         },
@@ -49,11 +49,11 @@ const CwimpieSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref:'Hobby'
         }],
-        primaryParent_id: {
+        primaryParentId: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'User'
         },
-        stamp_id: {
+        stampId: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'Stamp'
         }
@@ -64,8 +64,8 @@ const CwimpieSchema = new mongoose.Schema(
 );
 
 CwimpieSchema.post("deleteOne", { document: true, query: false },async function (cwimpie, next) {
-    await cascadeDelete(DailySchedule, this, "cwimpie_id");
-    await cascadeDelete(Stamp, this, "stamp_id");
+    await cascadeDelete(DailySchedule, this, "cwimpieId");
+    await cascadeDelete(Stamp, this, "stampId");
 })
 
 

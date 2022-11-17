@@ -25,7 +25,7 @@ const StampSchema = new mongoose.Schema({
 )
 
 StampSchema.post("deleteOne", { document: true, query: false },async function (stamp, next) {
-    await cascadeDelete(Cwimpie, this, "stamp_id");
+    await cascadeDelete(Cwimpie, this, "stampId");
 })
 
 module.exports = mongoose.model('Stamp', StampSchema);

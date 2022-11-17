@@ -17,13 +17,13 @@ module.exports = class CwimpieService {
     static async getAllCwimpies() {
         try {
             const allCwimpies = await Cwimpie.find()
-                .populate('colour_id', 'hexCode name')
-                .populate('species_id', 'name type iconName')
+                .populate('colourId', 'hexCode name')
+                .populate('speciesId', 'name type iconName')
                 .populate('favourites', 'name type')
                 .populate('professions', 'name type')
                 .populate('hobbies', 'name')
                 .populate({
-                    path: 'stamp_id',
+                    path: 'stampId',
                     populate: [
                         {
                             path: 'primary_colour'
@@ -32,8 +32,16 @@ module.exports = class CwimpieService {
                         }
                     ],
                 })
-                .populate('partner_id')
-                .populate('primaryParent_id', 'username name');
+                .populate('partnerId')
+                .populate('primaryParentId', 'username name')
+                .populate({
+                    path: 'dailyScheduleId',
+                    populate: [
+                        {
+                            path: 'tasks'
+                        }
+                    ],
+                });
             return allCwimpies;
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)
@@ -43,14 +51,14 @@ module.exports = class CwimpieService {
     static async getCwimpie(name: string) {
         try {
             const cwimpie = await Cwimpie.findOne({name: name})
-                .populate('colour_id')
-                .populate('species_id')
+                .populate('colourId')
+                .populate('speciesId')
                 .populate('favourites')
                 .populate('professions')
                 .populate('hobbies')
-                .populate('stamp_id')
-                .populate('partner_id')
-                .populate('primaryParent_id', 'username name')
+                .populate('stampId')
+                .populate('partnerId')
+                .populate('primaryParentId', 'username name')
             ;
             if (cwimpie) {
                 return cwimpie;
@@ -84,19 +92,19 @@ module.exports = class CwimpieService {
 
         const cwimpie = new Cwimpie({
             name: cwimpieData.name,
-            colour_id: await colourService.getColourOrCreate(cwimpieData.colour),
-            species_id: await speciesService.getSpeciesOrCreate(cwimpieData.species),
+            colourId: await colourService.getColourOrCreate(cwimpieData.colour),
+            speciesId: await speciesService.getSpeciesOrCreate(cwimpieData.species),
             favourites: favourites,
             professions: professions,
             hobbies: hobbies,
-            stamp_id: await stampService.getStampOrCreate(cwimpieData.stamp),
+            stampId: await stampService.getStampOrCreate(cwimpieData.stamp),
             birthdate: new Date(cwimpieData.birthdate),
-            primaryParent_id: await userService.getUser(cwimpieData.primaryParent)
+            primaryParentId: await userService.getUser(cwimpieData.primaryParent)
         })
         if (cwimpieData.partnerName) {
             const partner_cwimpie = await this.getCwimpie(cwimpieData.partnerName)
             if (partner_cwimpie) {
-                cwimpie.partner_id = partner_cwimpie
+                cwimpie.partnerId = partner_cwimpie
             }
         }
         await cwimpie.save()

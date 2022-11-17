@@ -12,10 +12,10 @@ const TaskSchema = new mongoose.Schema({
         description: {
             type: String,
         },
-        start_time: {
+        startTime: {
             type: Date,
         },
-        end_time: {
+        endTime: {
             type: Date,
         },
         durationMinutes: {
@@ -24,7 +24,7 @@ const TaskSchema = new mongoose.Schema({
         isCompleted: {
             type: Boolean
         },
-        dailySchedule_id: {
+        dailyScheduleId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'DailySchedule'
         }

@@ -343,24 +343,39 @@ export class UpdateCwimpiesComponent implements OnInit {
   }
 
   fill_update_field(field: any, value: any) {
-    if (field.fieldGroup) {
-      this.fill_update_field(field.fieldGroup[0], value)
+    if (field.formControl != undefined) {
+      let patchValue
+      patchValue = (typeof value == "string") ? value : value[field.key]
+      field.formControl!.patchValue(patchValue)
     } else {
-      if (field.formControl != undefined) {
-        if (typeof value == "object") {
-          if (value[field.key] == undefined) {
-            field.formControl!.patchValue(value[0][field.key])
-          }
-          field.formControl!.patchValue(value[field.key])
-        } else if (typeof value == "string") {
-          field.formControl!.patchValue(value)
+      console.log(`${field} formControl is undefined`)
+    }
+    return
+  }
+
+  search_form_for_fields(searchFields: any, value: any, key: any, parentKey = "") {  // If parent key isnt empty, search for parent first and then key. If no parent key, then just stearch for key
+    if (parentKey != "") {  // The key name is not unique and so we need to find the parent first (which is unique)
+      for (let field of searchFields) {
+        if (field.key == parentKey) {  // Found the parent field
+          console.log(`parent field is ${field} with key ${parentKey}`)
+          this.search_form_for_fields(field.fieldGroup, value, key)
         }
-      } else {
-        console.log(`${field} formControl is undefined`)
+      }
+    } else {  // We know that the key name is unique and can just walk through the form
+      for (let field of searchFields) {
+        if (field.key) {  // Should just have a fieldGroup if no key
+          if (field.key == key) {  // Current field is the correct field
+            this.fill_update_field(field, value)
+            return
+          } else if (field.fieldGroup) {  // Current field incorrect, search another level down
+            this.search_form_for_fields(field.fieldGroup, value, key, parentKey)
+          }
+        } else if (field.fieldGroup) {
+          this.search_form_for_fields(field.fieldGroup, value, key, parentKey)
+        }
       }
     }
   }
-
 
   ngOnInit(): void {
   }
@@ -369,28 +384,41 @@ export class UpdateCwimpiesComponent implements OnInit {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
         this.initialData = data
-        // console.log(this.initialData)
+        console.log(this.initialData)
+        console.log(this.fields[0].fieldGroup)
         let allSections = this.fields[0].fieldGroup
         for (const [key, value] of Object.entries(this.initialData)) {
-          if (Array.isArray(value)) {
-            for (let valueObj of value) {
-              for (let section of allSections!) {
-                for (let field of section.fieldGroup!) {
-                  let fieldKey = field.key
-                  if ((fieldKey == key) && (fieldKey != "newColour")) {
-                    this.fill_update_field(field, valueObj)
+          if (key !== "cwimpieId" && key != "newColour") {  // List of keys to ignore from Cwimpie object
+            if (Array.isArray(value)) {  // List of objects
+              for (const singleValue of value) {
+                for (const [nestedKey, nestedValue] of Object.entries(singleValue)) {
+                  if (nestedKey != "_id") {
+                    console.log('list', nestedKey, key, value)
+                    this.search_form_for_fields(allSections, nestedValue, nestedKey, key)
                   }
                 }
               }
-            }
-          } else {
-            for (let section of allSections!) {
-              for (let field of section.fieldGroup!) {
-                let fieldKey = field.key
-                if ((fieldKey == key) && (fieldKey != "newColour")) {
-                  this.fill_update_field(field, value)
+            } else if (typeof value == "object") {  // 1+ nested objects
+              for (const [nestedKey, nestedValue] of Object.entries(value)) {
+                if (nestedKey != "_id") {
+                  if (typeof value[nestedKey] == "string") { // 1 nested object
+                    console.log('1nested', nestedKey, key, value)
+                    this.search_form_for_fields(allSections, value, nestedKey, key)
+                    break
+                  } else {  // 2 + nested objects
+                    // @ts-ignore
+                    for (const [nestedNestedKey, nestedNestedValue] of Object.entries(nestedValue)) {
+                      if (nestedNestedKey != "_id") {
+                        console.log('2+nested', nestedNestedKey, nestedKey, nestedNestedValue)
+                        this.search_form_for_fields(allSections, nestedNestedValue, nestedNestedKey, key)
+                      }
+                    }
+                  }
                 }
               }
+            } else { // 0 nested objects
+              console.log('0nested', key, value)
+              this.search_form_for_fields(allSections, value, key)
             }
           }
         }
@@ -453,8 +481,11 @@ export class UpdateCwimpiesComponent implements OnInit {
     // }
   }
 
-  ngOnDestroy(): void {
-    if (this.cwimpieUpdateDataServiceSubscription) {
+  ngOnDestroy()
+    :
+    void {
+    if (this.cwimpieUpdateDataServiceSubscription
+    ) {
       this.cwimpieUpdateDataServiceSubscription.unsubscribe()
     }
   }

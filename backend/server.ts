@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import {loadFixtures} from "./src/config/fixtureCommands";
+import {createDailySchedules} from "./src/utilities/periodicTasks/createDailySchedule";
 
 const express = require('express');
 const cors = require("cors");
@@ -24,6 +25,7 @@ require('dotenv').config()
 
 databaseConfig.dbConnect();
 loadFixtures()
+createDailySchedules()
 
 const PORT = process.env.PORT || 5000;
 

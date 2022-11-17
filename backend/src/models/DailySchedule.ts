@@ -5,7 +5,7 @@ const DailyScheduleSchema = new mongoose.Schema({
             type: Date,
             required: true,
         },
-        cwimpie_id:             {
+        cwimpieId:             {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Cwimpie'
         },

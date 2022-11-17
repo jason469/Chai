@@ -31,28 +31,8 @@ export class ReducedCwimpieCardComponent implements OnInit {
   }
 
   public updateCwimpieModal(): void {
-    let cwimpie = new Cwimpie()
-    let getCwimpieSub = this.viewCwimpiesService.getCwimpie(this.data.name).subscribe((cwimpieData: any) => {
-        console.log(cwimpieData)
-        cwimpie.photo = cwimpieData.photo
-        cwimpie.birthdate = cwimpieData.birthdate
-        cwimpie.colour = cwimpieData.colour_id
-        cwimpie.species = cwimpieData.species_id
-        cwimpie.primaryParent = cwimpieData.primaryParent_id
-        cwimpie.favourites = cwimpieData.favourites
-        cwimpie.professions = cwimpieData.professions
-        cwimpie.hobbies = cwimpieData.hobbies
-        cwimpie.stamp = cwimpieData.stamp
-
-        if (cwimpieData.partner_id) {
-          cwimpie.partnerName = cwimpieData.partner_id.name
-        }
-
-        this.cwimpieUpdateDataService.changeData(cwimpie)
-        this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
-        getCwimpieSub.unsubscribe()
-      }
-    )
+    this.cwimpieUpdateDataService.changeData(this.data)
+    this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
   }
 
   deleteCwimpie(name: string): void {
