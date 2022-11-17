@@ -13,7 +13,7 @@ module.exports = class CountryService {
 
     static async getOrCreateCountry(data: ICountry) {
         try {
-            let country = await Country.find({
+            let country = await Country.findOne({
                 name: data.name
             });
             if (!country) {
@@ -22,6 +22,8 @@ module.exports = class CountryService {
                     coordinates: data.coordinates
                 })
                 await country.save()
+                return country
+            } else {
                 return country
             }
         } catch (error) {

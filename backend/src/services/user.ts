@@ -34,15 +34,13 @@ module.exports = class UserService {
                 return "This user already exists";
             } else {
                 const hashedPassword = await bcryptjs.hash(data.password, 8);
-                const country = await CountryService.getOrCreateCountry(data.countryData)
-                console.log(country)
                 let user = new User({
                     username: data.username,
                     password: hashedPassword,
                     name: data.name,
-                    countryId: country
+                    countryId: await CountryService.getOrCreateCountry(data.countryData)
                 })
-                user = await user.save()
+                await user.save()
                 return "New user was created"
             }
         } catch (e: any) {
