@@ -1,17 +1,19 @@
 export class Cwimpie {
-  cwimpieId: string = "";
+  cwimpieId?: string = "";
   name: string = "";
   photo?: object;
-  birthdate: string = "";
+  birthdate?: string = "";
   colour?: Colour = new Colour();
   newColour?: Colour = new Colour();
-  species: Species = new Species();
-  favourites: Favourite[] =[];
-  professions: Profession[] = [];
-  hobbies: Hobby[] = [];
-  primaryParent: User = new User();
+  species?: Species = new Species();
+  favourites?: Favourite[] = [];
+  professions?: Profession[] = [];
+  hobbies?: Hobby[] = [];
+  primaryParent?: User = new User();
   partnerName?: string = "";
   stamp?: Stamp = new Stamp()
+  dailyScheduleId?: DailySchedule[] = [];
+
   constructor() {
   }
 
@@ -65,6 +67,25 @@ export class User {
   id?: string = "";
   username?: string = "";
   token?: string = "";
-  constructor(
-  ) {}
+
+  constructor() {
+  }
+}
+
+export class Task {
+  _id?: string = "";
+  name?: string = "";
+  description?: string = "";
+  startTime?: string = "";
+  endTime?: string = "";
+  durationMinutes?: number = 0;
+  isCompleted?: string = "";
+  dailyScheduleId?: string = "";
+}
+
+export class DailySchedule {
+  _id?: string = "";
+  tasks?: Task[] = [];
+  date?: string = "";
+  cwimpieId?: string = ""
 }

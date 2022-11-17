@@ -1,6 +1,9 @@
 import {IDailySchedule} from "../utilities/interfaces/modelInterfaces";
+import {Types} from "mongoose";
+import mongoose from 'mongoose';
 
 const DailySchedule = require('../models/DailySchedule')
+const Cwimpie = require('../models/Cwimpie')
 
 module.exports = class DailyScheduleService {
     static async getAllDailySchedules() {
@@ -38,8 +41,8 @@ module.exports = class DailyScheduleService {
         try {
             const dailySchedule = await DailySchedule.findOne(
                 {
-                    date: data.date,
-                    cwimpieId: data.cwimpieId
+                    date: new Date(data.date),
+                    cwimpieId: new mongoose.Types.ObjectId(data.cwimpieId)
                 }
             );
             if (dailySchedule) {

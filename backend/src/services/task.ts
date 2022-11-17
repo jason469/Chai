@@ -29,17 +29,9 @@ module.exports = class TaskService {
         }
     }
 
-    static async deleteTask(data: ITask) {
+    static async deleteTask(id: string) {
         try {
-            const task = await Task.findOne(
-                {
-                    name: data.name,
-                    description: data.description
-                }
-            );
-            if (task) {
-                await task.deleteOne()
-            }
+            await Task.findOneAndDelete({"_id": id});
             return true
         } catch (error) {
             console.log(`Could not delete task ${error}`)

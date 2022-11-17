@@ -14,6 +14,7 @@ const taskTimes = [8, 14, 17]
 
 export const createDailySchedules = () => {
     schedule.scheduleJob('0 0 * * *', async () => {
+    // schedule.scheduleJob('* * * * *', async () => {
         console.log('Creating daily schedules')
 
         let taskDurationMinutes = 40;
@@ -42,7 +43,15 @@ export const createDailySchedules = () => {
             dailySchedule.tasks = listOfTasks
             await dailySchedule.save()
             cwimpie.dailyScheduleId.push(dailySchedule)
-            cwimpie.save()
+            await cwimpie.save()
+            let numberOfSchedules = cwimpie.dailyScheduleId.length
+            console.log(cwimpie)
+            if (numberOfSchedules > 5) {
+                let deleteDailyScheduleId = cwimpie.dailyScheduleId[0]
+                cwimpie.dailyScheduleId.pop()
+                DailySchedule.findByIdAndDelete(deleteDailyScheduleId)
+            }
+            await cwimpie.save()
         }
     })
 }

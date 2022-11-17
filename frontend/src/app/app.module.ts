@@ -54,6 +54,7 @@ import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/f
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
 import { LocationComponent } from './components/pages/cwimpies/location/location.component';
+import { DailyScheduleCardComponent } from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { LocationComponent } from './components/pages/cwimpies/location/location
     StepperComponent,
     FileFieldComponent,
     FileValueAccessor,
-    LocationComponent
+    LocationComponent,
+    DailyScheduleCardComponent
   ],
   imports: [
     BrowserModule,

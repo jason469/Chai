@@ -38,10 +38,11 @@ module.exports = class CwimpieService {
                     path: 'dailyScheduleId',
                     populate: [
                         {
-                            path: 'tasks'
+                            path: 'tasks',
+                            model: 'Task'
                         }
                     ],
-                });
+                })
             return allCwimpies;
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)

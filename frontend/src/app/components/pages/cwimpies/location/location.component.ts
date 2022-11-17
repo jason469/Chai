@@ -10,8 +10,8 @@ import {environment} from "../../../../../environments/environment";
 export class LocationComponent implements OnInit {
   map!: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-  lat = 37.75;
-  lng = -122.41;
+  lat = -31.7833;
+  lng = 159.3000;
 
   constructor() {
   }
@@ -21,7 +21,7 @@ export class LocationComponent implements OnInit {
       accessToken: environment.mapbox.accessToken,
       container: 'map',
       style: this.style,
-      zoom: 13,
+      zoom: 3,
       center: [this.lng, this.lat]
     });
     // Add map controls

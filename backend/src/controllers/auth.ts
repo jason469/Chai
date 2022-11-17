@@ -30,13 +30,13 @@ module.exports = class AuthController {
             const userData = {
                 name: requestData.name,
                 username: requestData.username,
-                password: requestData.password
+                password: requestData.password,
+                countryData: requestData.countryData
             }
+            const user = await UserService.getOrCreateUser(userData)
 
-            const user = UserService.createUser(userData)
-
-            if (user) {
-                res.json(user);
+            if (user == "New user was created") {
+                res.status(200).json({msg: `${requestData.name} was created`});
                 return
             } else if (user == "This user already exists") {
                 res.status(400).json({msg: 'There is already a user with that username!'});

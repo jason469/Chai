@@ -14,6 +14,8 @@ const hobbyRouter = require('./src/routes/hobby');
 const professionRouter = require('./src/routes/profession');
 const speciesRouter = require('./src/routes/species');
 const userRouter = require('./src/routes/users');
+const dailyScheduleRouter = require('./src/routes/dailySchedule');
+const countryRouter = require('./src/routes/country');
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.use(professionRouter)
 app.use(speciesRouter)
 app.use(stampRouter)
 app.use(userRouter)
+app.use(dailyScheduleRouter)
+app.use(countryRouter)
 
 
 app.listen(PORT, "0.0.0.0", () => {

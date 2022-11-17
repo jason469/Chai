@@ -53,13 +53,14 @@ export interface IUser {
 }
 
 export interface ICountry {
-
+    name: string,
+    coordinates?: coordinates[]
 }
 
 export interface IDailySchedule {
-    date: Date,
-    cwimpieId: ICwimpie,
-    tasks: ITask[],
+    date: string,
+    cwimpieId: string,
+    tasks?: ITask[],
 }
 
 export interface ITask {
@@ -71,3 +72,5 @@ export interface ITask {
     isCompleted: boolean,
     dailyScheduleId: IDailySchedule
 }
+
+type coordinates = number[]

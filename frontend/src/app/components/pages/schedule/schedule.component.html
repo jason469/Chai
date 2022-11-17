@@ -1,1 +1,10 @@
-<p>schedule works!</p>
+<div class="allCwimpies_layout">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <app-daily-schedule-card
+    *ngFor="let cwimpieSchedule of allCwimpieSchedules"
+    [cwimpieSchedule]="cwimpieSchedule"
+  ></app-daily-schedule-card>
+  <h1
+    *ngIf="allCwimpieSchedules.length == 0"
+  >All the Cwimpies are supa free today !!</h1>
+</div>
