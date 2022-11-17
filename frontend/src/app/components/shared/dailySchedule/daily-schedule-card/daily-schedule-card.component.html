@@ -1,0 +1,19 @@
+<div class="dailyScheduleCard">
+  {{data.name}}
+  <div
+    *ngFor="let dailySchedule of data.dailyScheduleId"
+    class="dailyScheduleCard__schedule"
+  >
+    {{dailySchedule.date}}
+    <div
+      *ngFor="let task of dailySchedule.tasks"
+      class="dailyScheduleCard__schedule__task"
+    >
+      Name: {{task.name}}
+      Description: {{task.description}}
+      Start time: {{task.startTime}}
+      End time: {{task.endTime}}
+      Length: {{task.durationMinutes}}
+    </div>
+  </div>
+</div>
