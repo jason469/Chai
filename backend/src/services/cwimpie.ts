@@ -33,7 +33,15 @@ module.exports = class CwimpieService {
                     ],
                 })
                 .populate('partnerId')
-                .populate('primaryParentId', 'username name')
+                .populate({
+                    path: 'primaryParentId',
+                    populate: [
+                        {
+                            path: 'countryId',
+                            model: 'Country'
+                        }
+                    ],
+                })
                 .populate({
                     path: 'dailyScheduleId',
                     populate: [
