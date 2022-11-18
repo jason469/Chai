@@ -31,7 +31,8 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
-              "./node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "mapbox-gl/dist/mapbox-gl.css"
             ],
             "scripts": [],
             "serviceWorker": true,

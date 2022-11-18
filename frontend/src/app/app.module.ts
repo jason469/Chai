@@ -55,6 +55,7 @@ import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
 import { LocationComponent } from './components/pages/cwimpies/location/location.component';
 import { DailyScheduleCardComponent } from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 @NgModule({
@@ -134,7 +135,10 @@ import { DailyScheduleCardComponent } from './components/shared/dailySchedule/da
     MatNativeDateModule,
     FormlyMatDatepickerModule,
     MatStepperModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxMapboxGLModule.withConfig({
+      accessToken: environment.mapbox.accessToken, // Optional, can also be set per map (accessToken input of mgl-map)
+    })
   ],
   providers: [
     AuthService,
