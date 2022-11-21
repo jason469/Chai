@@ -1,10 +1,12 @@
-import {Component, Directive, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import * as mapboxgl from 'mapbox-gl';
 import {GeoJSONSource} from 'mapbox-gl';
 import {environment} from "../../../../../environments/environment";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
 
+import * as turf from '@turf/turf'
+import {Units} from '@turf/turf'
 
 @Component({
   selector: 'app-location',
@@ -19,6 +21,8 @@ export class LocationComponent implements OnInit {
 
   loading = true
 
+  CITY_LOCATION_SOURCE: string = "CityLocationSource"
+
   CWIMPIE_ICON_SOURCE: string = "CwimpieIconDatasource"
   TRIP_ONE_SOURCE: string = 'TripOneSource'
   MULTI_STOP_TRIP_SOURCE: string = 'MultiStopTripSource'
@@ -28,9 +32,12 @@ export class LocationComponent implements OnInit {
 
   DUNEDIN_COORDS = [170.50361, -45.87416]
   AUCKLAND_COORDS = [174.767700, -36.850109]
+  WELLINGTON_COORDS = [174.777969, -41.276825]
   MELBOURNE_COORDS = [144.946457, -37.840935]
   SYDNEY_COORDS = [151.208755, -33.870453]
+  ADELAIDE_COORDS = [138.599503, -34.921230]
 
+  CITY_ICON_COORDINATES = [this.DUNEDIN_COORDS, this.MELBOURNE_COORDS]
   MULTI_STOP_TRIPS_DATASOURCES_CONFIG = [
     {
       "displayName": "Dunedin To Melbourne (Trip 2)",
@@ -38,7 +45,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "boat",
-            "lineStyle": "dash",
             "lineColour": "#FF0000",
             "tripName": "tripTwo",
           },
@@ -47,7 +53,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "train",
-            "lineStyle": "solid",
             "lineColour": "#0000FF",
             "tripName": "tripTwo",
           },
@@ -61,7 +66,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineStyle": "dash",
             "lineColour": "#00FF00",
             "tripName": "tripThree",
           },
@@ -70,15 +74,66 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineStyle": "solid",
             "lineColour": "#FFFF00",
             "tripName": "tripThree",
           },
           "coordinates": [this.AUCKLAND_COORDS, this.MELBOURNE_COORDS],
         },
       ],
+    },
+    {
+      "displayName": "Dunedin To Melbourne (Trip 4)",
+      "pathConfig": [
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.DUNEDIN_COORDS, this.AUCKLAND_COORDS]
+        },
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.AUCKLAND_COORDS, this.WELLINGTON_COORDS],
+        },
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.WELLINGTON_COORDS, this.SYDNEY_COORDS],
+        },
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.SYDNEY_COORDS, this.ADELAIDE_COORDS],
+        },
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.ADELAIDE_COORDS, this.MELBOURNE_COORDS],
+        },
+        {
+          "properties": {
+            "transportationMode": "plane",
+            "lineColour": "#000000",
+            "tripName": "tripFour",
+          },
+          "coordinates": [this.MELBOURNE_COORDS, this.DUNEDIN_COORDS],
+        },
+      ],
     }
-
   ]
 
   LAYER_IDS: string[] = []  // Captures the layer ids of the non-multi-stop paths
@@ -110,6 +165,28 @@ export class LocationComponent implements OnInit {
       if (error) throw error;
       this.map.addImage(iconTagName, image, {'sdf': true});
     })
+  }
+
+  async loadCityLocationDatasource() {
+    let features = []
+    for (let coordinates of this.CITY_ICON_COORDINATES) {
+      const center = coordinates
+      const radius = 100;
+      const options = {
+        steps: 16,
+        units: ("kilometers" as Units),
+        properties: {}
+      }
+      const data = turf.circle(center, radius, options)
+      features.push(data)
+    }
+    let cityLocationData: GeoJSON.FeatureCollection<GeoJSON.Polygon>
+    cityLocationData = {
+      "type": "FeatureCollection",
+      "features": features
+    };
+    (this.map.getSource(this.CITY_LOCATION_SOURCE) as GeoJSONSource).setData(cityLocationData);
+    console.log(cityLocationData)
   }
 
   async loadCwimpieIconsDatasource() {
@@ -168,22 +245,19 @@ export class LocationComponent implements OnInit {
     (this.map.getSource(this.TRIP_ONE_SOURCE) as GeoJSONSource).setData(TripOneData)
   }
 
-  async loadMultiStopTripDatasources(tripConfigList: any[], datasourceName:string) {
+  async loadMultiStopTripDatasources(tripConfigList: any[], datasourceName: string) {
     let tripDatasource: GeoJSON.FeatureCollection<GeoJSON.LineString>
     let lineFeatures: any[] = []
 
     for (let tripConfig of tripConfigList) {
       for (let lineConfig of tripConfig["pathConfig"]) {
         let lineProperties = lineConfig["properties"]
-
-        lineFeatures.push({
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": lineConfig["coordinates"]
-          },
-          "properties": lineProperties
-        });
+        const options = {
+          properties: lineProperties
+        }
+        const curvedLine = turf.greatCircle(lineConfig["coordinates"][0], lineConfig["coordinates"][1], options)
+        // const straightLine = turf.lineString(lineConfig["coordinates"], lineProperties)
+        lineFeatures.push(curvedLine);
       }
     }
     tripDatasource = {
@@ -209,6 +283,9 @@ export class LocationComponent implements OnInit {
     this.map.on('load', async () => {
       this.loadImage('/assets/icons/species/Bunny.png', 20, this.CWIMPIE_ICON_BUNNY_TAG)
       this.loadImage('/assets/icons/species/Poodel.png', 20, this.CWIMPIE_ICON_POODEL_TAG)
+
+      // City source
+      this.createEmptySource(this.CITY_LOCATION_SOURCE)
 
       // Cwimpie icons source
       this.createEmptySource(this.CWIMPIE_ICON_SOURCE, {
@@ -374,13 +451,76 @@ export class LocationComponent implements OnInit {
           'line-color': ['get', 'lineColour'],
           'line-width': 5,
           'line-opacity': 0.7,
+          'line-dasharray': [
+            "match", ['get', 'transportationMode'],
+            "plane", ["literal", []],
+            "boat", ["literal", [1, 2]],
+            "train", ["literal", [3, 3]],
+            ["literal", []]
+          ],
         }
       })
+
+      // Create city layers
+      this.map.addLayer({
+        'id': 'city-location-extrusion',
+        'type': 'fill',
+        'source': this.CITY_LOCATION_SOURCE,
+        'paint': {
+          'fill-color': '#9F1319',
+          'fill-opacity': 0.3
+        }
+      });
+      this.map.addLayer({
+        'id': 'city-location-outline',
+        'type': 'line',
+        'source': this.CITY_LOCATION_SOURCE,
+        'layout': {},
+        'paint': {
+          'line-color': '#000',
+          'line-width': 2
+        }
+      });
+
+      // Added 3d building layer for some depth
+      this.map.addLayer(
+        {
+          'id': 'add-3d-buildings',
+          'source': 'composite',
+          'source-layer': 'building',
+          'filter': ['==', 'extrude', 'true'],
+          'type': 'fill-extrusion',
+          'minzoom': 13,
+          'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              13,
+              0,
+              13.05,
+              ["*", 4, ['get', 'height']]
+            ],
+            'fill-extrusion-base': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              13,
+              0,
+              13.05,
+              ['get', 'height']
+            ],
+            'fill-extrusion-opacity': 1
+          }
+        },
+      );
 
       // Populate sources
       await this.loadCwimpieIconsDatasource()
       await this.loadTripOneDatasource()
       await this.loadMultiStopTripDatasources(this.MULTI_STOP_TRIPS_DATASOURCES_CONFIG, this.MULTI_STOP_TRIP_SOURCE)  // Populate the sources for each multi-stop source
+      await this.loadCityLocationDatasource()
     })
   }
 
