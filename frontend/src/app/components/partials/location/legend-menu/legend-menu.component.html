@@ -1,0 +1,15 @@
+<div class="trip_legend">
+  <div class="trip_legend__title">
+    Legend
+  </div>
+  <div class="trip_legend__items">
+    <div class="trip_legend__items__item" appLegendMenuItem [prefix]="'cwimpie'" (menuItemData)="toggleItem($event)">
+      <span class="trip_legend__items__item__icon" style="color: #000000"></span>
+      Cwimpie Icons
+    </div>
+    <div class="trip_legend__items__item" appLegendMenuItem [prefix]="'tripOne'" (menuItemData)="toggleItem($event)">
+      <span class="trip_legend__items__item__icon" style="color: #FF0000"></span>
+      Melbourne to Dunedin
+    </div>
+  </div>
+</div>

@@ -56,6 +56,8 @@ import {hexCodeValidator} from "./shared/functions/fileValidation";
 import { LocationComponent } from './components/pages/cwimpies/location/location.component';
 import { DailyScheduleCardComponent } from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { LegendMenuComponent } from './components/partials/location/legend-menu/legend-menu.component';
+import { LegendMenuItemDirective } from './directives/cwimpies/location/legend/legend-menu-item.directive';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     FileFieldComponent,
     FileValueAccessor,
     LocationComponent,
-    DailyScheduleCardComponent
+    DailyScheduleCardComponent,
+    LegendMenuComponent,
+    LegendMenuItemDirective
   ],
   imports: [
     BrowserModule,

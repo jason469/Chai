@@ -1,0 +1,51 @@
+.trip_legend {
+  z-index: 2000;
+  position: absolute;
+  background-color: white;
+  border-radius: 5%;
+  min-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.trip_legend__title {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.trip_legend__items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trip_legend__items__item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.disabled {
+  text-decoration: line-through;
+  color: darkgray;
+}
+
+.trip_legend__items__item {
+  cursor: pointer;
+}
+
+.trip_legend__items__item__icon {
+  font-size: 1rem;
+  display: inline-block;;
+  font-weight: bold;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}

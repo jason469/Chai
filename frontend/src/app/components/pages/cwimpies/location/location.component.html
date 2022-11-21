@@ -1,5 +1,12 @@
-<div id="map" class="map match-parent">
-  <mat-spinner
-    *ngIf="loading"
-  ></mat-spinner>
-</div>
+<!--<div>-->
+  <div id="map" class="map match-parent">
+    <mat-spinner
+      *ngIf="loading"
+      id="loading_spinner"
+    ></mat-spinner>
+    <app-legend-menu
+      [map]="map"
+      [layerIds]="LAYER_IDS"
+    ></app-legend-menu>
+  </div>
+<!--</div>-->

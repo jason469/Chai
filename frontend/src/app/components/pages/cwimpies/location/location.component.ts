@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Directive, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 
 import * as mapboxgl from 'mapbox-gl';
 import {GeoJSONSource} from 'mapbox-gl';
 import {environment} from "../../../../../environments/environment";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
+
 
 @Component({
   selector: 'app-location',
@@ -78,8 +79,10 @@ export class LocationComponent implements OnInit {
 
   ]
 
+  LAYER_IDS: string[] = []  // Captures the layer ids of the non-multi-stop paths
+
   constructor(
-    private viewCwimpiesService: ViewCwimpiesService
+    private viewCwimpiesService: ViewCwimpiesService,
   ) {
   }
 
@@ -253,6 +256,8 @@ export class LocationComponent implements OnInit {
           'circle-stroke-width': 1,
         }
       });
+      this.LAYER_IDS.push('cwimpie-circle')
+
       this.map.addLayer({
         'id': 'cwimpie-circle-label',
         'type': 'symbol',
@@ -268,6 +273,8 @@ export class LocationComponent implements OnInit {
           'text-size': 12
         },
       });
+      this.LAYER_IDS.push('cwimpie-circle-label')
+
       this.map.addLayer({
         'id': 'cwimpie-icon',
         'type': 'symbol',
@@ -284,6 +291,7 @@ export class LocationComponent implements OnInit {
           'icon-size': 0.05
         }
       })
+      this.LAYER_IDS.push('cwimpie-icon')
 
       this.map.on('mouseenter', 'cwimpie-circle', () => {
         this.map.getCanvas().style.cursor = 'pointer'
@@ -349,6 +357,7 @@ export class LocationComponent implements OnInit {
           ]
         }
       })
+      this.LAYER_IDS.push('tripOne-path')
 
       // Create multi stop trips
       this.map.addLayer({
@@ -370,16 +379,14 @@ export class LocationComponent implements OnInit {
       await this.loadCwimpieIconsDatasource()
       await this.loadTripOneDatasource()
       await this.loadMultiStopTripDatasources(this.MULTI_STOP_TRIPS_DATASOURCES_CONFIG, this.MULTI_STOP_TRIP_SOURCE)  // Populate the sources for each multi-stop source
-
-      return
     })
   }
 
-
-  async ngOnInit() {
-    await this.initialiseMap().then(() => {
+  ngOnInit() {
+    this.initialiseMap().then(() => {
       this.loading = false
       console.log(this.loading)
     })
   }
+
 }
