@@ -3,13 +3,32 @@
     Legend
   </div>
   <div class="trip_legend__items">
-    <div class="trip_legend__items__item" appLegendMenuItem [prefix]="'cwimpie'" (menuItemData)="toggleItem($event)">
-      <span class="trip_legend__items__item__icon" style="color: #000000"></span>
+    <div class="trip_legend__items__item"
+         appLegendMenuItem
+         [prefix]="'cwimpie'"
+         [isMultiStopItem]="false"
+         (menuItemData)="toggleItem($event)"
+    >
+      <span class="trip_legend__items__item__icon"></span>
       Cwimpie Icons
     </div>
-    <div class="trip_legend__items__item" appLegendMenuItem [prefix]="'tripOne'" (menuItemData)="toggleItem($event)">
-      <span class="trip_legend__items__item__icon" style="color: #FF0000"></span>
+    <div class="trip_legend__items__item"
+         appLegendMenuItem
+         [prefix]="'tripOne'"
+         [isMultiStopItem]="false"
+         (menuItemData)="toggleItem($event)"
+    >
+      <span class="trip_legend__items__item__icon"></span>
       Melbourne to Dunedin
+    </div>
+    <div class="trip_legend__items__item"
+         appLegendMenuItem
+         *ngFor="let trip of multiStopTrips"
+         [prefix]=trip.pathConfig[0].properties.tripName
+         [isMultiStopItem]="true"
+         (menuItemData)="toggleItem($event)">
+      <span class="trip_legend__items__item__icon"></span>
+      {{trip.displayName}}
     </div>
   </div>
 </div>

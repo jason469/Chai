@@ -33,6 +33,7 @@ export class LocationComponent implements OnInit {
 
   MULTI_STOP_TRIPS_DATASOURCES_CONFIG = [
     {
+      "displayName": "Dunedin To Melbourne (Trip 2)",
       "pathConfig": [
         {
           "properties": {
@@ -41,7 +42,7 @@ export class LocationComponent implements OnInit {
             "lineColour": "#FF0000",
             "tripName": "tripTwo",
           },
-          "coordinates": [this.DUNEDIN_COORDS, this.SYDNEY_COORDS]
+          "coordinates": [this.DUNEDIN_COORDS, this.SYDNEY_COORDS],
         },
         {
           "properties": {
@@ -55,6 +56,7 @@ export class LocationComponent implements OnInit {
       ],
     },
     {
+      "displayName": "Dunedin To Melbourne (Trip 3)",
       "pathConfig": [
         {
           "properties": {
@@ -361,7 +363,7 @@ export class LocationComponent implements OnInit {
 
       // Create multi stop trips
       this.map.addLayer({
-        'id': `multi-stop-trip-path`,
+        'id': 'multi-stop-trip-path',
         'type': 'line',
         'source': this.MULTI_STOP_TRIP_SOURCE,
         'layout': {
@@ -385,7 +387,6 @@ export class LocationComponent implements OnInit {
   ngOnInit() {
     this.initialiseMap().then(() => {
       this.loading = false
-      console.log(this.loading)
     })
   }
 
