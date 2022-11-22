@@ -45,7 +45,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "boat",
-            "lineColour": "#FF0000",
             "tripName": "tripTwo",
           },
           "coordinates": [this.DUNEDIN_COORDS, this.SYDNEY_COORDS],
@@ -53,7 +52,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "train",
-            "lineColour": "#0000FF",
             "tripName": "tripTwo",
           },
           "coordinates": [this.SYDNEY_COORDS, this.MELBOURNE_COORDS],
@@ -66,7 +64,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#00FF00",
             "tripName": "tripThree",
           },
           "coordinates": [this.DUNEDIN_COORDS, this.AUCKLAND_COORDS]
@@ -74,7 +71,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#FFFF00",
             "tripName": "tripThree",
           },
           "coordinates": [this.AUCKLAND_COORDS, this.MELBOURNE_COORDS],
@@ -87,7 +83,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.DUNEDIN_COORDS, this.AUCKLAND_COORDS]
@@ -95,7 +90,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.AUCKLAND_COORDS, this.WELLINGTON_COORDS],
@@ -103,7 +97,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.WELLINGTON_COORDS, this.SYDNEY_COORDS],
@@ -111,7 +104,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.SYDNEY_COORDS, this.ADELAIDE_COORDS],
@@ -119,7 +111,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.ADELAIDE_COORDS, this.MELBOURNE_COORDS],
@@ -127,7 +118,6 @@ export class LocationComponent implements OnInit {
         {
           "properties": {
             "transportationMode": "plane",
-            "lineColour": "#000000",
             "tripName": "tripFour",
           },
           "coordinates": [this.MELBOURNE_COORDS, this.DUNEDIN_COORDS],
@@ -448,7 +438,13 @@ export class LocationComponent implements OnInit {
           'line-cap': 'round',
         },
         'paint': {
-          'line-color': ['get', 'lineColour'],
+          'line-color': [
+            "match", ['get', 'transportationMode'],
+            "plane", "#FF0000",
+            "boat", "#00FF00",
+            "train", "#0000FF",
+            "#FF0000"
+          ],
           'line-width': 5,
           'line-opacity': 0.7,
           'line-dasharray': [

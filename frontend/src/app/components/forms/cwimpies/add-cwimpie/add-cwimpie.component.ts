@@ -49,13 +49,13 @@ export class AddCwimpieComponent implements OnInit {
                       required: true,
                     }
                   },
-                  // {
-                  //   key: 'photo',
-                  //   type: 'file',
-                  //   templateOptions: {
-                  //     multiple: true
-                  //   },
-                  // },
+                  {
+                    key: 'photo',
+                    type: 'file',
+                    templateOptions: {
+                      multiple: true
+                    },
+                  },
                   {
                     key: 'birthdate',
                     type: 'datepicker',

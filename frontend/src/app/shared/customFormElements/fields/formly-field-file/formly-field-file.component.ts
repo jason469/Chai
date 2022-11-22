@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FieldType, FieldTypeConfig} from "@ngx-formly/core";
+import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-file-field',
-  templateUrl: './file-field.component.html',
-  styleUrls: ['./file-field.component.scss']
+  selector: 'app-formly-field-file',
+  templateUrl: './formly-field-file.component.html',
+  styleUrls: ['./formly-field-file.component.scss']
 })
-export class FileFieldComponent extends FieldType implements OnInit {
+export class FormlyFieldFile extends FieldType<FieldTypeConfig> implements OnInit {
   @ViewChild("fileinput") el: ElementRef | undefined;
   selectedFiles: File[] | undefined;
   constructor(public sanitizer: DomSanitizer) {
@@ -15,7 +15,7 @@ export class FileFieldComponent extends FieldType implements OnInit {
   }
   ngOnInit(): void {}
   openFileInput() {
-    this.el?.nativeElement.click();
+    this.el!.nativeElement.click();
   }
   onDelete(index: number) {
     // this.formControl.reset();
@@ -25,9 +25,8 @@ export class FileFieldComponent extends FieldType implements OnInit {
     this.formControl.patchValue(this.selectedFiles);
     console.log("Form Control Value", this.formControl.value);
   }
-
-  onChange(event: any) {
-    this.selectedFiles = Array.from(event.target?.files);
+  onChange(event:any) {
+    this.selectedFiles = Array.from(event.target.files);
     console.log(this.selectedFiles);
   }
   getSanitizedImageUrl(file: File) {
@@ -39,4 +38,3 @@ export class FileFieldComponent extends FieldType implements OnInit {
     return /^image\//.test(file.type);
   }
 }
-

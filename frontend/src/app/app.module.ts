@@ -48,16 +48,20 @@ import {AddNewFieldComponent} from './shared/customFormElements/ui/buttons/add-n
 import {UpdateCwimpiesComponent} from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
 import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
-import {FileFieldComponent} from './shared/customFormElements/fields/file-field/file-field.component';
 import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
-import {FileValueAccessor} from "./shared/customFormElements/fields/file-field/file-value-accessor";
+import {FileValueAccessor} from "./shared/customFormElements/fields/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
-import { LocationComponent } from './components/pages/cwimpies/location/location.component';
-import { DailyScheduleCardComponent } from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
-import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { LegendMenuComponent } from './components/partials/location/legend-menu/legend-menu.component';
-import { LegendMenuItemDirective } from './directives/cwimpies/location/legend/legend-menu-item.directive';
+import {LocationComponent} from './components/pages/cwimpies/location/location.component';
+import {
+  DailyScheduleCardComponent
+} from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
+import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
+import {LegendMenuComponent} from './components/partials/location/legend-menu/legend-menu.component';
+import {LegendMenuItemDirective} from './directives/cwimpies/location/legend/legend-menu-item.directive';
+import {
+  FormlyFieldFile,
+} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
 
 
 @NgModule({
@@ -78,12 +82,12 @@ import { LegendMenuItemDirective } from './directives/cwimpies/location/legend/l
     AddNewFieldComponent,
     UpdateCwimpiesComponent,
     StepperComponent,
-    FileFieldComponent,
-    FileValueAccessor,
     LocationComponent,
     DailyScheduleCardComponent,
     LegendMenuComponent,
-    LegendMenuItemDirective
+    LegendMenuItemDirective,
+    FileValueAccessor,
+    FormlyFieldFile
   ],
   imports: [
     BrowserModule,
@@ -97,7 +101,7 @@ import { LegendMenuItemDirective } from './directives/cwimpies/location/legend/l
     ReactiveFormsModule,
     FormlyModule.forRoot({
       types: [
-        {name: 'file', component: FileFieldComponent, wrappers: ['form-field']},
+        {name: 'file', component: FormlyFieldFile, wrappers: []},
         {name: 'stepper', component: StepperComponent, wrappers: []},
         {name: 'repeat', component: AddNewFieldComponent},
         {
