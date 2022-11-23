@@ -1,6 +1,15 @@
 <div id="addCwimpieForm">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    enctype="multipart/form-data"
+  >
+    <formly-form
+      [model]="model"
+      [fields]="fields"
+      [options]="options"
+      [form]="form">
+    </formly-form>
     <button
       mat-raised-button
       type="button"

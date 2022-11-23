@@ -10,7 +10,7 @@ COPY yarn.lock ./
 
 # Install Dependencies
 RUN yarn install
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy rest of the code to container
 COPY . .

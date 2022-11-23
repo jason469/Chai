@@ -4,6 +4,7 @@ import {createDailySchedules} from "./src/utilities/periodicTasks/createDailySch
 
 const express = require('express');
 const cors = require("cors");
+const path = require("path");
 
 const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');
@@ -33,11 +34,13 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+
 app.use(cors({
     credentials: true,
     origin: ["http://localhost:4200"]
 }))
-app.use(express.static('public'))
+// app.use('/public', express.static('public'));
+app.use('/public', express.static('public'));
 
 app.use(authRouter)
 app.use(colourRouter)

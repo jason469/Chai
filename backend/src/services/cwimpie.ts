@@ -13,6 +13,7 @@ const hobbyService = require('../services/hobby')
 const stampService = require('../services/stamp')
 const userService = require('../services/user')
 
+
 module.exports = class CwimpieService {
     static async getAllCwimpies() {
         try {

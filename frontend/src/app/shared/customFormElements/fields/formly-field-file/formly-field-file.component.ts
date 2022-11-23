@@ -19,13 +19,13 @@ export class FormlyFieldFile extends FieldType<FieldTypeConfig> implements OnIni
   }
   onDelete(index: number) {
     // this.formControl.reset();
-    console.log(this.selectedFiles);
     this.selectedFiles?.splice(index, 1);
 
     this.formControl.patchValue(this.selectedFiles);
     console.log("Form Control Value", this.formControl.value);
   }
   onChange(event:any) {
+    console.log(event.target.files)
     this.selectedFiles = Array.from(event.target.files);
     console.log(this.selectedFiles);
   }

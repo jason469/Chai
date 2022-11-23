@@ -17,6 +17,7 @@ export const GET_RANDOM_VALUES_URL = BASE_URL + '/api/cwimpies/random-values/'
 
 // URLs to create cwimpies
 export const CREATE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/add/'
+export const CREATE_CWIMPIE_PHOTO_URL = BASE_URL + '/api/cwimpies/add-photo/'
 
 // URLs to delete cwimpies
 export const DELETE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/'

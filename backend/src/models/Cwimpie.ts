@@ -11,8 +11,7 @@ const CwimpieSchema = new mongoose.Schema(
             trim: true,
         },
         photo: {
-            data: Buffer,
-            contentType: String
+            type: String,
         },
         birthdate: {
             type: Date

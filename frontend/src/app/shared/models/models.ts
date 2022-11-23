@@ -1,7 +1,6 @@
 export class Cwimpie {
   cwimpieId?: string = "";
   name: string = "";
-  photo?: object;
   birthdate?: string = "";
   colour?: Colour = new Colour();
   newColour?: Colour = new Colour();
@@ -13,6 +12,7 @@ export class Cwimpie {
   partnerName?: string = "";
   stamp?: Stamp = new Stamp()
   dailyScheduleId?: DailySchedule[] = [];
+  photo?: any;
 
   constructor() {
   }

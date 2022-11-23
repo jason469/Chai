@@ -3,7 +3,7 @@
   .upload-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     height: 50px;
     border: 1px dashed #3f51c2;
     border-radius: 5px;
@@ -14,7 +14,7 @@
       .absolute-div {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         position: absolute;
         right: 3%;
         left: 3%;

@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {activityNames, cwimpieNames, favouriteNames} from "../utilities/randomValues/cwimpieValues";
+const upload = require("../middlewares/upload.mid");
 
 const CwimpieService = require('../services/cwimpie')
 const _ = require('lodash');
@@ -33,7 +34,6 @@ module.exports = class CwimpieController {
 
     static async addCwimpie(req: Request, res: Response) {
         try {
-            console.log('add cwimpie data is ', req.body)
             const cwimpieData = req.body;
 
             let cwimpie = await CwimpieService.getCwimpie(cwimpieData.name);
@@ -43,9 +43,29 @@ module.exports = class CwimpieController {
             } else {
                 await CwimpieService.createCwimpie(cwimpieData)
             }
-            console.log(cwimpie)
             res.status(200).json({name: `${cwimpieData.name}`})
             return
+        } catch (error) {
+            res.status(500).json({msg: error})
+            return
+        }
+    }
+
+    static async addCwimpiePhoto(req: Request, res: Response) {
+        try {
+            const url = req.protocol + '://' + req.get('host')
+            const photoName = req.file?.filename
+            const cwimpieName = req.params.cwimpieName
+            let cwimpie = await CwimpieService.getCwimpie(cwimpieName);
+            if (cwimpie) {
+                cwimpie.photo = url + '/public/media/' + photoName
+                cwimpie.save()
+                res.status(200).json({msg: `${cwimpieName} now has a photo!`})
+                return
+            } else {
+                res.status(400).json({msg: `${cwimpieName} doesnt exist!`})
+                return
+            }
         } catch (error) {
             res.status(500).json({msg: error})
             return

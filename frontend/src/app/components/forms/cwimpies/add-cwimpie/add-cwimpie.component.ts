@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormBuilder} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 import {Cwimpie} from "../../../../shared/models/models";
@@ -24,7 +24,7 @@ export class AddCwimpieComponent implements OnInit {
   constructor(
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -53,8 +53,11 @@ export class AddCwimpieComponent implements OnInit {
                     key: 'photo',
                     type: 'file',
                     templateOptions: {
-                      multiple: true
+                      multiple: false
                     },
+                    props: {
+                      required: true
+                    }
                   },
                   {
                     key: 'birthdate',
@@ -433,16 +436,33 @@ export class AddCwimpieComponent implements OnInit {
         this.model
       ).subscribe(
         (responseData: any) => {
-          this.form.reset()
-          this.toastrService.success(
-            `Yayyy well done`,
-            `${responseData.name} was created`
-          );
-        }, errorMessage => {
-          this.toastrService.warning(
-            `${JSON.stringify(errorMessage)}`,
-            `There was an error in making the cwimpie :(`
-          );
+          let photoData = new FormData();
+          photoData.append('photo', this.model.photo[0]);
+          this.cwimpieFormService.postCwimpiePhoto(
+            photoData, this.model.name
+          ).subscribe(
+            (responseData: any) => {
+              console.log('photo added')
+              // this.form.reset()
+              this.toastrService.success(
+                `Yayyy well done`,
+                `${this.model.name} was created`
+              );
+            }
+          )
+        }, error => {
+          console.log(error)
+          if (error.status >= 400 && error.status <= 499) {
+            this.toastrService.warning(
+              `${JSON.stringify(error.error.msg)}`,
+              `There was something wrong with the form :(`
+            );
+          } else {
+            this.toastrService.error(
+              `${JSON.stringify(error.error.msg)}`,
+              `There was an error in making the cwimpie :(`
+            );
+          }
         }
       )
     }

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {
+  CREATE_CWIMPIE_PHOTO_URL,
   CREATE_CWIMPIE_URL,
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES_URL, GET_ALL_FONTS_URL, GET_ALL_PROFESSION_TYPES_URL,
@@ -84,6 +85,10 @@ export class CwimpieFormService {
 
   postCwimpieData(data: Cwimpie) {
     return this.http.post(CREATE_CWIMPIE_URL, data)
+  }
+
+  postCwimpiePhoto(data: FormData, cwimpieName:string) {
+    return this.http.post(`${CREATE_CWIMPIE_PHOTO_URL}${cwimpieName}/`, data)
   }
 
   getRandomValues(valueType:string) {
