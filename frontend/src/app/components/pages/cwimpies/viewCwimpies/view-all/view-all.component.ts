@@ -34,6 +34,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             hobbies: data.hobbies,
             primaryParent: data.primaryParentId,
             stamp: data.stampId,
+            photo: data.photo
           }
           if (data.partnerId) {
             cwimpieData.partnerName = data.partnerId.name
