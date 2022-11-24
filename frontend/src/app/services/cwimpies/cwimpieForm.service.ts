@@ -8,7 +8,7 @@ import {
   GET_ALL_COLOURS_URL,
   GET_ALL_CWIMPIES_URL, GET_ALL_FAVOURITE_TYPES_URL, GET_ALL_FONTS_URL, GET_ALL_PROFESSION_TYPES_URL,
   GET_ALL_SPECIES_URL,
-  GET_ALL_USERS_URL, GET_RANDOM_VALUES_URL
+  GET_ALL_USERS_URL, GET_RANDOM_VALUES_URL, UPDATE_CWIMPIE_URL
 } from "../../shared/constants/url";
 import {Cwimpie} from "../../shared/models/models";
 
@@ -89,6 +89,10 @@ export class CwimpieFormService {
 
   postCwimpiePhoto(data: FormData, cwimpieName:string) {
     return this.http.post(`${CREATE_CWIMPIE_PHOTO_URL}${cwimpieName}/`, data)
+  }
+
+  updateCwimpieData(data: Cwimpie, cwimpieName:string) {
+    return this.http.patch(`${UPDATE_CWIMPIE_URL}${cwimpieName}/`, data)
   }
 
   getRandomValues(valueType:string) {

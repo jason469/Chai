@@ -75,13 +75,12 @@ module.exports = class CwimpieController {
     static async updateCwimpie(req: Request, res: Response) {
         try {
             const updateCwimpieData = req.body;
-
-            var cwimpie = await CwimpieService.getCwimpie(updateCwimpieData.name);
+            let cwimpie = await CwimpieService.getCwimpie(req.params.cwimpieName);
             if (!cwimpie) {
                 res.status(400).json({msg: `${updateCwimpieData.name} doesn't exists!`})
                 return
             } else {
-                await CwimpieService.updateCwimpie(updateCwimpieData)
+                await CwimpieService.updateCwimpie(cwimpie, updateCwimpieData)
             }
             res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
             return

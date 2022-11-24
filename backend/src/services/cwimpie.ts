@@ -121,24 +121,16 @@ module.exports = class CwimpieService {
         return cwimpie
     }
 
-    static async updateCwimpie(updateData: IUpdateCwimpieData) {
-        let cwimpie = await this.getCwimpie(updateData.name)
-        let cwimpieProperty = await getPropertyFromObject(cwimpie, updateData.property)
-
-        type ObjectKey = keyof typeof cwimpie;
-        const property = updateData.property as ObjectKey;
-
-        if (cwimpieProperty !== undefined) {  // Replace it
-            let newValue = await getCwimpieProperty(cwimpie, updateData.property, updateData.data)
-
-            if (Array.isArray(cwimpieProperty)) {  // Default behaviour is to just add the new value
-                cwimpie[property].push(newValue)
-            } else {
-                cwimpie[property] = newValue
+    static async updateCwimpie(cwimpie: typeof Cwimpie, updateData: IUpdateCwimpieData) {
+        console.log(updateData)
+        for (const [key, value] of Object.entries(updateData)) {
+            let cwimpieProperty = await getPropertyFromObject(cwimpie, key)
+            if (cwimpieProperty != undefined) {
+                let newValue = await getCwimpieProperty(cwimpie, key, value)
+                cwimpie[key] = newValue
+                // }
+                await cwimpie.save()
             }
-            await cwimpie.save()
-        } else {  // Property doesn't exist on the object
-            return null
         }
     }
 

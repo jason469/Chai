@@ -409,11 +409,9 @@ export class UpdateCwimpiesComponent implements OnInit {
                     // @ts-ignore
                     for (const [nestedNestedKey, nestedNestedValue] of Object.entries(nestedValue)) {
                       if (!blackListedKeys.includes(nestedNestedKey)) {
-                        console.log('2+ nested', nestedNestedKey, nestedKey)
                         let parentField = this.search_form_for_fields(rootField, key)
                         let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
                         let grandChildField = this.search_form_for_fields(childField.fieldGroup, nestedNestedKey)
-                        console.log(grandChildField)
                         this.fill_update_field(grandChildField, nestedNestedValue)
                       }
                     }
@@ -458,31 +456,28 @@ export class UpdateCwimpiesComponent implements OnInit {
   }
 
   submit() {
-    // if (this.addNewColour) {
-    //   this.model.colour = this.model.newColour
-    // }
-    // delete this.model.newColour
-    // if (this.form.valid) {
-    //   this.cwimpieFormService.postCwimpieData(
-    //     this.model
-    //   ).subscribe(
-    //     (responseData:any) => {
-    //       this.form.reset()
-    //       this.toastrService.success(
-    //         `Yayyy well done`,
-    //         `${responseData.name} was created`
-    //       );
-    //     }, errorMessage => {
-    //       this.toastrService.warning(
-    //         `${JSON.stringify(errorMessage)}`,
-    //         `There was an error in making the cwimpie :(`
-    //       );
-    //     }
-    //   )
-    // }
-    // else {
-    //   validateAllFormFields(this.form)
-    // }
+    if (this.addNewColour) {
+      this.model.colour = this.model.newColour
+    }
+    delete this.model.newColour
+    console.log(this.model)
+    if (this.form.valid) {
+      this.cwimpieFormService.updateCwimpieData(
+        this.model, this.initialData.name
+      ).subscribe(
+        (responseData:any) => {
+          this.toastrService.success(
+            `Yayyy well done`,
+            `${responseData.name} was updated`
+          );
+        }, errorMessage => {
+          this.toastrService.warning(
+            `${JSON.stringify(errorMessage)}`,
+            `There was an error in making the cwimpie :(`
+          );
+        }
+      )
+    }
   }
 
   ngOnDestroy()

@@ -20,11 +20,11 @@ export function getCwimpieProperty(object:Object, propertyName:string,
             case "photo":
             case "birthdate":
                 return newPropertyValue
-            case "partnerId":
+            case "partnerName":
                 return cwimpieService.getCwimpie(<string> newPropertyValue)
-            case "colourId":
+            case "colour":
                 return colourService.getColourOrCreate(<IColour> newPropertyValue)
-            case "speciesId":
+            case "species":
                 return speciesService.getSpeciesOrCreate(<ISpecies>newPropertyValue)
             case "favourites":
                 return favouriteService.getFavouriteOrCreate(<IFavourite>newPropertyValue)
@@ -32,9 +32,9 @@ export function getCwimpieProperty(object:Object, propertyName:string,
                 return professionService.getProfessionOrCreate(<IProfession>newPropertyValue)
             case "hobbies":
                 return hobbyService.getHobbyOrCreate(<IHobby>newPropertyValue)
-            case "primaryParentId":
+            case "primaryParent":
                 return userService.getUser(<IUser>newPropertyValue)
-            case "stampId":
+            case "stamp":
                 return stampService.getStampOrCreate(<IStamp>newPropertyValue)
         }
     }
