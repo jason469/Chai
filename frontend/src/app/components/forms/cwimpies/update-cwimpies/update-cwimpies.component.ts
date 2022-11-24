@@ -46,13 +46,13 @@ export class UpdateCwimpiesComponent implements OnInit {
                   required: true,
                 }
               },
-              // {
-              //   key: 'photo',
-              //   type: 'file',
-              //   templateOptions: {
-              //     multiple: true
-              //   },
-              // },
+              {
+                key: 'photo',
+                type: 'file',
+                templateOptions: {
+                  multiple: true
+                },
+              },
               {
                 key: 'birthdate',
                 type: 'datepicker',
@@ -344,34 +344,32 @@ export class UpdateCwimpiesComponent implements OnInit {
 
   fill_update_field(field: any, value: any) {
     if (field.formControl != undefined) {
-      let patchValue
-      patchValue = (typeof value == "string") ? value : value[field.key]
-      field.formControl!.patchValue(patchValue)
+      if (value != undefined) {
+        let patchValue = (typeof value == "string") ? value : value[field.key]
+        field.formControl!.patchValue(patchValue)
+      }
     } else {
       console.log(`${field} formControl is undefined`)
     }
     return
   }
 
-  search_form_for_fields(searchFields: any, value: any, key: any, parentKey = "") {  // If parent key isnt empty, search for parent first and then key. If no parent key, then just stearch for key
-    if (parentKey != "") {  // The key name is not unique and so we need to find the parent first (which is unique)
-      for (let field of searchFields) {
-        if (field.key == parentKey) {  // Found the parent field
-          console.log(`parent field is ${field} with key ${parentKey}`)
-          this.search_form_for_fields(field.fieldGroup, value, key)
+  search_form_for_fields(rootField: any, key: any) {
+    let queue = rootField.slice() // This is a queue of fields to check
+    let currentField;
+
+    while (true) {
+      currentField = queue.shift()
+      if (currentField.key != undefined) {  // Is a field
+        if (currentField.key == key) {  // Found the field
+          queue.length = 0
+          return currentField
         }
-      }
-    } else {  // We know that the key name is unique and can just walk through the form
-      for (let field of searchFields) {
-        if (field.key) {  // Should just have a fieldGroup if no key
-          if (field.key == key) {  // Current field is the correct field
-            this.fill_update_field(field, value)
-            return
-          } else if (field.fieldGroup) {  // Current field incorrect, search another level down
-            this.search_form_for_fields(field.fieldGroup, value, key, parentKey)
+      } else {
+        if (currentField.fieldGroup) {
+          for (let newField of currentField.fieldGroup) {
+            queue.push(newField)
           }
-        } else if (field.fieldGroup) {
-          this.search_form_for_fields(field.fieldGroup, value, key, parentKey)
         }
       }
     }
@@ -381,44 +379,50 @@ export class UpdateCwimpiesComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    const blackListedKeys = ["_id", "_v", "hexCode"]
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
         this.initialData = data
-        console.log(this.initialData)
-        console.log(this.fields[0].fieldGroup)
-        let allSections = this.fields[0].fieldGroup
+        const rootField = [this.fields[0]]
         for (const [key, value] of Object.entries(this.initialData)) {
           if (key !== "cwimpieId" && key != "newColour") {  // List of keys to ignore from Cwimpie object
             if (Array.isArray(value)) {  // List of objects
-              for (const singleValue of value) {
-                for (const [nestedKey, nestedValue] of Object.entries(singleValue)) {
-                  if (nestedKey != "_id") {
-                    console.log('list', nestedKey, key, value)
-                    this.search_form_for_fields(allSections, nestedValue, nestedKey, key)
+              let parentField = this.search_form_for_fields(rootField, key)
+              if (parentField.fieldGroup.length != 0) {
+                for (const singleValue of value) {
+                  for (const [nestedKey, nestedValue] of Object.entries(singleValue)) {
+                    if (!blackListedKeys.includes(nestedKey)) {
+                      let childField = this.search_form_for_fields(parentField.fieldGroup[0].fieldGroup, nestedKey)
+                      this.fill_update_field(childField, nestedValue)
+                    }
                   }
                 }
               }
             } else if (typeof value == "object") {  // 1+ nested objects
               for (const [nestedKey, nestedValue] of Object.entries(value)) {
-                if (nestedKey != "_id") {
+                if (!blackListedKeys.includes(nestedKey)) {
                   if (typeof value[nestedKey] == "string") { // 1 nested object
-                    console.log('1nested', nestedKey, key, value)
-                    this.search_form_for_fields(allSections, value, nestedKey, key)
-                    break
+                    let parentField = this.search_form_for_fields(rootField, key)
+                    let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
+                    this.fill_update_field(childField, nestedValue)
                   } else {  // 2 + nested objects
                     // @ts-ignore
                     for (const [nestedNestedKey, nestedNestedValue] of Object.entries(nestedValue)) {
-                      if (nestedNestedKey != "_id") {
-                        console.log('2+nested', nestedNestedKey, nestedKey, nestedNestedValue)
-                        this.search_form_for_fields(allSections, nestedNestedValue, nestedNestedKey, key)
+                      if (!blackListedKeys.includes(nestedNestedKey)) {
+                        console.log('2+ nested', nestedNestedKey, nestedKey)
+                        let parentField = this.search_form_for_fields(rootField, key)
+                        let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
+                        let grandChildField = this.search_form_for_fields(childField.fieldGroup, nestedNestedKey)
+                        console.log(grandChildField)
+                        this.fill_update_field(grandChildField, nestedNestedValue)
                       }
                     }
                   }
                 }
               }
             } else { // 0 nested objects
-              console.log('0nested', key, value)
-              this.search_form_for_fields(allSections, value, key)
+              let field = this.search_form_for_fields(rootField, key)
+              this.fill_update_field(field, value)
             }
           }
         }

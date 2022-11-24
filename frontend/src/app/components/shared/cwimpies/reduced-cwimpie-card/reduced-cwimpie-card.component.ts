@@ -30,8 +30,36 @@ export class ReducedCwimpieCardComponent implements OnInit {
     this.modalRef = this.modalService.show(FullCwimpieModalComponent)
   }
 
+
   public updateCwimpieModal(): void {
-    this.cwimpieUpdateDataService.changeData(this.data)
+    let updateCwimpieData:Cwimpie = {
+      birthdate: this.data.birthdate!,
+      colour: {
+        name: this.data.colour!.name
+      },
+      favourites: this.data.favourites!,
+      hobbies: this.data.hobbies!,
+      name: this.data.name,
+      partnerName: this.data.partnerName!,
+      photo: this.data.photo,
+      primaryParent: {
+        name: this.data.primaryParent!.name
+      },
+      professions: this.data.professions,
+      species: {
+        name: this.data.species!.name
+      },
+      stamp: {
+        primary_colour: {
+          name: this.data.stamp!.primary_colour!.name
+        },
+        accent_colour: {
+          name: this.data.stamp!.accent_colour!.name
+        },
+        font: this.data.stamp!.font,
+      }
+    }
+    this.cwimpieUpdateDataService.changeData(updateCwimpieData)
     this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
   }
 
