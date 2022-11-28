@@ -2,6 +2,7 @@ import {IColour, ICountry, IFavourite, IHobby, IProfession, ISpecies, IStamp, IU
 
 export interface INewCwimpieData {
     name: string,
+    sex: string,
     colour: IColour,
     species: ISpecies,
     user?: string,

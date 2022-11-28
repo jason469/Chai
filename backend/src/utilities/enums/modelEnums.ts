@@ -19,3 +19,8 @@ export enum FontChoices {
     Arial = 'Arial',
     Calibri = 'Calibri'
 }
+
+export enum CwimpieSexes {
+    Male = 'Male',
+    Female = 'Female'
+}

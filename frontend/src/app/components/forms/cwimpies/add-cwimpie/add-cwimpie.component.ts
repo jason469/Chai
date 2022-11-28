@@ -60,6 +60,18 @@ export class AddCwimpieComponent implements OnInit {
                     }
                   },
                   {
+                    key: 'sex',
+                    type: 'select',
+                    props: {
+                      label: 'Sex',
+                      required: true,
+                      options: [
+                        { label: 'Male', value: 'Male' },
+                        { label: 'Female', value: 'Female' },
+                      ],
+                    },
+                  },
+                  {
                     key: 'birthdate',
                     type: 'datepicker',
                     defaultValue: new Date(),

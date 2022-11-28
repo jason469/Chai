@@ -56,6 +56,18 @@ export class UpdateCwimpiesComponent implements OnInit {
                 },
               },
               {
+                key: 'sex',
+                type: 'select',
+                props: {
+                  label: 'Sex',
+                  required: true,
+                  options: [
+                    { label: 'Male', value: 'Male' },
+                    { label: 'Female', value: 'Female' },
+                  ],
+                },
+              },
+              {
                 key: 'birthdate',
                 type: 'datepicker',
                 defaultValue: new Date(),
@@ -344,88 +356,14 @@ export class UpdateCwimpiesComponent implements OnInit {
     ];
   }
 
-  fill_update_field(field: any, value: any) {
-    if (field.formControl != undefined) {
-      if (value != undefined) {
-        let patchValue = (typeof value == "string") ? value : value[field.key]
-        field.formControl!.patchValue(patchValue)
-      }
-    } else {
-      console.log(`${field} formControl is undefined`)
-    }
-    return
-  }
-
-  search_form_for_fields(rootField: any, key: any) {
-    let queue = rootField.slice() // This is a queue of fields to check
-    let currentField;
-
-    while (true) {
-      currentField = queue.shift()
-      if (currentField.key != undefined) {  // Is a field
-        if (currentField.key == key) {  // Found the field
-          queue.length = 0
-          return currentField
-        }
-      } else {
-        if (currentField.fieldGroup) {
-          for (let newField of currentField.fieldGroup) {
-            queue.push(newField)
-          }
-        }
-      }
-    }
-  }
-
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    const blackListedKeys = ["_id", "_v", "hexCode"]
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
         this.initialData = data
-        const rootField = [this.fields[0]]
-        for (const [key, value] of Object.entries(this.initialData)) {
-          if (key !== "cwimpieId" && key != "newColour") {  // List of keys to ignore from Cwimpie object
-            if (Array.isArray(value)) {  // List of objects
-              let parentField = this.search_form_for_fields(rootField, key)
-              if (parentField.fieldGroup.length != 0) {
-                for (const singleValue of value) {
-                  for (const [nestedKey, nestedValue] of Object.entries(singleValue)) {
-                    if (!blackListedKeys.includes(nestedKey)) {
-                      let childField = this.search_form_for_fields(parentField.fieldGroup[0].fieldGroup, nestedKey)
-                      this.fill_update_field(childField, nestedValue)
-                    }
-                  }
-                }
-              }
-            } else if (typeof value == "object") {  // 1+ nested objects
-              for (const [nestedKey, nestedValue] of Object.entries(value)) {
-                if (!blackListedKeys.includes(nestedKey)) {
-                  if (typeof value[nestedKey] == "string") { // 1 nested object
-                    let parentField = this.search_form_for_fields(rootField, key)
-                    let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
-                    this.fill_update_field(childField, nestedValue)
-                  } else {  // 2 + nested objects
-                    // @ts-ignore
-                    for (const [nestedNestedKey, nestedNestedValue] of Object.entries(nestedValue)) {
-                      if (!blackListedKeys.includes(nestedNestedKey)) {
-                        let parentField = this.search_form_for_fields(rootField, key)
-                        let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
-                        let grandChildField = this.search_form_for_fields(childField.fieldGroup, nestedNestedKey)
-                        this.fill_update_field(grandChildField, nestedNestedValue)
-                      }
-                    }
-                  }
-                }
-              }
-            } else { // 0 nested objects
-              let field = this.search_form_for_fields(rootField, key)
-              this.fill_update_field(field, value)
-            }
-          }
-        }
+        this.model = this.initialData
       }
     });
   }
@@ -492,3 +430,88 @@ export class UpdateCwimpiesComponent implements OnInit {
   }
 
 }
+
+
+// Archived code which replicates the update functionality using a custom search function
+// fill_update_field(field: any, value: any) {
+//   if (field.formControl != undefined) {
+//     if (value != undefined) {
+//       let patchValue = (typeof value == "string") ? value : value[field.key]
+//       field.formControl!.patchValue(patchValue)
+//     }
+//   } else {
+//     console.log(`${field} formControl is undefined`)
+//   }
+//   return
+// }
+//
+// search_form_for_fields(rootField: any, key: any) {
+//   let queue = rootField.slice() // This is a queue of fields to check
+//   let currentField;
+//
+//   while (true) {
+//     currentField = queue.shift()
+//     if (currentField.key != undefined) {  // Is a field
+//       if (currentField.key == key) {  // Found the field
+//         queue.length = 0
+//         return currentField
+//       }
+//     } else {
+//       if (currentField.fieldGroup) {
+//         for (let newField of currentField.fieldGroup) {
+//           queue.push(newField)
+//         }
+//       }
+//     }
+//   }
+// }
+//
+// ngAfterViewInit(): void {
+//   const blackListedKeys = ["_id", "_v", "hexCode"]
+//   this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
+//     next: (data: Cwimpie) => {
+//       this.initialData = data
+//       const rootField = [this.fields[0]]
+//       for (const [key, value] of Object.entries(this.initialData)) {
+//         if (key !== "cwimpieId" && key != "newColour") {  // List of keys to ignore from Cwimpie object
+//           if (Array.isArray(value)) {  // List of objects
+//             let parentField = this.search_form_for_fields(rootField, key)
+//             if (parentField.fieldGroup.length != 0) {
+//               for (const singleValue of value) {
+//                 for (const [nestedKey, nestedValue] of Object.entries(singleValue)) {
+//                   if (!blackListedKeys.includes(nestedKey)) {
+//                     let childField = this.search_form_for_fields(parentField.fieldGroup[0].fieldGroup, nestedKey)
+//                     this.fill_update_field(childField, nestedValue)
+//                   }
+//                 }
+//               }
+//             }
+//           } else if (typeof value == "object") {  // 1+ nested objects
+//             for (const [nestedKey, nestedValue] of Object.entries(value)) {
+//               if (!blackListedKeys.includes(nestedKey)) {
+//                 if (typeof value[nestedKey] == "string") { // 1 nested object
+//                   let parentField = this.search_form_for_fields(rootField, key)
+//                   let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
+//                   this.fill_update_field(childField, nestedValue)
+//                 } else {  // 2 + nested objects
+//                   // @ts-ignore
+//                   for (const [nestedNestedKey, nestedNestedValue] of Object.entries(nestedValue)) {
+//                     if (!blackListedKeys.includes(nestedNestedKey)) {
+//                       let parentField = this.search_form_for_fields(rootField, key)
+//                       let childField = this.search_form_for_fields(parentField.fieldGroup, nestedKey)
+//                       let grandChildField = this.search_form_for_fields(childField.fieldGroup, nestedNestedKey)
+//                       this.fill_update_field(grandChildField, nestedNestedValue)
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           } else { // 0 nested objects
+//             let field = this.search_form_for_fields(rootField, key)
+//             this.fill_update_field(field, value)
+//           }
+//         }
+//       }
+//     }
+//   });
+// }

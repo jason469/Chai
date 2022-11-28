@@ -26,6 +26,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
           let cwimpieData: Cwimpie = {
             cwimpieId: data._id,
             name: data.name,
+            sex: data.sex,
             birthdate: data.birthdate,
             colour: data.colourId,
             species: data.speciesId,

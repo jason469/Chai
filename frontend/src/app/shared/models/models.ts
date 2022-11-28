@@ -1,6 +1,7 @@
 export class Cwimpie {
   cwimpieId?: string = "";
   name: string = "";
+  sex?: string = "";
   birthdate?: string = "";
   colour?: Colour = new Colour();
   newColour?: Colour = new Colour();

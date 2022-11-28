@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import {cascadeDelete} from "../utilities/functions/misc";
+import {CwimpieSexes} from "../utilities/enums/modelEnums";
 const DailySchedule = require("./DailySchedule");
 const Stamp = require("./Stamp");
 
@@ -12,6 +13,12 @@ const CwimpieSchema = new mongoose.Schema(
         },
         photo: {
             type: String,
+        },
+        sex: {
+            type: String,
+            required: true,
+            enum: Object.values(CwimpieSexes),
+            default: CwimpieSexes.Male
         },
         birthdate: {
             type: Date

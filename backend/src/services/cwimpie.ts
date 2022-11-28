@@ -103,6 +103,7 @@ module.exports = class CwimpieService {
 
         const cwimpie = new Cwimpie({
             name: cwimpieData.name,
+            sex: cwimpieData.sex,
             colourId: await colourService.getColourOrCreate(cwimpieData.colour),
             speciesId: await speciesService.getSpeciesOrCreate(cwimpieData.species),
             favourites: favourites,
@@ -140,7 +141,7 @@ module.exports = class CwimpieService {
 
     static async updateCwimpie(cwimpie: typeof Cwimpie, updateData: IUpdateCwimpieData) {
         console.log(updateData)
-        const cwimpieFields = ["birthdate", "photo"]  // Fields that only exist on a cwimpie object
+        const cwimpieFields = ["birthdate", "photo", "sex"]  // Fields that only exist on a cwimpie object
         const arrayFields = ["favourites", "professions", "hobbies"]  // Fields on a cwimpie object that exists as a list
         const objectFields = ["colour", "species", "primaryParent", "partnerName", "stamp"] // Fields on a cwimpie object that exists as FK relationships
         const ignoreFields = ["cwimpieId", "name", "user", "token", "dailyScheduleId"] //Fields on updateData that should be ignored
