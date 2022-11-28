@@ -151,8 +151,11 @@ export class AddCwimpieComponent implements OnInit {
                   {
                     key: 'partnerName',
                     type: 'select',
-                    templateOptions: {
+                    props: {
                       label: 'Partner',
+                      required: false,
+                    },
+                    templateOptions: {
                       options: [],
                       description: `Lovers ♥ !!`,
                     },
@@ -167,8 +170,11 @@ export class AddCwimpieComponent implements OnInit {
                         key: 'name',
                         type: 'select',
                         templateOptions: {
-                          label: 'Colour',
                           options: [],
+                        },
+                        props: {
+                          label: 'Colour',
+                          required: true,
                         },
                         hooks: {
                           onInit: (field) => this.cwimpieFormService.getColours(field)
@@ -183,7 +189,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'name',
                         type: 'input',
-                        templateOptions: {
+                        props: {
                           label: 'New colour\'s name',
                           required: false,
                         },
@@ -194,7 +200,7 @@ export class AddCwimpieComponent implements OnInit {
                       {
                         key: 'hexCode',
                         type: 'input',
-                        templateOptions: {
+                        props: {
                           label: 'New colour\'s hex code',
                           required: false,
                         },
@@ -215,8 +221,10 @@ export class AddCwimpieComponent implements OnInit {
                         type: 'select',
                         defaultValue: "Bunny",
                         templateOptions: {
-                          label: 'Species',
                           options: [],
+                        },
+                        props: {
+                          label: 'Species',
                           required: true,
                         },
                         hooks: {
@@ -232,8 +240,10 @@ export class AddCwimpieComponent implements OnInit {
                         key: 'name',
                         type: 'select',
                         templateOptions: {
-                          label: 'Primary Parent',
                           options: [],
+                        },
+                        props: {
+                          label: 'Primary Parent',
                           required: true,
                         },
                         hooks: {
@@ -373,21 +383,21 @@ export class AddCwimpieComponent implements OnInit {
     let newColourGroup = firstPage!.find(obj => obj.key == "newColour")
     if (this.addNewColour) { // If addNewColour is true, then we don't want to add a new colour
       colourField!.formControl!.patchValue({name: ""})
-      colourField!.templateOptions!.disabled = false
-      colourField!.templateOptions!.required = true
+      colourField!.props!.disabled = false
+      colourField!.props!.required = true
       newColourGroup!.fieldGroup?.forEach((field) => {
         field.formControl?.patchValue("")
-        field.templateOptions!.disabled = true
-        field.templateOptions!.required = false
+        field.props!.disabled = true
+        field.props!.required = false
       })
       this.addNewColour = false
     } else {  // We do want to add a new colour
       colourField!.formControl!.patchValue({name: ""})
-      colourField!.templateOptions!.disabled = true
-      colourField!.templateOptions!.required = false
+      colourField!.props!.disabled = true
+      colourField!.props!.required = false
       newColourGroup!.fieldGroup?.forEach((field) => {
-        field.templateOptions!.disabled = false
-        field.templateOptions!.required = true
+        field.props!.disabled = false
+        field.props!.required = true
       })
       this.addNewColour = true
     }
