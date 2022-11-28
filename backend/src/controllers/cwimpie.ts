@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
 import {activityNames, cwimpieNames, favouriteNames} from "../utilities/randomValues/cwimpieValues";
-const upload = require("../middlewares/upload.mid");
 
 const CwimpieService = require('../services/cwimpie')
 const _ = require('lodash');
@@ -56,10 +55,8 @@ module.exports = class CwimpieController {
             const url = req.protocol + '://' + req.get('host')
             const photoName = req.file?.filename
             const cwimpieName = req.params.cwimpieName
-            let cwimpie = await CwimpieService.getCwimpie(cwimpieName);
-            if (cwimpie) {
-                cwimpie.photo = url + '/public/media/' + photoName
-                cwimpie.save()
+            const addPhotoSuccess = await CwimpieService.addCwimpiePhoto(url, photoName, cwimpieName)
+            if (addPhotoSuccess) {
                 res.status(200).json({msg: `${cwimpieName} now has a photo!`})
                 return
             } else {

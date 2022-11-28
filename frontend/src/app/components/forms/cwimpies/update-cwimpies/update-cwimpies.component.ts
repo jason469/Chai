@@ -43,8 +43,10 @@ export class UpdateCwimpiesComponent implements OnInit {
                 type: 'input',
                 props: {
                   label: 'Cwimpie\'s name!',
-                  required: true,
-                }
+                },
+                expressionProperties: {
+                  'templateOptions.disabled': "true",
+                },
               },
               {
                 key: 'photo',

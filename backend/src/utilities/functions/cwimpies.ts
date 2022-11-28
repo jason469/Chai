@@ -1,4 +1,5 @@
 import {IColour, IFavourite, IHobby, IProfession, ISpecies, IStamp, IUser} from "../interfaces/modelInterfaces";
+import {TNewPropertyValue} from "../interfaces/cwimpieInterfaces"
 
 const colourService = require('../../services/colour')
 const speciesService = require('../../services/species')
@@ -8,34 +9,35 @@ const hobbyService = require('../../services/hobby')
 const stampService = require('../../services/stamp')
 const userService = require('../../services/user')
 const cwimpieService = require('../../services/cwimpie')
-import {TNewPropertyValue} from "../interfaces/cwimpieInterfaces"
 
-export function getCwimpieProperty(object:Object, propertyName:string,
-                                      newPropertyValue:TNewPropertyValue) {
-    type ObjectKey = keyof typeof object;
-    const property = propertyName as ObjectKey;
-    if (object[property] !== undefined) {
-        switch (propertyName) {
-            case "name":
-            case "photo":
-            case "birthdate":
-                return newPropertyValue
-            case "partnerName":
-                return cwimpieService.getCwimpie(<string> newPropertyValue)
-            case "colour":
-                return colourService.getColourOrCreate(<IColour> newPropertyValue)
-            case "species":
-                return speciesService.getSpeciesOrCreate(<ISpecies>newPropertyValue)
-            case "favourites":
-                return favouriteService.getFavouriteOrCreate(<IFavourite>newPropertyValue)
-            case "professions":
-                return professionService.getProfessionOrCreate(<IProfession>newPropertyValue)
-            case "hobbies":
-                return hobbyService.getHobbyOrCreate(<IHobby>newPropertyValue)
-            case "primaryParent":
-                return userService.getUser(<IUser>newPropertyValue)
-            case "stamp":
-                return stampService.getStampOrCreate(<IStamp>newPropertyValue)
-        }
+export async function getCwimpieProperty(propertyName: string, newPropertyValue: TNewPropertyValue) {
+    switch (propertyName) {
+        case "name":
+        case "photo":
+        case "birthdate":
+            return newPropertyValue
+        case "partnerName":
+            if (newPropertyValue === "") {
+                return ""
+            } else {
+                let cwimpie = await cwimpieService.getCwimpie(<string>newPropertyValue)
+                console.log('cwimpie', cwimpie)
+                return cwimpie.name
+            }
+        case "colour":
+            return await colourService.getColourOrCreate(<IColour>newPropertyValue)
+        case "species":
+            return await speciesService.getSpeciesOrCreate(<ISpecies>newPropertyValue)
+        case "favourites":
+            return await favouriteService.getFavouriteOrCreate(<IFavourite>newPropertyValue)
+        case "professions":
+            return await professionService.getProfessionOrCreate(<IProfession>newPropertyValue)
+        case "hobbies":
+            return await hobbyService.getHobbyOrCreate(<IHobby>newPropertyValue)
+        case "primaryParent":
+            return await userService.getUser(<IUser>newPropertyValue)
+        case "stamp":
+            console.log('stamp')
+            return await stampService.getStampOrCreate(<IStamp>newPropertyValue)
     }
 }
