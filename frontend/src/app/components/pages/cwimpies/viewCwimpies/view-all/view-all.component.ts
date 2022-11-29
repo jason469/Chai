@@ -38,7 +38,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             photo: data.photo
           }
           if (data.partnerId) {
-            cwimpieData.partnerName = data.partnerId.name
+            cwimpieData.partner = data.partnerId.name
           }
           this.allCwimpies.push(cwimpieData)
         }

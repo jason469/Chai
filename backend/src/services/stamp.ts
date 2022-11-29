@@ -19,7 +19,6 @@ module.exports = class StampService {
 
     static async getStampOrCreate(data: IStamp) {
         try {
-            console.log(data)
             const primary_colour = await colourService.getColourOrCreate(data.primary_colour)
             const accent_colour = await colourService.getColourOrCreate(data.accent_colour)
             let stamp = await Stamp.findOne({
@@ -29,7 +28,6 @@ module.exports = class StampService {
             })
                 .populate('primary_colour')
                 .populate('accent_colour');
-            console.log(stamp)
             if (!stamp) {
                 stamp = new Stamp({
                     primary_colour: primary_colour,
@@ -38,6 +36,7 @@ module.exports = class StampService {
                 })
                 await stamp.save()
             }
+            // console.log(stamp)
             return stamp
         } catch (error) {
             console.log(`Could not create stamp ${error}`)

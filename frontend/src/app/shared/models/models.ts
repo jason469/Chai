@@ -10,7 +10,7 @@ export class Cwimpie {
   professions?: Profession[] = [];
   hobbies?: Hobby[] = [];
   primaryParent?: User = new User();
-  partnerName?: string = "";
+  partner?: string = "";
   stamp?: Stamp = new Stamp()
   dailyScheduleId?: DailySchedule[] = [];
   photo?: any;

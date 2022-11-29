@@ -41,7 +41,7 @@ export class ReducedCwimpieCardComponent implements OnInit {
       hobbies: this.data.hobbies!,
       name: this.data.name,
       sex: this.data.sex,
-      partnerName: this.data.partnerName!,
+      partner: this.data.partner,
       photo: this.data.photo,
       primaryParent: {
         name: this.data.primaryParent!.name

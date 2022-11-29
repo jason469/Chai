@@ -10,20 +10,18 @@ const stampService = require('../../services/stamp')
 const userService = require('../../services/user')
 const cwimpieService = require('../../services/cwimpie')
 
+const Cwimpie = require('../../models/Cwimpie')
+
+
 export async function getCwimpieProperty(propertyName: string, newPropertyValue: TNewPropertyValue) {
     switch (propertyName) {
         case "name":
         case "photo":
         case "birthdate":
             return newPropertyValue
-        case "partnerName":
-            if (newPropertyValue === "") {
-                return ""
-            } else {
-                let cwimpie = await cwimpieService.getCwimpie(<string>newPropertyValue)
-                console.log('cwimpie', cwimpie)
-                return cwimpie.name
-            }
+        case "partner":
+            console.log(newPropertyValue)
+            return Cwimpie.findOne({name: <string>newPropertyValue});
         case "colour":
             return await colourService.getColourOrCreate(<IColour>newPropertyValue)
         case "species":
@@ -37,7 +35,6 @@ export async function getCwimpieProperty(propertyName: string, newPropertyValue:
         case "primaryParent":
             return await userService.getUser(<IUser>newPropertyValue)
         case "stamp":
-            console.log('stamp')
             return await stampService.getStampOrCreate(<IStamp>newPropertyValue)
     }
 }

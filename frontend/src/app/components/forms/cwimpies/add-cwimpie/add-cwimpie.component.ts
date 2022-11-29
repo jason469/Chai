@@ -5,6 +5,7 @@ import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.serv
 import {Cwimpie} from "../../../../shared/models/models";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-cwimpie',
@@ -25,6 +26,7 @@ export class AddCwimpieComponent implements OnInit {
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -78,8 +80,10 @@ export class AddCwimpieComponent implements OnInit {
                     props: {
                       label: 'Birthday',
                       required: true,
-                      description: "MM/DD/YYYY"
+                      description: "MM/DD/YYYY",
                     },
+                    templateOptions: {
+                    }
                   },
                   {
                     key: 'stamp',
@@ -149,7 +153,7 @@ export class AddCwimpieComponent implements OnInit {
                 className: 'addCwimpies_page1__right',
                 fieldGroup: [
                   {
-                    key: 'partnerName',
+                    key: 'partner',
                     type: 'select',
                     props: {
                       label: 'Partner',
@@ -447,7 +451,6 @@ export class AddCwimpieComponent implements OnInit {
     this.fillDefaultValues(nameField, "name")
   }
 
-
   submit() {
     if (this.addNewColour) {
       this.model.colour = this.model.newColour
@@ -464,12 +467,12 @@ export class AddCwimpieComponent implements OnInit {
             photoData, this.model.name
           ).subscribe(
             (responseData: any) => {
-              console.log('photo added')
-              // this.form.reset()
+              this.form.reset()
               this.toastrService.success(
                 `Yayyy well done`,
                 `${this.model.name} was created`
               );
+              this.router.navigate(['/cwimpies/view-cwimpies'])
             }
           )
         }, error => {
@@ -488,8 +491,5 @@ export class AddCwimpieComponent implements OnInit {
         }
       )
     }
-    // else {
-    //   validateAllFormFields(this.form)
-    // }
   }
 }

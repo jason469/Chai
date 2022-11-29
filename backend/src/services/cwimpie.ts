@@ -1,6 +1,5 @@
 import {INewCwimpieData, IUpdateCwimpieData} from "../utilities/interfaces/cwimpieInterfaces";
 import {IFavourite, IHobby, IProfession} from "../utilities/interfaces/modelInterfaces";
-import {getPropertyFromObject} from "../utilities/functions/misc";
 import {getCwimpieProperty} from "../utilities/functions/cwimpies";
 
 const Cwimpie = require('../models/Cwimpie')
@@ -12,6 +11,7 @@ const professionService = require('../services/profession')
 const hobbyService = require('../services/hobby')
 const stampService = require('../services/stamp')
 const userService = require('../services/user')
+const sexService = require('../services/sex')
 
 
 module.exports = class CwimpieService {
@@ -60,7 +60,6 @@ module.exports = class CwimpieService {
 
     static async getCwimpie(name: string) {
         try {
-            console.log('name', name)
             const cwimpie = await Cwimpie.findOne({name: name})
                 .populate('colourId')
                 .populate('speciesId')
@@ -113,8 +112,8 @@ module.exports = class CwimpieService {
             birthdate: new Date(cwimpieData.birthdate),
             primaryParentId: await userService.getUser(cwimpieData.primaryParent)
         })
-        if (cwimpieData.partnerName) {
-            const partner_cwimpie = await this.getCwimpie(cwimpieData.partnerName)
+        if (cwimpieData.partner) {
+            const partner_cwimpie = await this.getCwimpie(cwimpieData.partner)
             if (partner_cwimpie) {
                 cwimpie.partnerId = partner_cwimpie
             }
@@ -140,21 +139,18 @@ module.exports = class CwimpieService {
     }
 
     static async updateCwimpie(cwimpie: typeof Cwimpie, updateData: IUpdateCwimpieData) {
-        console.log(updateData)
-        const cwimpieFields = ["birthdate", "photo", "sex"]  // Fields that only exist on a cwimpie object
+        const ignoreFields = ["cwimpieId", "name", "user", "token", "dailyScheduleId", "photo"] // Fields on updateData that should be ignored
+        const cwimpieFields = ["birthdate", "sex"]  // Fields that only exist on a cwimpie object
         const arrayFields = ["favourites", "professions", "hobbies"]  // Fields on a cwimpie object that exists as a list
-        const objectFields = ["colour", "species", "primaryParent", "partnerName", "stamp"] // Fields on a cwimpie object that exists as FK relationships
-        const ignoreFields = ["cwimpieId", "name", "user", "token", "dailyScheduleId"] //Fields on updateData that should be ignored
+        const objectFields = ["colour", "species", "primaryParent", "stamp", "partner"] // Fields on a cwimpie object that exists as FK relationships
 
         for (const [key, value] of Object.entries(updateData)) {
-            console.log(key)
             let cwimpieKey:string = key
             let newValue:any;
             if (ignoreFields.includes(key)) {
                 continue
             } else if (cwimpieFields.includes(key)) {
-                newValue = value
-                console.log(value)
+                newValue = (key == "sex") ? await sexService.getSex(value) : value
             } else if (arrayFields.includes(key)) {
                 let newArray = []
                 for (const currentObject of value) {
@@ -167,7 +163,6 @@ module.exports = class CwimpieService {
                 cwimpieKey = `${key}Id`
             }
             cwimpie[cwimpieKey] = newValue
-            console.log(key, newValue)
         }
         await cwimpie.save()
     }

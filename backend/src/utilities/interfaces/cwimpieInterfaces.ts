@@ -13,7 +13,7 @@ export interface INewCwimpieData {
     hobbies: IHobby[],
     stamp: IStamp,
     primaryParent: IUser,
-    partnerName?: string,
+    partner?: string,
 }
 
 export interface IUpdateCwimpieData {

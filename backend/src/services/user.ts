@@ -3,7 +3,6 @@ import {INewUser} from "../utilities/interfaces/newUserData";
 
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User')
-const Country = require('../models/Country')
 const CountryService = require('../services/country')
 
 module.exports = class UserService {

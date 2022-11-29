@@ -55,12 +55,17 @@ module.exports = class CwimpieController {
             const url = req.protocol + '://' + req.get('host')
             const photoName = req.file?.filename
             const cwimpieName = req.params.cwimpieName
-            const addPhotoSuccess = await CwimpieService.addCwimpiePhoto(url, photoName, cwimpieName)
-            if (addPhotoSuccess) {
-                res.status(200).json({msg: `${cwimpieName} now has a photo!`})
-                return
+            if (photoName != undefined) {
+                const addPhotoSuccess = await CwimpieService.addCwimpiePhoto(url, photoName, cwimpieName)
+                if (addPhotoSuccess) {
+                    res.status(200).json({msg: `${cwimpieName} now has a photo!`})
+                    return
+                } else {
+                    res.status(400).json({msg: `${cwimpieName} doesnt exist!`})
+                    return
+                }
             } else {
-                res.status(400).json({msg: `${cwimpieName} doesnt exist!`})
+                res.status(200).json({msg: `${cwimpieName} has kept its old photo!`})
                 return
             }
         } catch (error) {
@@ -79,6 +84,7 @@ module.exports = class CwimpieController {
             } else {
                 await CwimpieService.updateCwimpie(cwimpie, updateCwimpieData)
             }
+            console.log(`returning cwimpie is ${cwimpie}`)
             res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
             return
         } catch (error) {
@@ -102,7 +108,7 @@ module.exports = class CwimpieController {
         try {
             let valueType = req.params.valueType;
             let randomValue = ""
-            switch(valueType) {
+            switch (valueType) {
                 case "name":
                     randomValue = _.sample(cwimpieNames);
                     break

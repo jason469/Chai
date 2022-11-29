@@ -6,6 +6,7 @@ import {Cwimpie} from "../../../../shared/models/models";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpdateData.service";
+import {BsModalService} from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-update-cwimpie',
@@ -25,6 +26,7 @@ export class UpdateCwimpiesComponent implements OnInit {
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
     private cwimpieUpdateDataService: CwimpieUpdateDataService,
+    private modalService: BsModalService,
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -62,8 +64,8 @@ export class UpdateCwimpiesComponent implements OnInit {
                   label: 'Sex',
                   required: true,
                   options: [
-                    { label: 'Male', value: 'Male' },
-                    { label: 'Female', value: 'Female' },
+                    {label: 'Male', value: 'Male'},
+                    {label: 'Female', value: 'Female'},
                   ],
                 },
               },
@@ -145,7 +147,7 @@ export class UpdateCwimpiesComponent implements OnInit {
             className: 'addCwimpies_page1__right',
             fieldGroup: [
               {
-                key: 'partnerName',
+                key: 'partner',
                 type: 'select',
                 templateOptions: {
                   label: 'Partner',
@@ -400,16 +402,24 @@ export class UpdateCwimpiesComponent implements OnInit {
       this.model.colour = this.model.newColour
     }
     delete this.model.newColour
-    console.log(this.model)
     if (this.form.valid) {
       this.cwimpieFormService.updateCwimpieData(
         this.model, this.initialData.name
       ).subscribe(
-        (responseData:any) => {
-          this.toastrService.success(
-            `Yayyy well done`,
-            `${responseData.name} was updated`
-          );
+        (responseData: any) => {
+          let photoData = new FormData();
+          photoData.append('photo', this.model.photo[0]);
+          this.cwimpieFormService.postCwimpiePhoto(
+            photoData, this.model.name
+          ).subscribe(
+            (responseData: any) => {
+              this.toastrService.success(
+                `Yayyy well done`,
+                `${this.model.name} was updated`
+              );
+              this.modalService.hide()
+            }
+          )
         }, errorMessage => {
           this.toastrService.warning(
             `${JSON.stringify(errorMessage)}`,
