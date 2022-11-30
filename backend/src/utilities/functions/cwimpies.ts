@@ -32,7 +32,8 @@ export async function getCwimpieProperty(propertyName: string, newPropertyValue:
         case "hobbies":
             return await hobbyService.getHobbyOrCreate(<IHobby>newPropertyValue)
         case "primaryParent":
-            return await userService.getUser(<string>newPropertyValue)
+            let name = (<IUser>newPropertyValue).name
+            return await userService.getUser(name, "name")
         case "stamp":
             return await stampService.getStampOrCreate(<IStamp>newPropertyValue)
     }
