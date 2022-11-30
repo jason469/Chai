@@ -12,7 +12,7 @@ import {IBirthdayCwimpie} from "../../../shared/interfaces/IBirthdayCwimpie";
 export class StartComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getBirthdayCwimpiesSub: Subscription | undefined;
-  allBirthdayCwimpies: Cwimpie[] = [];
+  allBirthdayCwimpies: IBirthdayCwimpie[] = [];
 
   constructor(
     private startPageService: StartPageService
@@ -26,7 +26,8 @@ export class StartComponent implements OnInit, OnDestroy {
           let birthdayCwimpie:IBirthdayCwimpie = {
             name: birthdayCwimpieData.name,
             birthdate: birthdayCwimpieData.birthdate,
-            photo: birthdayCwimpieData.photo
+            photo: birthdayCwimpieData.photo,
+            sex: birthdayCwimpieData.sex
           }
           this.allBirthdayCwimpies.push(birthdayCwimpie)
         }

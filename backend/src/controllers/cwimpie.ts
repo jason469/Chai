@@ -17,6 +17,17 @@ module.exports = class CwimpieController {
         }
     }
 
+    static async getAllCwimpiesFromUser(req: Request, res: Response) {
+        try {
+            const allCwimpies = await CwimpieService.getAllCwimpiesFromUser(req.params.username);
+            res.json(allCwimpies);
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
+
     static async getCwimpie(req: Request, res: Response) {
         try {
             const cwimpie = await CwimpieService.getCwimpie(req.params.name);

@@ -22,4 +22,4 @@ export interface IUpdateCwimpieData {
     data?: any
 }
 
-export type TNewPropertyValue = IColour | ISpecies | IFavourite | IProfession | IHobby | IStamp | ICountry | string
+export type TNewPropertyValue = IColour | ISpecies | IFavourite | IProfession | IHobby | IStamp | ICountry | IUser | string

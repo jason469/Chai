@@ -72,12 +72,12 @@ module.exports = class AuthController {
 
             const token = jwt.sign({id: user._id}, "passwordKey", {expiresIn: "100 days"});
             res.json({token, ...user._doc})
+            return
         } catch (e: any) {
             console.log(e)
             res.status(500).json({error: e.message})
             return
         }
-        return
     }
 
     static async checkTokenIsValid(req: Request, res: Response) {

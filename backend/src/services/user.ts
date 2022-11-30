@@ -16,11 +16,18 @@ module.exports = class UserService {
         }
     }
 
-    static async getUser(username: string) {
+    static async getUser(value: string, key:string = "username") {
         try {
-            return await User.findOne({username: username})
-                .populate('countryId')
-                .select('-password');
+            console.log(value)
+            if (key == "name") {
+                return await User.findOne({name: value})
+                    .populate('countryId')
+                    .select('-password');
+            } else {  // Default is to search by username
+                return await User.findOne({username: value})
+                    .populate('countryId')
+                    .select('-password');
+            }
         } catch (error) {
             console.log(`Could not fetch user ${error}`)
         }

@@ -3,6 +3,7 @@ import {IFavourite, IHobby, IProfession} from "../utilities/interfaces/modelInte
 import {getCwimpieProperty} from "../utilities/functions/cwimpies";
 
 const Cwimpie = require('../models/Cwimpie')
+const User = require('../models/User')
 
 const colourService = require('../services/colour')
 const speciesService = require('../services/species')
@@ -54,6 +55,49 @@ module.exports = class CwimpieService {
                     ],
                 })
             return allCwimpies;
+        } catch (error) {
+            console.log(`Could not fetch cwimpies ${error}`)
+        }
+    }
+
+    static async getAllCwimpiesFromUser(username:string) {
+        try {
+            const user = await User.findOne({username: username})
+            return await Cwimpie.find({primaryParentId: user._id})
+                .populate('colourId', 'hexCode name')
+                .populate('speciesId', 'name type iconName')
+                .populate('favourites', 'name type')
+                .populate('professions', 'name type')
+                .populate('hobbies', 'name')
+                .populate({
+                    path: 'stampId',
+                    populate: [
+                        {
+                            path: 'primary_colour'
+                        }, {
+                            path: 'accent_colour'
+                        }
+                    ],
+                })
+                .populate('partnerId')
+                .populate({
+                    path: 'primaryParentId',
+                    populate: [
+                        {
+                            path: 'countryId',
+                            model: 'Country'
+                        }
+                    ],
+                })
+                .populate({
+                    path: 'dailyScheduleId',
+                    populate: [
+                        {
+                            path: 'tasks',
+                            model: 'Task'
+                        }
+                    ],
+                });
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)
         }
@@ -118,26 +162,30 @@ module.exports = class CwimpieService {
             hobbies.push(newHobby)
         }
 
-        const cwimpie = new Cwimpie({
-            name: cwimpieData.name,
-            sex: cwimpieData.sex,
-            colourId: await colourService.getColourOrCreate(cwimpieData.colour),
-            speciesId: await speciesService.getSpeciesOrCreate(cwimpieData.species),
-            favourites: favourites,
-            professions: professions,
-            hobbies: hobbies,
-            stampId: await stampService.getStampOrCreate(cwimpieData.stamp),
-            birthdate: await miscService.convertDateToUTC(cwimpieData.birthdate),
-            primaryParentId: await userService.getUser(cwimpieData.primaryParent)
-        })
-        if (cwimpieData.partner) {
-            const partner_cwimpie = await this.getCwimpie(cwimpieData.partner)
-            if (partner_cwimpie) {
-                cwimpie.partnerId = partner_cwimpie
+        try {
+            const cwimpie = new Cwimpie({
+                name: cwimpieData.name,
+                sex: cwimpieData.sex,
+                colourId: await colourService.getColourOrCreate(cwimpieData.colour),
+                speciesId: await speciesService.getSpeciesOrCreate(cwimpieData.species),
+                favourites: favourites,
+                professions: professions,
+                hobbies: hobbies,
+                stampId: await stampService.getStampOrCreate(cwimpieData.stamp),
+                birthdate: await miscService.convertDateToUTC(cwimpieData.birthdate),
+                primaryParentId: await userService.getUser(cwimpieData.primaryParent.name!, "name")
+            })
+            if (cwimpieData.partner) {
+                const partner_cwimpie = await this.getCwimpie(cwimpieData.partner)
+                if (partner_cwimpie) {
+                    cwimpie.partnerId = partner_cwimpie
+                }
             }
+            await cwimpie.save()
+            return cwimpie
+        } catch (error) {
+          console.log(`there was an error in creating the cwimpie, with the message ${error}`)
         }
-        await cwimpie.save()
-        return cwimpie
     }
 
     static async addCwimpiePhoto(url:string, photoName:string, cwimpieName:string) {

@@ -61,6 +61,7 @@ import {
 } from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
 import { StartComponent } from './components/pages/start/start.component';
 import { BirthdayCardComponent } from './components/shared/start/birthday-card/birthday-card.component';
+import { ProfileCwimpieCardComponent } from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { BirthdayCardComponent } from './components/shared/start/birthday-card/b
     FileValueAccessor,
     FormlyFieldFile,
     StartComponent,
-    BirthdayCardComponent
+    BirthdayCardComponent,
+    ProfileCwimpieCardComponent
   ],
   imports: [
     BrowserModule,

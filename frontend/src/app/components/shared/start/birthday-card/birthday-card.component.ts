@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cwimpie} from "../../../../shared/models/models";
 import moment from "moment";
+import {IBirthdayCwimpie} from "../../../../shared/interfaces/IBirthdayCwimpie";
 
 @Component({
   selector: 'app-birthday-card',
@@ -8,7 +9,7 @@ import moment from "moment";
   styleUrls: ['./birthday-card.component.scss']
 })
 export class BirthdayCardComponent implements OnInit {
-  @Input('cwimpieData') data!: Cwimpie;
+  @Input('cwimpieData') data!: IBirthdayCwimpie;
   age!:number
   pronoun!:string
 

@@ -47,7 +47,7 @@ export interface IStamp {
 }
 
 export interface IUser {
-    username: string,
+    username?: string,
     name?: string,
 }
 
