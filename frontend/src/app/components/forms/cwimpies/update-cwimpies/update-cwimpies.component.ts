@@ -1,36 +1,34 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig, FormlyFormOptions} from "@ngx-formly/core";
 import {CwimpieFormService} from "../../../../services/cwimpies/cwimpieForm.service";
 import {Cwimpie} from "../../../../shared/models/models";
-import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpdateData.service";
-import {UpdateCwimpieCardService} from "../../../../services/cwimpies/updateCwimpieCard.service";
 import {BsModalService} from "ngx-bootstrap/modal";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-update-cwimpie',
   templateUrl: './update-cwimpies.component.html',
   styleUrls: ['./update-cwimpies.component.scss']
 })
-export class UpdateCwimpiesComponent implements OnInit {
-  @Output('cwimpieChanged') cwimpieChanged = new EventEmitter<boolean>();
+export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
+  @Output('cwimpieChanged') changedCwimpieName = new EventEmitter<string>();
 
   form: FormGroup
   model: Cwimpie;
   options: FormlyFormOptions;
   fields: Array<FormlyFieldConfig>
   addNewColour: boolean
-  cwimpieUpdateDataServiceSubscription!: Subscription
   initialData!: Cwimpie;
+  cwimpieUpdateDataServiceSubscription!: Subscription
 
   constructor(
     private cwimpieFormService: CwimpieFormService,
     private toastrService: ToastrService,
     private cwimpieUpdateDataService: CwimpieUpdateDataService,
     private modalService: BsModalService,
-    private updateCwimpieCardService: UpdateCwimpieCardService
   ) {
     this.addNewColour = false;
     this.form = new FormGroup({});
@@ -374,7 +372,6 @@ export class UpdateCwimpiesComponent implements OnInit {
     });
   }
 
-
   toggleNewColour() {
     let firstPage = this.fields[0].fieldGroup![1].fieldGroup
     let colourField = firstPage!.find(obj => obj.key == "colour")
@@ -421,7 +418,7 @@ export class UpdateCwimpiesComponent implements OnInit {
                 `Yayyy well done`,
                 `${this.model.name} was updated`
               );
-              this.updateCwimpieCardService.changeState(this.model.name)
+              this.changedCwimpieName.next(this.initialData.name)
               this.modalService.hide()
             }
           )
@@ -435,15 +432,11 @@ export class UpdateCwimpiesComponent implements OnInit {
     }
   }
 
-  ngOnDestroy()
-    :
-    void {
-    if (this.cwimpieUpdateDataServiceSubscription
-    ) {
+  ngOnDestroy():void {
+    if (this.cwimpieUpdateDataServiceSubscription) {
       this.cwimpieUpdateDataServiceSubscription.unsubscribe()
     }
   }
-
 }
 
 

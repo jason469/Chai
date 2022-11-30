@@ -66,9 +66,26 @@ module.exports = class CwimpieService {
                 .populate('favourites')
                 .populate('professions')
                 .populate('hobbies')
-                .populate('stampId')
+                .populate({
+                    path: 'stampId',
+                    populate: [
+                        {
+                            path: 'primary_colour'
+                        }, {
+                            path: 'accent_colour'
+                        }
+                    ],
+                })
                 .populate('partnerId')
-                .populate('primaryParentId', 'username name')
+                .populate({
+                    path: 'primaryParentId',
+                    populate: [
+                        {
+                            path: 'countryId',
+                            model: 'Country'
+                        }
+                    ],
+                })
             ;
             if (cwimpie) {
                 return cwimpie;

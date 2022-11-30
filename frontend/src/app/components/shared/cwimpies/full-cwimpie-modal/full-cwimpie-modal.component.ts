@@ -10,10 +10,9 @@ import {Cwimpie} from "../../../../shared/models/models";
   styleUrls: ['./full-cwimpie-modal.component.css']
 })
 export class FullCwimpieModalComponent implements OnInit, OnDestroy {
-  data!: Cwimpie;
   @Input('cwimpieData') public modalRef!: BsModalRef;
   cwimpieModalDataServiceSubscription!: Subscription
-
+  data!: Cwimpie;
 
   constructor(
     private cwimpieModalDataService: CwimpieModalDataService,
@@ -23,7 +22,6 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cwimpieModalDataServiceSubscription = this.cwimpieModalDataService.getData().subscribe({
       next: (data:Cwimpie) => {
-        console.log(data)
         this.data = data
       }
     });

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Bunny",
+    "type": "Bunny",
+    "iconName": "Bunny.png"
+  },
+  {
+    "name": "Poodel",
+    "type": "Poodel",
+    "iconName": "Poodel.png"
+  }
+]

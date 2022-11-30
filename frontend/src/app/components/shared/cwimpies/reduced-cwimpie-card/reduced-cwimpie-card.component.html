@@ -1,7 +1,7 @@
 <div>
   <mat-card
     class="card"
-    style="background-color:{{!data!.colour?.hexCode}}"
+    style="background-color:{{!initialData!.colour?.hexCode}}"
   >
     <div class="openModal click"
          (click)="openCwimpieModal()"
@@ -9,18 +9,18 @@
     >
       <mat-card-header>
         <div mat-card-avatar class="header-image"
-             style="background-image: url('/assets/icons/species/{{data!.species!.iconName}}')">
+             style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
         </div>
-        <mat-card-title>{{data!.name}}</mat-card-title>
-        <mat-card-subtitle>{{data!.species!.name}}</mat-card-subtitle>
+        <mat-card-title>{{initialData!.name}}</mat-card-title>
+        <mat-card-subtitle>{{initialData!.species!.name}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="{{data!.photo}}" alt="">
+      <img mat-card-image src="{{initialData!.photo}}" alt="">
     </div>
     <mat-card-content>
       <mat-tab-group mat-align-tabs="start">
         <mat-tab label="Job">
           <div
-            *ngFor="let job of data!.professions"
+            *ngFor="let job of initialData!.professions"
             [ngClass]="{main: job!.type === 'Main'}"
           >
             {{job!.name}}
@@ -28,7 +28,7 @@
         </mat-tab>
         <mat-tab label="Hobbies">
           <div
-            *ngFor="let hobby of data!.hobbies"
+            *ngFor="let hobby of initialData!.hobbies"
           >
             {{hobby!.name}}
           </div>
@@ -41,12 +41,12 @@
       <button
         mat-raised-button
         class="update_button"
-        (click)="updateCwimpieModal()"
+        (click)="openUpdateCwimpieModal()"
       >
         Update
       </button>
       <button mat-mini-fab>
-        <mat-icon (click)="deleteCwimpie(data!.name)">clear</mat-icon>
+        <mat-icon (click)="deleteCwimpie(initialData!.name)">clear</mat-icon>
       </button>
     </mat-card-actions>
     <mat-card-footer>

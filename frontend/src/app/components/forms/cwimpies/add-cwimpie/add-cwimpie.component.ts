@@ -52,16 +52,6 @@ export class AddCwimpieComponent implements OnInit {
                     }
                   },
                   {
-                    key: 'photo',
-                    type: 'file',
-                    templateOptions: {
-                      multiple: false
-                    },
-                    props: {
-                      required: true
-                    }
-                  },
-                  {
                     key: 'sex',
                     type: 'select',
                     props: {
@@ -146,6 +136,16 @@ export class AddCwimpieComponent implements OnInit {
                         },
                       },
                     ]
+                  },
+                  {
+                    key: 'photo',
+                    type: 'file',
+                    templateOptions: {
+                      multiple: false
+                    },
+                    props: {
+                      required: true
+                    }
                   },
                 ]
               },
