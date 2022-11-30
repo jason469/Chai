@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FullCwimpieModalComponent} from "../full-cwimpie-modal/full-cwimpie-modal.component";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
@@ -6,22 +6,29 @@ import {CwimpieModalDataService} from "../../../../services/cwimpies/cwimpieModa
 import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpdateData.service";
 import {UpdateCwimpiesComponent} from "../../../forms/cwimpies/update-cwimpies/update-cwimpies.component";
 import {Cwimpie} from "../../../../shared/models/models";
+import {UpdateCwimpieCardService} from "../../../../services/cwimpies/updateCwimpieCard.service";
+import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reduced-cwimpie-card',
   templateUrl: './reduced-cwimpie-card.component.html',
   styleUrls: ['./reduced-cwimpie-card.component.css']
 })
-export class ReducedCwimpieCardComponent implements OnInit {
+export class ReducedCwimpieCardComponent implements OnInit, OnDestroy {
   @Input('cwimpieData') data!: Cwimpie;
   @Output() deletedCwimpieName: EventEmitter<string> = new EventEmitter();
   modalRef!: BsModalRef
+  updateCwimpieCardServiceSubscription!: Subscription
+  initialData!: any
 
   constructor(
     private viewCwimpiesService: ViewCwimpiesService,
     private cwimpieModalDataService: CwimpieModalDataService,
     private cwimpieUpdateDataService: CwimpieUpdateDataService,
     private modalService: BsModalService,
+    private updateCwimpieCardService: UpdateCwimpieCardService,
+    private router: Router
   ) {
   }
 
@@ -30,34 +37,33 @@ export class ReducedCwimpieCardComponent implements OnInit {
     this.modalRef = this.modalService.show(FullCwimpieModalComponent)
   }
 
-
   public updateCwimpieModal(): void {
-    let updateCwimpieData:Cwimpie = {
-      birthdate: this.data.birthdate!,
+    let updateCwimpieData: Cwimpie = {
+      birthdate: this.initialData.birthdate!,
       colour: {
-        name: this.data.colour!.name
+        name: this.initialData.colour!.name
       },
-      favourites: this.data.favourites!,
-      hobbies: this.data.hobbies!,
-      name: this.data.name,
-      sex: this.data.sex,
-      partner: this.data.partner,
-      photo: this.data.photo,
+      favourites: this.initialData.favourites!,
+      hobbies: this.initialData.hobbies!,
+      name: this.initialData.name,
+      sex: this.initialData.sex,
+      partner: this.initialData.partner,
+      photo: this.initialData.photo,
       primaryParent: {
-        name: this.data.primaryParent!.name
+        name: this.initialData.primaryParent!.name
       },
-      professions: this.data.professions,
+      professions: this.initialData.professions,
       species: {
-        name: this.data.species!.name
+        name: this.initialData.species!.name
       },
       stamp: {
         primary_colour: {
-          name: this.data.stamp!.primary_colour!.name
+          name: this.initialData.stamp!.primary_colour!.name
         },
         accent_colour: {
-          name: this.data.stamp!.accent_colour!.name
+          name: this.initialData.stamp!.accent_colour!.name
         },
-        font: this.data.stamp!.font,
+        font: this.initialData.stamp!.font,
       }
     }
     this.cwimpieUpdateDataService.changeData(updateCwimpieData)
@@ -73,6 +79,23 @@ export class ReducedCwimpieCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initialData = this.data
+    this.updateCwimpieCardService.changeState("")
+    this.updateCwimpieCardServiceSubscription = this.updateCwimpieCardService.getState().subscribe((res) => {
+      if (this.data.name == res) {
+        let updatedCwimpieDataSubscription = this.viewCwimpiesService.getCwimpie(res).subscribe(response => {
+          console.log(response)
+          this.initialData = response
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        })
+        updatedCwimpieDataSubscription.unsubscribe()
+      }
+    })
   }
 
+  ngOnDestroy() {
+    if (this.updateCwimpieCardServiceSubscription) {
+      this.updateCwimpieCardServiceSubscription.unsubscribe()
+    }
+  }
 }

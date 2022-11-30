@@ -16,9 +16,6 @@ import {GenerateComponent} from './components/pages/cwimpies/generate/generate.c
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {ScheduleComponent} from './components/pages/schedule/schedule.component';
 import {ViewAllComponent} from './components/pages/cwimpies/viewCwimpies/view-all/view-all.component';
-import {
-  ViewOneCwimpieComponent
-} from './components/pages/cwimpies/viewCwimpies/view-one-cwimpie/view-one-cwimpie.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthComponent} from "./components/auth/auth.component";
 import {ReactiveFormsModule} from '@angular/forms';
@@ -72,7 +69,6 @@ import {
     ProfileComponent,
     ScheduleComponent,
     ViewAllComponent,
-    ViewOneCwimpieComponent,
     AuthComponent,
     ReducedCwimpieCardComponent,
     FullCwimpieModalComponent,

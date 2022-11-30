@@ -84,7 +84,6 @@ module.exports = class CwimpieController {
             } else {
                 await CwimpieService.updateCwimpie(cwimpie, updateCwimpieData)
             }
-            console.log(`returning cwimpie is ${cwimpie}`)
             res.status(200).json({msg: `${updateCwimpieData.name} has been successfully updated`})
             return
         } catch (error) {

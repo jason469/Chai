@@ -8,7 +8,6 @@ import {GenerateComponent} from "./components/pages/cwimpies/generate/generate.c
 import {ProfileComponent} from "./components/pages/profile/profile.component";
 import {ScheduleComponent} from "./components/pages/schedule/schedule.component";
 import {ViewAllComponent} from "./components/pages/cwimpies/viewCwimpies/view-all/view-all.component";
-import {ViewOneCwimpieComponent} from "./components/pages/cwimpies/viewCwimpies/view-one-cwimpie/view-one-cwimpie.component";
 import {CommandmentsComponent} from "./components/pages/cwimpies/commandments/commandments.component";
 
 const appRoutes: Routes = [
@@ -17,7 +16,6 @@ const appRoutes: Routes = [
   {path: 'cwimpies/generate', canActivate: [AuthGuardService], component: GenerateComponent},
   {path: 'cwimpies/commandments', canActivate: [AuthGuardService], component: CommandmentsComponent},
   {path: 'cwimpies/view-cwimpies', canActivate: [AuthGuardService], component: ViewAllComponent},
-  {path: 'cwimpies/view-cwimpies/:id', canActivate: [AuthGuardService], component: ViewOneCwimpieComponent},
   {path: 'profile', canActivate: [AuthGuardService], component: ProfileComponent},
   {path: 'schedule', canActivate: [AuthGuardService], component: ScheduleComponent},
 ];

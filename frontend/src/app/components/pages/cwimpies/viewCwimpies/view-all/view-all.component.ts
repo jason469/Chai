@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
