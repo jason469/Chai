@@ -3,6 +3,7 @@ import {activityNames, cwimpieNames, favouriteNames} from "../utilities/randomVa
 
 const CwimpieService = require('../services/cwimpie')
 const _ = require('lodash');
+const Cwimpie = require("../models/Cwimpie");
 
 module.exports = class CwimpieController {
     static async getAllCwimpies(req: Request, res: Response) {
@@ -120,6 +121,36 @@ module.exports = class CwimpieController {
                     break
             }
             res.status(200).json(randomValue)
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
+
+    static async getBirthdayCwimpies(req: Request, res: Response) {
+        let birthdayCwimpies:typeof Cwimpie[] = []
+        try {
+            let nzst = new Date(new Date().toLocaleString("en-US", {timeZone: "Pacific/Auckland"}))
+            let midnightNzst = new Date(nzst.setHours(0,0,0,0))
+            console.log(midnightNzst)
+
+            let midnightDateMonth = midnightNzst.getMonth()
+            let midnightDateDay = midnightNzst.getDate()
+
+            const allCwimpies = await CwimpieService.getAllCwimpies();
+            for (let cwimpie of allCwimpies) {
+                let nzstDateString = new Date(new Date(cwimpie.birthdate).toLocaleString("en-US", {timeZone: "Pacific/Auckland"}))
+                let nzstDate = new Date(nzstDateString)
+
+                let birthdayMonth = nzstDate.getMonth()
+                let birthdayDay = nzstDate.getDate()
+
+                if (birthdayDay == midnightDateDay && birthdayMonth == midnightDateMonth) {
+                    birthdayCwimpies.push(cwimpie)
+                }
+            }
+            res.status(200).json(birthdayCwimpies)
             return
         } catch (error) {
             res.status(500).json({error: error})

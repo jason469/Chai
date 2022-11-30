@@ -25,3 +25,5 @@ export const UPDATE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/update/'
 // URLs to delete cwimpies
 export const DELETE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/'
 
+// URLs to get all cwimpies whose birthdays are today
+export const GET_BIRTHDAY_CWIMPIES_URL = BASE_URL + '/api/cwimpies/birthdays/'

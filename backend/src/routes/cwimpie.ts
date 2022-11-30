@@ -8,6 +8,7 @@ const cwimpieCtrl = require('../controllers/cwimpie')
 
 
 cwimpieRouter.get('/api/cwimpies', auth, cwimpieCtrl.getAllCwimpies)
+cwimpieRouter.get('/api/cwimpies/birthdays', auth, cwimpieCtrl.getBirthdayCwimpies)
 cwimpieRouter.get('/api/cwimpies/:name', auth, cwimpieCtrl.getCwimpie)
 cwimpieRouter.get('/api/cwimpies/random-values/:valueType', auth, cwimpieCtrl.getRandomCwimpieValues)
 cwimpieRouter.post('/api/cwimpies/add', auth, cwimpieCtrl.addCwimpie)

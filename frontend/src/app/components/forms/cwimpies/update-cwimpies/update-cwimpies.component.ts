@@ -74,11 +74,11 @@ export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
               {
                 key: 'birthdate',
                 type: 'datepicker',
-                defaultValue: new Date(),
                 props: {
                   label: 'Birthday',
                   required: true,
-                  description: "MM/DD/YYYY"
+                  description: "MM/DD/YYYY",
+                  placeholder: "Birthdayyy",
                 },
               },
               {
@@ -366,6 +366,7 @@ export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
   ngAfterViewInit(): void {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
+        console.log(data)
         this.initialData = data
         this.model = this.initialData
       }
@@ -404,6 +405,9 @@ export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
     }
     delete this.model.newColour
     if (this.form.valid) {
+      console.log(this.model.birthdate)
+      console.log(typeof this.model.birthdate)
+
       this.cwimpieFormService.updateCwimpieData(
         this.model, this.initialData.name
       ).subscribe(

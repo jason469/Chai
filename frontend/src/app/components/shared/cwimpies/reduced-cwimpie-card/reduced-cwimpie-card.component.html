@@ -11,6 +11,15 @@
         <div mat-card-avatar class="header-image"
              style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
         </div>
+        <ng-container
+          *ngIf="initialData.sex === 'Male'; then male; else female"
+        ></ng-container>
+        <ng-template #male>
+          <i class="fa-solid fa-mars"></i>
+        </ng-template>
+        <ng-template #female>
+          <i class="fa-solid fa-venus"></i>
+        </ng-template>
         <mat-card-title>{{initialData!.name}}</mat-card-title>
         <mat-card-subtitle>{{initialData!.species!.name}}</mat-card-subtitle>
       </mat-card-header>

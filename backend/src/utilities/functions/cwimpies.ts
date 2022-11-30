@@ -8,7 +8,6 @@ const professionService = require('../../services/profession')
 const hobbyService = require('../../services/hobby')
 const stampService = require('../../services/stamp')
 const userService = require('../../services/user')
-const cwimpieService = require('../../services/cwimpie')
 
 const Cwimpie = require('../../models/Cwimpie')
 

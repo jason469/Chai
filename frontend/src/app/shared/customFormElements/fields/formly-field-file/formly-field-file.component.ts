@@ -25,9 +25,7 @@ export class FormlyFieldFile extends FieldType<FieldTypeConfig> implements OnIni
     console.log("Form Control Value", this.formControl.value);
   }
   onChange(event:any) {
-    console.log(event.target.files)
     this.selectedFiles = Array.from(event.target.files);
-    console.log(this.selectedFiles);
   }
   getSanitizedImageUrl(file: File) {
     return this.sanitizer.bypassSecurityTrustUrl(

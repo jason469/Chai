@@ -13,6 +13,7 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   @Input('cwimpieData') public modalRef!: BsModalRef;
   cwimpieModalDataServiceSubscription!: Subscription
   data!: Cwimpie;
+  birthDateString!: string;
 
   constructor(
     private cwimpieModalDataService: CwimpieModalDataService,
@@ -23,12 +24,17 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
     this.cwimpieModalDataServiceSubscription = this.cwimpieModalDataService.getData().subscribe({
       next: (data:Cwimpie) => {
         this.data = data
+        if (this.data.birthdate) {
+          this.birthDateString = new Date(this.data.birthdate).toLocaleDateString('en-US', {
+            timeZone: "Pacific/Auckland",
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })
+        }
       }
     });
-  }
-
-  ngOnChanges(changes: any) {
-    console.log(changes)
   }
 
   ngOnDestroy(): void {

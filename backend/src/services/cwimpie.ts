@@ -12,6 +12,7 @@ const hobbyService = require('../services/hobby')
 const stampService = require('../services/stamp')
 const userService = require('../services/user')
 const sexService = require('../services/sex')
+const miscService = require('../services/misc')
 
 
 module.exports = class CwimpieService {
@@ -126,7 +127,7 @@ module.exports = class CwimpieService {
             professions: professions,
             hobbies: hobbies,
             stampId: await stampService.getStampOrCreate(cwimpieData.stamp),
-            birthdate: new Date(cwimpieData.birthdate),
+            birthdate: await miscService.convertDateToUTC(cwimpieData.birthdate),
             primaryParentId: await userService.getUser(cwimpieData.primaryParent)
         })
         if (cwimpieData.partner) {
@@ -167,7 +168,7 @@ module.exports = class CwimpieService {
             if (ignoreFields.includes(key)) {
                 continue
             } else if (cwimpieFields.includes(key)) {
-                newValue = (key == "sex") ? await sexService.getSex(value) : value
+                newValue = (key == "sex") ? await sexService.getSex(value) : await miscService.convertDateToUTC(value)
             } else if (arrayFields.includes(key)) {
                 let newArray = []
                 for (const currentObject of value) {

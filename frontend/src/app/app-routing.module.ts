@@ -9,9 +9,11 @@ import {ProfileComponent} from "./components/pages/profile/profile.component";
 import {ScheduleComponent} from "./components/pages/schedule/schedule.component";
 import {ViewAllComponent} from "./components/pages/cwimpies/viewCwimpies/view-all/view-all.component";
 import {CommandmentsComponent} from "./components/pages/cwimpies/commandments/commandments.component";
+import {StartComponent} from "./components/pages/start/start.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthComponent},
+  {path: '', canActivate: [AuthGuardService], component: StartComponent},
   {path: 'cwimpies/locations', canActivate: [AuthGuardService], component: LocationComponent},
   {path: 'cwimpies/generate', canActivate: [AuthGuardService], component: GenerateComponent},
   {path: 'cwimpies/commandments', canActivate: [AuthGuardService], component: CommandmentsComponent},

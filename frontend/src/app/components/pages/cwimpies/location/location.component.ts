@@ -176,7 +176,6 @@ export class LocationComponent implements OnInit {
       "features": features
     };
     (this.map.getSource(this.CITY_LOCATION_SOURCE) as GeoJSONSource).setData(cityLocationData);
-    console.log(cityLocationData)
   }
 
   async loadCwimpieIconsDatasource() {

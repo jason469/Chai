@@ -27,7 +27,7 @@ dotenv.config()
 require('dotenv').config()
 
 databaseConfig.dbConnect();
-loadFixtures()
+// loadFixtures()
 createDailySchedules()
 
 const PORT = process.env.PORT || 5000;

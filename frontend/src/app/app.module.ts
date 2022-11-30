@@ -59,6 +59,8 @@ import {LegendMenuItemDirective} from './directives/cwimpies/location/legend/leg
 import {
   FormlyFieldFile,
 } from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
+import { StartComponent } from './components/pages/start/start.component';
+import { BirthdayCardComponent } from './components/shared/start/birthday-card/birthday-card.component';
 
 
 @NgModule({
@@ -83,7 +85,9 @@ import {
     LegendMenuComponent,
     LegendMenuItemDirective,
     FileValueAccessor,
-    FormlyFieldFile
+    FormlyFieldFile,
+    StartComponent,
+    BirthdayCardComponent
   ],
   imports: [
     BrowserModule,

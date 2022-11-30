@@ -82,8 +82,8 @@ export class AuthService {
               if (isValid) {
                 this.user.next(loadedUser)
                 this.loggedIn = true;
+                this.router.navigate(['/'])
               } else {
-                console.log('need to login')
                 localStorage.removeItem('userData');
                 this.user.next(null)
                 this.loggedIn = false;
@@ -123,7 +123,6 @@ export class AuthService {
     this.loggedIn = false;
     localStorage.removeItem('userData');
     this.router.navigate(['/login'])
-    console.log(this.user)
   }
 
   getLoginStatus() {
