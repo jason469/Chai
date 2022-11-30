@@ -27,3 +27,7 @@ export const DELETE_CWIMPIE_URL = BASE_URL + '/api/cwimpies/'
 
 // URLs to get all cwimpies whose birthdays are today
 export const GET_BIRTHDAY_CWIMPIES_URL = BASE_URL + '/api/cwimpies/birthdays/'
+
+// URLs to get the most current user
+export const GET_CURRENT_USER_URL = BASE_URL + '/api/users/'
+

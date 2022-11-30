@@ -16,4 +16,18 @@ module.exports = class UserController {
             return
         }
     }
+
+    static async getUser(req: Request, res: Response) {
+        try {
+            const user = await UserService.getUser(req.params.username);
+            if (!user) {
+                res.status(404).json("There are no user with this username")
+            }
+            res.json(user);
+            return
+        } catch (error) {
+            res.status(500).json({error: error})
+            return
+        }
+    }
 };
