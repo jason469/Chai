@@ -43,10 +43,23 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  redis-dev:
+    image: redis
+    restart: unless-stopped
+    network_mode: bridge
+    expose:
+      - 6379
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+
 networks:
   chai-net:
     driver: bridge
 
 volumes:
   mongo-data:
+    driver: local
+
+  cache:
     driver: local
