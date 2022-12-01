@@ -22,24 +22,25 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getCurrentUserSub = this.profilePageService.getCurrentUser()?.subscribe(response => {
-      this.currentUser = response
-      if (this.currentUser.username) {
-        this.getCwimpiesFromUserSub = this.profilePageService
-          .getCwimpiesFromUser(this.currentUser.username)
-          .subscribe(allCwimpiesResponse => {
-            if (allCwimpiesResponse.length != 0) {
-              for (let cwimpieData of allCwimpiesResponse) {
-                let cwimpie: IUserCwimpies = {
-                  name: cwimpieData.name,
-                  photo: cwimpieData.photo
+    this.getCurrentUserSub = this.profilePageService.getCurrentUser()?.subscribe({next: (response:User) => {
+        this.currentUser = response
+        if (this.currentUser.username) {
+          this.getCwimpiesFromUserSub = this.profilePageService
+            .getCwimpiesFromUser(this.currentUser.username)
+            .subscribe(allCwimpiesResponse => {
+              if (allCwimpiesResponse.length != 0) {
+                for (let cwimpieData of allCwimpiesResponse) {
+                  let cwimpie: IUserCwimpies = {
+                    name: cwimpieData.name,
+                    photo: cwimpieData.photo
+                  }
+                  this.allCwimpies.push(cwimpie)
                 }
-                this.allCwimpies.push(cwimpie)
               }
-            }
-        })
+            })
+        }
+        this.loading = false
       }
-      this.loading = false
     })
   }
 
