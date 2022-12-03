@@ -1,4 +1,4 @@
-const redis = require('redis')
+const Redis = require("ioredis");
 
 export class RedisCache {
     username: string;
@@ -6,7 +6,6 @@ export class RedisCache {
     host: string;
     port: number;
     dbNumber: number;
-    private url: string;
     private client: any;
     private isClientConnected: boolean = false;
 
@@ -17,33 +16,24 @@ export class RedisCache {
         this.port = port;
         this.dbNumber = dbNumber;
 
-        this.url = `redis[s]://${this.username}:${this.password}@${this.host}:${this.port}${this.dbNumber}`
-        this.connect()
-            .then(() => {
-                this.isClientConnected = true
-            })
-            .catch(() => this.isClientConnected = false)
-    }
-
-    private async connect(): Promise<void> {
         try {
-            this.client = redis.createClient({
-                url: `redis://redis:${this.port}`
-            })
-            this.client.on('error', (err:any) => console.log('Redis - Connection status: error ', { err }));
-            this.client.on('connect', () => console.log('Redis - Connection status: connected'));
-            this.client.on('end', () => console.log('Redis - Connection status: disconnected'));
-            this.client.on('reconnecting', () => console.log('Redis - Connection status: reconnecting'));
-            await this.client.connect(this.port, this.host)
+            this.client = new Redis({
+                port: this.port,
+                host: this.host,
+                db: this.dbNumber,
+                connectTimeout: 15000,
+                family: 6
+            });
+            this.isClientConnected = true
         } catch {
-            console.log(`There was an error connecting to the redis cache`)
+            console.error('Could not create redis cache')
         }
     }
 
     async getAllKeys() {
         if (this.client && this.isClientConnected) {
             try {
-                await this.client.keys
+                await this.client.keys("*")
             } catch {
                 console.log(`There was an error getting all the keys`)
             }
@@ -69,6 +59,7 @@ export class RedisCache {
     async setValueByKey(key: string, value: any) {
         if (this.client && this.isClientConnected) {
             try {
+                console.log('begin setting')
                 await this.client.set(key, JSON.stringify(value))
             } catch {
                 console.log(`There was an error setting the value for ${key}`)

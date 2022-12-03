@@ -1,5 +1,18 @@
 version: "3"
 services:
+#  redis-dev:
+#    image: redis:latest
+#    command: redis-server
+#    ports:
+#      - "6379:6379"
+#    restart: on-failure
+#    container_name: redis
+#    hostname: redis
+#    volumes:
+#      - cache:/data
+#    networks:
+#      - chai-net
+
 
   angular:
     build:
@@ -32,6 +45,7 @@ services:
       - ./backend/nodemon.json:/usr/app/nodemon.json
     depends_on:
       - mongodb
+      - redis
 
   mongodb:
     image: mongo
@@ -43,15 +57,12 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  redis-dev:
-    image: redis
-    restart: unless-stopped
-    network_mode: bridge
-    expose:
-      - 6379
-    command: redis-server --save 20 1 --loglevel warning
-    volumes:
-      - cache:/data
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
+    networks:
+      - chai-net
 
 networks:
   chai-net:
