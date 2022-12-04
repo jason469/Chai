@@ -22,16 +22,14 @@ const countryRouter = require('./src/routes/country');
 const app = express();
 
 const databaseConfig = require('./src/config/database.config');
-const Redis = require("ioredis");
 
-const client =  new Redis(`redis://redis:6379`)
 
 dotenv.config()
 require('dotenv').config()
 
 databaseConfig.dbConnect();
 // loadFixtures()
-// cacheSetUpConfig()
+cacheSetUpConfig()
 createDailySchedules()
 
 const PORT = process.env.PORT || 5000;
@@ -57,9 +55,6 @@ app.use(stampRouter)
 app.use(userRouter)
 app.use(dailyScheduleRouter)
 app.use(countryRouter)
-
-client.set('test1', 'test1 value')
-let value = client.get('test1')
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`connected at port ${PORT}`)

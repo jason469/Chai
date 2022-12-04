@@ -133,7 +133,7 @@ module.exports = class CwimpieService {
                 })
             ;
             if (cwimpie) {
-                return cwimpie;
+                return {...cwimpie._doc};
             } else {
                 return null;
             }

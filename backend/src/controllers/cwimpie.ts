@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {activityNames, cwimpieNames, favouriteNames} from "../utilities/randomValues/cwimpieValues";
+import {allCwimpiesCache} from "../config/caches/allCaches";
 
 const CwimpieService = require('../services/cwimpie')
 const _ = require('lodash');
@@ -30,12 +31,14 @@ module.exports = class CwimpieController {
 
     static async getCwimpie(req: Request, res: Response) {
         try {
-            const cwimpie = await CwimpieService.getCwimpie(req.params.name);
+            // const cwimpie = await allCwimpiesCache.getValueByKey(req.params.name)
+            const cwimpie = await allCwimpiesCache.getOrSetCacheWithCallback(req.params.name, await CwimpieService.getCwimpie(req.params.name))
+            // const cwimpie = await CwimpieService.getCwimpie(req.params.name);
             if (!cwimpie) {
                 res.status(404).json(`${req.body.name} is sleeping!`)
                 return
             }
-            res.json({...cwimpie._doc});
+            res.json(cwimpie);
             return
         } catch (error) {
             res.status(500).json({error: error})

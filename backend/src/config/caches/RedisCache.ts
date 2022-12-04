@@ -17,13 +17,7 @@ export class RedisCache {
         this.dbNumber = dbNumber;
 
         try {
-            this.client = new Redis({
-                port: this.port,
-                host: this.host,
-                db: this.dbNumber,
-                connectTimeout: 15000,
-                family: 6
-            });
+            this.client =  new Redis(`redis://${this.host}:${this.port}/${this.dbNumber}`)
             this.isClientConnected = true
         } catch {
             console.error('Could not create redis cache')
@@ -33,7 +27,7 @@ export class RedisCache {
     async getAllKeys() {
         if (this.client && this.isClientConnected) {
             try {
-                await this.client.keys("*")
+                return await this.client.keys("*")
             } catch {
                 console.log(`There was an error getting all the keys`)
             }
@@ -42,7 +36,7 @@ export class RedisCache {
 
     async getValueByKey(key: string) {
         try {
-            await this.client.get(key, (error: any, value: any) => {
+            return await this.client.get(key, (error: any, value: any) => {
                 if (value != null) {
                     console.log('cache hit')
                     return JSON.parse(value)
@@ -53,13 +47,13 @@ export class RedisCache {
             })
         } catch {
             console.log(`There was an error getting the keys`)
+            return null
         }
     }
 
     async setValueByKey(key: string, value: any) {
         if (this.client && this.isClientConnected) {
             try {
-                console.log('begin setting')
                 await this.client.set(key, JSON.stringify(value))
             } catch {
                 console.log(`There was an error setting the value for ${key}`)
@@ -74,7 +68,10 @@ export class RedisCache {
                 return new Promise((resolve: any, reject: any) => {
                     this.client.get(key, async (error: any, value: any) => {
                         if (error) return reject(error)
-                        if (value != null) return resolve(JSON.parse(value))
+                        if (value != null) {
+                            console.log('cache hit')
+                            return resolve(JSON.parse(value))
+                        }
                         const freshData = await callback()
                         this.client.set(key, JSON.stringify(freshData))
                         resolve(freshData)

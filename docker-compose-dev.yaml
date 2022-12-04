@@ -1,19 +1,5 @@
 version: "3"
 services:
-#  redis-dev:
-#    image: redis:latest
-#    command: redis-server
-#    ports:
-#      - "6379:6379"
-#    restart: on-failure
-#    container_name: redis
-#    hostname: redis
-#    volumes:
-#      - cache:/data
-#    networks:
-#      - chai-net
-
-
   angular:
     build:
       context: ./frontend
