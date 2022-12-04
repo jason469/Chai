@@ -1,6 +1,7 @@
 import moment from "moment";
 import {ITask} from "../interfaces/modelInterfaces";
 import {taskDescriptions} from "../randomValues/taskDescriptions";
+import {allCwimpiesCache} from "../../config/caches/allCaches";
 
 const schedule = require('node-schedule')
 const _ = require('lodash');
@@ -45,12 +46,12 @@ export const createDailySchedules = () => {
             cwimpie.dailyScheduleId.push(dailySchedule)
             await cwimpie.save()
             let numberOfSchedules = cwimpie.dailyScheduleId.length
-            console.log(cwimpie)
             if (numberOfSchedules > 5) {
                 let deleteDailyScheduleId = cwimpie.dailyScheduleId[0]
                 cwimpie.dailyScheduleId.pop()
                 DailySchedule.findByIdAndDelete(deleteDailyScheduleId)
             }
+            await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
             await cwimpie.save()
         }
     })

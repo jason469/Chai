@@ -405,9 +405,6 @@ export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
     }
     delete this.model.newColour
     if (this.form.valid) {
-      console.log(this.model.birthdate)
-      console.log(typeof this.model.birthdate)
-
       this.cwimpieFormService.updateCwimpieData(
         this.model, this.initialData.name
       ).subscribe(

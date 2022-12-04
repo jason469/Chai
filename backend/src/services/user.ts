@@ -18,7 +18,6 @@ module.exports = class UserService {
 
     static async getUser(value: string, key:string = "username") {
         try {
-            console.log(value)
             if (key == "name") {
                 return await User.findOne({name: value})
                     .populate('countryId')

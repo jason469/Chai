@@ -1,4 +1,5 @@
 import {IColour} from "../utilities/interfaces/modelInterfaces";
+import {allColoursCache} from "../config/caches/allCaches";
 
 const Colours = require('../models/Colours')
 
@@ -15,7 +16,8 @@ module.exports = class ColourService {
     static async getColourOrCreate(data: IColour) {
 
         try {
-            var colour = await Colours.findOne({name: data.name});
+            let colour;
+            colour = await Colours.findOne({name: data.name});
             if (!colour) {
                 let hexCode = data.hexCode
                 if (data.hexCode?.slice(0, 1) !== "#") {
@@ -26,6 +28,7 @@ module.exports = class ColourService {
                     hexCode: hexCode
                 })
                 await colour.save()
+                await allColoursCache.setValueByKey(colour.name, colour)
             }
             return colour;
         } catch (error) {
@@ -38,6 +41,7 @@ module.exports = class ColourService {
             const colour = await Colours.findOne({name: name})
             if (colour) {
                 await colour.deleteOne()
+                await allColoursCache.deleteValueByKey(name)
             }
             return true
         } catch (error) {

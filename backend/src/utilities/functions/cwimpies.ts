@@ -19,7 +19,6 @@ export async function getCwimpieProperty(propertyName: string, newPropertyValue:
         case "birthdate":
             return newPropertyValue
         case "partner":
-            console.log(newPropertyValue)
             return Cwimpie.findOne({name: <string>newPropertyValue});
         case "colour":
             return await colourService.getColourOrCreate(<IColour>newPropertyValue)

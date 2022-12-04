@@ -9,7 +9,21 @@ const Cwimpie = require("../models/Cwimpie");
 module.exports = class CwimpieController {
     static async getAllCwimpies(req: Request, res: Response) {
         try {
-            const allCwimpies = await CwimpieService.getAllCwimpies();
+            let allCwimpies = []
+            let allCwimpiesCacheKeys = await allCwimpiesCache.getAllKeys()
+            let allCwimpiesDatabaseCount = await Cwimpie.countDocuments()
+
+            if (allCwimpiesCacheKeys.length == allCwimpiesDatabaseCount) {  // Assume cache is correct
+                for (let cwimpieName of allCwimpiesCacheKeys) {
+                    let cwimpieData = JSON.parse(await allCwimpiesCache.getValueByKey(cwimpieName, true))
+                    allCwimpies.push(cwimpieData)
+                }
+            } else {
+                allCwimpies = await CwimpieService.getAllCwimpies();
+                for (let cwimpie of allCwimpies) {
+                    await allCwimpiesCache.setValueByKey(cwimpie.name, cwimpie)
+                }
+            }
             res.json(allCwimpies);
             return
         } catch (error) {
@@ -31,14 +45,22 @@ module.exports = class CwimpieController {
 
     static async getCwimpie(req: Request, res: Response) {
         try {
-            // const cwimpie = await allCwimpiesCache.getValueByKey(req.params.name)
-            const cwimpie = await allCwimpiesCache.getOrSetCacheWithCallback(req.params.name, await CwimpieService.getCwimpie(req.params.name))
-            // const cwimpie = await CwimpieService.getCwimpie(req.params.name);
+            let cwimpie;
+            let cwimpieResponse;
+
+            cwimpie = JSON.parse(await(allCwimpiesCache.getValueByKey(req.params.name)))
+            cwimpieResponse = cwimpie
             if (!cwimpie) {
-                res.status(404).json(`${req.body.name} is sleeping!`)
-                return
+                cwimpie = await CwimpieService.getCwimpie(req.params.name);
+                if (cwimpie) {
+                    await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
+                    cwimpieResponse = {...cwimpie._doc}
+                } else {
+                    res.status(404).json(`${req.body.name} is sleeping!`)
+                    return
+                }
             }
-            res.json(cwimpie);
+            res.json(cwimpieResponse);
             return
         } catch (error) {
             res.status(500).json({error: error})
@@ -147,7 +169,6 @@ module.exports = class CwimpieController {
         try {
             let nzst = new Date(new Date().toLocaleString("en-US", {timeZone: "Pacific/Auckland"}))
             let midnightNzst = new Date(nzst.setHours(0,0,0,0))
-            console.log(midnightNzst)
 
             let midnightDateMonth = midnightNzst.getMonth()
             let midnightDateDay = midnightNzst.getDate()

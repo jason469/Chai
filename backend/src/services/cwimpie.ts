@@ -1,6 +1,7 @@
 import {INewCwimpieData, IUpdateCwimpieData} from "../utilities/interfaces/cwimpieInterfaces";
 import {IFavourite, IHobby, IProfession} from "../utilities/interfaces/modelInterfaces";
 import {getCwimpieProperty} from "../utilities/functions/cwimpies";
+import {allCwimpiesCache} from "../config/caches/allCaches";
 
 const Cwimpie = require('../models/Cwimpie')
 const User = require('../models/User')
@@ -19,7 +20,7 @@ const miscService = require('../services/misc')
 module.exports = class CwimpieService {
     static async getAllCwimpies() {
         try {
-            const allCwimpies = await Cwimpie.find()
+            return await Cwimpie.find()
                 .populate('colourId', 'hexCode name')
                 .populate('speciesId', 'name type iconName')
                 .populate('favourites', 'name type')
@@ -53,8 +54,7 @@ module.exports = class CwimpieService {
                             model: 'Task'
                         }
                     ],
-                })
-            return allCwimpies;
+                });
         } catch (error) {
             console.log(`Could not fetch cwimpies ${error}`)
         }
@@ -133,7 +133,7 @@ module.exports = class CwimpieService {
                 })
             ;
             if (cwimpie) {
-                return {...cwimpie._doc};
+                return cwimpie;
             } else {
                 return null;
             }
@@ -143,9 +143,9 @@ module.exports = class CwimpieService {
     }
 
     static async createCwimpie(cwimpieData: INewCwimpieData) {
-        var favourites: IFavourite[] = [];
-        var professions: IProfession[] = [];
-        var hobbies: IHobby[] = [];
+        let favourites: IFavourite[] = [];
+        let professions: IProfession[] = [];
+        let hobbies: IHobby[] = [];
 
         for (let favouriteData of cwimpieData.favourites) {
             const newFavourite = await favouriteService.getFavouriteOrCreate(favouriteData)
@@ -194,12 +194,13 @@ module.exports = class CwimpieService {
             if (cwimpie) {
                 cwimpie.photo = url + '/public/media/' + photoName
                 await cwimpie.save()
+                await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
                 return true
             } else {
                 return false
             }
         } catch (error) {
-            console.log(error)
+            console.log(`There was a problem adding ${cwimpieName} photos, error ${error}`)
             return false
         }
     }
@@ -230,12 +231,14 @@ module.exports = class CwimpieService {
             }
             cwimpie[cwimpieKey] = newValue
         }
+        await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
         await cwimpie.save()
     }
 
     static async deleteCwimpie(name: string) {
         try {
             await Cwimpie.deleteOne({name: name});
+            await allCwimpiesCache.deleteValueByKey(name)
         } catch (error) {
             console.log(`Could not delete cwimpie ${error}`)
         }

@@ -8,13 +8,15 @@ export class RedisCache {
     dbNumber: number;
     private client: any;
     private isClientConnected: boolean = false;
+    private prefix: string = "";  // Used to prepend each key in the cache
 
-    constructor(username: string, password: string, host: string, port: number, dbNumber: number) {
+    constructor(username: string, password: string, host: string, port: number, dbNumber: number, prefix:string) {
         this.username = username;
         this.password = password;
         this.host = host;
         this.port = port;
         this.dbNumber = dbNumber;
+        this.prefix = prefix
 
         try {
             this.client =  new Redis(`redis://${this.host}:${this.port}/${this.dbNumber}`)
@@ -27,16 +29,17 @@ export class RedisCache {
     async getAllKeys() {
         if (this.client && this.isClientConnected) {
             try {
-                return await this.client.keys("*")
+                return await this.client.keys(`*${this.prefix}__*`)
             } catch {
                 console.log(`There was an error getting all the keys`)
             }
         }
     }
 
-    async getValueByKey(key: string) {
+    async getValueByKey(key: string, hasPrefix: boolean = false) {
         try {
-            return await this.client.get(key, (error: any, value: any) => {
+            let finalKey = hasPrefix ? key : `${this.prefix}__${key}`
+            return await this.client.get(finalKey, (error: any, value: any) => {
                 if (value != null) {
                     console.log('cache hit')
                     return JSON.parse(value)
@@ -51,52 +54,48 @@ export class RedisCache {
         }
     }
 
-    async setValueByKey(key: string, value: any) {
+    async setValueByKey(key: string, value: any, hasPrefix: boolean = false) {
         if (this.client && this.isClientConnected) {
+            let finalKey = hasPrefix ? key : `${this.prefix}__${key}`
             try {
-                await this.client.set(key, JSON.stringify(value))
+                await this.client.set(finalKey, JSON.stringify(value))
             } catch {
                 console.log(`There was an error setting the value for ${key}`)
             }
         }
     }
 
-    async getOrSetCacheWithCallback(key: string, callback: Function) {
-        // Returns cached data from either cache or function call
+    async deleteValueByKey(key: string, hasPrefix: boolean = false) {
         if (this.client && this.isClientConnected) {
+            let finalKey = hasPrefix ? key : `${this.prefix}__${key}`
             try {
-                return new Promise((resolve: any, reject: any) => {
-                    this.client.get(key, async (error: any, value: any) => {
-                        if (error) return reject(error)
-                        if (value != null) {
-                            console.log('cache hit')
-                            return resolve(JSON.parse(value))
-                        }
-                        const freshData = await callback()
-                        this.client.set(key, JSON.stringify(freshData))
-                        resolve(freshData)
-                    })
-                })
+                await this.client.del(finalKey)
             } catch {
                 console.log(`There was an error setting the value for ${key}`)
             }
         }
     }
 
-    async getOrSetCacheWithValue(key: string, newValue: any = null) {
-        if (this.client && this.isClientConnected) {
-            try {
-                return new Promise((resolve: any, reject: any) => {
-                    this.client.get(key, async (error: any, value: any) => {
-                        if (error) return reject(error)
-                        if (value != null) return resolve(JSON.parse(value))
-                        this.client.set(key, JSON.stringify(newValue))
-                        resolve(value)
-                    })
-                })
-            } catch {
-                console.log(`There was an error setting the value for ${key}`)
-            }
-        }
-    }
+
+    // async getOrSetCacheWithCallback(key: string, callback: Function) {
+    //     // Returns cached data from either cache or function call
+    //     if (this.client && this.isClientConnected) {
+    //         try {
+    //             return new Promise((resolve: any, reject: any) => {
+    //                 this.client.get(`${this.prefix}__${key}`, async (error: any, value: any) => {
+    //                     if (error) return reject(error)
+    //                     if (value != null) {
+    //                         console.log('cache hit')
+    //                         return resolve(JSON.parse(value))
+    //                     }
+    //                     const freshData = await callback()
+    //                     this.client.set(`${this.prefix}__${key}`, JSON.stringify(freshData))
+    //                     resolve(freshData)
+    //                 })
+    //             })
+    //         } catch {
+    //             console.log(`There was an error setting the value for ${key}`)
+    //         }
+    //     }
+    // }
 }

@@ -4,7 +4,6 @@ const UserService = require('../services/user')
 
 module.exports = class UserController {
     static async getAllUsers(req: Request, res: Response) {
-        console.log('get all')
         try {
             const allUsers = await UserService.getAllUsers();
             if (allUsers.length == 0) {
