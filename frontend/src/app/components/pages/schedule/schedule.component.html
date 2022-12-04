@@ -1,5 +1,6 @@
-<div class="allCwimpies_layout">
-  <mat-spinner *ngIf="loading"></mat-spinner>
+<div class="allCwimpies_layout"
+     *ngIf="!loading"
+>
   <app-daily-schedule-card
     *ngFor="let cwimpieSchedule of allCwimpieSchedules"
     [cwimpieSchedule]="cwimpieSchedule"

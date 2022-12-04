@@ -1,11 +1,14 @@
 <h1>Happy Birthday Cwimpies !!</h1>
-<div class="allBirthdayCwimpies_layout">
-  <mat-spinner *ngIf="loading"></mat-spinner>
+<div class="allBirthdayCwimpies_layout"
+     *ngIf="!loading"
+>
   <app-birthday-card
     *ngFor="let cwimpie of allBirthdayCwimpies"
     [cwimpieData]="cwimpie"
   ></app-birthday-card>
   <h1
     *ngIf="allBirthdayCwimpies.length == 0"
-  >No birthdays todayyy</h1>
+  >
+    No birthdays todayyy
+  </h1>
 </div>

@@ -1,6 +1,4 @@
 <div>
-  <mat-spinner *ngIf="loading"></mat-spinner>
-
   <h1>Profile</h1>
   <div
     *ngIf="currentUser"
@@ -8,11 +6,15 @@
     <h2>Welcome {{currentUser.name}}</h2>
   </div>
 
-  <h1>Your cwimpies!</h1>
-  <div class="allCwimpies_layout">
-    <app-profile-cwimpie-card
-      *ngFor="let cwimpie of allCwimpies"
-      [cwimpieData]="cwimpie"
-    ></app-profile-cwimpie-card>
+  <div
+    *ngIf="!loading"
+  >
+    <h1>Your cwimpies!</h1>
+    <div class="allCwimpies_layout">
+      <app-profile-cwimpie-card
+        *ngFor="let cwimpie of allCwimpies"
+        [cwimpieData]="cwimpie"
+      ></app-profile-cwimpie-card>
+    </div>
   </div>
 </div>

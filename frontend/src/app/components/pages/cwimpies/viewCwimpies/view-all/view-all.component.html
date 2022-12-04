@@ -1,5 +1,7 @@
-<div class="allCwimpies_layout">
-  <mat-spinner *ngIf="loading"></mat-spinner>
+<div class="allCwimpies_layout"
+     *ngIf="!loading"
+>
+<!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
   <app-reduced-cwimpie-card
     *ngFor="let cwimpie of allCwimpies"
     [cwimpieData]="cwimpie"
