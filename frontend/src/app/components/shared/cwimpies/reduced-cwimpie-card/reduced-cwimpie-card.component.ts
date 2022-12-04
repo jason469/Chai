@@ -1,11 +1,11 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, ElementRef,
   EventEmitter,
   Input,
   OnInit,
-  Output
+  Output, Renderer2, ViewChild
 } from '@angular/core';
 import {FullCwimpieModalComponent} from "../full-cwimpie-modal/full-cwimpie-modal.component";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
@@ -25,6 +25,7 @@ import {Router} from "@angular/router";
 export class ReducedCwimpieCardComponent implements OnInit {
   @Input('cwimpieData') data!: Cwimpie;
   @Output() deletedCwimpieName: EventEmitter<string> = new EventEmitter();
+  @ViewChild('sex') private sexContainer!: ElementRef;
   modalRef!: BsModalRef
   initialData!: any
 
@@ -34,7 +35,9 @@ export class ReducedCwimpieCardComponent implements OnInit {
     private cwimpieUpdateDataService: CwimpieUpdateDataService,
     private modalService: BsModalService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private el:ElementRef
   ) {
   }
 
@@ -110,6 +113,7 @@ export class ReducedCwimpieCardComponent implements OnInit {
 
   ngOnInit(cwimpieData?:Cwimpie): void {
     if (cwimpieData) {
+      this.renderer.removeChild(this.el.nativeElement, this.sexContainer.nativeElement)
       this.initialData = cwimpieData
     } else {
       this.initialData = this.data

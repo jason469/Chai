@@ -466,13 +466,13 @@ export class AddCwimpieComponent implements OnInit {
           this.cwimpieFormService.postCwimpiePhoto(
             photoData, this.model.name
           ).subscribe(
-            (responseData: any) => {
+            async (responseData: any) => {
               this.form.reset()
-              this.toastrService.success(
+              await this.toastrService.success(
                 `Yayyy well done`,
-                `${this.model.name} was created`
+                `A new cwimpie was created`
               );
-              this.router.navigate(['/cwimpies/view-cwimpies'])
+              await this.router.navigate(['/cwimpies/view-cwimpies'])
             }
           )
         }, error => {
