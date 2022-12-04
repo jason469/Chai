@@ -62,6 +62,8 @@ import {
 import { StartComponent } from './components/pages/start/start.component';
 import { BirthdayCardComponent } from './components/shared/start/birthday-card/birthday-card.component';
 import { ProfileCwimpieCardComponent } from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
+import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
+import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
 
 
 @NgModule({
@@ -148,7 +150,9 @@ import { ProfileCwimpieCardComponent } from './components/shared/profile/profile
     ModalModule.forRoot(),
     NgxMapboxGLModule.withConfig({
       accessToken: environment.mapbox.accessToken, // Optional, can also be set per map (accessToken input of mgl-map)
-    })
+    }),
+    MdbCollapseModule,
+    MdbDropdownModule
   ],
   providers: [
     AuthService,

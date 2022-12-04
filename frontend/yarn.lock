@@ -1383,6 +1383,11 @@
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
+"@fortawesome/fontawesome-free@*":
+  version "6.2.1"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz"
+  integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
+
 "@gar/promisify@^1.1.3":
   version "1.1.3"
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz"
@@ -3231,7 +3236,7 @@ ajv@8.9.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-angular-moment@*:
+angular-moment@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/angular-moment/-/angular-moment-1.3.0.tgz"
   integrity sha512-KG8rvO9MoaBLwtGnxTeUveSyNtrL+RNgGl1zqWN36+HDCCVGk2DGWOzqKWB6o+eTTbO3Opn4hupWKIElc8XETA==
@@ -5572,6 +5577,13 @@ mapbox-gl@^2.11.0:
     supercluster "^7.1.5"
     tinyqueue "^2.0.3"
     vt-pbf "^3.1.3"
+
+mdb-angular-ui-kit@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/mdb-angular-ui-kit/-/mdb-angular-ui-kit-3.0.0.tgz"
+  integrity sha512-D1gP9pC6CwYHg1O6WJeXTr6k78FNU/A55Gsez5ICTj6rM2sn3A3FoxrIYz8OGgaAVhm5NjBxX7N+2R0EF7dVwQ==
+  dependencies:
+    tslib "^2.0.0"
 
 media-typer@0.3.0:
   version "0.3.0"

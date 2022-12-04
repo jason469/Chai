@@ -2,7 +2,11 @@
   <mat-spinner *ngIf="loading"></mat-spinner>
 
   <h1>Profile</h1>
-  <h2>Welcome {{currentUser.name}}</h2>
+  <div
+    *ngIf="currentUser"
+  >
+    <h2>Welcome {{currentUser.name}}</h2>
+  </div>
 
   <h1>Your cwimpies!</h1>
   <div class="allCwimpies_layout">

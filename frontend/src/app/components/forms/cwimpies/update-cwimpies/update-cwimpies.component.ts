@@ -366,7 +366,6 @@ export class UpdateCwimpiesComponent implements OnInit, OnDestroy {
   ngAfterViewInit(): void {
     this.cwimpieUpdateDataServiceSubscription = this.cwimpieUpdateDataService.getData().subscribe({
       next: (data: Cwimpie) => {
-        console.log(data)
         this.initialData = data
         this.model = this.initialData
       }

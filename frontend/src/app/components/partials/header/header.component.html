@@ -1,108 +1,127 @@
-<div class="navbar">
-  <div
-    *ngIf="isAuthenticated"
-  >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Chai</a>
     <button
-      mat-button
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}"
+      class="navbar-toggler"
+      type="button"
+      (click)="noListNav.toggle()"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-      Chai
+      <i class="fas fa-bars"></i>
     </button>
-  </div>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarNavAltMarkup"
+      mdbCollapse
+      #noListNav="mdbCollapse"
+    >
+      <div class="navbar-nav"
+           *ngIf="!isAuthenticated"
+      >
+        <a class="nav-link"
+           routerLink="/login"
+           routerLinkActive="active"
+        >Login</a>
+      </div>
+      <div class="navbar-nav"
+           *ngIf="isAuthenticated"
+      >
+        <a class="nav-link"
+           routerLink="/schedule"
+           routerLinkActive="active"
+        >
+          Daily Schedule
+        </a>
+        <ul class="navbar-nav">
+          <li
+            mdbDropdown
+            class="nav-link dropdown"
+          >
+            <a
+              class="nav-link dropdown-toggle"
+              id="cwimpieMenu"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+              routerLinkActive="active"
+            >
+              Cwimpies
+            </a>
+            <ul
+              mdbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="cwimpieMenu"
+            >
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/cwimpies/view-cwimpies"
+                   routerLinkActive="active"
+                >
+                  View Cwimpies
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/cwimpies/generate"
+                   routerLinkActive="active"
+                >
+                  Generate
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/cwimpies/commandments"
+                   routerLinkActive="active"
+                >
+                  Commandments
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/cwimpies/locations"
+                   routerLinkActive="active"
+                >
+                  Locations
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <a class="nav-link">
+          <li mdbDropdown class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="profileMenu"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+              routerLinkActive="active"
+            >
+              Profile
+            </a>
+            <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="profileMenu">
+              <li>
+                <a class="dropdown-item"
+                   routerLink="/profile"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact: true}"
+                >
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item"
+                   (click)="onLogout()"
+                >
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        </a>
 
-  <div
-    *ngIf="!isAuthenticated"
-  >
-    <button
-      mat-button
-      routerLink="/login"
-      routerLinkActive="active"
-    >
-      Login
-    </button>
+      </div>
+    </div>
   </div>
-
-  <div
-    *ngIf="isAuthenticated"
-  >
-    <button
-      mat-button
-      [matMenuTriggerFor]="cwimpieMenu"
-      routerLinkActive="active"
-    >
-      Cwimpies!
-    </button>
-    <mat-menu #cwimpieMenu="matMenu" xPosition="before">
-      <button
-        mat-button
-        routerLink="/cwimpies/view-cwimpies"
-        routerLinkActive="active"
-      >
-        View Cwimpies!
-      </button>
-      <button
-        mat-button
-        routerLink="/cwimpies/generate"
-        routerLinkActive="active"
-      >
-        Generate
-      </button>
-      <button
-        mat-button
-        routerLink="/cwimpies/commandments"
-        routerLinkActive="active"
-      >
-        Commandments
-      </button>
-      <button
-        mat-button
-        routerLink="/cwimpies/locations"
-        routerLinkActive="active"
-      >
-        Locations
-      </button>
-    </mat-menu>
-  </div>
-
-  <div
-    *ngIf="isAuthenticated"
-  >
-    <button
-      mat-button
-      routerLink="/schedule"
-      routerLinkActive="active"
-    >
-      Daily schedule
-    </button>
-  </div>
-
-  <div
-    *ngIf="isAuthenticated"
-  >
-    <button
-      mat-button
-      [matMenuTriggerFor]="profileMenu"
-      routerLinkActive="active"
-    >
-      Profile
-    </button>
-    <mat-menu #profileMenu="matMenu" xPosition="before">
-      <button
-        mat-menu-item
-        routerLink="/profile"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-      >
-        Profile
-      </button>
-      <button
-        mat-menu-item
-        (click)="onLogout()"
-      >
-        Logout
-      </button>
-    </mat-menu>
-  </div>
-</div>
+</nav>
