@@ -46,10 +46,8 @@
     <div id="primaryParent">
       Primary Parent: {{data.primaryParent!.name}}
     </div>
-    <div id="stamp">
-      Primary Colour: {{data.stamp!.primary_colour!.name}} <br>
-      Accent Colour: {{data.stamp!.accent_colour!.name}} <br>
-      Font: {{data.stamp!.font}}
-    </div>
   </div>
+  <app-cwimpie-stamp
+    [stampData]="stampData"
+  ></app-cwimpie-stamp>
 </div>

@@ -19,7 +19,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-reduced-cwimpie-card',
   templateUrl: './reduced-cwimpie-card.component.html',
-  styleUrls: ['./reduced-cwimpie-card.component.css'],
+  styleUrls: ['./reduced-cwimpie-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReducedCwimpieCardComponent implements OnInit {

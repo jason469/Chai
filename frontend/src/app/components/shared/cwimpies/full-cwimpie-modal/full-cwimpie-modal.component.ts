@@ -3,17 +3,19 @@ import {BsModalRef} from 'ngx-bootstrap/modal';
 import {CwimpieModalDataService} from "../../../../services/cwimpies/cwimpieModalData.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../shared/models/models";
+import {IStampData} from "../../../../shared/interfaces/IStampData";
 
 @Component({
   selector: 'app-full-cwimpie-modal',
   templateUrl: './full-cwimpie-modal.component.html',
-  styleUrls: ['./full-cwimpie-modal.component.css']
+  styleUrls: ['./full-cwimpie-modal.component.scss']
 })
 export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   @Input('cwimpieData') public modalRef!: BsModalRef;
   cwimpieModalDataServiceSubscription!: Subscription
   data!: Cwimpie;
   birthDateString!: string;
+  stampData!: IStampData
 
   constructor(
     private cwimpieModalDataService: CwimpieModalDataService,
@@ -32,6 +34,13 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
             month: "long",
             year: "numeric",
           })
+        }
+        this.stampData = {
+          name: data.name,
+          primaryColour: data.stamp!.primary_colour!.hexCode!,
+          accentColour: data.stamp!.accent_colour!.hexCode!,
+          font: data.stamp!.font!,
+          speciesName: data.species!.name
         }
       }
     });

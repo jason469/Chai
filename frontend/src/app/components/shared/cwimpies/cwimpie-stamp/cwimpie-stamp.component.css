@@ -1,0 +1,37 @@
+:root {
+  --accentColour: #000000;
+  --primaryColour: #000000;
+  --font: "Arial";
+}
+
+.stamp__background {
+  height: 10rem;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: repeating-linear-gradient(
+      45deg,
+      var(--accentColour) 0px,
+      var(--accentColour) 20px,
+      #FFFFFF 20px,
+      #FFFFFF 40px
+  );
+}
+
+.stamp__species {
+}
+
+.stamp__species__icon {
+  height: 5rem;
+  color: var(--primaryColour);
+}
+
+.stamp__name {
+  font-size: 2rem;
+  font-weight: bold;
+  font-style: italic;
+  font-family: var(--font);
+}

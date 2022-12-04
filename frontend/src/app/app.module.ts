@@ -64,6 +64,7 @@ import { BirthdayCardComponent } from './components/shared/start/birthday-card/b
 import { ProfileCwimpieCardComponent } from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
+import { CwimpieStampComponent } from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
     FormlyFieldFile,
     StartComponent,
     BirthdayCardComponent,
-    ProfileCwimpieCardComponent
+    ProfileCwimpieCardComponent,
+    CwimpieStampComponent
   ],
   imports: [
     BrowserModule,
