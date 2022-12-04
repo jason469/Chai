@@ -181,9 +181,11 @@ export class LocationComponent implements OnInit {
   async loadCwimpieIconsDatasource() {
     let cwimpieIcons: any[] = []
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
+      console.log(allData)
       if (allData.length != 0) {
         for (let data of allData) {
           let coords = data.primaryParentId.countryId.coordinates
+
           let latLngCoordinates = coords[Math.floor(Math.random() * coords.length)]
           let lngLatCoordinates = [latLngCoordinates[1], latLngCoordinates[0]]
           cwimpieIcons.push({

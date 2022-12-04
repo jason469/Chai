@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {ColourMenuService} from "../../../../services/misc/helpMenu/colourMenu.service";
 import {Subscription} from "rxjs";
 import {Colour} from "../../../../shared/models/models";
@@ -8,7 +8,7 @@ import {Colour} from "../../../../shared/models/models";
   templateUrl: './colour-menu.component.html',
   styleUrls: ['./colour-menu.component.scss']
 })
-export class ColourMenuComponent implements OnInit {
+export class ColourMenuComponent implements OnInit, OnDestroy {
   private getAllColoursSub: Subscription | undefined;
   allColours: Colour[] = [];
   @ViewChild('colourMenu') private menu!: ElementRef;
@@ -38,6 +38,10 @@ export class ColourMenuComponent implements OnInit {
 
   hideMenu() {
     this.renderer.setStyle(this.menu.nativeElement, 'visibility', 'hidden')
+  }
+
+  ngOnDestroy(): void {
+    this.getAllColoursSub?.unsubscribe()
   }
 
 }

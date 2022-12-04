@@ -1,5 +1,6 @@
 const Fixtures = require('node-mongodb-fixtures');
 
+// Note that the fixture file needs to be the name of the Collection to be filled
 export const loadFixtures = () => {
     const options = null;
     const fixtures = new Fixtures({
