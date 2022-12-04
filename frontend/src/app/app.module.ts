@@ -65,6 +65,8 @@ import { ProfileCwimpieCardComponent } from './components/shared/profile/profile
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
 import { CwimpieStampComponent } from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
+import { ColourMenuComponent } from './components/shared/helpMenus/colour-menu/colour-menu.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -93,7 +95,8 @@ import { CwimpieStampComponent } from './components/shared/cwimpies/cwimpie-stam
     StartComponent,
     BirthdayCardComponent,
     ProfileCwimpieCardComponent,
-    CwimpieStampComponent
+    CwimpieStampComponent,
+    ColourMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -154,7 +157,8 @@ import { CwimpieStampComponent } from './components/shared/cwimpies/cwimpie-stam
       accessToken: environment.mapbox.accessToken, // Optional, can also be set per map (accessToken input of mgl-map)
     }),
     MdbCollapseModule,
-    MdbDropdownModule
+    MdbDropdownModule,
+    MatTooltipModule
   ],
   providers: [
     AuthService,

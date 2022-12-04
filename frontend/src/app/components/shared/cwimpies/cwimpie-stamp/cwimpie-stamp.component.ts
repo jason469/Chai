@@ -1,6 +1,5 @@
-import {Component, ElementRef, HostBinding, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IStampData} from "../../../../shared/interfaces/IStampData";
-import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -14,7 +13,6 @@ export class CwimpieStampComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private sanitizer: DomSanitizer
   ) {
   }
 
