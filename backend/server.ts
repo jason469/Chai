@@ -5,7 +5,6 @@ import {cacheSetUpConfig} from "./src/config/caches/cacheSetUp.config";
 
 const express = require('express');
 const cors = require("cors");
-const path = require("path");
 
 const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');

@@ -14,6 +14,11 @@
   gap: 0.5rem;
   border: 0.5rem solid var(--primaryColour);
   background-color: var(--accentColour);
+  background-image: radial-gradient(#fff 10%, transparent 11%),
+  radial-gradient(#fff 10%, transparent 11%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  background-repeat: repeat;
 }
 
 .stamp__species {
