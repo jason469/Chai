@@ -1,9 +1,38 @@
+<!-- Tabs navs -->
+<ul
+  class="nav nav-tabs mb-3"
+  id="userFilters"
+  role="tablist"
+  appActiveTab
+>
+  <li
+    #options
+    id="{{option.username}}Filter"
+    class="nav-item"
+    role="presentation"
+    *ngFor="let option of filterOptions;"
+    appFilterTab
+    [filterValue]="option.username"
+    (filterTabData)="filterCwimpies($event)"
+  >
+    <p
+      class="nav-link"
+      data-mdb-toggle="tab"
+      role="tab"
+      id="{{option.username}}Filter"
+    >
+      {{option.displayName}}
+    </p>
+  </li>
+</ul>
+<!-- Tabs navs -->
+
 <div class="allCwimpies_layout"
      *ngIf="!loading"
 >
-<!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
+  <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
   <app-reduced-cwimpie-card
-    *ngFor="let cwimpie of allCwimpies"
+    *ngFor="let cwimpie of currentCwimpies"
     [cwimpieData]="cwimpie"
     (deletedCwimpieName)="refreshAllCwimpies($event)"
   ></app-reduced-cwimpie-card>

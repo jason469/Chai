@@ -1,14 +1,43 @@
 <h1>Happy Birthday Cwimpies !!</h1>
 <div class="allBirthdayCwimpies_layout"
-     *ngIf="!loading"
+     *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
 >
-  <app-birthday-card
-    *ngFor="let cwimpie of allBirthdayCwimpies"
-    [cwimpieData]="cwimpie"
-  ></app-birthday-card>
-  <h1
-    *ngIf="allBirthdayCwimpies.length == 0"
+  <div
+    class="bg-image no-birthdays"
+    *ngIf="(allBirthdayCwimpies.length == 0)"
+    style="background-image: url('/assets/start-page/all-cwimpies.jpg')"
   >
-    No birthdays todayyy
-  </h1>
+    <div
+      class="mask"
+    >
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1
+          >
+            No birthdays todayyy
+          </h1>
+          <a class="btn btn-outline-light btn-lg" routerLink="/cwimpies/view-cwimpies" role="button">
+            Visit the cwimpies !
+          </a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-light text-center"
+    *ngIf="(allBirthdayCwimpies.length != 0)"
+  >
+    <mdb-carousel [controls]="true" [indicators]="true" id="birthdayCarousel" class="carousel-fade">
+      <mdb-carousel-item
+        *ngFor="let cwimpie of allBirthdayCwimpies"
+      >
+        <app-birthday-card
+          [cwimpieData]="cwimpie"
+        ></app-birthday-card>
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div>
+
 </div>

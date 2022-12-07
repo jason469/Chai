@@ -56,17 +56,21 @@ import {
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {LegendMenuComponent} from './components/partials/location/legend-menu/legend-menu.component';
 import {LegendMenuItemDirective} from './directives/cwimpies/location/legend/legend-menu-item.directive';
+import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
+import {StartComponent} from './components/pages/start/start.component';
+import {BirthdayCardComponent} from './components/shared/start/birthday-card/birthday-card.component';
 import {
-  FormlyFieldFile,
-} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
-import { StartComponent } from './components/pages/start/start.component';
-import { BirthdayCardComponent } from './components/shared/start/birthday-card/birthday-card.component';
-import { ProfileCwimpieCardComponent } from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
+  ProfileCwimpieCardComponent
+} from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
-import { CwimpieStampComponent } from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
-import { ColourMenuComponent } from './components/shared/helpMenus/colour-menu/colour-menu.component';
+import {CwimpieStampComponent} from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
+import {ColourMenuComponent} from './components/shared/helpMenus/colour-menu/colour-menu.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
+import {FooterComponent} from './components/partials/footer/footer.component';
+import {FilterTabDirective} from './directives/cwimpies/viewAll/filter-tab.directive';
+import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.directive";
 
 
 @NgModule({
@@ -96,7 +100,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     BirthdayCardComponent,
     ProfileCwimpieCardComponent,
     CwimpieStampComponent,
-    ColourMenuComponent
+    ColourMenuComponent,
+    FooterComponent,
+    FilterTabDirective,
+    ActiveTabDirective
   ],
   imports: [
     BrowserModule,
@@ -158,7 +165,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     }),
     MdbCollapseModule,
     MdbDropdownModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MdbCarouselModule
   ],
   providers: [
     AuthService,

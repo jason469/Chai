@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
@@ -13,10 +13,41 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getAllCwimpiesSub: Subscription | undefined;
   allCwimpies: Cwimpie[] = [];
+  currentCwimpies: Cwimpie[] = [];
+
+  public filterOptions: any = [
+    {
+      displayName: 'All',
+      username: 'all'
+    },
+    {
+      displayName: 'Jason',
+      username: 'jason'
+    },
+    {
+      displayName: 'Sue',
+      username: 'sue'
+    },
+  ];
 
   constructor(
     private viewCwimpiesService: ViewCwimpiesService
   ) {
+  }
+
+  filterCwimpies(event: any) {
+    console.log(event)
+    console.log(this.currentCwimpies[0].primaryParent)
+    switch (event.filterValue) {
+      case "all":
+        this.currentCwimpies = this.allCwimpies.filter((cwimpie:Cwimpie) => cwimpie );
+        break
+      case "jason":
+      case "sue":
+        this.currentCwimpies = this.allCwimpies.filter((cwimpie:Cwimpie) => cwimpie.primaryParent!.username == event.filterValue);
+    }
+
+
   }
 
   ngOnInit(): void {
@@ -41,15 +72,17 @@ export class ViewAllComponent implements OnInit, OnDestroy {
             cwimpieData.partner = data.partnerId.name
           }
           this.allCwimpies.push(cwimpieData)
+          this.currentCwimpies.push(cwimpieData)
         }
       }
+
       this.loading = false;
     })
   }
 
-  refreshAllCwimpies(deleteCwimpieName:string) {
+  refreshAllCwimpies(deleteCwimpieName: string) {
     let deletedCwimpieIndex = this.allCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
-    this.allCwimpies.splice(deletedCwimpieIndex, 1);
+    this.currentCwimpies.splice(deletedCwimpieIndex, 1);
   }
 
   ngOnDestroy() {

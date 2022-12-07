@@ -7,6 +7,14 @@
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
 
+@import "app/components/pages/start/start.component";
+@import "app/components/forms/cwimpies/add-cwimpie/add-cwimpie.component";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html, body {
   height: 100%;
 }
@@ -20,27 +28,3 @@ body {
   cursor: pointer;
 }
 
-// Formly
-.valueType {
-  formly-group {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.addCwimpies_page1 {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.mat-stepper-next, .mat-stepper-previous{
-  display: none;
-}
-
-.cdk-global-overlay-wrapper, .cdk-overlay-container {
-  z-index: 10000 !important;
-}

@@ -12,8 +12,8 @@ export class LegendMenuItemDirective {
   }
 
   @Input() prefix: string = ''
-  @Output() menuItemData: EventEmitter<any> = new EventEmitter<any>()
   @Input() isMultiStopItem: boolean = false;
+  @Output() menuItemData: EventEmitter<any> = new EventEmitter<any>()
 
   @HostBinding('style.textDecoration') textDecoration: string = ''
   viewStatus: boolean = true
