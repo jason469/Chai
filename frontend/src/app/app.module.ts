@@ -13,8 +13,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
 import {GenerateComponent} from './components/pages/cwimpies/generate/generate.component';
-import {ProfileComponent} from './components/pages/profile/profile.component';
-import {ScheduleComponent} from './components/pages/schedule/schedule.component';
 import {ViewAllComponent} from './components/pages/cwimpies/viewCwimpies/view-all/view-all.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthComponent} from "./components/auth/auth.component";
@@ -50,18 +48,10 @@ import {FileValueAccessor} from "./shared/customFormElements/fields/file-value-a
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
 import {LocationComponent} from './components/pages/cwimpies/location/location.component';
-import {
-  DailyScheduleCardComponent
-} from './components/shared/dailySchedule/daily-schedule-card/daily-schedule-card.component';
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {LegendMenuComponent} from './components/partials/location/legend-menu/legend-menu.component';
 import {LegendMenuItemDirective} from './directives/cwimpies/location/legend/legend-menu-item.directive';
 import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
-import {StartComponent} from './components/pages/start/start.component';
-import {BirthdayCardComponent} from './components/shared/start/birthday-card/birthday-card.component';
-import {
-  ProfileCwimpieCardComponent
-} from './components/shared/profile/profile-cwimpie-card/profile-cwimpie-card.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
 import {CwimpieStampComponent} from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
@@ -78,8 +68,6 @@ import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.direc
     AppComponent,
     HeaderComponent,
     GenerateComponent,
-    ProfileComponent,
-    ScheduleComponent,
     ViewAllComponent,
     AuthComponent,
     ReducedCwimpieCardComponent,
@@ -91,14 +79,10 @@ import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.direc
     UpdateCwimpiesComponent,
     StepperComponent,
     LocationComponent,
-    DailyScheduleCardComponent,
     LegendMenuComponent,
     LegendMenuItemDirective,
     FileValueAccessor,
     FormlyFieldFile,
-    StartComponent,
-    BirthdayCardComponent,
-    ProfileCwimpieCardComponent,
     CwimpieStampComponent,
     ColourMenuComponent,
     FooterComponent,
@@ -179,6 +163,7 @@ import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.direc
     CwimpieFormService,
     BsModalService,
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
