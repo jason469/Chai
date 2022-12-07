@@ -6,24 +6,23 @@ import {AddCwimpieComponent} from "../../../forms/cwimpies/add-cwimpie/add-cwimp
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormlyModule} from "@ngx-formly/core";
 import {MatButtonModule} from "@angular/material/button";
-import {ColourMenuComponent} from "../../../shared/helpMenus/colour-menu/colour-menu.component";
+import {ColourMenuModule} from "../../../shared/helpMenus/colour-menu/colour-menu.module";
 
 
 @NgModule({
   declarations: [
     AddCwimpieComponent,
-    ColourMenuComponent,
   ],
   exports: [
     AddCwimpieComponent,
-    ColourMenuComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
     ReactiveFormsModule,
     FormlyModule,
-    MatButtonModule
+    MatButtonModule,
+    ColourMenuModule,
   ]
 })
 export class GenerateModule { }

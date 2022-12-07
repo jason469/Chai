@@ -7,11 +7,6 @@ import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponent} from './components/partials/header/header.component';
 import {ToastrModule} from 'ngx-toastr'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatMenuModule,} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from "@angular/material/button";
 import {AppRoutingModule} from "./app-routing.module";
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule} from '@ngx-formly/core';
@@ -20,21 +15,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./services/auth/auth.service";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
 import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
-import {MatCardModule} from "@angular/material/card";
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatNativeDateModule} from "@angular/material/core";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper/panel-wrapper.component";
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
 import {AddNewFieldComponent} from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
-import {UpdateCwimpiesComponent} from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
 import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
-import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
@@ -42,34 +29,39 @@ import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import {FooterComponent} from './components/partials/footer/footer.component';
-import {GenerateModule} from "./components/pages/cwimpies/generate/generate.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    // All page components
     HeaderComponent,
     FooterComponent,
+
+    // Form components
     PanelWrapperComponent,
     AddNewFieldComponent,
-    UpdateCwimpiesComponent,
     StepperComponent,
     FileValueAccessor,
     FormlyFieldFile,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+
+    // Service Worker Modules for PWA config
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    AppRoutingModule,
-    ReactiveFormsModule,
+
+    // Global form settings
     FormlyModule.forRoot({
       types: [
         {name: 'file', component: FormlyFieldFile, wrappers: []},
@@ -91,49 +83,41 @@ import {GenerateModule} from "./components/pages/cwimpies/generate/generate.modu
       ],
     }),
     FormlyMaterialModule,
-    BrowserAnimationsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    HttpClientModule,
+    ReactiveFormsModule,
+    NgxMatFileInputModule,
+    MatNativeDateModule,
+    FormlyMatDatepickerModule,
+
+    // Global Toastr Module
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       newestOnTop: false
     }),
-    MatCardModule,
-    MatGridListModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatRippleModule,
-    MatProgressBarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgxMatFileInputModule,
-    MatNativeDateModule,
-    FormlyMatDatepickerModule,
-    MatStepperModule,
+
+    // Global Modal Module
     ModalModule.forRoot(),
+
+    // Global Mapbox Module
     NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapbox.accessToken, // Optional, can also be set per map (accessToken input of mgl-map)
+      accessToken: environment.mapbox.accessToken,
     }),
-    MdbCollapseModule,
+
+    // Global Page Modules
     MdbDropdownModule,
-    MatTooltipModule,
-    MdbCarouselModule,
-    GenerateModule
+    MdbCollapseModule,
+    MatStepperModule,
   ],
   providers: [
     AuthService,
     AuthGuardService,
+    BsModalService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
     },
-    CwimpieFormService,
-    BsModalService,
   ],
   exports: [],
   bootstrap: [AppComponent]

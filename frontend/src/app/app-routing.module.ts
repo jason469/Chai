@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 import {AuthComponent} from "./components/auth/auth.component";
-import {AuthGuardService} from "./services/auth/auth-guard.service";
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthComponent},
@@ -21,6 +20,4 @@ const appRoutes: Routes = [
   ]
 
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

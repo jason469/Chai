@@ -12,6 +12,10 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {FullCwimpieModalComponent} from "../../../../shared/cwimpies/full-cwimpie-modal/full-cwimpie-modal.component";
 import {CwimpieStampComponent} from "../../../../shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component";
+import {UpdateCwimpiesComponent} from "../../../../forms/cwimpies/update-cwimpies/update-cwimpies.component";
+import {FormlyModule} from "@ngx-formly/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {ColourMenuModule} from "../../../../shared/helpMenus/colour-menu/colour-menu.module";
 
 
 @NgModule({
@@ -21,6 +25,7 @@ import {CwimpieStampComponent} from "../../../../shared/cwimpies/cwimpie-stamp/c
     ReducedCwimpieCardComponent,
     FullCwimpieModalComponent,
     CwimpieStampComponent,
+    UpdateCwimpiesComponent,
   ],
   exports: [
     FilterTabDirective,
@@ -28,6 +33,7 @@ import {CwimpieStampComponent} from "../../../../shared/cwimpies/cwimpie-stamp/c
     ReducedCwimpieCardComponent,
     FullCwimpieModalComponent,
     CwimpieStampComponent,
+    UpdateCwimpiesComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +41,9 @@ import {CwimpieStampComponent} from "../../../../shared/cwimpies/cwimpie-stamp/c
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
+    FormlyModule,
+    ReactiveFormsModule,
+    ColourMenuModule,
   ]
 })
 export class ViewAllModule { }
