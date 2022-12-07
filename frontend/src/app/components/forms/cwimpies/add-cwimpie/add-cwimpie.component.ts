@@ -472,7 +472,7 @@ export class AddCwimpieComponent implements OnInit {
                 `Yayyy well done`,
                 `A new cwimpie was created`
               );
-              await this.router.navigate(['/cwimpies/view-cwimpies'])
+              await this.router.navigate(['/cwimpies'])
             }
           )
         }, error => {
