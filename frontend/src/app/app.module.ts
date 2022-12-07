@@ -12,10 +12,7 @@ import {MatMenuModule,} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
-import {GenerateComponent} from './components/pages/cwimpies/generate/generate.component';
-import {ViewAllComponent} from './components/pages/cwimpies/viewCwimpies/view-all/view-all.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {AuthComponent} from "./components/auth/auth.component";
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyMaterialModule} from '@ngx-formly/material';
@@ -23,22 +20,16 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./services/auth/auth.service";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
 import {AuthInterceptorService} from "./services/auth/auth-interceptor.service";
-import {
-  ReducedCwimpieCardComponent
-} from './components/shared/cwimpies/reduced-cwimpie-card/reduced-cwimpie-card.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatTabsModule} from "@angular/material/tabs";
-import {FullCwimpieModalComponent} from './components/shared/cwimpies/full-cwimpie-modal/full-cwimpie-modal.component';
 import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {AddCwimpieComponent} from './components/forms/cwimpies/add-cwimpie/add-cwimpie.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import {PanelWrapperComponent} from "./shared/customFormElements/ui/wrappers/panel-wrapper/panel-wrapper.component";
 import {FormlyMatDatepickerModule} from '@ngx-formly/material/datepicker';
-import {CommandmentsComponent} from './components/pages/cwimpies/commandments/commandments.component';
 import {AddNewFieldComponent} from './shared/customFormElements/ui/buttons/add-new-field/add-new-field.component';
 import {UpdateCwimpiesComponent} from './components/forms/cwimpies/update-cwimpies/update-cwimpies.component';
 import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/stepper.component';
@@ -47,47 +38,27 @@ import {CwimpieFormService} from "./services/cwimpies/cwimpieForm.service";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {hexCodeValidator} from "./shared/functions/fileValidation";
-import {LocationComponent} from './components/pages/cwimpies/location/location.component';
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
-import {LegendMenuComponent} from './components/partials/location/legend-menu/legend-menu.component';
-import {LegendMenuItemDirective} from './directives/cwimpies/location/legend/legend-menu-item.directive';
 import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
-import {CwimpieStampComponent} from './components/shared/cwimpies/cwimpie-stamp/cwimpie-stamp.component';
-import {ColourMenuComponent} from './components/shared/helpMenus/colour-menu/colour-menu.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import {FooterComponent} from './components/partials/footer/footer.component';
-import {FilterTabDirective} from './directives/cwimpies/viewAll/filter-tab.directive';
-import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.directive";
+import {GenerateModule} from "./components/pages/cwimpies/generate/generate.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    GenerateComponent,
-    ViewAllComponent,
-    AuthComponent,
-    ReducedCwimpieCardComponent,
-    FullCwimpieModalComponent,
-    AddCwimpieComponent,
-    CommandmentsComponent,
+    FooterComponent,
     PanelWrapperComponent,
     AddNewFieldComponent,
     UpdateCwimpiesComponent,
     StepperComponent,
-    LocationComponent,
-    LegendMenuComponent,
-    LegendMenuItemDirective,
     FileValueAccessor,
     FormlyFieldFile,
-    CwimpieStampComponent,
-    ColourMenuComponent,
-    FooterComponent,
-    FilterTabDirective,
-    ActiveTabDirective
   ],
   imports: [
     BrowserModule,
@@ -150,7 +121,8 @@ import {ActiveTabDirective} from "./directives/cwimpies/viewAll/active-tab.direc
     MdbCollapseModule,
     MdbDropdownModule,
     MatTooltipModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    GenerateModule
   ],
   providers: [
     AuthService,

@@ -25,7 +25,7 @@
            *ngIf="!isAuthenticated"
       >
         <a class="nav-link"
-           routerLink="/login"
+           routerLink="/auth/login"
            routerLinkActive="active"
         >Login</a>
       </div>
@@ -60,8 +60,9 @@
             >
               <li>
                 <a class="dropdown-item"
-                   routerLink="/cwimpies/view-cwimpies"
+                   routerLink="/cwimpies"
                    routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact: true}"
                 >
                   View Cwimpies
                 </a>

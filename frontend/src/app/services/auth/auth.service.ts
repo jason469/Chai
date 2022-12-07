@@ -122,7 +122,7 @@ export class AuthService {
     this.user.next(null);
     this.loggedIn = false;
     localStorage.removeItem('userData');
-    this.router.navigate(['/login'])
+    this.router.navigate(['/auth/login'])
   }
 
   getLoginStatus() {
