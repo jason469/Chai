@@ -2,13 +2,21 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
+import {listAnimation} from "./view-all.animation";
+
 
 @Component({
   selector: 'app-view-all',
   templateUrl: './view-all.component.html',
   styleUrls: ['./view-all.component.scss'],
-  providers: []
+  providers: [],
+  animations: [
+    listAnimation
+  ]
 })
+
+
+
 export class ViewAllComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getAllCwimpiesSub: Subscription | undefined;
@@ -36,15 +44,19 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   }
 
   filterCwimpies(event: any) {
-    console.log(event)
-    console.log(this.currentCwimpies[0].primaryParent)
-    switch (event.filterValue) {
+    const username = event.filterValue
+    switch (username) {
       case "all":
-        this.currentCwimpies = this.allCwimpies.filter((cwimpie:Cwimpie) => cwimpie );
+        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
         break
       case "jason":
+        console.log('all cwimpies', this.allCwimpies)
+        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
+        break
       case "sue":
-        this.currentCwimpies = this.allCwimpies.filter((cwimpie:Cwimpie) => cwimpie.primaryParent!.username == event.filterValue);
+        console.log('all cwimpies', this.allCwimpies)
+        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
+        break
     }
 
 
@@ -82,7 +94,9 @@ export class ViewAllComponent implements OnInit, OnDestroy {
 
   refreshAllCwimpies(deleteCwimpieName: string) {
     let deletedCwimpieIndex = this.allCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
-    this.currentCwimpies.splice(deletedCwimpieIndex, 1);
+    this.allCwimpies.splice(deletedCwimpieIndex, 1);
+    let currentCwimpieIndex = this.currentCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
+    this.currentCwimpies.splice(currentCwimpieIndex, 1);
   }
 
   ngOnDestroy() {

@@ -29,12 +29,14 @@
 
 <div class="allCwimpies_layout"
      *ngIf="!loading"
+     [@listAnimationTrigger]="currentCwimpies.length"
 >
   <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
   <app-reduced-cwimpie-card
     *ngFor="let cwimpie of currentCwimpies"
     [cwimpieData]="cwimpie"
     (deletedCwimpieName)="refreshAllCwimpies($event)"
+    class="reduced-cwimpie-card"
   ></app-reduced-cwimpie-card>
   <h1
     *ngIf="allCwimpies.length == 0"
