@@ -1,12 +1,9 @@
 <div>
-  <mat-card
-    class="card"
-  >
-    <div>
-      <mat-card-header>
-        <mat-card-title>{{data.name}}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{data!.photo}}" alt="">
-    </div>
-  </mat-card>
+  <img
+    src="{{data.photo}}"
+    alt="..."
+  />
+  <div class="carousel-caption">
+    <h5>{{data.name}}</h5>
+  </div>
 </div>

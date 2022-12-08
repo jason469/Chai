@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private getCwimpiesFromUserSub: Subscription | undefined;
   currentUser!: User;
   allCwimpies: IUserCwimpies[] = [];
-  loading: boolean = true
+  isLoading: boolean = true
 
   constructor(
     private profilePageService: ProfilePageService
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
               }
             })
         }
-        this.loading = false
+        this.isLoading = false
       }
     })
   }

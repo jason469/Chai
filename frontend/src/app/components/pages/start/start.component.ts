@@ -19,7 +19,6 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.allBirthdayCwimpies)
     this.getBirthdayCwimpiesSub = this.startPageService.getBirthdayCwimpies().subscribe(response => {
         let data: any = response
         if (data.length != 0) {
@@ -32,7 +31,6 @@ export class StartComponent implements OnInit, OnDestroy {
               index: index
             }
             this.allBirthdayCwimpies.push(birthdayCwimpie)
-            console.log('pushed')
           })
         } else {
           this.allBirthdayCwimpies = []

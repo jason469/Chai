@@ -5,6 +5,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import {ProfileCwimpieCardComponent} from "../../shared/profile/profile-cwimpie-card/profile-cwimpie-card.component";
 import {MatCardModule} from "@angular/material/card";
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {MatCardModule} from "@angular/material/card";
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MdbCarouselModule
   ]
 })
 export class ProfileModule { }
