@@ -11,7 +11,13 @@
     @loadCarouselAnimationTrigger
   >
     <h1>Your cwimpies!</h1>
-    <mdb-carousel [controls]="true" [indicators]="true" id="userCarousel" class="carousel-fade">
+    <mdb-carousel
+      [controls]="true"
+      [indicators]="false"
+      id="userCarousel"
+      class="carousel-fade"
+      *ngIf="allCwimpies.length > 1"
+    >
       <mdb-carousel-item
         *ngFor="let cwimpie of allCwimpies"
       >
@@ -20,5 +26,10 @@
         ></app-profile-cwimpie-card>
       </mdb-carousel-item>
     </mdb-carousel>
+
+    <app-profile-cwimpie-card
+      *ngIf="allCwimpies.length == 1"
+      [cwimpieData]="allCwimpies[0]"
+    ></app-profile-cwimpie-card>
   </div>
 </div>

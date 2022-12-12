@@ -29,7 +29,13 @@
     class="bg-light text-center"
     *ngIf="(allBirthdayCwimpies.length != 0)"
   >
-    <mdb-carousel [controls]="true" [indicators]="true" id="birthdayCarousel" class="carousel-fade">
+    <mdb-carousel
+      [controls]="true"
+      [indicators]="false"
+      id="birthdayCarousel"
+      class="carousel-fade"
+      *ngIf="allBirthdayCwimpies.length > 1"
+    >
       <mdb-carousel-item
         *ngFor="let cwimpie of allBirthdayCwimpies"
       >
@@ -38,6 +44,11 @@
         ></app-birthday-card>
       </mdb-carousel-item>
     </mdb-carousel>
+
+    <app-birthday-card
+      *ngIf="allBirthdayCwimpies.length == 1"
+      [cwimpieData]="allBirthdayCwimpies[0]"
+    ></app-birthday-card>
   </div>
 
 </div>

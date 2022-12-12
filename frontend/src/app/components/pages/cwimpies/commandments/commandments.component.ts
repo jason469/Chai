@@ -15,7 +15,7 @@ export class CommandmentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setTimeout(() => this.isLoading = false, 500)
+    setTimeout(() => this.isLoading = false, 200)
   }
 
   public commandments: any = [

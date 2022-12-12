@@ -1,6 +1,5 @@
-import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
+import {transition, trigger} from "@angular/animations";
 import {horizontalBounce, verticalBounceInAndOut} from "../../../../../shared/utils/animations";
-import {optional} from "../../../../../shared/constants/animations";
 
 export const listAnimation =
   trigger('listAnimationTrigger', [

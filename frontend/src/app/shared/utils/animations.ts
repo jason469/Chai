@@ -1,4 +1,4 @@
-import {animate, keyframes, query, stagger, style} from "@angular/animations";
+import {animate, group, keyframes, query, stagger, style} from "@angular/animations";
 import {optional} from "../constants/animations";
 
 export function verticalBounceIn() {
@@ -50,11 +50,6 @@ export function verticalBounceOut() {
             offset: 0
           }),
           style({
-            opacity: 0.5,
-            transform: 'translateY(35px)',
-            offset: 0.3
-          }),
-          style({
             opacity: 0,
             transform: 'translateY(-75px)',
             offset: 1
@@ -67,7 +62,7 @@ export function verticalBounceOut() {
 }
 
 export function verticalBounceInAndOut() {
-  return verticalBounceIn().concat(verticalBounceOut())
+  return group(verticalBounceIn().concat(verticalBounceOut()))
 }
 
 export function horizontalBounce(selector:string) {

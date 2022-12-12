@@ -1,13 +1,11 @@
-<!--<div>-->
-  <div id="map" class="map match-parent">
-    <mat-spinner
-      *ngIf="loading"
-      id="loading_spinner"
-    ></mat-spinner>
-    <app-legend-menu
-      [map]="map"
-      [layerIds]="LAYER_IDS"
-      [multiStopTrips]="MULTI_STOP_TRIPS_DATASOURCES_CONFIG"
-    ></app-legend-menu>
-  </div>
-<!--</div>-->
+<div id="map" class="map match-parent">
+  <mat-spinner
+    *ngIf="loading"
+    id="loading_spinner"
+  ></mat-spinner>
+  <app-legend-menu
+    [map]="map"
+    [layerIds]="LAYER_IDS"
+    [multiStopTrips]="MULTI_STOP_TRIPS_DATASOURCES_CONFIG"
+  ></app-legend-menu>
+</div>
