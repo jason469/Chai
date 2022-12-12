@@ -1,11 +1,18 @@
-<div class="allCwimpies_layout"
-     *ngIf="!loading"
+<div class=""
+     *ngIf="(!loading && allCwimpieSchedules != undefined)"
 >
-  <app-daily-schedule-card
-    *ngFor="let cwimpieSchedule of allCwimpieSchedules"
-    [cwimpieSchedule]="cwimpieSchedule"
-  ></app-daily-schedule-card>
+  <div
+    *ngIf="allCwimpieSchedules.length != 0"
+  >
+    <mdb-accordion>
+      <app-daily-schedule-card
+        *ngFor="let cwimpieSchedule of allCwimpieSchedules"
+        [cwimpieSchedule]="cwimpieSchedule"
+      ></app-daily-schedule-card>
+    </mdb-accordion>
+  </div>
   <h1
     *ngIf="allCwimpieSchedules.length == 0"
-  >All the Cwimpies are supa free today !!</h1>
+  >
+    All the Cwimpies are supa free today !!</h1>
 </div>

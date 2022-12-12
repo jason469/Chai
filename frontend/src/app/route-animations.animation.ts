@@ -24,7 +24,7 @@ function fadePage() {
     group([  // Group the entering the leaving animations to happen at the same time (in parallel)
 
       query(':leave', [  // Fade out the leaving component
-        animate('200ms ease-in', style({
+        animate('400ms ease-in', style({
           opacity: 0,
         }))
       ], optional),
@@ -33,7 +33,7 @@ function fadePage() {
         style({  // Start by hiding the entering component
           opacity: 0,
         }),
-        animate('300ms ease-in', style({
+        animate('500ms ease-in', style({
           opacity: 1
         }))
       ], optional)

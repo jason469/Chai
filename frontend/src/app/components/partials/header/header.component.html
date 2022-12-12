@@ -1,11 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand"
-       routerLink="/"
-       routerLinkActive="active"
-    >
-      Chai
-    </a>
+    <!--    Toggle button   -->
     <button
       class="navbar-toggler"
       type="button"
@@ -15,118 +10,152 @@
     >
       <i class="fas fa-bars"></i>
     </button>
+
+    <!--  Collapsible wrapper  -->
     <div
       class="collapse navbar-collapse"
       id="navbarNavAltMarkup"
       mdbCollapse
       #noListNav="mdbCollapse"
     >
-      <div class="navbar-nav"
-           *ngIf="!isAuthenticated"
+      <a class="navbar-brand"
+         routerLink="/"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+      >
+        Chai
+      </a>
+
+      <!--   Unauthenticated header   -->
+      <div
+        class="me-auto mb-2 mb-lg-0"
+        *ngIf="!isAuthenticated"
       >
         <a class="nav-link"
            routerLink="/auth/login"
            routerLinkActive="active"
-        >Login</a>
-      </div>
-      <div class="navbar-nav"
-           *ngIf="isAuthenticated"
-      >
-        <a class="nav-link"
-           routerLink="/schedule"
-           routerLinkActive="active"
         >
-          Daily Schedule
+          Login
         </a>
-        <ul class="navbar-nav">
-          <li
-            mdbDropdown
-            class="nav-link dropdown"
+      </div>
+
+
+      <!--  Authenticated navbar   -->
+      <div
+        *ngIf="isAuthenticated"
+        class="chai__navbar"
+      >
+        <div
+          class="navbar-nav chai__navbar-nav"
+        >
+          <!--  Left links  -->
+          <div
+            class="ms-auto"
+            id="leftNav"
           >
-            <a
-              class="nav-link dropdown-toggle"
-              id="cwimpieMenu"
-              role="button"
-              mdbDropdownToggle
-              aria-expanded="false"
-              routerLinkActive="active"
+            <a class="nav-link"
+               routerLink="/schedule"
+               routerLinkActive="active"
             >
-              Cwimpies
+              Daily Schedule
             </a>
-            <ul
-              mdbDropdownMenu
-              class="dropdown-menu"
-              aria-labelledby="cwimpieMenu"
+            <li
+              mdbDropdown
+              class="nav-link dropdown"
             >
-              <li>
-                <a class="dropdown-item"
-                   routerLink="/cwimpies"
-                   routerLinkActive="active"
-                   [routerLinkActiveOptions]="{exact: true}"
-                >
-                  View Cwimpies
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item"
-                   routerLink="/cwimpies/generate"
-                   routerLinkActive="active"
-                >
-                  Generate
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item"
-                   routerLink="/cwimpies/commandments"
-                   routerLinkActive="active"
-                >
-                  Commandments
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item"
-                   routerLink="/cwimpies/locations"
-                   routerLinkActive="active"
-                >
-                  Locations
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <a class="nav-link">
-          <li mdbDropdown class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="profileMenu"
-              role="button"
-              mdbDropdownToggle
-              aria-expanded="false"
-              routerLinkActive="active"
-            >
-              Profile
-            </a>
-            <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="profileMenu">
-              <li>
-                <a class="dropdown-item"
-                   routerLink="/profile"
-                   routerLinkActive="active"
-                   [routerLinkActiveOptions]="{exact: true}"
+              <a
+                class="nav-link dropdown-toggle"
+                id="cwimpieMenu"
+                role="button"
+                mdbDropdownToggle
+                aria-expanded="false"
+                routerLinkActive="active"
+              >
+                Cwimpies
+              </a>
+              <ul
+                mdbDropdownMenu
+                class="dropdown-menu"
+                aria-labelledby="cwimpieMenu"
+              >
+                <li>
+                  <a class="dropdown-item"
+                     routerLink="/cwimpies"
+                     routerLinkActive="active"
+                     [routerLinkActiveOptions]="{exact: true}"
+                  >
+                    View Cwimpies
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item"
+                     routerLink="/cwimpies/generate"
+                     routerLinkActive="active"
+                  >
+                    Generate
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item"
+                     routerLink="/cwimpies/commandments"
+                     routerLinkActive="active"
+                  >
+                    Commandments
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item"
+                     routerLink="/cwimpies/locations"
+                     routerLinkActive="active"
+                  >
+                    Locations
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </div>
+          <!--    Left Links    -->
+
+          <!--    Right Links    -->
+          <div
+            class="me-auto"
+            id="rightNav"
+          >
+            <a class="nav-link">
+              <li mdbDropdown class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="profileMenu"
+                  role="button"
+                  mdbDropdownToggle
+                  aria-expanded="false"
+                  routerLinkActive="active"
                 >
                   Profile
                 </a>
+                <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="profileMenu">
+                  <li>
+                    <a class="dropdown-item"
+                       routerLink="/profile"
+                       routerLinkActive="active"
+                       [routerLinkActiveOptions]="{exact: true}"
+                    >
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"
+                       (click)="onLogout()"
+                    >
+                      Logout
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <a class="dropdown-item"
-                   (click)="onLogout()"
-                >
-                  Logout
-                </a>
-              </li>
-            </ul>
-          </li>
-        </a>
-
+            </a>
+          </div>
+          <!--   Right Links   -->
+        </div>
       </div>
     </div>
   </div>

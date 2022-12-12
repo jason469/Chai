@@ -1,19 +1,28 @@
-<div class="dailyScheduleCard">
-  {{data.name}}
-  <div
-    *ngFor="let dailySchedule of data.dailyScheduleId"
-    class="dailyScheduleCard__schedule"
+<mdb-accordion-item>
+  <ng-template
+    mdbAccordionItemHeader
+    class="dailyScheduleCard"
   >
-    {{dailySchedule.date}}
+    {{data.name}}
+  </ng-template>
+  <ng-template
+    mdbAccordionItemBody
+  >
     <div
-      *ngFor="let task of dailySchedule.tasks"
-      class="dailyScheduleCard__schedule__task"
+      *ngFor="let dailySchedule of data.dailyScheduleId"
+      class="dailyScheduleCard__schedule"
     >
-      Name: {{task.name}}
-      Description: {{task.description}}
-      Start time: {{task.startTime}}
-      End time: {{task.endTime}}
-      Length: {{task.durationMinutes}}
+      {{dailySchedule.date}}
+      <div
+        *ngFor="let task of dailySchedule.tasks"
+        class="dailyScheduleCard__schedule__task"
+      >
+        Name: {{task.name}}
+        Description: {{task.description}}
+        Start time: {{task.startTime}}
+        End time: {{task.endTime}}
+        Length: {{task.durationMinutes}}
+      </div>
     </div>
-  </div>
-</div>
+  </ng-template>
+</mdb-accordion-item>

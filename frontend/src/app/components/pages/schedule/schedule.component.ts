@@ -27,6 +27,7 @@ export class ScheduleComponent implements OnInit {
           this.allCwimpieSchedules.push(cwimpieData)
         }
       }
+      console.log(this.allCwimpieSchedules)
       this.loading = false;
     })
   }

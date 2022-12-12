@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ScheduleRoutingModule} from './schedule-routing.module';
 import {ScheduleComponent} from './schedule.component';
 import {DailyScheduleCardComponent} from "../../shared/dailySchedule/daily-schedule-card/daily-schedule-card.component";
+import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
 
 
 @NgModule({
@@ -11,10 +12,11 @@ import {DailyScheduleCardComponent} from "../../shared/dailySchedule/daily-sched
     ScheduleComponent,
     DailyScheduleCardComponent,
   ],
-  imports: [
-    CommonModule,
-    ScheduleRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        ScheduleRoutingModule,
+        MdbAccordionModule
+    ]
 })
 export class ScheduleModule {
 }
