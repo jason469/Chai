@@ -45,11 +45,9 @@ export class ViewAllComponent implements OnInit, OnDestroy {
 
   filterCwimpies(event: any) {
     const username = event.filterValue
-    console.log('current cwimpies', this.currentCwimpies)
     switch (username) {
       case "all":
         this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
-        console.log('current cwimpies', this.currentCwimpies)
         break
       case "jason":
         this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);

@@ -1,11 +1,14 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
-  Output, Renderer2, ViewChild
+  Output,
+  Renderer2,
+  ViewChild
 } from '@angular/core';
 import {FullCwimpieModalComponent} from "../full-cwimpie-modal/full-cwimpie-modal.component";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
@@ -15,6 +18,8 @@ import {CwimpieUpdateDataService} from "../../../../services/cwimpies/cwimpieUpd
 import {UpdateCwimpiesComponent} from "../../../forms/cwimpies/update-cwimpies/update-cwimpies.component";
 import {Cwimpie} from "../../../../shared/models/models";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteCwimpieDialogComponent} from "../delete-cwimpie-dialog/delete-cwimpie-dialog.component";
 
 @Component({
   selector: 'app-reduced-cwimpie-card',
@@ -37,7 +42,8 @@ export class ReducedCwimpieCardComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private renderer: Renderer2,
-    private el:ElementRef
+    private el: ElementRef,
+    public dialog: MatDialog
   ) {
   }
 
@@ -77,9 +83,9 @@ export class ReducedCwimpieCardComponent implements OnInit {
     }
     this.cwimpieUpdateDataService.changeData(updateCwimpieData)
     this.modalRef = this.modalService.show(UpdateCwimpiesComponent)
-    this.modalRef.content.changedCwimpieName.subscribe((name:string) => {
+    this.modalRef.content.changedCwimpieName.subscribe((name: string) => {
       let updatedCwimpieDataSubscription = this.viewCwimpiesService.getCwimpie(name).subscribe(response => {
-        let data:any = response
+        let data: any = response
         let cwimpieData: Cwimpie = {
           cwimpieId: data._id,
           name: data.name,
@@ -111,7 +117,25 @@ export class ReducedCwimpieCardComponent implements OnInit {
     )
   }
 
-  ngOnInit(cwimpieData?:Cwimpie): void {
+  openDialog(name: string): void {
+    const dialogRef = this.dialog.open(DeleteCwimpieDialogComponent, {
+      data: {name: name},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result)
+      let deleteCwimpieName = result;
+      if (deleteCwimpieName) {
+        this.viewCwimpiesService.deleteCwimpie(deleteCwimpieName).subscribe(response => {
+            this.deletedCwimpieName.emit(deleteCwimpieName)
+          }
+        )
+      }
+    });
+  }
+
+  ngOnInit(cwimpieData?: Cwimpie): void {
     if (cwimpieData) {
       this.renderer.removeChild(this.el.nativeElement, this.sexContainer.nativeElement)
       this.initialData = cwimpieData
