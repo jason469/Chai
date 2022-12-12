@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
-import {loadListAnimation, tabAnimation} from "./view-all.animation";
+import {listAnimation, tabAnimation} from "./view-all.animation";
 
 
 @Component({
@@ -12,7 +12,7 @@ import {loadListAnimation, tabAnimation} from "./view-all.animation";
   providers: [],
   animations: [
     tabAnimation,
-    loadListAnimation,
+    listAnimation,
   ]
 })
 

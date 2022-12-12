@@ -43,7 +43,7 @@ export function verticalBounceOut() {
   return [
     query(':leave',
       stagger('300ms', [
-        animate('500s ease-in', keyframes([
+        animate('500ms ease-in', keyframes([
           style({
             opacity: 1,
             transform: 'translateY(0)',
