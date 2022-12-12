@@ -9,8 +9,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LocationModule} from "./location/location.module";
 import {GenerateModule} from "./generate/generate.module";
 import {CwimpiesRoutingModule} from "./cwimpies-routing.module";
-import {ColourMenuComponent} from "../../shared/helpMenus/colour-menu/colour-menu.component";
 import {MatButtonModule} from "@angular/material/button";
+import { CwimpiesComponent } from './cwimpies.component';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import {MatButtonModule} from "@angular/material/button";
     LocationComponent,
     GenerateComponent,
     CommandmentsComponent,
+    CwimpiesComponent,
   ],
   exports: [
   ],
@@ -29,7 +30,7 @@ import {MatButtonModule} from "@angular/material/button";
     GenerateModule,
     MatProgressSpinnerModule,
     CwimpiesRoutingModule,
-    MatButtonModule
+    MatButtonModule,
   ]
 })
 export class CwimpiesModule { }

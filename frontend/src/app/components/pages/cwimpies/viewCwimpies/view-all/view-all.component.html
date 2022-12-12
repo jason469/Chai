@@ -1,44 +1,48 @@
-<!-- Tabs navs -->
-<ul
-  class="nav nav-tabs mb-3"
-  id="userFilters"
-  role="tablist"
-  appActiveTab
->
-  <li
-    #options
-    id="{{option.username}}Filter"
-    class="nav-item"
-    role="presentation"
-    *ngFor="let option of filterOptions;"
-    appFilterTab
-    [filterValue]="option.username"
-    (filterTabData)="filterCwimpies($event)"
-  >
-    <p
-      class="nav-link"
-      data-mdb-toggle="tab"
-      role="tab"
-      id="{{option.username}}Filter"
+<div>
+  <div>
+    <!-- Tabs navs -->
+    <ul
+      class="nav nav-tabs mb-3"
+      id="userFilters"
+      role="tablist"
+      appActiveTab
     >
-      {{option.displayName}}
-    </p>
-  </li>
-</ul>
-<!-- Tabs navs -->
+      <li
+        #options
+        id="{{option.username}}Filter"
+        class="nav-item"
+        role="presentation"
+        *ngFor="let option of filterOptions;"
+        appFilterTab
+        [filterValue]="option.username"
+        (filterTabData)="filterCwimpies($event)"
+      >
+        <p
+          class="nav-link"
+          data-mdb-toggle="tab"
+          role="tab"
+          id="{{option.username}}Filter"
+        >
+          {{option.displayName}}
+        </p>
+      </li>
+    </ul>
+    <!-- Tabs navs -->
+  </div>
 
-<div class="allCwimpies_layout"
-     *ngIf="!loading"
-     [@listAnimationTrigger]="currentCwimpies.length"
->
-  <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
-  <app-reduced-cwimpie-card
-    *ngFor="let cwimpie of currentCwimpies"
-    [cwimpieData]="cwimpie"
-    (deletedCwimpieName)="refreshAllCwimpies($event)"
-    class="reduced-cwimpie-card"
-  ></app-reduced-cwimpie-card>
-  <h1
-    *ngIf="allCwimpies.length == 0"
-  >All the cwimpies are sleeping :(</h1>
+  <div class="allCwimpies_layout"
+       *ngIf="!loading"
+       [@listAnimationTrigger]=""
+  >
+    <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
+    <app-reduced-cwimpie-card
+      *ngFor="let cwimpie of currentCwimpies"
+      [cwimpieData]="cwimpie"
+      (deletedCwimpieName)="refreshAllCwimpies($event)"
+      class="reduced-cwimpie-card"
+    ></app-reduced-cwimpie-card>
+    <h1
+      *ngIf="allCwimpies.length == 0"
+    >All the cwimpies are sleeping :(</h1>
+  </div>
 </div>

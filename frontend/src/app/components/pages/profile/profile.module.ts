@@ -11,7 +11,7 @@ import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 @NgModule({
   declarations: [
     ProfileComponent,
-    ProfileCwimpieCardComponent
+    ProfileCwimpieCardComponent,
   ],
   imports: [
     CommonModule,

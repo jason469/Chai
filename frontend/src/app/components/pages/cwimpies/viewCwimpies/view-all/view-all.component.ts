@@ -11,10 +11,9 @@ import {listAnimation} from "./view-all.animation";
   styleUrls: ['./view-all.component.scss'],
   providers: [],
   animations: [
-    listAnimation
+    listAnimation,
   ]
 })
-
 
 
 export class ViewAllComponent implements OnInit, OnDestroy {

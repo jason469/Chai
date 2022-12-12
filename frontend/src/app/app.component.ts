@@ -2,16 +2,16 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SwUpdate} from '@angular/service-worker';
 import {AuthService} from "./services/auth/auth.service";
 import {Subscription} from "rxjs";
-import {ChildrenOutletContexts, RouterOutlet} from "@angular/router";
-import {slider} from "./route-animations";
+import {RouterOutlet} from "@angular/router";
+import {routeAnimation} from "./route-animations.animation";
+import {prepareRoute} from "./shared/constants/animations"
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    // fader,
-    slider,
+    routeAnimation,
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(updates: SwUpdate,
               private authService: AuthService,
-              private contexts: ChildrenOutletContexts
   ) {
     updates.versionUpdates.subscribe(event => {
       updates.activateUpdate().then(() => document.location.reload())
@@ -31,8 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.autoLogin()?.subscribe()
   }
 
-  getRouteAnimationData() {
-    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+  prepareRoute(outlet: RouterOutlet) {
+    return prepareRoute(outlet)
   }
 
   ngOnDestroy() {
