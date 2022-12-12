@@ -66,6 +66,10 @@ export function verticalBounceOut() {
   ]
 }
 
+export function verticalBounceInAndOut() {
+  return verticalBounceIn().concat(verticalBounceOut())
+}
+
 export function horizontalBounce(selector:string) {
   return [
     query(selector, style({
