@@ -10,12 +10,11 @@
     class="list-group list-group-light list-group-small"
     *ngIf="!isLoading"
   >
-    <div
+    <app-commandment-item
       class="commandment__item list-group-item"
       *ngFor="let commandment of commandments; let i = index"
+      [commandmentData]="commandment"
     >
-      <div>{{commandment.rule}}</div>
-      <em>{{commandment.sub_rule}}</em>
-    </div>
+    </app-commandment-item>
   </div>
 </div>

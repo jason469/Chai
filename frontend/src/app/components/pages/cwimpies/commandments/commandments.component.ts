@@ -6,7 +6,7 @@ import {loadCommandmentsAnimation} from "./commandments.animation";
   templateUrl: './commandments.component.html',
   styleUrls: ['./commandments.component.scss'],
   animations: [
-    loadCommandmentsAnimation
+    loadCommandmentsAnimation,
   ]
 })
 export class CommandmentsComponent implements OnInit {
@@ -37,5 +37,6 @@ export class CommandmentsComponent implements OnInit {
       sub_rule: 'Optional for daddy\'s toots'
     },
   ];
+
 
 }

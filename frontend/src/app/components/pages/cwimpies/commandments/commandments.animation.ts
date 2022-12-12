@@ -3,6 +3,6 @@ import {horizontalBounce} from "../../../../shared/utils/animations";
 
 export const loadCommandmentsAnimation =
   trigger('commandmentsAnimationTrigger', [
-    transition('void => *', horizontalBounce('.commandment__item')),
-  ])
-
+      transition('void => *', horizontalBounce('.commandment__item')),
+    ],
+  )

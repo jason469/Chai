@@ -83,7 +83,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
           this.currentCwimpies.push(cwimpieData)
         }
       }
-
       this.loading = false;
     })
   }

@@ -30,7 +30,9 @@ import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
 import {FooterComponent} from './components/partials/footer/footer.component';
-import { DeleteCwimpieDialogComponent } from './components/shared/cwimpies/delete-cwimpie-dialog/delete-cwimpie-dialog.component';
+import {
+  DeleteCwimpieDialogComponent
+} from './components/shared/cwimpies/delete-cwimpie-dialog/delete-cwimpie-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 
@@ -125,7 +127,6 @@ import {MatButtonModule} from "@angular/material/button";
       multi: true
     },
   ],
-  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
