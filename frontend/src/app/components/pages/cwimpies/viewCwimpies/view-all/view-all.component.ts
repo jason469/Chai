@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies.service";
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
-import {listAnimation} from "./view-all.animation";
+import {loadListAnimation, tabAnimation} from "./view-all.animation";
 
 
 @Component({
@@ -11,7 +11,8 @@ import {listAnimation} from "./view-all.animation";
   styleUrls: ['./view-all.component.scss'],
   providers: [],
   animations: [
-    listAnimation,
+    tabAnimation,
+    loadListAnimation,
   ]
 })
 
@@ -44,21 +45,19 @@ export class ViewAllComponent implements OnInit, OnDestroy {
 
   filterCwimpies(event: any) {
     const username = event.filterValue
+    console.log('current cwimpies', this.currentCwimpies)
     switch (username) {
       case "all":
         this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
+        console.log('current cwimpies', this.currentCwimpies)
         break
       case "jason":
-        console.log('all cwimpies', this.allCwimpies)
         this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
         break
       case "sue":
-        console.log('all cwimpies', this.allCwimpies)
         this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
         break
     }
-
-
   }
 
   ngOnInit(): void {

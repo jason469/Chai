@@ -3,11 +3,15 @@ import {ProfilePageService} from "../../../services/profile/profilePage.service"
 import {Subscription} from "rxjs";
 import {User} from "../../../shared/models/models";
 import {IUserCwimpies} from "../../../shared/interfaces/IUserCwimpies";
+import {loadCarouselAnimation} from "./profile.animation";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations: [
+    loadCarouselAnimation
+  ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   private getCurrentUserSub: Subscription | undefined;
@@ -22,7 +26,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getCurrentUserSub = this.profilePageService.getCurrentUser()?.subscribe({next: (response:User) => {
+    this.getCurrentUserSub = this.profilePageService.getCurrentUser()?.subscribe({
+      next: (response: User) => {
         this.currentUser = response
         if (this.currentUser.username) {
           this.getCwimpiesFromUserSub = this.profilePageService

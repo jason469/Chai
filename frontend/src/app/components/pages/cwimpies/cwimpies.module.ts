@@ -10,7 +10,6 @@ import {LocationModule} from "./location/location.module";
 import {GenerateModule} from "./generate/generate.module";
 import {CwimpiesRoutingModule} from "./cwimpies-routing.module";
 import {MatButtonModule} from "@angular/material/button";
-import { CwimpiesComponent } from './cwimpies.component';
 
 
 @NgModule({
@@ -19,7 +18,6 @@ import { CwimpiesComponent } from './cwimpies.component';
     LocationComponent,
     GenerateComponent,
     CommandmentsComponent,
-    CwimpiesComponent,
   ],
   exports: [
   ],

@@ -24,7 +24,7 @@ import {StepperComponent} from './shared/customFormElements/ui/layouts/stepper/s
 import {MatStepperModule} from "@angular/material/stepper";
 import {FileValueAccessor} from "./shared/customFormElements/fields/file-value-accessor";
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
-import {hexCodeValidator} from "./shared/functions/fileValidation";
+import {hexCodeValidator} from "./shared/utils/fileValidation";
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {FormlyFieldFile,} from './shared/customFormElements/fields/formly-field-file/formly-field-file.component';
 import {MdbCollapseModule} from "mdb-angular-ui-kit/collapse";

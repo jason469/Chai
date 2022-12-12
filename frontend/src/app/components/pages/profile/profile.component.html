@@ -8,6 +8,7 @@
 
   <div
     *ngIf="(!isLoading && allCwimpies.length != 0)"
+    @loadCarouselAnimationTrigger
   >
     <h1>Your cwimpies!</h1>
     <mdb-carousel [controls]="true" [indicators]="true" id="userCarousel" class="carousel-fade">

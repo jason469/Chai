@@ -1,16 +1,20 @@
-<div>
-  <div>
+<div
+  *ngIf="!loading"
+>
+  <div
+  >
     <!-- Tabs navs -->
-    <ul
+    <div
       class="nav nav-tabs mb-3"
       id="userFilters"
       role="tablist"
       appActiveTab
+      @tabAnimationTrigger
     >
-      <li
+      <div
         #options
         id="{{option.username}}Filter"
-        class="nav-item"
+        class="nav-item filterOption"
         role="presentation"
         *ngFor="let option of filterOptions;"
         appFilterTab
@@ -25,14 +29,13 @@
         >
           {{option.displayName}}
         </p>
-      </li>
-    </ul>
+      </div>
+    </div>
     <!-- Tabs navs -->
   </div>
 
   <div class="allCwimpies_layout"
-       *ngIf="!loading"
-       [@listAnimationTrigger]=""
+       [@loadListAnimationTrigger]="this.currentCwimpies.length"
   >
     <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
     <app-reduced-cwimpie-card

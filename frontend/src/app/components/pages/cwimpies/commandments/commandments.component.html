@@ -1,25 +1,21 @@
-<div>
+<div
+>
   <h1>Commandments</h1>
   <div>
     <h3>These commandments were all decreed by Judge Nana</h3>
     <i class="fa-solid fa-gavel"></i>
   </div>
-  <ol>
-    <li>
-      No male cwimpie can be younger than their partner
-    </li>
-    <li>
-      All cwimpies must supa like eggplant
-    </li>
-    <li>
-      All cwimpies must defend mummy and be on her side !!
-    </li>
-    <li>
-      All cwimpies must be awake when mummy is making announcements <br>
-      <em>Optional for daddy's announcements</em>
-    </li>
-    <li>All cwimpies must deny that mummy's tooted <br>
-      <em>Optional for daddy's toots</em>
-    </li>
-  </ol>
+  <div
+    @commandmentsAnimationTrigger
+    class="list-group list-group-light list-group-small"
+    *ngIf="!isLoading"
+  >
+    <div
+      class="commandment__item list-group-item"
+      *ngFor="let commandment of commandments; let i = index"
+    >
+      <div>{{commandment.rule}}</div>
+      <em>{{commandment.sub_rule}}</em>
+    </div>
+  </div>
 </div>
