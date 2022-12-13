@@ -1,8 +1,27 @@
+@use "./variables" as v;
+
 @function map-get-value($map, $key) {
   @if map-has-key($map, $key) {
     @return map-get($map, $key)
-  }
-  @else {
+  } @else {
     @error "ERROR: Specified key #{$key} does not exist in the mapping #{map-get($map, name)}";
   }
 }
+
+@function create-theme-map($map) {
+  $map: (
+    backgroundColor: map-get-value($map, v.$primary),
+    textColor: map-get-value($map, v.$secondary),
+    buttonTextColor: map-get-value($map, v.$background),
+    buttonTextTransform: map-get-value($map, v.$on-primary),
+    buttonTextHoverColor: map-get-value($map, v.$on-primary),
+    buttonColor: map-get-value($map, v.$on-secondary),
+    buttonBorder: map-get-value($map, v.$on-surface),
+  );
+  @return $map
+}
+
+@function themed($theme-map, $key) {
+    @return map-get($theme-map, $key);
+}
+

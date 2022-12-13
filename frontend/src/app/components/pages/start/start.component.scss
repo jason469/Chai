@@ -10,17 +10,3 @@ no-birthdays {
     background-color: rgba(0, 0, 0, 0.6);;
   }
 }
-
-#birthdayCarousel {
-  .carousel-slide {
-    .carousel-indicators {
-      button {
-        color: #000000;
-        opacity: 1 !important;
-      }
-    }
-  }
-  .carousel-control-prev-icon, .carousel-control-next-icon {
-    color:#000000;
-  }
-}

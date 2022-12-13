@@ -1,21 +1,39 @@
 @use "./colours" as c;
 
-$theme-map--cold-grass : (
-  theme-primary: c.$cg--blue,
-  theme-secondary: c.$cg--green,
-  theme-surface: c.$cg--lightBlue,
-  theme-background: c.$cg--peach,
-  theme-on-primary: c.$black,
-  theme-on-secondary: c.$black,
-  theme-on-surface: c.$white,
+$primary: primary;
+$secondary: secondary;
+$surface: surface;
+$background: background;
+$on-primary: on-primary;
+$on-secondary: on-secondary;
+$on-surface: on-surface;
+
+$color-map--cold-grass : (
+  primary: c.$cg--green,
+  secondary: c.$cg--green,
+  surface: c.$cg--lightBlue,
+  background: c.$cg--peach,
+  on-primary: c.$black,
+  on-secondary: c.$black,
+  on-surface: c.$white,
 );
 
-$theme-map--sunset : (
-  theme-primary: c.$ss--blue,
-  theme-secondary: c.$ss--grey,
-  theme-surface: c.$ss--lightBlue,
-  theme-background: c.$ss--pink,
-  theme-on-primary: c.$ss--yellow,
-  theme-on-secondary: c.$black,
-  theme-on-surface: c.$white,
+$color-map--sunset :  (
+  primary: c.$ss--blue,
+  secondary: c.$ss--pink,
+  surface: c.$ss--lightBlue,
+  background: c.$ss--pink,
+  on-primary: c.$ss--yellow,
+  on-secondary: c.$black,
+  on-surface: c.$white,
+);
+
+$color-map--cold-grass2 : (
+  primary: c.$cg--green,
+  secondary: c.$cg--green,
+  surface: c.$cg--lightBlue,
+  background: c.$cg--peach,
+  on-primary: c.$black,
+  on-secondary: c.$black,
+  on-surface: c.$white,
 );
