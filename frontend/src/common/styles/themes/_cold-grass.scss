@@ -1,0 +1,10 @@
+@use "../abstracts" as a;
+
+.theme--cold-grass {
+  @include a.set-theme-colours(a.$theme-map--cold-grass)
+}
+
+.theme--sunset {
+  @include a.set-theme-colours(a.$theme-map--sunset)
+}
+

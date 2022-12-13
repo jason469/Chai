@@ -1,6 +1,3 @@
-@import "../../../../variables";
-
-
 .allCwimpies_layout {
   width: 100%;
   display: grid;
@@ -14,12 +11,12 @@
   .carousel-slide {
     .carousel-indicators {
       button {
-        color: $chai--black;
+        color: #000000;
         opacity: 1 !important;
       }
     }
   }
   .carousel-control-prev-icon, .carousel-control-next-icon {
-    color: $chai--black;
+    color: #000000;
   }
 }

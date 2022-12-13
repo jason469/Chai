@@ -1,5 +1,3 @@
-@import "../../../../variables";
-
 .allBirthdayCwimpies_layout {
   width: 100%;
   height: 100%;
@@ -17,12 +15,12 @@ no-birthdays {
   .carousel-slide {
     .carousel-indicators {
       button {
-        color: $chai--black;
+        color: #000000;
         opacity: 1 !important;
       }
     }
   }
   .carousel-control-prev-icon, .carousel-control-next-icon {
-    color: $chai--black;
+    color:#000000;
   }
 }

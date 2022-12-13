@@ -1,0 +1,21 @@
+@use "./colours" as c;
+
+$theme-map--cold-grass : (
+  theme-primary: c.$cg--blue,
+  theme-secondary: c.$cg--green,
+  theme-surface: c.$cg--lightBlue,
+  theme-background: c.$cg--peach,
+  theme-on-primary: c.$black,
+  theme-on-secondary: c.$black,
+  theme-on-surface: c.$white,
+);
+
+$theme-map--sunset : (
+  theme-primary: c.$ss--blue,
+  theme-secondary: c.$ss--grey,
+  theme-surface: c.$ss--lightBlue,
+  theme-background: c.$ss--pink,
+  theme-on-primary: c.$ss--yellow,
+  theme-on-secondary: c.$black,
+  theme-on-surface: c.$white,
+);

@@ -1,0 +1,5 @@
+@use "./functions" as f;
+
+@mixin set-theme-colours($spread_map) {
+  color: f.map-get-value($spread_map, theme-primary);
+}
