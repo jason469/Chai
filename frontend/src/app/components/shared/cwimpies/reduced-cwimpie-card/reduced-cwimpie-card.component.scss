@@ -1,10 +1,14 @@
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
 @use "/src/common/styles/components" as c;
 
 .card {
   padding: 0;
   margin: 0.5rem;
 
-  @include c.image_with_text_overlay(".card__image", #FFFFFF, #d3d3d3)
+  @include a.themify(t.$themes) using($theme-map) {
+    @include c.image_with_text_overlay(".card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour))
+  }
 }
 
 mat-tab-group, mat-card-footer {
