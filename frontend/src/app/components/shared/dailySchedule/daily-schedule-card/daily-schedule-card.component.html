@@ -1,7 +1,7 @@
 <mdb-accordion-item>
   <ng-template
     mdbAccordionItemHeader
-    class="dailyScheduleCard"
+    class="daily-schedule-card"
   >
     {{data.name}}
   </ng-template>
@@ -10,18 +10,18 @@
   >
     <div
       *ngFor="let dailySchedule of data.dailyScheduleId"
-      class="dailyScheduleCard__schedule"
+      class="daily-schedule-card__schedule"
     >
-      {{dailySchedule.date}}
-      <div
-        *ngFor="let task of dailySchedule.tasks"
-        class="dailyScheduleCard__schedule__task"
-      >
-        Name: {{task.name}}
-        Description: {{task.description}}
-        Start time: {{task.startTime}}
-        End time: {{task.endTime}}
-        Length: {{task.durationMinutes}}
+      <div class="daily-schedule-card__schedule__date">
+        {{currentDateString}}
+      </div>
+      <div class="daily-schedule-card__schedule__tasks">
+        <app-task-card
+          *ngFor="let task of dailySchedule.tasks"
+          class="daily-schedule-card__schedule__tasks__task"
+          [taskData]="task"
+        >
+        </app-task-card>
       </div>
     </div>
   </ng-template>

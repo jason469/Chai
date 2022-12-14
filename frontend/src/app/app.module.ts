@@ -38,96 +38,97 @@ import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
+    declarations: [
+        AppComponent,
 
-    // All page components
-    HeaderComponent,
-    FooterComponent,
+        // All page components
+        HeaderComponent,
+        FooterComponent,
 
-    // Form components
-    PanelWrapperComponent,
-    AddNewFieldComponent,
-    StepperComponent,
-    FileValueAccessor,
-    FormlyFieldFile,
-    DeleteCwimpieDialogComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
+        // Form components
+        PanelWrapperComponent,
+        AddNewFieldComponent,
+        StepperComponent,
+        FileValueAccessor,
+        FormlyFieldFile,
+        DeleteCwimpieDialogComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
 
-    // Service Worker Modules for PWA config
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+        // Service Worker Modules for PWA config
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
 
-    // Global form settings
-    FormlyModule.forRoot({
-      types: [
-        {name: 'file', component: FormlyFieldFile, wrappers: []},
-        {name: 'stepper', component: StepperComponent, wrappers: []},
-        {name: 'repeat', component: AddNewFieldComponent},
+        // Global form settings
+        FormlyModule.forRoot({
+            types: [
+                {name: 'file', component: FormlyFieldFile, wrappers: []},
+                {name: 'stepper', component: StepperComponent, wrappers: []},
+                {name: 'repeat', component: AddNewFieldComponent},
+                {
+                    name: 'password', extends: 'input', defaultOptions: {props: {type: 'password',},},
+                },
+            ],
+            wrappers: [
+                {name: 'panel', component: PanelWrapperComponent}
+            ],
+            validators: [
+                {name: "VHexCode", validation: hexCodeValidator}
+            ],
+            validationMessages: [
+                {name: 'required', message: 'This field is requiredddd'},
+                {name: 'VHexCode', message: 'The value isn\'t a valid hex codeeeee'}
+            ],
+        }),
+        FormlyMaterialModule,
+        ReactiveFormsModule,
+        NgxMatFileInputModule,
+        MatNativeDateModule,
+        FormlyMatDatepickerModule,
+
+        // Global Toastr Module
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right',
+            newestOnTop: false
+        }),
+
+        // Global Modal Module
+        ModalModule.forRoot(),
+
+        // Global Mapbox Module
+        NgxMapboxGLModule.withConfig({
+            accessToken: environment.mapbox.accessToken,
+        }),
+
+        // Global Page Modules
+        MdbDropdownModule,
+        MdbCollapseModule,
+        MatStepperModule,
+        MatDialogModule,
+        MatButtonModule,
+    ],
+    providers: [
+        AuthService,
+        AuthGuardService,
+        BsModalService,
+
         {
-          name: 'password', extends: 'input', defaultOptions: {props: {type: 'password',},},
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
         },
-      ],
-      wrappers: [
-        {name: 'panel', component: PanelWrapperComponent}
-      ],
-      validators: [
-        {name: "VHexCode", validation: hexCodeValidator}
-      ],
-      validationMessages: [
-        {name: 'required', message: 'This field is requiredddd'},
-        {name: 'VHexCode', message: 'The value isn\'t a valid hex codeeeee'}
-      ],
-    }),
-    FormlyMaterialModule,
-    ReactiveFormsModule,
-    NgxMatFileInputModule,
-    MatNativeDateModule,
-    FormlyMatDatepickerModule,
-
-    // Global Toastr Module
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      newestOnTop: false
-    }),
-
-    // Global Modal Module
-    ModalModule.forRoot(),
-
-    // Global Mapbox Module
-    NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapbox.accessToken,
-    }),
-
-    // Global Page Modules
-    MdbDropdownModule,
-    MdbCollapseModule,
-    MatStepperModule,
-    MatDialogModule,
-    MatButtonModule,
-  ],
-  providers: [
-    AuthService,
-    AuthGuardService,
-    BsModalService,
-
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    },
-  ],
-  bootstrap: [AppComponent]
+    ],
+    exports: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

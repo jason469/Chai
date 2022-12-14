@@ -4,6 +4,7 @@ import {CwimpieModalDataService} from "../../../../services/cwimpies/cwimpieModa
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../shared/models/models";
 import {IStampData} from "../../../../shared/interfaces/IStampData";
+import {dateFormat} from "../../../../shared/constants/dateTimeFormats";
 
 @Component({
   selector: 'app-full-cwimpie-modal',
@@ -27,13 +28,7 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
       next: (data:Cwimpie) => {
         this.data = data
         if (this.data.birthdate) {
-          this.birthDateString = new Date(this.data.birthdate).toLocaleDateString('en-US', {
-            timeZone: "Pacific/Auckland",
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })
+          this.birthDateString = new Date(this.data.birthdate).toLocaleDateString('en-US', dateFormat)
         }
         this.stampData = {
           name: data.name,

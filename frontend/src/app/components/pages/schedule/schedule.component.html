@@ -1,8 +1,12 @@
-<div class=""
+<div class="all-schedules"
      *ngIf="(!loading && allCwimpieSchedules != undefined)"
 >
+  <div class="theme-cold-grass">
+    <h1 class="all-schedules__title">Daily Schedules</h1>
+  </div>
   <div
     *ngIf="allCwimpieSchedules.length != 0"
+    class="all-schedules__content"
   >
     <mdb-accordion>
       <app-daily-schedule-card

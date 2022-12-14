@@ -8,7 +8,11 @@ const Cwimpie = require('../models/Cwimpie')
 module.exports = class DailyScheduleService {
     static async getAllDailySchedules() {
         try {
-            return await DailySchedule.find();
+            return await DailySchedule.find()
+                .populate({
+                    path: 'tasks',
+                    model: 'Task'
+                });
         } catch (error) {
             console.log(`Could not fetch daily schedules ${error}`)
         }

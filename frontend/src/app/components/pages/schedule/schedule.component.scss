@@ -1,0 +1,21 @@
+@use "/src/common/styles/components" as c;
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
+
+.all-schedules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  &__title {
+    @include a.themify(t.$themes) using($theme-map) {
+      @include c.page_title(a.themed($theme-map, a.$backgroundColour), a.themed($theme-map, a.$textColor))
+    }
+  }
+
+  &__content {
+    width: 100%;
+  }
+}
+

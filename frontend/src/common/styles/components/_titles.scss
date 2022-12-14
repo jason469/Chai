@@ -1,0 +1,40 @@
+/// page_title will create a title with lines on its left and right
+/// line-colour is the colour of the lines
+/// text-colour is the colour of the title text
+
+@mixin page_title($line-colour, $text-colour) {
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: $text-colour;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.2rem;
+
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+  }
+
+  &::before {
+    background: white;
+    height: 101%;
+    z-index: -1;
+    left: -1.2rem;
+    right: -1.2rem;
+  }
+
+  &::after {
+    background: $line-colour;
+    width: 100vw;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: -2;
+    height: 100%;
+  }
+}
