@@ -10,18 +10,23 @@
 
 @function create-theme-map($map) {
   $map: (
-    backgroundColor: map-get-value($map, v.$primary),
-    textColor: map-get-value($map, v.$secondary),
-    buttonTextColor: map-get-value($map, v.$background),
-    buttonTextTransform: map-get-value($map, v.$on-primary),
-    buttonTextHoverColor: map-get-value($map, v.$on-primary),
-    buttonColor: map-get-value($map, v.$on-secondary),
-    buttonBorder: map-get-value($map, v.$on-surface),
+    v.$backgroundColour: map-get-value($map, v.$background),
+    v.$textColor: map-get-value($map, v.$secondary),
+    v.$buttonTextColour: map-get-value($map, v.$primary),
+    v.$buttonTextTransform: map-get-value($map, v.$on-primary),
+    v.$buttonTextHoverColour: map-get-value($map, v.$on-primary),
+    v.$buttonColour: map-get-value($map, v.$on-secondary),
+    v.$buttonBorder: map-get-value($map, v.$on-surface),
   );
   @return $map
 }
 
 @function themed($theme-map, $key) {
+  @if variable-exists(theme-map) {
     @return map-get($theme-map, $key);
+  }
+  @else {
+    @return #FFFFFF
+  }
 }
 

@@ -1,0 +1,34 @@
+/// Custom tooltip for showing more information about a link
+/// background-colour is the colour of the tooltip's background
+/// text-colour is the colour of the tooltip's text
+
+@mixin hover-link-tooltip($background-colour, $text-colour) {
+  a[data-tool-tip] {
+    position: relative;
+  }
+
+  a[data-tool-tip]::after {
+    content: attr(data-tool-tip);
+    display: block;
+    position: absolute;
+    background-color: $background-colour;
+    padding: 1rem 3rem;
+    color: $text-colour;
+    border-radius: 1rem;
+    font-size: 0.85em;
+    bottom: 0;
+    left: -100%;
+    white-space: nowrap;
+    transform: scale(0);
+    transition:
+      transform ease-out 150ms,
+      bottom ease-out 150ms;
+    font-weight: normal;
+  }
+
+  a[data-tool-tip]:hover::after {
+    transform: scale(1);
+    bottom: 100%;
+  }
+}
+

@@ -13,6 +13,7 @@
       class="commandment__item list-group-item"
       *ngFor="let commandment of commandments; let i = index"
       [commandmentData]="commandment"
+      [index]="i"
     >
     </app-commandment-item>
   </div>

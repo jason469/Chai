@@ -1,54 +1,49 @@
-<h1>Happy Birthday Cwimpies !!</h1>
-<div class="allBirthdayCwimpies_layout"
-     *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
->
-  <div
-    class="bg-image no-birthdays"
-    *ngIf="(allBirthdayCwimpies.length == 0)"
-    style="background-image: url('/assets/start-page/all-cwimpies.jpg')"
+<div class="startPage">
+  <div class="startPage__cwimpies"
+       *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
   >
     <div
-      class="mask"
+      class="bg-image startPage__cwimpies__noBirthdays"
+      *ngIf="(allBirthdayCwimpies.length == 0)"
+      style="background-image: url('/assets/start-page/all-cwimpies.jpg')"
     >
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
-          <h1
-          >
-            No birthdays todayyy
-          </h1>
-          <a class="btn btn-outline-light btn-lg" routerLink="/cwimpies" role="button">
-            Visit the cwimpies !
-          </a
-          >
-        </div>
+      <div
+        class="startPage__cwimpies__noBirthdays__mask"
+      >
+        <h1>No birthdays todayyy</h1>
+        <a class="white-btn" routerLink="/cwimpies" role="button">
+          Visit the cwimpies !
+        </a
+        >
       </div>
     </div>
-  </div>
 
-  <div
-    class="bg-light text-center"
-    *ngIf="(allBirthdayCwimpies.length != 0)"
-  >
-    <mdb-carousel
-      [controls]="true"
-      [indicators]="false"
-      id="birthdayCarousel"
-      class="carousel-fade"
-      *ngIf="allBirthdayCwimpies.length > 1"
+    <div
+      class="bg-light text-center startPage__cwimpies__birthdays"
+      *ngIf="(allBirthdayCwimpies.length != 0)"
     >
-      <mdb-carousel-item
-        *ngFor="let cwimpie of allBirthdayCwimpies"
+      <h1>Happy Birthday Cwimpies !!</h1>
+      <mdb-carousel
+        [controls]="true"
+        [indicators]="false"
+        id="birthdayCarousel"
+        class="carousel-fade"
+        *ngIf="allBirthdayCwimpies.length > 1"
       >
-        <app-birthday-card
-          [cwimpieData]="cwimpie"
-        ></app-birthday-card>
-      </mdb-carousel-item>
-    </mdb-carousel>
+        <mdb-carousel-item
+          *ngFor="let cwimpie of allBirthdayCwimpies"
+        >
+          <app-birthday-card
+            [cwimpieData]="cwimpie"
+          ></app-birthday-card>
+        </mdb-carousel-item>
+      </mdb-carousel>
 
-    <app-birthday-card
-      *ngIf="allBirthdayCwimpies.length == 1"
-      [cwimpieData]="allBirthdayCwimpies[0]"
-    ></app-birthday-card>
+      <app-birthday-card
+        *ngIf="allBirthdayCwimpies.length == 1"
+        [cwimpieData]="allBirthdayCwimpies[0]"
+      ></app-birthday-card>
+    </div>
+
   </div>
-
 </div>

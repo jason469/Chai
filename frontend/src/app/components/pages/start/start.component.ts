@@ -36,7 +36,7 @@ export class StartComponent implements OnInit, OnDestroy {
           this.allBirthdayCwimpies = []
         }
         this.isLoading = false
-        console.log(this.allBirthdayCwimpies)
+        console.log(this.allBirthdayCwimpies.length)
       }
     )
   }

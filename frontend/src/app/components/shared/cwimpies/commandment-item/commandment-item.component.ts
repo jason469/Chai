@@ -12,6 +12,7 @@ import {clickCommandmentsAnimation} from "./commandment-item.animation";
 })
 export class CommandmentItemComponent implements OnInit {
   @Input('commandmentData') data!: ICommandmentData;
+  @Input() index !:number
   clicked: string = 'false';
 
   constructor() { }

@@ -1,15 +1,9 @@
 @use "./abstracts" as a;
+@use "./pages" as p;
+@use "./components" as c;
+@use "./base" as b;
 
-@use "./pages/add-cwimpie";
-
-@use "./components/carousel";
-
-@use "./themes/all-themes" as t;
-
-@use "base/base-dir";
-@use "base/global";
-
-/* You can add global styles to this file, and also import other style files */
+@use "themes/all-themes" as t;
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
@@ -17,9 +11,3 @@
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
-
-.test-main-class {
-  @include a.themify(t.$themes) using ($theme-map) {
-    color: a.themed($theme-map, 'textColor');
-  }
-}
