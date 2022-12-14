@@ -1,25 +1,32 @@
-<div class="startPage">
-  <div class="startPage__cwimpies"
+<div class="start-page">
+  <div class="start-page__cwimpies"
        *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
   >
     <div
-      class="bg-image startPage__cwimpies__noBirthdays"
+      class="start-page__cwimpies__no-birthdays"
       *ngIf="(allBirthdayCwimpies.length == 0)"
-      style="background-image: url('/assets/start-page/all-cwimpies.jpg')"
     >
-      <div
-        class="startPage__cwimpies__noBirthdays__mask"
+      <img
+        class="start-page__cwimpies__no-birthdays__photo"
+        src="assets/start-page/all-cwimpies.jpg"
+        alt=""
       >
-        <h1>No birthdays todayyy</h1>
-        <a class="white-btn" routerLink="/cwimpies" role="button">
-          Visit the cwimpies !
-        </a
-        >
+      <div
+        class="start-page__cwimpies__no-birthdays__text"
+      >
+        <div class="start-page__cwimpies__no-birthdays__text__title">
+          No birthdays todayyy
+        </div>
+        <div class="start-page__cwimpies__no-birthdays__text__body">
+          <a class="white-btn" routerLink="/cwimpies" role="button">
+            Visit the cwimpies !
+          </a>
+        </div>
       </div>
     </div>
 
     <div
-      class="bg-light text-center startPage__cwimpies__birthdays"
+      class="bg-light text-center start-page__cwimpies__birthdays"
       *ngIf="(allBirthdayCwimpies.length != 0)"
     >
       <h1>Happy Birthday Cwimpies !!</h1>

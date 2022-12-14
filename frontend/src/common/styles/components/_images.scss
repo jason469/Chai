@@ -2,18 +2,20 @@
 /// parent_selector is the identifier of the parent element (the element holding the image and texts)
 /// border-colour is the colour of the border
 /// background-colour is the colour of the darkened image on hover (will be automatically darkened)
+/// text-gap is the amount of space between the title and the body
+/// Make sure the photo and text are on the same hierarchy (should be siblings)
 
-@mixin image_with_text_overlay($parent_selector, $border-colour, $background-colour) {
+@mixin image_with_text_overlay($parent_selector, $border-colour, $background-colour, $text-gap) {
   #{$parent_selector} {
-    background: none;
+    background: mix($background-colour, #000000, 70%);  // This will darken any colour provided
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative;
+
 
     &:hover {
-      background: mix($background-colour, #000000, 70%);  // This will darken the background with the colour provided
-
       #{$parent_selector}__photo {
         opacity: 0.3
       }
@@ -27,22 +29,22 @@
     &::after {
       content: '';
       position: absolute;
-      top: 1.25em;
-      bottom: 1.25em;
-      left: 1.25em;
-      right: 1.25em;
+      top: 4%;
+      bottom: 4%;
+      left: 4%;
+      right: 4%;
     }
 
     &::before {
       transform: scale(0, 1);
-      transition: transform ease-out 350ms;
+      transition: transform ease-in-out 350ms;
       border-top: 1px solid $border-colour;
       border-bottom: 1px solid $border-colour;
     }
 
     &::after {
       transform: scale(1, 0);
-      transition: transform ease-out 350ms;
+      transition: transform ease-in-out 350ms;
       border-left: 1px solid $border-colour;
       border-right: 1px solid $border-colour;
     }
@@ -58,7 +60,8 @@
     &__photo {
       max-width: 100%;
       display: block;
-      transition: opacity ease-out 350ms;
+      transition: opacity ease-in-out 350ms;
+      object-fit: cover;
     }
 
     &__text {
@@ -68,7 +71,13 @@
       transform: translate(-50%, -50%);
       color: white;
       opacity: 0;
-      transition: opacity ease-out 350ms;
+      transition: opacity ease-in-out 350ms;
+      display: flex;
+      flex-direction: column;
+      gap: $text-gap;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
 
       &__title {
         font-size: 2rem;

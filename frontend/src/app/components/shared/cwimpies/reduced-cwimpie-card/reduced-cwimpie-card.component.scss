@@ -7,7 +7,7 @@
   margin: 0.5rem;
 
   @include a.themify(t.$themes) using($theme-map) {
-    @include c.image_with_text_overlay(".card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour))
+    @include c.image_with_text_overlay(".card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 0.5rem)
   }
 }
 
