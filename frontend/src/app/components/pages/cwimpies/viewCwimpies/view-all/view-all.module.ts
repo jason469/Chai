@@ -16,6 +16,7 @@ import {UpdateCwimpiesComponent} from "../../../../forms/cwimpies/update-cwimpie
 import {FormlyModule} from "@ngx-formly/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ColourMenuModule} from "../../../../shared/helpMenus/colour-menu/colour-menu.module";
+import {MatRippleModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -35,15 +36,16 @@ import {ColourMenuModule} from "../../../../shared/helpMenus/colour-menu/colour-
     CwimpieStampComponent,
     UpdateCwimpiesComponent,
   ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatIconModule,
-    FormlyModule,
-    ReactiveFormsModule,
-    ColourMenuModule,
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatIconModule,
+        FormlyModule,
+        ReactiveFormsModule,
+        ColourMenuModule,
+        MatRippleModule,
+    ]
 })
 export class ViewAllModule { }

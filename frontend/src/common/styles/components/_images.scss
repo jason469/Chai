@@ -1,0 +1,84 @@
+/// image_with_text_overlay will take an image and text and overlay the text over the image with effects
+/// parent_selector is the identifier of the parent element (the element holding the image and texts)
+/// border-colour is the colour of the border
+/// background-colour is the colour of the darkened image on hover (will be automatically darkened)
+
+@mixin image_with_text_overlay($parent_selector, $border-colour, $background-colour) {
+  #{$parent_selector} {
+    background: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: mix($background-colour, #000000, 70%);  // This will darken the background with the colour provided
+
+      #{$parent_selector}__photo {
+        opacity: 0.3
+      }
+
+      #{$parent_selector}__text {
+        opacity: 1;
+      }
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1.25em;
+      bottom: 1.25em;
+      left: 1.25em;
+      right: 1.25em;
+    }
+
+    &::before {
+      transform: scale(0, 1);
+      transition: transform ease-out 350ms;
+      border-top: 1px solid $border-colour;
+      border-bottom: 1px solid $border-colour;
+    }
+
+    &::after {
+      transform: scale(1, 0);
+      transition: transform ease-out 350ms;
+      border-left: 1px solid $border-colour;
+      border-right: 1px solid $border-colour;
+    }
+
+    &:hover::before {
+      transform: scale(1.065, 1);
+    }
+
+    &:hover::after {
+      transform: scale(1, 1.065);
+    }
+
+    &__photo {
+      max-width: 100%;
+      display: block;
+      transition: opacity ease-out 350ms;
+    }
+
+    &__text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      opacity: 0;
+      transition: opacity ease-out 350ms;
+
+      &__title {
+        font-size: 2rem;
+        color: white;
+        margin-bottom: 0;
+      }
+
+      &__body {
+
+      }
+    }
+  }
+}

@@ -1,35 +1,39 @@
 <div>
   <mat-card
     class="card"
-    style="background-color:{{!initialData!.colour?.hexCode}}"
   >
-    <div class="openModal click"
-         (click)="openCwimpieModal()"
-         matRipple
+    <!--    style="background-color:{{!initialData!.colour?.hexCode}}"-->
+    <div
+      class="openModal click card__image"
+      (click)="openCwimpieModal()"
+      matRipple
     >
-      <mat-card-header>
-        <div mat-card-avatar class="header-image"
-             style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
+      <img class="card__image__photo" src="{{initialData!.photo}}" alt="">
+      <div class="card__image__text">
+        <div class="card__image__text__title">
+          <div>{{initialData!.name}}</div>
         </div>
-        <div>
-          <ng-container
-            *ngIf="initialData.sex === 'Male'; then male; else female"
-          ></ng-container>
-          <div #sex
-            class="sex_container"
-          >
-            <ng-template #male>
-              <i class="fa-solid fa-mars"></i>
-            </ng-template>
-            <ng-template #female>
-              <i class="fa-solid fa-venus"></i>
-            </ng-template>
+        <div class="card__image__text__body">
+          <div class="card__image__text__body__species"
+               style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
+            <div>{{initialData!.species!.name}}</div>
+          </div>
+          <div
+            class="card__image__text__body__species__sex_container">
+            <ng-container
+              *ngIf="initialData.sex === 'Male'; then male; else female"
+            ></ng-container>
+            <div #sex>
+              <ng-template #male>
+                <i class="fa-solid fa-mars"></i>
+              </ng-template>
+              <ng-template #female>
+                <i class="fa-solid fa-venus"></i>
+              </ng-template>
+            </div>
           </div>
         </div>
-        <mat-card-title>{{initialData!.name}}</mat-card-title>
-        <mat-card-subtitle>{{initialData!.species!.name}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="{{initialData!.photo}}" alt="">
+      </div>
     </div>
     <mat-card-content>
       <mat-tab-group mat-align-tabs="start">
@@ -61,7 +65,7 @@
         Update
       </button>
       <button mat-mini-fab>
-<!--        <mat-icon (click)="deleteCwimpie(initialData!.name)">clear</mat-icon>-->
+        <!--        <mat-icon (click)="deleteCwimpie(initialData!.name)">clear</mat-icon>-->
         <mat-icon (click)="openDialog(initialData!.name)">clear</mat-icon>
       </button>
     </mat-card-actions>
