@@ -17,7 +17,19 @@
 
     &:hover {
       #{$parent_selector}__photo {
-        opacity: 0.3
+        opacity: 0.5;
+
+        -webkit-mask-image: linear-gradient(  // mask image for google chrome
+            rgb(0 0 0 / 1),
+            rgb(0 0 0 / 0.5) 30%,
+            rgb(0 0 0 / 0),
+        );
+
+        mask-image: linear-gradient(
+            rgb(0 0 0 / 1),
+            rgb(0 0 0 / 0.5) 30%,
+            rgb(0 0 0 / 0),
+        );
       }
 
       #{$parent_selector}__text {
@@ -63,6 +75,8 @@
       transition: opacity ease-in-out 350ms;
       object-fit: cover;
     }
+
+
 
     &__text {
       position: absolute;

@@ -3,39 +3,40 @@
 $gap: 1rem;
 $white: 0, 0%, 100%;
 
-header {
-  background-color: #2F5C8F;
-}
-
 .flex {
   display: flex;
   flex-direction: row;
   gap: $gap;
 }
 
-.active {
-  color: hsl(0 0% 100% / 1) !important;
-  border-color: hsl(0 0% 100% / 1);
-  border-bottom: .2rem solid hsl(0 0% 100%/ 1);
-  padding: var(--underline-gap, 1rem) 0;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-.black-btn {
-  @include c.hover-fill-button(#000000, #FFFFFF)
-}
-
 // Primary header
-.logo {
-  margin: 2rem;
-}
-
 .primary-header {
   align-items: center;
   justify-content: space-between;
+  background-color: #2F5C8F;
+
+  .active {
+    color: hsl(0 0% 100% / 1) !important;
+    border-color: hsl(0 0% 100% / 1);
+    border-bottom: .2rem solid hsl(0 0% 100%/ 1);
+    padding-bottom: 1rem;
+  }
+
+  .logo {
+    margin: 2rem;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  .black-btn {
+    @include c.hover-fill-button(#000000, #FFFFFF)
+  }
+
+  a {
+    color: white;
+  }
 }
 
 .mobile-nav-toggle {
@@ -48,7 +49,7 @@ header {
   margin: 0 0 0 0;
 
   background: hsl(0 0% 0% / 0.5);
-  $gap: 3rem;
+  gap: 3rem;
 
   a {
     text-decoration: none;
@@ -59,7 +60,7 @@ header {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-
+    color: white;
 
     > [aria-hidden="true"] {
       font-weight: 700;
@@ -76,6 +77,7 @@ header {
 
     &:hover {
       color: hsl(0, 0%, 100%/ .5);
+      transform: scale(1.15);
     }
   }
 }
@@ -92,7 +94,7 @@ header {
     position: fixed;
     inset: 0 0 0 50%;
     color: black;
-    z-index: 1000;
+    z-index: 9000;
 
     padding: min(30vh, 10rem) 2em;
     flex-direction: column;
