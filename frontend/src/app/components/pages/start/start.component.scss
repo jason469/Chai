@@ -17,11 +17,26 @@
   &__cwimpies {
     width: 60%;
 
+    &__no-birthdays {
+      img {
+        -webkit-mask-image: linear-gradient(
+            rgb(0 0 0 / 1),
+            rgb(0 0 0 / 0.5) 30%,
+            rgb(0 0 0 / 0),
+        );
+
+        mask-image: linear-gradient(
+            rgb(0 0 0 / 1),
+            rgb(0 0 0 / 0.5) 30%,
+            rgb(0 0 0 / 0),
+        );
+      }
+    }
+
     @include c.image_with_text_overlay(".start-page__cwimpies__no-birthdays", #FFFFFF, #808080, 2rem)
   }
 
   .white-btn {
     @include c.hover-fill-button(#FFFFFF, #000000)
   }
-
 }

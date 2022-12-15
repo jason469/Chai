@@ -48,10 +48,18 @@ header {
   margin: 0 0 0 0;
 
   background: hsl(0 0% 0% / 0.5);
+  $gap: 3rem;
 
   a {
     text-decoration: none;
     transition: 250ms ease-in;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+
 
     > [aria-hidden="true"] {
       font-weight: 700;
@@ -84,7 +92,6 @@ header {
     position: fixed;
     inset: 0 0 0 50%;
     color: black;
-    $gap: 2em;
     z-index: 1000;
 
     padding: min(30vh, 10rem) 2em;
@@ -124,7 +131,7 @@ header {
   }
 }
 
-@media (min-width: 35em) and (max-width: 55em) {
+@media (min-width: 35em) and (max-width: 54.999em) {
   .primary-navigation {
     a {
       > [aria-hidden="true"] {
@@ -141,6 +148,20 @@ header {
     $gap: clamp(1.5rem, 5vw, 3rem);
   }
 
+  .primary-header::after {
+    content: '';
+    display: block;
+    position: relative;
+    height: 1px;
+    background: black;
+    width: 30%;
+    order: 1;
+    margin-right: -2.5rem;
+  }
+
+  nav {
+    order: 2;
+  }
 }
 
 .sr-only { // Stands for screen reader only
