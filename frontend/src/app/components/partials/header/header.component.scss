@@ -1,28 +1,128 @@
-.active {
-  color: red;
+$gap: 1rem;
+header {
+  background-color: #2F5C8F;
 }
 
-.nav-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.chai__navbar, .chai__navbar-nav {
-  width: 100%;
-}
-
-#leftNav, #rightNav {
+.flex {
   display: flex;
   flex-direction: row;
+  gap: $gap;
+}
+
+[hidden] {
+  display: none !important;
+}
+// Primary header
+.logo {
+  margin: 2rem;
+}
+
+.primary-header {
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
 }
 
-#leftNav {
-  justify-content: flex-start;
+.mobile-nav-toggle {
+  display: none;
 }
 
-#rightNav {
-  justify-content: flex-end;
+.primary-navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 0;
+
+  background: hsl(0 0% 0% / 0.5);
+
+  a {
+    text-decoration: none;
+
+    > [aria-hidden="true"] {
+      font-weight: 700;
+      margin-inline-end: 0.75em;
+    }
+
+    &:link {
+      color: black;
+    }
+    &:visited {
+      color: black;
+    }
+  }
+}
+
+@supports (backdrop-filter: blur(1rem)) {
+  .primary-navigation {
+    background: hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(1rem);
+  }
+}
+
+@media (max-width: 35em) {
+  .primary-navigation {
+    position: fixed;
+    inset: 0 0 0 50%;
+    color: black;
+    $gap: 2em;
+    z-index: 1000;
+
+    padding: min(30vh, 10rem) 2em;
+    flex-direction: column;
+
+    transform: translateX(100%);
+    transition: transform 350ms ease-out;
+
+    a:link {
+      color: black;
+    }
+    a:visited {
+      color: black;
+    }
+
+    &[data-visible='true'] {
+      transform: translateX(0%);
+    }
+  }
+
+  .mobile-nav-toggle {
+    position: absolute;
+    z-index: 9999;
+    border: 0;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: 2rem;
+    right: 2rem;
+    display: block;
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 35em) and (max-width: 55em) {
+  .primary-navigation {
+    a {
+      > [aria-hidden="true"] {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 35em) {
+  .primary-navigation {
+    padding-block: 2rem;
+    padding-inline: clamp(3rem, 5vw, 10rem);
+    $gap: clamp(1.5rem, 5vw, 3rem);
+  }
+
+}
+
+.sr-only {  // Stands for screen reader only
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
 }

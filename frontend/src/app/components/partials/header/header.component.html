@@ -1,162 +1,124 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <!--    Toggle button   -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      (click)="noListNav.toggle()"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+<header class="primary-header flex">
+  <div class="logo">
+    <a class=""
+       routerLink="/"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}"
     >
-      <i class="fas fa-bars"></i>
-    </button>
+      Chai
+    </a>
+  </div>
 
-    <!--  Collapsible wrapper  -->
+  <button
+    aria-controls="primary-navigation"
+    [attr.aria-expanded]="navbarVisible"
+    class="mobile-nav-toggle"
+    (click)="toggleNavbar()"
+  >
     <div
-      class="collapse navbar-collapse"
-      id="navbarNavAltMarkup"
-      mdbCollapse
-      #noListNav="mdbCollapse"
+      [hidden]="navbarVisible"
     >
-      <a class="navbar-brand"
-         routerLink="/"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{exact: true}"
-      >
-        Chai
-      </a>
+      <i class="fa-solid fa-bars"></i>
+    </div>
 
-      <!--   Unauthenticated header   -->
-      <div
-        class="me-auto mb-2 mb-lg-0"
-        *ngIf="!isAuthenticated"
-      >
-        <a class="nav-link"
+    <div
+      [hidden]="!navbarVisible"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <span class="sr-only">
+      Menu
+    </span>
+  </button>
+
+  <nav>
+    <ul id="primary-navigation"
+        class="primary-navigation flex"
+        [attr.data-visible]="navbarVisible"
+    >
+      <li class="">
+        <a class=""
            routerLink="/auth/login"
            routerLinkActive="active"
+           *ngIf="!isAuthenticated"
         >
+          <span aria-hidden="true">00</span>
           Login
         </a>
-      </div>
-
-
-      <!--  Authenticated navbar   -->
-      <div
-        *ngIf="isAuthenticated"
-        class="chai__navbar"
-      >
-        <div
-          class="navbar-nav chai__navbar-nav"
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/schedule"
+           routerLinkActive="active"
+           *ngIf="isAuthenticated"
         >
-          <!--  Left links  -->
-          <div
-            class="ms-auto"
-            id="leftNav"
-          >
-            <a class="nav-link"
-               routerLink="/schedule"
-               routerLinkActive="active"
-            >
-              Daily Schedule
-            </a>
-            <li
-              mdbDropdown
-              class="nav-link dropdown"
-            >
-              <a
-                class="nav-link dropdown-toggle"
-                id="cwimpieMenu"
-                role="button"
-                mdbDropdownToggle
-                aria-expanded="false"
-                routerLinkActive="active"
-              >
-                Cwimpies
-              </a>
-              <ul
-                mdbDropdownMenu
-                class="dropdown-menu"
-                aria-labelledby="cwimpieMenu"
-              >
-                <li>
-                  <a class="dropdown-item"
-                     routerLink="/cwimpies"
-                     routerLinkActive="active"
-                     [routerLinkActiveOptions]="{exact: true}"
-                  >
-                    View Cwimpies
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item"
-                     routerLink="/cwimpies/generate"
-                     routerLinkActive="active"
-                  >
-                    Generate
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item"
-                     routerLink="/cwimpies/commandments"
-                     routerLinkActive="active"
-                  >
-                    Commandments
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item"
-                     routerLink="/cwimpies/locations"
-                     routerLinkActive="active"
-                  >
-                    Locations
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </div>
-          <!--    Left Links    -->
+          <span aria-hidden="true">01</span>
+          Daily Schedule
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/cwimpies"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">02</span>
+          View Cwimpies
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/cwimpies/generate"
+           routerLinkActive="active"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">03</span>
+          Generate
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/cwimpies/commandments"
+           routerLinkActive="active"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">04</span>
+          Commandments
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/cwimpies/locations"
+           routerLinkActive="active"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">05</span>
 
-          <!--    Right Links    -->
-          <div
-            class="me-auto"
-            id="rightNav"
-          >
-            <a class="nav-link">
-              <li mdbDropdown class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  id="profileMenu"
-                  role="button"
-                  mdbDropdownToggle
-                  aria-expanded="false"
-                  routerLinkActive="active"
-                >
-                  Profile
-                </a>
-                <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="profileMenu">
-                  <li>
-                    <a class="dropdown-item"
-                       routerLink="/profile"
-                       routerLinkActive="active"
-                       [routerLinkActiveOptions]="{exact: true}"
-                    >
-                      Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item"
-                       (click)="onLogout()"
-                    >
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </a>
-          </div>
-          <!--   Right Links   -->
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+          Locations
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           routerLink="/profile"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">06</span>
+
+          Profile
+        </a>
+      </li>
+      <li class="">
+        <a class=""
+           (click)="onLogout()"
+           *ngIf="isAuthenticated"
+        >
+          <span aria-hidden="true">07</span>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

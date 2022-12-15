@@ -3,18 +3,8 @@
 @use "/src/common/styles/components" as c;
 
 
-//a[data-tool-tip] {
-//  position: relative;
-//
-//}
-//
-//a[data-tool-tip]::after {
-//  content: attr(data-tool-tip);
-//}
 .copyright {
   @include a.themify(t.$themes) using($theme-map) {
     @include c.hover-link-tooltip(a.themed($theme-map, a.$backgroundColour), a.themed($theme-map, a.$textColor))
   }
 }
-
-//@include c.hover-link-tooltip(#fff, #fff)

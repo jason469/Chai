@@ -1,4 +1,6 @@
-const BASE_URL = 'http://localhost:5000'
+import {environment} from "../../../environments/environment";
+
+const BASE_URL = environment.backendApiUrl
 
 // URLs for authentication
 export const USER_LOGIN_URL = BASE_URL + '/api/login/';
