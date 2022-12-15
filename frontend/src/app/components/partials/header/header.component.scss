@@ -1,4 +1,8 @@
+@use "/src/common/styles/components" as c;
+
 $gap: 1rem;
+$white: 0, 0%, 100%;
+
 header {
   background-color: #2F5C8F;
 }
@@ -9,9 +13,21 @@ header {
   gap: $gap;
 }
 
+.active {
+  color: hsl(0 0% 100% / 1) !important;
+  border-color: hsl(0 0% 100% / 1);
+  border-bottom: .2rem solid hsl(0 0% 100%/ 1);
+  padding: var(--underline-gap, 1rem) 0;
+}
+
 [hidden] {
   display: none !important;
 }
+
+.black-btn {
+  @include c.hover-fill-button(#000000, #FFFFFF)
+}
+
 // Primary header
 .logo {
   margin: 2rem;
@@ -35,6 +51,7 @@ header {
 
   a {
     text-decoration: none;
+    transition: 250ms ease-in;
 
     > [aria-hidden="true"] {
       font-weight: 700;
@@ -44,8 +61,13 @@ header {
     &:link {
       color: black;
     }
+
     &:visited {
       color: black;
+    }
+
+    &:hover {
+      color: hsl(0, 0%, 100%/ .5);
     }
   }
 }
@@ -74,6 +96,7 @@ header {
     a:link {
       color: black;
     }
+
     a:visited {
       color: black;
     }
@@ -93,6 +116,11 @@ header {
     right: 2rem;
     display: block;
     background-color: transparent;
+
+    &:focus-visible {
+      outline: 5px solid white;
+      outline-offset: 5px;
+    }
   }
 }
 
@@ -115,7 +143,7 @@ header {
 
 }
 
-.sr-only {  // Stands for screen reader only
+.sr-only { // Stands for screen reader only
   position: absolute;
   width: 1px;
   height: 1px;
