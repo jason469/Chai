@@ -1,39 +1,29 @@
-<header class="primary-header flex">
-  <div class="logo">
-    <a class=""
-       routerLink="/"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}"
-    >
-      Chai
-    </a>
-  </div>
-
-  <button
-    aria-controls="primary-navigation"
-    [attr.aria-expanded]="navbarVisible"
-    class="mobile-nav-toggle"
-    (click)="toggleNavbar()"
-  >
-    <div
-      [hidden]="navbarVisible"
-    >
-      <i class="fa-solid fa-bars"></i>
+<header>
+  <nav class="navigation" [attr.data-visible]="navbarVisible">
+    <div class="primary-header">
+      <app-hamburger-close
+        [buttonControl]="'primary-navigation'"
+        [initialVisibleState]="true"
+        (itemVisibleEvent)="toggleNavbar($event)"
+        class="mobile-nav-toggle"
+      >
+        <span class="sr-only">
+          Menu
+        </span>
+      </app-hamburger-close>
+      <div class="logo">
+        <a class=""
+           routerLink="/"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}"
+        >
+          Chai
+        </a>
+      </div>
     </div>
 
-    <div
-      [hidden]="!navbarVisible"
-    >
-      <i class="fa-solid fa-xmark"></i>
-    </div>
-    <span class="sr-only">
-      Menu
-    </span>
-  </button>
-
-  <nav>
     <ul id="primary-navigation"
-        class="primary-navigation flex"
+        class="primary-navigation"
         [attr.data-visible]="navbarVisible"
     >
       <li class="">
@@ -112,8 +102,8 @@
       </li>
       <li class="">
         <button class="black-btn"
-           (click)="onLogout()"
-           *ngIf="isAuthenticated"
+                (click)="onLogout()"
+                *ngIf="isAuthenticated"
         >
           <span aria-hidden="true">07</span>
           Logout

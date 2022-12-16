@@ -3,39 +3,26 @@
 $gap: 1rem;
 $white: 0, 0%, 100%;
 
-.flex {
-  display: flex;
-  flex-direction: row;
-  gap: $gap;
-}
-
 // Primary header
-.primary-header {
+.navigation {
   align-items: center;
-  justify-content: space-between;
-  background-color: #2F5C8F;
+  z-index: 9999;
+  display: flex;
+  gap: $gap;
 
-  .active {
-    color: hsl(0 0% 100% / 1) !important;
-    border-color: hsl(0 0% 100% / 1);
-    border-bottom: .2rem solid hsl(0 0% 100%/ 1);
-    padding-bottom: 1rem;
-  }
-
-  .logo {
-    margin: 2rem;
-  }
-
-  [hidden] {
-    display: none !important;
-  }
+  //.active {
+  //  color: hsl(0 0% 100% / 1) !important;
+  //  border-color: hsl(0 0% 100% / 1);
+  //  border-bottom: .2rem solid hsl(0 0% 100%/ 1);
+  //  padding-bottom: 1rem;
+  //}
 
   .black-btn {
     @include c.hover-fill-button(#000000, #FFFFFF)
   }
 
   a {
-    color: white;
+    color: black;
   }
 }
 
@@ -48,8 +35,8 @@ $white: 0, 0%, 100%;
   padding: 0;
   margin: 0 0 0 0;
 
-  background: hsl(0 0% 0% / 0.5);
   gap: 3rem;
+  display: flex;
 
   a {
     text-decoration: none;
@@ -67,11 +54,7 @@ $white: 0, 0%, 100%;
       margin-inline-end: 0.75em;
     }
 
-    &:link {
-      color: black;
-    }
-
-    &:visited {
+    &:link, &:visited {
       color: black;
     }
 
@@ -82,53 +65,69 @@ $white: 0, 0%, 100%;
   }
 }
 
-@supports (backdrop-filter: blur(1rem)) {
-  .primary-navigation {
-    background: hsl(0 0% 100% / 0.1);
-    backdrop-filter: blur(1rem);
-  }
-}
-
 @media (max-width: 35em) {
-  .primary-navigation {
-    position: fixed;
-    inset: 0 0 0 50%;
-    color: black;
-    z-index: 9000;
-
-    padding: min(30vh, 10rem) 2em;
+  .navigation {
     flex-direction: column;
-
-    transform: translateX(100%);
+    position: fixed;
+    justify-content: center;
+    right: 0;
     transition: transform 350ms ease-out;
 
-    a:link {
-      color: black;
+    .primary-header {
+      margin-top: 1rem;
+      justify-content: center;
+      gap: 1rem;
+
+      .logo {
+        text-align: center;
+      }
     }
 
-    a:visited {
+    .primary-navigation {
+      inset: 0 0 0 50%;
       color: black;
+      z-index: 9000;
+      gap: 1rem;
+      overflow-y: auto;
+
+      padding: min(10vh, 3rem) 2em;
+      flex-direction: column;
+
+      transform: translateX(100%);
+      transition: transform 350ms ease-out;
+
+      a:link {
+        color: black;
+      }
+
+      a:visited {
+        color: black;
+      }
+
+      &[data-visible='true'] {
+        transform: translateX(0%);
+      }
     }
 
-    &[data-visible='true'] {
-      transform: translateX(0%);
+    .mobile-nav-toggle {
+      z-index: 9999;
+      border: 0;
+      width: 2rem;
+      aspect-ratio: 1;
+      display: block;
+      background-color: transparent;
+
+      &:focus-visible {
+        outline: 5px solid white;
+        outline-offset: 5px;
+      }
     }
   }
 
-  .mobile-nav-toggle {
-    position: absolute;
-    z-index: 9999;
-    border: 0;
-    width: 2rem;
-    aspect-ratio: 1;
-    top: 2rem;
-    right: 2rem;
-    display: block;
-    background-color: transparent;
-
-    &:focus-visible {
-      outline: 5px solid white;
-      outline-offset: 5px;
+  @supports (backdrop-filter: blur(1rem)) {
+    .navigation[data-visible='true'] {
+      background: hsl(0 0% 100% / 0.1);
+      backdrop-filter: blur(1rem);
     }
   }
 }
@@ -144,25 +143,28 @@ $white: 0, 0%, 100%;
 }
 
 @media (min-width: 35em) {
+  .navigation {
+    background-color: #2F5C8F;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .primary-navigation {
+    flex-direction: row;
     padding-block: 2rem;
     padding-inline: clamp(3rem, 5vw, 10rem);
     $gap: clamp(1.5rem, 5vw, 3rem);
   }
 
-  .primary-header::after {
-    content: '';
-    display: block;
-    position: relative;
-    height: 1px;
-    background: black;
-    width: 30%;
-    order: 1;
-    margin-right: -2.5rem;
+  .logo {
+    margin: 2rem;
   }
 
-  nav {
-    order: 2;
+  @supports (backdrop-filter: blur(1rem)) {
+    .primary-navigation {
+      background: hsl(0 0% 100% / 0.1);
+      backdrop-filter: blur(1rem);
+    }
   }
 }
 

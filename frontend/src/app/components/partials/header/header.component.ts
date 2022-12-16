@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private renderer: Renderer2
   ) {
   }
 
@@ -24,19 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logOut()
   }
 
-  toggleNavbar() {
-    this.navbarVisible = !this.navbarVisible
-    console.log(this.navbarVisible)
-    if (this.navbarVisible) {  // Navbar is visible, so we want cross
-      console.log('cross')
-      this.renderer.removeClass(this.toggleNavbarCross.nativeElement, "hide")
-      this.renderer.addClass(this.toggleNavbarHamburger.nativeElement, "hide")
-    } else {  // Navbar isn't visible, so we want hamburger
-      console.log('jamburger')
-      this.renderer.removeClass(this.toggleNavbarHamburger.nativeElement, "hide")
-      this.renderer.addClass(this.toggleNavbarCross.nativeElement, "hide")
-    }
-
+  toggleNavbar(event:boolean) {
+    this.navbarVisible = event
   }
 
   ngOnInit(): void {
