@@ -3,6 +3,13 @@
 $gap: 1rem;
 $white: 0, 0%, 100%;
 
+:host {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
 // Primary header
 .navigation {
   align-items: center;
@@ -10,12 +17,13 @@ $white: 0, 0%, 100%;
   display: flex;
   gap: $gap;
 
-  //.active {
-  //  color: hsl(0 0% 100% / 1) !important;
-  //  border-color: hsl(0 0% 100% / 1);
-  //  border-bottom: .2rem solid hsl(0 0% 100%/ 1);
-  //  padding-bottom: 1rem;
-  //}
+  .active {
+    //color: hsl(0 0% 100% / 1) !important;
+    color: red !important;
+    border-color: hsl(0 0% 100% / 1);
+    border-bottom: .2rem solid hsl(0 0% 100%/ 1);
+    padding-bottom: 1rem;
+  }
 
   .black-btn {
     @include c.hover-fill-button(#000000, #FFFFFF)
@@ -63,15 +71,20 @@ $white: 0, 0%, 100%;
       transform: scale(1.15);
     }
   }
+
+  &__sub {
+    font-weight: bold;
+  }
 }
 
 @media (max-width: 35em) {
   .navigation {
     flex-direction: column;
     position: fixed;
-    justify-content: center;
+    justify-content: flex-start;
     right: 0;
     transition: transform 350ms ease-out;
+    height: 100%;
 
     .primary-header {
       margin-top: 1rem;
@@ -95,6 +108,8 @@ $white: 0, 0%, 100%;
 
       transform: translateX(100%);
       transition: transform 350ms ease-out;
+      height: 100%;
+      justify-content: space-between;
 
       a:link {
         color: black;
@@ -106,6 +121,12 @@ $white: 0, 0%, 100%;
 
       &[data-visible='true'] {
         transform: translateX(0%);
+      }
+
+      &__sub {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
     }
 
@@ -144,9 +165,10 @@ $white: 0, 0%, 100%;
 
 @media (min-width: 35em) {
   .navigation {
-    background-color: #2F5C8F;
     flex-direction: row;
     justify-content: space-between;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 70%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    width: 100%;
   }
 
   .primary-navigation {
@@ -154,6 +176,17 @@ $white: 0, 0%, 100%;
     padding-block: 2rem;
     padding-inline: clamp(3rem, 5vw, 10rem);
     $gap: clamp(1.5rem, 5vw, 3rem);
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10rem;
+
+    &__sub {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      align-items: center;
+    }
   }
 
   .logo {

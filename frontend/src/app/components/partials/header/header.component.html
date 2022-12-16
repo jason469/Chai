@@ -26,89 +26,97 @@
         class="primary-navigation"
         [attr.data-visible]="navbarVisible"
     >
-      <li class="">
-        <a class=""
-           routerLink="/auth/login"
-           routerLinkActive="active"
-           *ngIf="!isAuthenticated"
-        >
-          <span aria-hidden="true">00</span>
-          Login
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/schedule"
-           routerLinkActive="active"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">01</span>
-          Daily Schedule
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/cwimpies"
-           routerLinkActive="active"
-           [routerLinkActiveOptions]="{exact: true}"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">02</span>
-          View Cwimpies
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/cwimpies/generate"
-           routerLinkActive="active"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">03</span>
-          Generate
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/cwimpies/commandments"
-           routerLinkActive="active"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">04</span>
-          Commandments
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/cwimpies/locations"
-           routerLinkActive="active"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">05</span>
+      <div class="primary-navigation__sub" id="primary-navigation__left">
+        <li class="">
+          <a class=""
+             routerLink="/cwimpies"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             *ngIf="isAuthenticated"
+          >
+            VIEW
+          </a>
+        </li>
+        <li class="">
+          <a class=""
+             routerLink="/cwimpies/generate"
+             routerLinkActive="active"
+             *ngIf="isAuthenticated"
+          >
+            GENERATE
+          </a>
+        </li>
+      </div>
+      <div class="primary-navigation__sub" id="primary-navigation__right">
+        <li class="">
+          <a class=""
+             routerLink="/auth/login"
+             routerLinkActive="active"
+             *ngIf="!isAuthenticated"
+          >
+            <span aria-hidden="true">00</span>
+            Login
+          </a>
+        </li>
+        <li class="">
+          <a class=""
+             routerLink="/about-us"
+             routerLinkActive="active"
+             *ngIf="!isAuthenticated"
+          >
+            About Us
+          </a>
+        </li>
+        <li class="">
+          <a class=""
+             routerLink="/profile"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             *ngIf="isAuthenticated"
+          >
+            Profile
+          </a>
+        </li>
+        <li class="">
+          <button class="black-btn"
+                  (click)="onLogout()"
+                  *ngIf="isAuthenticated"
+          >
+            Logout
+          </button>
+        </li>
+      </div>
+<!--      <li class="">-->
+<!--        <a class=""-->
+<!--           routerLink="/schedule"-->
+<!--           routerLinkActive="active"-->
+<!--           *ngIf="isAuthenticated"-->
+<!--        >-->
+<!--          <span aria-hidden="true">01</span>-->
+<!--          Daily Schedule-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li class="">-->
+<!--        <a class=""-->
+<!--           routerLink="/cwimpies/commandments"-->
+<!--           routerLinkActive="active"-->
+<!--           *ngIf="isAuthenticated"-->
+<!--        >-->
+<!--          <span aria-hidden="true">04</span>-->
+<!--          Commandments-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li class="">-->
+<!--        <a class=""-->
+<!--           routerLink="/cwimpies/locations"-->
+<!--           routerLinkActive="active"-->
+<!--           *ngIf="isAuthenticated"-->
+<!--        >-->
+<!--          <span aria-hidden="true">05</span>-->
 
-          Locations
-        </a>
-      </li>
-      <li class="">
-        <a class=""
-           routerLink="/profile"
-           routerLinkActive="active"
-           [routerLinkActiveOptions]="{exact: true}"
-           *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">06</span>
-
-          Profile
-        </a>
-      </li>
-      <li class="">
-        <button class="black-btn"
-                (click)="onLogout()"
-                *ngIf="isAuthenticated"
-        >
-          <span aria-hidden="true">07</span>
-          Logout
-        </button>
-      </li>
+<!--          Locations-->
+<!--        </a>-->
+<!--      </li>-->
     </ul>
   </nav>
 </header>

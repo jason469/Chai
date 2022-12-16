@@ -27,6 +27,11 @@ const appRoutes: Routes = [
     loadChildren: () => import('./components/pages/profile/profile.module').then(m => m.ProfileModule),
     data: {animation: ''}
   },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./components/pages/about-us/about-us.module').then(m => m.AboutUsModule),
+    data: {animation: ''}
+  },
 ];
 
 @NgModule({
