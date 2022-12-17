@@ -1,3 +1,7 @@
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
+@use "/src/common/styles/components" as c;
+
 .about-us {
   display: flex;
   flex-direction: column;
@@ -14,10 +18,9 @@
     gap: 1rem;
 
     &__subtitle {
-      text-transform: uppercase;
-      font-size: 2rem;
-      color: #F7861D;
-      letter-spacing: 0.3rem;
+      @include a.themify(t.$themes) using($theme-map) {
+        @include c.subtitle(a.themed($theme-map, a.$primaryColour))
+      }
     }
 
     &__main {
@@ -39,7 +42,7 @@
     border: 10px solid;
     border-image-slice: 1;
     border-image-source: linear-gradient(to left, #F7861D, #FC380C);
-    max-width: 60%;
+    max-width: 47%;
 
     display: grid;
     grid-template-rows: 8rem 0.1fr 2fr;

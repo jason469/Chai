@@ -1,35 +1,100 @@
-<div>
-  <h1>Profile</h1>
+<div class="theme-warm-orange">
   <div
-    *ngIf="currentUser"
+    class="profile-page"
   >
-    <h2>Welcome {{currentUser.name}}</h2>
-  </div>
-
-  <div
-    *ngIf="(!isLoading && allCwimpies.length != 0)"
-    @loadCarouselAnimationTrigger
-  >
-    <h1>Your cwimpies!</h1>
-    <mdb-carousel
-      [controls]="true"
-      [indicators]="false"
-      id="userCarousel"
-      class=""
-      *ngIf="allCwimpies.length > 1"
-    >
-      <mdb-carousel-item
-        *ngFor="let cwimpie of allCwimpies"
+    <div class="profile-page__titles">
+      <div class="profile-page__titles__main">Profile</div>
+      <div
+        *ngIf="currentUser"
+        class="profile-page__titles__subtitle"
       >
-        <app-profile-cwimpie-card
-          [cwimpieData]="cwimpie"
-        ></app-profile-cwimpie-card>
-      </mdb-carousel-item>
-    </mdb-carousel>
+        Welcome {{currentUser.name}}
+      </div>
+    </div>
+    <div class="profile-page__content">
+      <div class="profile-page__content__navigation">
+        <div
+          class="profile-page__content__navigation__title"
+        >
+          Navigation
+        </div>
+        <div class="profile-page__content__navigation__links">
+          <a
+            class="black-btn"
+            routerLink="/cwimpies"
+            role="button"
+          >
+            View
+          </a>
+          <a
+            class="black-btn"
+            routerLink="/cwimpies/generate"
+            role="button"
+          >
+            Generate
+          </a>
+          <a
+            class="black-btn"
+            routerLink="/schedule"
+            role="button"
+          >
+            Daily Schedules
+          </a>
+          <a
+            class="black-btn"
+            routerLink="/cwimpies/commandments"
+            role="button"
+          >
+            Commandments
+          </a>
+          <a
+            class="black-btn"
+            routerLink="/cwimpies/locations"
+            role="button"
+          >
+            Locations
+          </a>
+          <a
+            class="black-btn"
+            routerLink="/about-us"
+            role="button"
+          >
+            About us
+          </a>
+        </div>
+      </div>
+      <div
+        class="profile-page__content__cwimpies"
+        *ngIf="(!isLoading && allCwimpies.length != 0)"
+        @loadCarouselAnimationTrigger
+      >
+        <div
+          class="profile-page__content__cwimpies__title"
+        >
+          Your cwimpies!
+        </div>
+        <div class="profile-page__content__cwimpies__carousel">
+          <mdb-carousel
+            [controls]="true"
+            [indicators]="false"
+            id="userCarousel"
+            *ngIf="allCwimpies.length > 1"
+          >
+            <mdb-carousel-item
+              *ngFor="let cwimpie of allCwimpies"
+            >
+              <app-profile-cwimpie-card
+                [cwimpieData]="cwimpie"
+              ></app-profile-cwimpie-card>
+            </mdb-carousel-item>
+          </mdb-carousel>
 
-    <app-profile-cwimpie-card
-      *ngIf="allCwimpies.length == 1"
-      [cwimpieData]="allCwimpies[0]"
-    ></app-profile-cwimpie-card>
+          <app-profile-cwimpie-card
+            *ngIf="allCwimpies.length == 1"
+            [cwimpieData]="allCwimpies[0]"
+          ></app-profile-cwimpie-card>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
