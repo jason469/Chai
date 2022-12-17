@@ -19,7 +19,7 @@
 
     &__subtitle {
       @include a.themify(t.$themes) using($theme-map) {
-        @include c.subtitle(a.themed($theme-map, a.$primaryColour))
+        @include c.subtitle(a.themed($theme-map, a.$primaryColour), true)
       }
     }
 

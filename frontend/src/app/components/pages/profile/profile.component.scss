@@ -18,7 +18,7 @@
 
     &__subtitle {
       @include a.themify(t.$themes) using($theme-map) {
-        @include c.subtitle(a.themed($theme-map, a.$primaryColour))
+        @include c.subtitle(a.themed($theme-map, a.$primaryColour), true)
       }
     }
   }
@@ -37,7 +37,7 @@
 
       &__title {
         @include a.themify(t.$themes) using($theme-map) {
-          @include c.subtitle(a.themed($theme-map, a.$secondaryColour))
+          @include c.subtitle(a.themed($theme-map, a.$secondaryColour), false)
         }
         font-weight: bold;
       }
@@ -68,7 +68,7 @@
 
       &__title {
         @include a.themify(t.$themes) using($theme-map) {
-          @include c.subtitle(a.themed($theme-map, a.$secondaryColour))
+          @include c.subtitle(a.themed($theme-map, a.$secondaryColour), false)
         }
         font-weight: bold;
       }
