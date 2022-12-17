@@ -10,7 +10,7 @@
 
   &__title {
     @include a.themify(t.$themes) using($theme-map) {
-      @include c.page_title(a.themed($theme-map, a.$backgroundColour), a.themed($theme-map, a.$textColor))
+      @include c.page_title(a.themed($theme-map, a.$primaryColour), a.themed($theme-map, a.$primaryTextColour))
     }
   }
 

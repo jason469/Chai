@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   Renderer2,
-  ViewChild
+  ViewChild, ViewEncapsulation
 } from '@angular/core';
 import {FullCwimpieModalComponent} from "../full-cwimpie-modal/full-cwimpie-modal.component";
 import {ViewCwimpiesService} from "../../../../services/cwimpies/viewCwimpies.service";
@@ -25,7 +25,8 @@ import {DeleteCwimpieDialogComponent} from "../delete-cwimpie-dialog/delete-cwim
   selector: 'app-reduced-cwimpie-card',
   templateUrl: './reduced-cwimpie-card.component.html',
   styleUrls: ['./reduced-cwimpie-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class ReducedCwimpieCardComponent implements OnInit {
   @Input('cwimpieData') data!: Cwimpie;

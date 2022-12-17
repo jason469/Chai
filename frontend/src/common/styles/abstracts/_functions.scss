@@ -10,13 +10,13 @@
 
 @function create-theme-map($map) {
   $map: (
+    v.$primaryColour: map-get-value($map, v.$primary),
+    v.$secondaryColour: map-get-value($map, v.$secondary),
+    v.$tertiaryColour: map-get-value($map, v.$tertiary),
     v.$backgroundColour: map-get-value($map, v.$background),
-    v.$textColor: map-get-value($map, v.$secondary),
-    v.$buttonTextColour: map-get-value($map, v.$primary),
-    v.$buttonTextTransform: map-get-value($map, v.$on-primary),
-    v.$buttonTextHoverColour: map-get-value($map, v.$on-primary),
-    v.$buttonColour: map-get-value($map, v.$on-secondary),
-    v.$buttonBorder: map-get-value($map, v.$on-surface),
+    v.$primaryTextColour: map-get-value($map, v.$on-primary),
+    v.$secondaryTextColour: map-get-value($map, v.$on-secondary),
+    v.$tertiaryTextColour: map-get-value($map, v.$on-tertiary),
   );
   @return $map
 }

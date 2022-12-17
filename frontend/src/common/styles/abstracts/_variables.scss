@@ -3,38 +3,31 @@
 // Variables to be set for each theme, so that we have a consistent naming pattern for every theme
 $primary: primary;
 $secondary: secondary;
+$tertiary: tertiary;
 $surface: surface;
 $background: background;
 $on-primary: on-primary;
 $on-secondary: on-secondary;
-$on-surface: on-surface;
+$on-tertiary: on-tertiary;
 
 
 // Variables to be used by other style sheets to access theme colours
+$primaryColour: primaryColor;
+$secondaryColour: secondaryColour;
+$tertiaryColour: tertiaryColour;
 $backgroundColour: backgroundColour;
-$textColor: textColor;
-$buttonTextColour: buttonTextColour;
-$buttonTextTransform: buttonTextTransform;
-$buttonTextHoverColour: buttonTextHoverColour;
-$buttonColour: buttonColour;
-$buttonBorder: buttonBorder;
+$primaryTextColour: primaryTextColour;
+$secondaryTextColour: secondaryTextColour;
+$tertiaryTextColour: tertiaryTextColour;
 
-$color-map--cold-grass : (
-  $primary: c.$cg--green,
-  $secondary: c.$cg--green,
-  $surface: c.$cg--lightBlue,
-  $background: c.$cg--blue,
-  $on-primary: c.$black,
-  $on-secondary: c.$black,
-  $on-surface: c.$white,
-);
 
-$color-map--sunset :  (
-  $primary: c.$ss--blue,
-  $secondary: c.$ss--pink,
-  $surface: c.$ss--lightblue,
-  $background: c.$ss--pink,
-  $on-primary: c.$ss--yellow,
-  $on-secondary: c.$black,
-  $on-surface: c.$white,
+$color-map--warm-orange :  (
+  $primary: c.$wo-orange,
+  $secondary: c.$wo-red,
+  $tertiary: c.$wo-darkred,
+  $surface: c.$wo-lightorange,
+  $background: c.$wo-lightorange,
+  $on-primary: c.$wo-darkgrey,
+  $on-secondary: c.$wo-grey,
+  $on-tertiary: c.$wo-lightgrey,
 );

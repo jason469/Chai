@@ -1,75 +1,78 @@
-<div class="theme-cold-grass">
-  <mat-card
-    class="card"
-  >
-    <!--    style="background-color:{{!initialData!.colour?.hexCode}}"-->
-    <div
-      class="openModal click card__image"
-      (click)="openCwimpieModal()"
-      matRipple
-    >
-      <img class="card__image__photo" src="{{initialData!.photo}}" alt="">
-      <div class="card__image__text">
-        <div class="card__image__text__title">
-          <div>{{initialData!.name}}</div>
-        </div>
-        <div class="card__image__text__body">
-          <div class="card__image__text__body__species"
-               style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
-            <div>{{initialData!.species!.name}}</div>
+<div class="theme-warm-orange">
+  <div class="card">
+    <!--    <div class="card__header">-->
+    <!--      {{initialData.primaryParent.name}}-->
+    <!--    </div>-->
+    <mat-card>
+      <div
+        class="openModal click card__image"
+        (click)="openCwimpieModal()"
+        matRipple
+      >
+        <img class="card__image__photo" src="{{initialData!.photo}}" alt="">
+        <div class="card__image__text">
+          <div class="card__image__text__title">
+            <div>{{initialData!.name}}</div>
           </div>
-          <div
-            class="card__image__text__body__species__sex_container">
-            <ng-container
-              *ngIf="initialData.sex === 'Male'; then male; else female"
-            ></ng-container>
-            <div #sex>
-              <ng-template #male>
-                <i class="fa-solid fa-mars"></i>
-              </ng-template>
-              <ng-template #female>
-                <i class="fa-solid fa-venus"></i>
-              </ng-template>
+          <div class="card__image__text__body">
+            <div class="card__image__text__body__species"
+                 style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
+              <div>{{initialData!.species!.name}}</div>
+            </div>
+            <div
+              class="card__image__text__body__species__sex_container">
+              <ng-container
+                *ngIf="initialData.sex === 'Male'; then male; else female"
+              ></ng-container>
+              <div #sex>
+                <ng-template #male>
+                  <i class="fa-solid fa-mars"></i>
+                </ng-template>
+                <ng-template #female>
+                  <i class="fa-solid fa-venus"></i>
+                </ng-template>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <mat-card-content>
-      <mat-tab-group mat-align-tabs="start">
-        <mat-tab label="Job">
-          <div
-            *ngFor="let job of initialData!.professions"
-            [ngClass]="{main: job!.type === 'Main'}"
-          >
-            {{job!.name}}
-          </div>
-        </mat-tab>
-        <mat-tab label="Hobbies">
-          <div
-            *ngFor="let hobby of initialData!.hobbies"
-          >
-            {{hobby!.name}}
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-    <mat-card-actions
-      class="card_actions"
-    >
-      <button
-        mat-raised-button
-        class="update_button"
-        (click)="openUpdateCwimpieModal()"
+      <mat-card-content>
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Job" class="job-tab">
+            <div
+              *ngFor="let job of initialData!.professions"
+              [ngClass]="{job__main: job!.type === 'Main'}"
+            >
+              {{job!.name}}
+            </div>
+          </mat-tab>
+          <mat-tab label="Hobbies">
+            <div
+              *ngFor="let hobby of initialData!.hobbies"
+            >
+              {{hobby!.name}}
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+      <mat-card-actions
+        class="card__actions"
       >
-        Update
-      </button>
-      <button mat-mini-fab>
-        <!--        <mat-icon (click)="deleteCwimpie(initialData!.name)">clear</mat-icon>-->
-        <mat-icon (click)="openDialog(initialData!.name)">clear</mat-icon>
-      </button>
-    </mat-card-actions>
-    <mat-card-footer>
-    </mat-card-footer>
-  </mat-card>
+        <button
+          class="update-button"
+          (click)="openUpdateCwimpieModal()"
+        >
+          Update
+        </button>
+        <button
+          class="delete-button"
+          (click)="openDialog(initialData!.name)"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </mat-card-actions>
+      <mat-card-footer>
+      </mat-card-footer>
+    </mat-card>
+  </div>
 </div>

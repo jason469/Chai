@@ -1,3 +1,6 @@
+@use "../abstracts" as a;
+@use "../themes/all-themes" as t;
+
 * {
   margin: 0;
   padding: 0;
@@ -6,28 +9,27 @@
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-  app-root {
-    display: flex;
-    flex-direction: column;
+app-root {
+  display: flex;
+  flex-direction: column;
+}
 
-    app-header {
-      order: 1;
-      flex: 1;
-    }
+app-header {
+  flex: 1;
+}
 
-    main {
-      order: 2;
-      flex: 6;
-      min-height: 80vh;
-      padding: 1rem;
-      background-image: linear-gradient(to bottom right, #FFFFFF, #FFA775);
-      margin: 0;;
-    }
-
-    app-footer {
-      order: 3;
-      flex: 1;
-    }
+main {
+  flex: 6;
+  min-height: 80vh;
+  padding: 1rem;
+  @include a.themify(t.$themes) using($theme-map) {
+    background-image: linear-gradient(to bottom right, #FFFFFF, a.themed($theme-map, a.$backgroundColour));
   }
+  margin: 0;;
+}
+
+app-footer {
+  flex: 1;
 }

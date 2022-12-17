@@ -1,3 +1,5 @@
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
 @use "/src/common/styles/components" as c;
 
 :host {
@@ -16,8 +18,9 @@
 
   &__cwimpies {
     width: 60%;
-
-    @include c.image_with_text_overlay(".start-page__cwimpies__no-birthdays", #FFFFFF, #808080, 2rem)
+    @include a.themify(t.$themes) using($theme-map) {
+      @include c.image_with_text_overlay(".start-page__cwimpies__no-birthdays", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 2rem)
+    }
   }
 
   .white-btn {

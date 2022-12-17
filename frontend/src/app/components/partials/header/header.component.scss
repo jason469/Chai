@@ -1,4 +1,6 @@
 @use "/src/common/styles/components" as c;
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
 
 $gap: 1rem;
 $white: 0, 0%, 100%;
@@ -7,19 +9,21 @@ $white: 0, 0%, 100%;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 // Primary header
 .navigation {
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
   display: flex;
   gap: $gap;
 
   .active {
-    color: red !important;
-    border-bottom: .2rem solid hsl(0 100% 50% / 1);
+    @include a.themify(t.$themes) using($theme-map) {
+      color: a.themed($theme-map, a.$tertiaryColour);
+      border-bottom: .2rem solid a.themed($theme-map, a.$tertiaryColour);
+    }
     padding-bottom: 1rem;
   }
 
@@ -65,7 +69,9 @@ $white: 0, 0%, 100%;
     }
 
     &:hover {
-      color: red;
+      @include a.themify(t.$themes) using($theme-map) {
+        color: a.themed($theme-map, a.$tertiaryColour);
+      }
       transform: scale(1.15);
     }
   }
@@ -97,7 +103,7 @@ $white: 0, 0%, 100%;
     .primary-navigation {
       inset: 0 0 0 50%;
       color: black;
-      z-index: 9000;
+      z-index: 1000;
       gap: 1rem;
       overflow-y: auto;
 
@@ -129,7 +135,7 @@ $white: 0, 0%, 100%;
     }
 
     .mobile-nav-toggle {
-      z-index: 9999;
+      z-index: 1000;
       border: 0;
       width: 2rem;
       aspect-ratio: 1;
@@ -178,7 +184,7 @@ $white: 0, 0%, 100%;
     justify-content: space-between;
     align-items: center;
     gap: 10rem;
-    padding-left: 40%;
+    padding-left: 35%;
     letter-spacing: 0.2rem;
 
     &__sub {

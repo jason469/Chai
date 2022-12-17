@@ -1,9 +1,7 @@
 @use "../abstracts" as a;
-@use "./cold-grass" as cg;
-@use "./sunset" as ss;
+@use "./warm-orange" as wo;
 
 $themes: (
-  cg.$cold-grass: a.create-theme-map(a.$color-map--cold-grass),
-  ss.$sunset: a.create-theme-map(a.$color-map--sunset),
+  wo.$warm-orange: a.create-theme-map(a.$color-map--warm-orange),
 );
 

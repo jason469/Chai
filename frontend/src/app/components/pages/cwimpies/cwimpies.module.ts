@@ -10,7 +10,6 @@ import {LocationModule} from "./location/location.module";
 import {GenerateModule} from "./generate/generate.module";
 import {CwimpiesRoutingModule} from "./cwimpies-routing.module";
 import {MatButtonModule} from "@angular/material/button";
-import {AppModule} from "../../../app.module";
 import {CommandmentsModule} from "./commandments/commandments.module";
 
 

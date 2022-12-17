@@ -5,29 +5,96 @@
 .card {
   padding: 0;
   margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: none;
+  background: none;
 
   @include a.themify(t.$themes) using($theme-map) {
     @include c.image_with_text_overlay(".card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 0.5rem)
   }
+
+  mat-card {
+    padding: 0.5rem;
+    margin: 0;
+    background-image: url("../../../../../assets/cwimpies/reduced-cwimpie-card/cwimpies-background.jpg");
+    background-repeat: no-repeat;
+    box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.75) !important;
+  }
+
+  &__header {
+    width: 50%;
+    padding: 1rem;
+    margin: 0;
+    @include a.themify(t.$themes) using($theme-map) {
+      color: a.themed($theme-map, a.$primaryTextColour);
+    }
+    @include a.themify(t.$themes) using($theme-map) {
+      background-color: a.themed($theme-map, a.$primaryColour);
+    }
+  }
+
+  &__image {
+    max-height: 18rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left, #F7861D, #FC380C);
+  }
+
+  .mat-tab-group, .mat-card-footer {
+    padding: 0.5em;
+  }
+
+  .mat-ink-bar {
+    @include a.themify(t.$themes) using($theme-map) {
+      background-color: a.themed($theme-map, a.$primaryColour) !important;
+    }
+  }
+
+  mat-card-content {
+    color: #ffe2d9 !important;
+    letter-spacing: 0.15rem;
+
+    .mat-tab-label {
+      color: #FFFFFF !important;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.2rem;
+    }
+  }
+
+  .job__main {
+    font-weight: bold;
+  }
+
+  &__actions {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem !important;
+    max-width: 100%;
+    margin: 0;
+
+    .mat-mini-fab {
+      @include a.themify(t.$themes) using($theme-map) {
+        background-color: a.themed($theme-map, a.$primaryColour) !important;
+      }
+    }
+  }
+
+  .update-button {
+    @include c.hover-fill-button(#FFFFFF, #000000);
+    padding: 0.5rem 2rem;
+  }
+
+  .delete-button {
+    @include a.themify(t.$themes) using($theme-map) {
+      @include c.hover-fill-button(a.themed($theme-map, a.$primaryColour), #000000)
+    }
+  }
 }
-
-mat-tab-group, mat-card-footer {
-  padding: 0.5rem;
-}
-
-//
-//.image__text__body__species {
-//  background-size: cover;
-//}
-
-.card_actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-}
-
-.main {
-  font-weight: bold;
-}
-
