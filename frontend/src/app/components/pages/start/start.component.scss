@@ -17,9 +17,30 @@
   width: 100%;
 
   &__cwimpies {
-    width: 60%;
+    max-width: 60%;
     @include a.themify(t.$themes) using($theme-map) {
       @include c.image_with_text_overlay(".start-page__cwimpies__no-birthdays", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 2rem)
+    }
+
+    &__birthdays {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      &__title {
+        @include a.themify(t.$themes) using($theme-map) {
+          @include c.page_title(a.themed($theme-map, a.$primaryTextColour))
+        }
+      }
+
+      &__carousel {
+        &__item {
+          width: 100%;
+          overflow: hidden;
+        }
+      }
     }
   }
 

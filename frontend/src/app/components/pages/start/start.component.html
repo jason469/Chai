@@ -27,19 +27,24 @@
       </div>
 
       <div
-        class="bg-light text-center start-page__cwimpies__birthdays"
+        class="start-page__cwimpies__birthdays"
         *ngIf="(allBirthdayCwimpies.length != 0)"
       >
-        <h1>Happy Birthday Cwimpies !!</h1>
+        <h1
+          class="start-page__cwimpies__birthdays__title"
+        >
+          Happy Birthday Cwimpies !!
+        </h1>
         <mdb-carousel
           [controls]="true"
           [indicators]="false"
-          id="birthdayCarousel"
-          class="carousel-fade"
+          id="birthday-carousel"
+          class="carousel-fade start-page__cwimpies__birthdays__carousel"
           *ngIf="allBirthdayCwimpies.length > 1"
         >
           <mdb-carousel-item
             *ngFor="let cwimpie of allBirthdayCwimpies"
+            class="start-page__cwimpies__birthdays__carousel__item"
           >
             <app-birthday-card
               [cwimpieData]="cwimpie"

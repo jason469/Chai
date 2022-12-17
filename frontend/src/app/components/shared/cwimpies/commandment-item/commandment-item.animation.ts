@@ -7,11 +7,11 @@ export const clickCommandmentsAnimation =
 function handleClick() {
   return [
     state('true', style({      // final CSS following animation
-      backgroundColor: `#A6ECA8`
+      color: `#02774e`
     })),
     state('false', style({
     })),
-    transition('true => false', animate('1000ms linear')),  // animation timing
-    transition('false => true', animate('1000ms linear'))
+    transition('true => false', animate('250ms linear')),  // animation timing
+    transition('false => true', animate('250ms linear'))
   ]
 }

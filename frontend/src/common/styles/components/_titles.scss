@@ -7,23 +7,28 @@
   line-height: 0.9;
   color: $text-colour;
   font-weight: bold;
+  font-size: 2.5rem;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   letter-spacing: 0.2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 @mixin page_title_with_lines($background-colour, $line-colour, $text-colour) {
   text-transform: uppercase;
   line-height: 0.9;
+  font-size: 2.5rem;
   color: $text-colour;
   font-weight: bold;
   position: relative;
   display: inline-block;
   text-align: center;
   letter-spacing: 0.2rem;
-
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 
   &::before,
   &::after {

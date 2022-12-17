@@ -22,12 +22,12 @@ export class CommandmentsComponent implements OnInit {
     {
       title: 'Age',
       rule: 'No male cwimpie can be younger than their partner',
-      icon: 'baby-carriage'
+      icon: 'plus'
     },
     {
       title: 'Eggplant',
       rule: 'All cwimpies must supa like eggplant',
-      icon: 'bowl-food'
+      icon: 'utensils'
     },
     {
       title: 'Defense',
@@ -44,7 +44,7 @@ export class CommandmentsComponent implements OnInit {
       title: 'Toots',
       rule: 'All cwimpies must deny that mummy\'s tooted ',
       sub_rule: 'Optional for daddy\'s toots',
-      icon: 'gas-pump'
+      icon: 'wind'
     },
     {
       title: 'Bed',

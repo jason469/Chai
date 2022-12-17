@@ -23,7 +23,7 @@ app-header {
 main {
   flex: 6;
   min-height: 80vh;
-  padding: 2rem 1rem;
+  padding-bottom: 2rem;
   @include a.themify(t.$themes) using($theme-map) {
     background-image: linear-gradient(to bottom right, #FFFFFF, a.themed($theme-map, a.$backgroundColour));
   }

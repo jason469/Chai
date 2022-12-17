@@ -10,6 +10,8 @@
   justify-content: center;
   gap: 1rem;
   max-width: 18rem;
+  cursor: pointer;
+  transition: transform ease-in 250ms;
 
   //&__index {
   //  background-color: darkgrey;
@@ -51,5 +53,9 @@
     &__sub-rule {
       font-style: italic;
     }
+  }
+
+  &:hover {
+    transform: scale(1.15);
   }
 }

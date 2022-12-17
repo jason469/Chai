@@ -14,7 +14,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
 
     &__title {
       @include a.themify(t.$themes) using($theme-map) {
@@ -22,6 +21,11 @@
       }
       margin: 0;
       padding: 0;
+    }
+
+    &__subtitle {
+      text-align: center;
+
     }
   }
 

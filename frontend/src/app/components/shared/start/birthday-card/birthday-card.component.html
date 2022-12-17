@@ -1,9 +1,14 @@
-<img
-  src="{{data.photo}}"
-  alt="..."
-/>
-<div class="carousel-caption">
-  <h5>Happy birthday to {{data.name}}</h5>
-  <p>{{this.pronoun|titlecase}} is {{this.age}} years old today</p>
+<div class="theme-warm-orange">
+  <div class="card">
+    <img
+      src="{{data.photo}}"
+      alt="..."
+      class="card__photo"
+    />
+    <div class="card__text">
+      <p class="card__text__title">{{data.name}}</p>
+      <p  class="card__text__age">{{this.pronoun|titlecase}} is {{this.age}} years old today</p>
+    </div>
+  </div>
 </div>
 
