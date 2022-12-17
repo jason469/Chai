@@ -7,4 +7,10 @@
   @include a.themify(t.$themes) using($theme-map) {
     @include c.hover-link-tooltip(a.themed($theme-map, a.$backgroundColour), a.themed($theme-map, a.$textColor))
   }
+  background-color: #565551;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  padding: 1rem 0;
+  text-align: center;
 }

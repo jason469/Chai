@@ -18,10 +18,8 @@ $white: 0, 0%, 100%;
   gap: $gap;
 
   .active {
-    //color: hsl(0 0% 100% / 1) !important;
     color: red !important;
-    border-color: hsl(0 0% 100% / 1);
-    border-bottom: .2rem solid hsl(0 0% 100%/ 1);
+    border-bottom: .2rem solid hsl(0 100% 50% / 1);
     padding-bottom: 1rem;
   }
 
@@ -67,7 +65,7 @@ $white: 0, 0%, 100%;
     }
 
     &:hover {
-      color: hsl(0, 0%, 100%/ .5);
+      color: red;
       transform: scale(1.15);
     }
   }
@@ -167,7 +165,7 @@ $white: 0, 0%, 100%;
   .navigation {
     flex-direction: row;
     justify-content: space-between;
-    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 70%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    //box-shadow: 0 2px 1px -1px rgb(0 0 0 / 70%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
     width: 100%;
   }
 
@@ -177,9 +175,11 @@ $white: 0, 0%, 100%;
     padding-inline: clamp(3rem, 5vw, 10rem);
     $gap: clamp(1.5rem, 5vw, 3rem);
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 10rem;
+    padding-left: 40%;
+    letter-spacing: 0.2rem;
 
     &__sub {
       display: flex;
