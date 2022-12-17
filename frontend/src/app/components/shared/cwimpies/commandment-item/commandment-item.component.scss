@@ -1,19 +1,43 @@
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
+@use "/src/common/styles/components" as c;
+
+
 .commandment-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 18rem;
 
-  &__index {
-    background-color: darkgrey;
-    width: 2em;
-    height: 2em;
+  //&__index {
+  //  background-color: darkgrey;
+  //  width: 2em;
+  //  height: 2em;
+  //  border-radius: 50%;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  border: 3px solid black;
+  //  box-sizing: border-box;
+  //}
+
+  &__icon {
+    background-color: white;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid black;
-    box-sizing: border-box;
+    padding: 2rem;
+    font-size: 7rem;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    @include a.themify(t.$themes) using($theme-map) {
+      color: a.themed($theme-map, a.$primaryTextColour);
+    }
+    letter-spacing: 0.3rem;
+    font-weight: bold;
   }
 
   &__rules {
@@ -21,6 +45,11 @@
     flex-direction: column;
     gap: 0.5rem;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+
+    &__sub-rule {
+      font-style: italic;
+    }
   }
 }

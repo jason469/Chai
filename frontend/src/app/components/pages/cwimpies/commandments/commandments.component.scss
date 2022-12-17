@@ -1,0 +1,30 @@
+@use "/src/common/styles/layout" as l;
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
+@use "/src/common/styles/components" as c;
+
+
+.commandments {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &__title {
+      @include a.themify(t.$themes) using($theme-map) {
+        @include c.page_title(a.themed($theme-map, a.$primaryTextColour))
+      }
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  @include l.responsive-grid(".commandments__commandment-items");
+}
+

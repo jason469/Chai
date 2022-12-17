@@ -3,13 +3,23 @@
   [@toggleClick]="clicked"
   class="commandment-item"
 >
-  <div class="commandment-item__index">
-    {{index}}
+  <div class="commandment-item__icon">
+    <i class="fa-solid fa-{{data.icon}}"></i>
+  </div>
+  <div class="commandment-item__title">
+    {{data.title}}
   </div>
   <div class="commandment-item__rules">
-    <div>{{data.rule}}</div>
-    <em
+    <div
+      class="commandment-item__rules__main-rule"
+    >
+      {{data.rule}}
+    </div>
+    <div
       *ngIf="data.sub_rule"
-    >{{data.sub_rule}}</em>
+      class="commandment-item__rules__sub-rule"
+    >
+      {{data.sub_rule}}
+    </div>
   </div>
 </div>

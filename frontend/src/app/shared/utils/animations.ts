@@ -14,7 +14,7 @@ export function verticalBounceIn() {
     ),
 
     query(':enter',  // Add in the component
-      stagger('600ms', [
+      stagger('500ms', [
         animate('500ms ease-in', keyframes([
           style({
             opacity: 0,
@@ -42,7 +42,7 @@ export function verticalBounceIn() {
 export function verticalBounceOut() {
   return [
     query(':leave',
-      stagger('300ms', [
+      stagger('500ms', [
         animate('500ms ease-in', keyframes([
           style({
             opacity: 1,

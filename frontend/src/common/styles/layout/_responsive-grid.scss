@@ -1,0 +1,28 @@
+@mixin responsive-grid($grid-class-name) {
+  #{$grid-class-name} {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  @media (max-width: 32rem) {
+    #{$grid-class-name} {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+
+  @media (min-width: 32.5rem) {
+    #{$grid-class-name} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 56.25rem) {
+    #{$grid-class-name} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

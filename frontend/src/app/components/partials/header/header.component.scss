@@ -177,7 +177,6 @@ $white: 0, 0%, 100%;
 
   .primary-navigation {
     flex-direction: row;
-    padding-block: 2rem;
     padding-inline: clamp(3rem, 5vw, 10rem);
     $gap: clamp(1.5rem, 5vw, 3rem);
     width: 100%;
@@ -190,7 +189,7 @@ $white: 0, 0%, 100%;
     &__sub {
       display: flex;
       flex-direction: row;
-      gap: 1rem;
+      gap: 2rem;
       align-items: center;
     }
   }

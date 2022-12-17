@@ -2,7 +2,19 @@
 /// line-colour is the colour of the lines
 /// text-colour is the colour of the title text
 
-@mixin page_title($line-colour, $text-colour) {
+@mixin page_title($text-colour) {
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: $text-colour;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.2rem;
+}
+
+@mixin page_title_with_lines($background-colour, $line-colour, $text-colour) {
   text-transform: uppercase;
   line-height: 0.9;
   color: $text-colour;
@@ -21,7 +33,7 @@
   }
 
   &::before {
-    background: white;
+    background: $background-colour;
     height: 101%;
     z-index: -1;
     left: -1.2rem;
