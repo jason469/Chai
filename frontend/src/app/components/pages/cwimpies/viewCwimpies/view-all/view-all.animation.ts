@@ -8,6 +8,6 @@ export const listAnimation =
 
 export const tabAnimation =
   trigger('tabAnimationTrigger', [
-    transition('* => *', horizontalBounce('.filterOption')),
+    transition('* => *', horizontalBounce('.horizontal-animation')),
   ])
 

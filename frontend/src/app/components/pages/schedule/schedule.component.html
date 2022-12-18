@@ -7,10 +7,12 @@
   <div
     *ngIf="allCwimpies.length != 0"
     class="all-schedules__content"
+    @loadSchedulesAnimationTrigger
   >
     <app-daily-schedule-card
       *ngFor="let cwimpie of allCwimpies"
       [cwimpieData]="cwimpie"
+      class="horizontal-animation"
     ></app-daily-schedule-card>
   </div>
   <h1

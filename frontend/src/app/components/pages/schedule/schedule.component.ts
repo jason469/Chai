@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Cwimpie} from "../../../shared/models/models";
 import {ViewCwimpiesService} from "../../../services/cwimpies/viewCwimpies.service";
+import {loadSchedulesAnimation} from "./schedule.animation";
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss']
+  styleUrls: ['./schedule.component.scss'],
+  animations: [
+    loadSchedulesAnimation
+  ]
 })
 export class ScheduleComponent implements OnInit {
   allCwimpies: Cwimpie[] = [];
