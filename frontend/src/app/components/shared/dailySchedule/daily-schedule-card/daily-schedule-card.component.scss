@@ -10,6 +10,7 @@
   min-width: 50rem;
   max-width: 100%;
   border: none;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 
   &__profile {
     @include a.themify(t.$themes) using($theme-map) {
