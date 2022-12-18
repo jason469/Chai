@@ -1,12 +1,14 @@
+<div class="page">
 <div class="theme-warm-orange">
   <div
     *ngIf="!loading"
   >
     <div
+      class="filter-tabs"
     >
       <!-- Tabs navs -->
       <div
-        class="nav nav-tabs mb-3"
+        class="filter-tabs__nav"
         id="userFilters"
         role="tablist"
         appActiveTab
@@ -15,7 +17,7 @@
         <div
           #options
           id="{{option.username}}Filter"
-          class="nav-item filterOption"
+          class="filter-tabs__nav__option"
           role="presentation"
           *ngFor="let option of filterOptions;"
           appFilterTab
@@ -23,9 +25,7 @@
           (filterTabData)="filterCwimpies($event)"
         >
           <p
-            class="nav-link"
-            data-mdb-toggle="tab"
-            role="tab"
+            class="filter-tabs__nav__option__text"
             id="{{option.username}}Filter"
           >
             {{option.displayName}}
@@ -50,4 +50,5 @@
       >All the cwimpies are sleeping :(</h1>
     </div>
   </div>
+</div>
 </div>
