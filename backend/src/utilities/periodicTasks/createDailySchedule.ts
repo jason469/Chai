@@ -1,6 +1,6 @@
 import moment from "moment";
 import {ITask} from "../interfaces/modelInterfaces";
-import {taskDescriptions} from "../randomValues/taskDescriptions";
+import {allTaskData} from "../randomValues/taskData";
 import {allCwimpiesCache} from "../../config/caches/allCaches";
 
 const schedule = require('node-schedule')
@@ -9,7 +9,7 @@ const _ = require('lodash');
 const taskService = require('../../services/task')
 const DailySchedule = require('../../models/DailySchedule')
 const Task = require('../../models/Task')
-const Cwimpie = require('../../models/Cwimpie')
+const CwimpieService = require('../../services/cwimpie')
 
 const taskTimes = [8, 14, 17]
 
@@ -19,40 +19,40 @@ export const createDailySchedules = () => {
         console.log('Creating daily schedules')
 
         let taskDurationMinutes = 40;
-        let allCwimpies = await Cwimpie.find()
+        let allCwimpies = await CwimpieService.getAllCwimpies()
         for await (let cwimpie of allCwimpies) {
             let dailySchedule = new DailySchedule()
             let listOfTasks: typeof Task[] = []
             for (let taskTime of taskTimes) {
                 let startDate = moment().add(taskTime, 'hours')
                 let endDate = moment(startDate).add(taskDurationMinutes, 'minutes')
-                let taskDescription = _.sample(taskDescriptions)
+                let taskData = _.sample(allTaskData)
                 let taskConfig: ITask = {
-                    dailyScheduleId: dailySchedule,
-                    description: taskDescription,
+                    description: taskData.description,
                     startTime: startDate.toDate(),
                     endTime: endDate.toDate(),
                     durationMinutes: taskDurationMinutes,
                     isCompleted: true,
-                    name: `${cwimpie.name} task at ${startDate}`,
+                    name: taskData.name,
                 }
                 let task = await taskService.createTask(taskConfig)
                 listOfTasks.push(task)
             }
             dailySchedule.date = new Date()
-            dailySchedule.cwimpieId = cwimpie
+            dailySchedule.cwimpieName = cwimpie.name
             dailySchedule.tasks = listOfTasks
             await dailySchedule.save()
+            console.log(dailySchedule)
             cwimpie.dailyScheduleId.push(dailySchedule)
             await cwimpie.save()
             let numberOfSchedules = cwimpie.dailyScheduleId.length
             if (numberOfSchedules > 5) {
                 let deleteDailyScheduleId = cwimpie.dailyScheduleId[0]
-                cwimpie.dailyScheduleId.pop()
+                cwimpie.dailyScheduleId.splice(0, 1)
                 DailySchedule.findByIdAndDelete(deleteDailyScheduleId)
             }
-            await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
             await cwimpie.save()
+            await allCwimpiesCache.setValueByKey(cwimpie.name, {...cwimpie._doc})
         }
     })
 }

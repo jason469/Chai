@@ -88,5 +88,5 @@ export class DailySchedule {
   _id?: string = "";
   tasks?: Task[] = [];
   date?: string = "";
-  cwimpieId?: string = ""
+  cwimpieName?: string = ""
 }

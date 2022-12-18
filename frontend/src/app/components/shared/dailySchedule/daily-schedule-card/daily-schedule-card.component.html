@@ -1,28 +1,61 @@
-<mdb-accordion-item>
-  <ng-template
-    mdbAccordionItemHeader
-    class="daily-schedule-card"
-  >
-    {{data.name}}
-  </ng-template>
-  <ng-template
-    mdbAccordionItemBody
+<div class="theme-warm-orange">
+  <div
+    *ngIf="!isLoading"
   >
     <div
-      *ngFor="let dailySchedule of data.dailyScheduleId"
-      class="daily-schedule-card__schedule"
+      *ngIf="this.todayData != undefined"
     >
-      <div class="daily-schedule-card__schedule__date">
-        {{currentDateString}}
-      </div>
-      <div class="daily-schedule-card__schedule__tasks">
-        <app-task-card
-          *ngFor="let task of dailySchedule.tasks"
-          class="daily-schedule-card__schedule__tasks__task"
-          [taskData]="task"
-        >
-        </app-task-card>
+      <div
+        class="card"
+      >
+        <!--  Left side-->
+        <div class="card__profile">
+          <div class="card__profile__photo">
+            <img class="card__profile__photo__image" src="{{data!.photo}}" alt="">
+          </div>
+          <div class="card__profile__name">{{data.name}}</div>
+          <div class="card__profile__jobs">
+            <div class="card__profile__jobs__professions">
+              {{professionNames}}
+            </div>
+            <div class="card__profile__jobs__hobbies">
+              <div class="card__profile__jobs__hobbies__title">
+                Hobbies:
+              </div>
+              <div class="card__profile__jobs__hobbies__list">
+                {{hobbyNames}}
+              </div>
+            </div>
+          </div>
+          <div class="card__profile__social-media-icons">
+            <i class="fa-brands fa-square-facebook card__profile__social-media-icons__icon"></i>
+            <i class="fa-brands fa-linkedin card__profile__social-media-icons__icon"></i>
+            <i class="fa-brands fa-youtube card__profile__social-media-icons__icon"></i>
+          </div>
+        </div>
+
+        <!--  Right side-->
+        <div class="card__tasks">
+          <div class="card__tasks__date">
+            {{currentDateString}}
+          </div>
+
+          <div class="card__tasks__list">
+            <app-task-card
+              *ngFor="let task of todayData.tasks"
+              class="daily-schedule-card__schedule__tasks__task"
+              [taskData]="task"
+            >
+            </app-task-card>
+          </div>
+        </div>
       </div>
     </div>
-  </ng-template>
-</mdb-accordion-item>
+  </div>
+  <!--  There is no schedule data  -->
+  <div
+    *ngIf="this.todayData == undefined"
+  >
+    {{data.name}} doesn't have anything on today!
+  </div>
+</div>

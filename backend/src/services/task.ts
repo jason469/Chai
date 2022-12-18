@@ -20,7 +20,6 @@ module.exports = class TaskService {
                 endTime: data.endTime,
                 durationMinutes: data.durationMinutes,
                 isCompleted: data.isCompleted,
-                dailyScheduleId: data.dailyScheduleId
             })
             await task.save()
             return task

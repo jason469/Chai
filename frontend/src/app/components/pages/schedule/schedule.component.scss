@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+  padding-inline: 2rem;
 
   &__title {
     @include a.themify(t.$themes) using($theme-map) {
@@ -16,6 +18,11 @@
 
   &__content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
   }
 }
 

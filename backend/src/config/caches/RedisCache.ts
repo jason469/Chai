@@ -57,6 +57,8 @@ export class RedisCache {
     async setValueByKey(key: string, value: any, hasPrefix: boolean = false) {
         if (this.client && this.isClientConnected) {
             let finalKey = hasPrefix ? key : `${this.prefix}__${key}`
+            console.log(finalKey)
+            console.log(JSON.stringify(value))
             try {
                 await this.client.set(finalKey, JSON.stringify(value))
             } catch {

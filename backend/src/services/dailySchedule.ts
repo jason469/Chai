@@ -23,13 +23,13 @@ module.exports = class DailyScheduleService {
             let dailySchedule = await DailySchedule.findOne(
                 {
                     date: data.date,
-                    cwimpieId: data.cwimpieId
+                    cwimpieName: data.cwimpieName
                 }
             );
             if (!dailySchedule) {
                 dailySchedule = new DailySchedule({
                     date: data.date,
-                    cwimpieId: data.cwimpieId,
+                    cwimpieName: data.cwimpieName,
                     tasks: data.tasks
                 })
                 dailySchedule.save()
@@ -46,7 +46,7 @@ module.exports = class DailyScheduleService {
             const dailySchedule = await DailySchedule.findOne(
                 {
                     date: new Date(data.date),
-                    cwimpieId: new mongoose.Types.ObjectId(data.cwimpieId)
+                    cwimpieName: data.cwimpieName
                 }
             );
             if (dailySchedule) {

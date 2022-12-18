@@ -58,7 +58,7 @@ export interface ICountry {
 
 export interface IDailySchedule {
     date: string,
-    cwimpieId: string,
+    cwimpieName: string,
     tasks?: ITask[],
 }
 
@@ -69,7 +69,6 @@ export interface ITask {
     endTime: Date,
     durationMinutes: Number,
     isCompleted: boolean,
-    dailyScheduleId: IDailySchedule
 }
 
 type coordinates = number[]

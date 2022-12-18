@@ -8,7 +8,7 @@ import {ViewCwimpiesService} from "../../../services/cwimpies/viewCwimpies.servi
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit {
-  allCwimpieSchedules: Cwimpie[] = [];
+  allCwimpies: Cwimpie[] = [];
   loading: boolean = true
 
   constructor(
@@ -20,14 +20,17 @@ export class ScheduleComponent implements OnInit {
     this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
         for (let data of allData) {
+          console.log(data.dailyScheduleId)
           let cwimpieData: Cwimpie = {
             name: data.name,
-            dailyScheduleId: data.dailyScheduleId
+            dailyScheduleId: data.dailyScheduleId,
+            professions: data.professions,
+            hobbies: data.hobbies,
+            photo: data.photo
           }
-          this.allCwimpieSchedules.push(cwimpieData)
+          this.allCwimpies.push(cwimpieData)
         }
       }
-      console.log(this.allCwimpieSchedules)
       this.loading = false;
     })
   }

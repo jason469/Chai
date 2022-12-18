@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 import {cascadeDelete} from "../utilities/functions/misc";
 import {CwimpieSexes} from "../utilities/enums/modelEnums";
-const DailySchedule = require("./DailySchedule");
 const Stamp = require("./Stamp");
+
+const DailyScheduleService = require('../services/dailySchedule')
+
 
 const CwimpieSchema = new mongoose.Schema(
     {
@@ -35,33 +37,33 @@ const CwimpieSchema = new mongoose.Schema(
         ],
         colourId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Colours'
+            ref: 'Colours'
         },
         speciesId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Species'
+            ref: 'Species'
         },
         favourites: [  // A cwimpie can have many favourites
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref:'Favourite'
+                ref: 'Favourite'
             }
         ],
         professions: [{  // A cwimpie can have many professions
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Profession'
+            ref: 'Profession'
         }],
         hobbies: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Hobby'
+            ref: 'Hobby'
         }],
         primaryParentId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'User'
+            ref: 'User'
         },
         stampId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Stamp'
+            ref: 'Stamp'
         }
     },
     {
@@ -69,9 +71,18 @@ const CwimpieSchema = new mongoose.Schema(
     }
 );
 
-CwimpieSchema.post("deleteOne", { document: true, query: false },async function (cwimpie, next) {
-    await cascadeDelete(DailySchedule, this, "cwimpieId");
+CwimpieSchema.post("deleteOne", {document: true, query: false}, async function (cwimpie, next) {
     await cascadeDelete(Stamp, this, "stampId");
+
+    let allSchedules = this.dailyScheduleId
+    for (let schedule of allSchedules) {
+        console.log(schedule)
+        // let scheduleData:IDailySchedule = {
+        //     date: schedule.date,
+        //     cwimpieName: schedule.cwimpieName
+        // }
+        // await DailyScheduleService.deleteDailySchedule(scheduleData)
+    }
 })
 
 

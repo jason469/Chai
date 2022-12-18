@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
+import {cascadeDelete} from "../utilities/functions/misc";
+
 const TaskService = require('../services/task')
+const Cwimpie = require("./Cwimpie");
 
 const DailyScheduleSchema = new mongoose.Schema({
         date: {
             type: Date,
             required: true,
         },
-        cwimpieId:             {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Cwimpie'
+        cwimpieName: {
+            type: String,
+            required: true
         },
         tasks: [
             {
@@ -27,7 +30,9 @@ DailyScheduleSchema.post("deleteOne", {document: true, query: false}, async func
     for (let taskId of allTasks) {
         await TaskService.deleteTask(taskId)
     }
-    return})
+    await cascadeDelete(Cwimpie, this, "dailyScheduleId");  // Remove reference to daily schedule in Cwimpie
+    return
+})
 
 
 module.exports = mongoose.model('DailySchedule', DailyScheduleSchema);

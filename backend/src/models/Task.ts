@@ -24,10 +24,6 @@ const TaskSchema = new mongoose.Schema({
         isCompleted: {
             type: Boolean
         },
-        dailyScheduleId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'DailySchedule'
-        }
     },
     {
         collection: "Tasks"

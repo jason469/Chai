@@ -61,6 +61,7 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAllCwimpiesSub = this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
+        console.log(allData)
         for (let data of allData) {
           let cwimpieData: Cwimpie = {
             cwimpieId: data._id,

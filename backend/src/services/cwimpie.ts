@@ -131,6 +131,15 @@ module.exports = class CwimpieService {
                         }
                     ],
                 })
+                .populate({
+                    path: 'dailyScheduleId',
+                    populate: [
+                        {
+                            path: 'tasks',
+                            model: 'Task'
+                        }
+                    ],
+                })
             ;
             if (cwimpie) {
                 return cwimpie;

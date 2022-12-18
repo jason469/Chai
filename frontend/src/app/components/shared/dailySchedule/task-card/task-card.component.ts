@@ -15,8 +15,8 @@ export class TaskCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.startTime = new Date(this.task.startTime!).toLocaleTimeString('en-US', timeFormat)
-    this.endTime = new Date(this.task.endTime!).toLocaleTimeString('en-US', timeFormat)
+    this.startTime = new Date(this.task.startTime!).toLocaleTimeString('en-US', timeFormat).replaceAll(" ","")
+    this.endTime = new Date(this.task.endTime!).toLocaleTimeString('en-US', timeFormat).replaceAll(" ","")
   }
 
 }
