@@ -1,3 +1,8 @@
+@use "/src/common/styles/abstracts" as a;
+@use "/src/common/styles/themes/all-themes" as t;
+@use "/src/common/styles/components" as c;
+
+
 .chai-card {
   display: flex;
   flex-direction: row;
@@ -17,6 +22,8 @@
   padding: 0.5rem;
   padding-inline: 0.8rem;
   height: 100%;
+  border-radius: 1rem;
+  background-color: #201f1f;
 
   &__times {
     display: flex;

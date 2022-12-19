@@ -71,7 +71,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
     this.allCwimpies = []
     switch (username) {
       case "all":
-        // this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
         let getAllCwimpiesSub = this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
           if (allData.length != 0) {
             for (let data of allData) {
@@ -82,8 +81,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
         })
         break
       case "jason":
-        console.log('hi')
-        // this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
         let getCwimpiesJasonSub = this.profilePageService.getCwimpiesFromUser(username).subscribe(allData => {
           console.log(allData)
           if (allData.length != 0) {
