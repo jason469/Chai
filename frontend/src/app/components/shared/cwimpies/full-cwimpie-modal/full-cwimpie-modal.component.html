@@ -1,53 +1,76 @@
-<div class="modal-header">
-  <h4 class="modal-title pull-left" id="my-modal-title">{{data.name}}</h4>
-  <span aria-hidden="true" class="visually-hidden">&times;</span>
-</div>
-<div class="modal-body">
-  <div id="my-modal-description">
-    <div id="birthday">
-      Birthday: {{birthDateString}}
-    </div>
-    <div id="sex">
-      Sex: {{data.sex}}
-    </div>
-    <div id="partner">
-      Partner: {{data.partner}}
-    </div>
-    <div id="colour">
-      Colour: {{data.colour?.name}}
-      <div id="colour__hexcode">
-        Hex code: {{data.colour?.hexCode}}
+<div class="theme-warm-orange">
+  <div class="modal-body postcard">
+    <div class="postcard__left">
+      <div class="postcard__left__photo">
+        <img src="{{data.photo}}" alt="">
+      </div>
+      <div class="postcard__left__welcome">
+        <div class="postcard__left__welcome__start">
+          Hi there, my name's
+        </div>
+        <div class="postcard__left__welcome__name">
+          {{data.name}}
+        </div>
+      </div>
+      <div class="postcard__left__logo">
+        Chai
       </div>
     </div>
-    <div id="species">
-      Species: {{data.species!.name}}
-    </div>
-    <div id="favourites">
-      <div
-        *ngFor="let favourite of data!.favourites"
-      >
-        Favourite {{favourite.type}} is {{favourite.name}}
+    <div class="postcard__right">
+      <div class="postcard__right__header">
+        <div class="postcard__right__header__date">
+          {{currentDateString}}
+        </div>
+        <div class="postcard__right__header__stamp">
+          <app-cwimpie-stamp
+            [stampData]="stampData"
+          ></app-cwimpie-stamp>
+        </div>
       </div>
-    </div>
-    <div id="professions">
-      <div
-        *ngFor="let profession of data!.professions"
-      >
-        Favourite {{profession.type}} is {{profession.name}}
+      <div class="postcard__right__body">
+        <div class="postcard__right__body__welcome">
+          <div
+            class="postcard__right__body__welcome__title"
+            [ngStyle]="{'color': data.colour!.hexCode}"
+          >
+            Welcome !!
+          </div>
+          <div class="postcard__right__body__welcome__subtitle">
+            It's so nice to meet you, my name's {{data.name}}
+          </div>
+        </div>
+        <div class="postcard__right__body__text">
+          <section>
+            This is my personal postcard to let others know a little more about me. I'd love to hear more about you
+            though, so feel free to visit me whenever you have time!
+          </section>
+          <section>
+            I was born on {{birthDateString}}, in a wonderful shade of {{data.colour?.name}}. <br>
+            Technically speaking, I'm a {{data.species!.name}} but we're all cwimpies here.
+          </section>
+          <section>
+            I'm currently in a loving relationship with {{data.partner}}, which always makes me super happy hehe. Aside
+            from that, I'm currently residing with {{data.primaryParent!.name}}.
+          </section>
+          <section>
+            During the week, I have various jobs, which includes being a {{professionNames}}. <br>
+            But I also have lots of hobbies, such as being a {{hobbyNames}}.
+          </section>
+          <section>
+            Finally, here's just a list of my favourite things in the whole world!
+            <ul class="list">
+              <li
+                *ngFor="let favourite of data!.favourites"
+              >
+                My favourite {{favourite.type|lowercase}} is {{favourite.name|lowercase}}
+              </li>
+            </ul>
+          </section>
+        </div>
       </div>
-    </div>
-    <div id="hobbies">
-      <div
-        *ngFor="let hobby of data.hobbies"
-      >
-        Hobby: {{hobby.name}}
+      <div class="postcard__right__footer">
+        {{addressNumber}} Cwimpies Avenue, JellyCat Boulevard, {{addressNumber}}4
       </div>
-    </div>
-    <div id="primaryParent">
-      Primary Parent: {{data.primaryParent!.name}}
     </div>
   </div>
-  <app-cwimpie-stamp
-    [stampData]="stampData"
-  ></app-cwimpie-stamp>
 </div>
