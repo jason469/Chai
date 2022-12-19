@@ -21,12 +21,21 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
   birthDateString!: string;
   currentDateString!: string
   addressNumber!: number
-  professionNames: string[] = []  // List of cwimpie's professions
-  hobbyNames: string[] = []  // List of cwimpie's hobbies
+  professionNamesString: string = ""  // String of cwimpie's professions
+  hobbyNamesString: string = ""  // String of cwimpie's hobbies
 
   constructor(
     private cwimpieModalDataService: CwimpieModalDataService,
   ) {
+  }
+
+  constructListString(array:any) {
+    let stringArray:string[] = []
+    for (let value of array) {
+      stringArray.push(' ' + value.name)
+    }
+    let stringCommas = stringArray.toString()
+    return stringCommas.replace(/,(?=[^,]*$)/, " and") // Replace last comma with and
   }
 
   ngOnInit(): void {
@@ -47,13 +56,9 @@ export class FullCwimpieModalComponent implements OnInit, OnDestroy {
     });
     this.currentDateString = new Date().toLocaleDateString('en-US', dateFormat)
     this.addressNumber = Math.floor(Math.random() * (999 - 100 + 1) + 100)  // Random 3 digit number
-    for (let profession of this.data.professions!) {
-      this.professionNames.push(' ' + profession.name)
-    }
 
-    for (let hobby of this.data.hobbies!) {
-      this.hobbyNames.push(' ' + hobby.name)
-    }
+    this.professionNamesString = this.constructListString(this.data.professions!)
+    this.hobbyNamesString = this.constructListString(this.data.hobbies!)
   }
 
   ngOnDestroy(): void {
