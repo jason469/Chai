@@ -2,14 +2,14 @@
 @use "/src/common/styles/themes/all-themes" as t;
 @use "/src/common/styles/components" as c;
 
-.card {
+.cwimpie-card {
   padding: 0;
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   background: none;
   transition: 200ms ease-in;
 
@@ -19,8 +19,7 @@
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
-  }
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);  }
 
   mat-card {
     padding: 0.5rem;
@@ -49,6 +48,10 @@
     border: 3px solid;
     border-image-slice: 1;
     border-image-source: linear-gradient(to left, #F7861D, #FC380C);
+
+    img {
+      max-width: 100%;
+    }
   }
 
   .mat-tab-group, .mat-card-footer {
