@@ -1,54 +1,56 @@
 <div class="page">
-<div class="theme-warm-orange">
-  <div
-    *ngIf="!loading"
-  >
+  <div class="theme-warm-orange">
     <div
-      class="filter-tabs"
+      *ngIf="!loading"
     >
-      <!-- Tabs navs -->
       <div
-        class="filter-tabs__nav"
-        id="userFilters"
-        role="tablist"
-        appActiveTab
-        @tabAnimationTrigger
+        class="filter-tabs"
       >
+        <!-- Tabs navs -->
         <div
-          #options
-          id="{{option.username}}Filter"
-          class="filter-tabs__nav__option horizontal-animation"
-          role="presentation"
-          *ngFor="let option of filterOptions;"
-          appFilterTab
-          [filterValue]="option.username"
-          (filterTabData)="filterCwimpies($event)"
+          class="filter-tabs__nav"
+          id="userFilters"
+          role="tablist"
+          appActiveTab
+          @tabAnimationTrigger
         >
-          <p
-            class="filter-tabs__nav__option__text"
+          <div
+            #options
             id="{{option.username}}Filter"
+            class="filter-tabs__nav__option horizontal-animation"
+            role="presentation"
+            *ngFor="let option of filterOptions;"
+            appFilterTab
+            [filterValue]="option.username"
+            (filterTabData)="filterCwimpies($event)"
           >
-            {{option.displayName}}
-          </p>
+            <p
+              class="filter-tabs__nav__option__text"
+              id="{{option.username}}Filter"
+            >
+              {{option.displayName}}
+            </p>
+          </div>
         </div>
+        <!-- Tabs navs -->
       </div>
-      <!-- Tabs navs -->
-    </div>
 
-    <div class="allCwimpies_layout"
-         [@listAnimationTrigger]="this.currentCwimpies.length"
-    >
-      <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
-      <app-reduced-cwimpie-card
-        *ngFor="let cwimpie of currentCwimpies"
-        [cwimpieData]="cwimpie"
-        (deletedCwimpieName)="refreshAllCwimpies($event)"
-        class="reduced-cwimpie-card"
-      ></app-reduced-cwimpie-card>
-      <h1
-        *ngIf="allCwimpies.length == 0"
-      >All the cwimpies are sleeping :(</h1>
+      <div class="allCwimpies_layout"
+           [@listAnimationTrigger]="this.allCwimpies.length"
+      >
+        <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
+        <app-reduced-cwimpie-card
+          *ngFor="let cwimpie of allCwimpies"
+          [cwimpieData]="cwimpie"
+          (deletedCwimpieName)="refreshAllCwimpies($event)"
+          class="reduced-cwimpie-card"
+        ></app-reduced-cwimpie-card>
+        <h1
+          *ngIf="allCwimpies.length == 0"
+        >
+          All the cwimpies are sleeping :(
+        </h1>
+      </div>
     </div>
   </div>
-</div>
 </div>

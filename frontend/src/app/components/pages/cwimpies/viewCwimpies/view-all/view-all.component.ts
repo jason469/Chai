@@ -3,6 +3,7 @@ import {ViewCwimpiesService} from "../../../../../services/cwimpies/viewCwimpies
 import {Subscription} from "rxjs";
 import {Cwimpie} from "../../../../../shared/models/models";
 import {listAnimation, tabAnimation} from "./view-all.animation";
+import {ProfilePageService} from "../../../../../services/profile/profilePage.service";
 
 
 @Component({
@@ -21,7 +22,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   loading: boolean = true
   private getAllCwimpiesSub: Subscription | undefined;
   allCwimpies: Cwimpie[] = [];
-  currentCwimpies: Cwimpie[] = [];
 
   public filterOptions: any = [
     {
@@ -39,21 +39,74 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private viewCwimpiesService: ViewCwimpiesService
+    private viewCwimpiesService: ViewCwimpiesService,
+    private profilePageService: ProfilePageService
   ) {
+  }
+
+  constructCwimpieData(data: any) {
+    let cwimpieData: Cwimpie = {
+      cwimpieId: data._id,
+      name: data.name,
+      sex: data.sex,
+      birthdate: data.birthdate,
+      colour: data.colourId,
+      species: data.speciesId,
+      favourites: data.favourites,
+      professions: data.professions,
+      hobbies: data.hobbies,
+      primaryParent: data.primaryParentId,
+      stamp: data.stampId,
+      photo: data.photo
+    }
+    if (data.partnerId) {
+      cwimpieData.partner = data.partnerId.name
+    }
+
+    return cwimpieData
   }
 
   filterCwimpies(event: any) {
     const username = event.filterValue
+    this.allCwimpies = []
     switch (username) {
       case "all":
-        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
+        // this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie);
+        let getAllCwimpiesSub = this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
+          if (allData.length != 0) {
+            for (let data of allData) {
+              let cwimpieData = this.constructCwimpieData(data)
+              this.allCwimpies.push(cwimpieData)
+            }
+          }
+        })
         break
       case "jason":
-        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
+        console.log('hi')
+        // this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
+        let getCwimpiesJasonSub = this.profilePageService.getCwimpiesFromUser(username).subscribe(allData => {
+          console.log(allData)
+          if (allData.length != 0) {
+            for (let data of allData) {
+              console.log(data)
+              let cwimpieData = this.constructCwimpieData(data)
+              this.allCwimpies.push(cwimpieData)
+            }
+          }
+          getCwimpiesJasonSub.unsubscribe()
+        })
+        console.log(this.allCwimpies)
         break
       case "sue":
-        this.currentCwimpies = this.allCwimpies.filter((cwimpie: Cwimpie) => cwimpie.primaryParent!.username == username);
+        let getCwimpiesSueSub = this.profilePageService.getCwimpiesFromUser(username).subscribe(allData => {
+          if (allData.length != 0) {
+            for (let data of allData) {
+              let cwimpieData = this.constructCwimpieData(data)
+              this.allCwimpies.push(cwimpieData)
+            }
+          }
+          getCwimpiesSueSub.unsubscribe()
+        })
         break
     }
   }
@@ -61,27 +114,9 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAllCwimpiesSub = this.viewCwimpiesService.getAllCwimpiesData().subscribe(allData => {
       if (allData.length != 0) {
-        console.log(allData)
         for (let data of allData) {
-          let cwimpieData: Cwimpie = {
-            cwimpieId: data._id,
-            name: data.name,
-            sex: data.sex,
-            birthdate: data.birthdate,
-            colour: data.colourId,
-            species: data.speciesId,
-            favourites: data.favourites,
-            professions: data.professions,
-            hobbies: data.hobbies,
-            primaryParent: data.primaryParentId,
-            stamp: data.stampId,
-            photo: data.photo
-          }
-          if (data.partnerId) {
-            cwimpieData.partner = data.partnerId.name
-          }
+          let cwimpieData = this.constructCwimpieData(data)
           this.allCwimpies.push(cwimpieData)
-          this.currentCwimpies.push(cwimpieData)
         }
       }
       this.loading = false;
@@ -91,8 +126,6 @@ export class ViewAllComponent implements OnInit, OnDestroy {
   refreshAllCwimpies(deleteCwimpieName: string) {
     let deletedCwimpieIndex = this.allCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
     this.allCwimpies.splice(deletedCwimpieIndex, 1);
-    let currentCwimpieIndex = this.currentCwimpies.map(object => object.name).indexOf(deleteCwimpieName)
-    this.currentCwimpies.splice(currentCwimpieIndex, 1);
   }
 
   ngOnDestroy() {
@@ -100,5 +133,4 @@ export class ViewAllComponent implements OnInit, OnDestroy {
       this.getAllCwimpiesSub.unsubscribe()
     }
   }
-
 }

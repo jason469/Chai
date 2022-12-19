@@ -24,6 +24,7 @@ export class ProfilePageService {
   }
 
   getCwimpiesFromUser(username: string) {
+    console.log(GET_ALL_CWIMPIES_FROM_USER_URL + username)
     return this.http.get(GET_ALL_CWIMPIES_FROM_USER_URL + username)
       .pipe(
         map(responseData => {
