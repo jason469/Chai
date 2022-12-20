@@ -1,10 +1,10 @@
-<div class="all-schedules"
+<article class="all-schedules"
      *ngIf="(!loading && allCwimpies != undefined)"
 >
   <div class="theme-warm-orange">
     <h1 class="all-schedules__title">Daily Schedules</h1>
   </div>
-  <div
+  <section
     *ngIf="allCwimpies.length != 0"
     class="all-schedules__content"
     @loadSchedulesAnimationTrigger
@@ -14,9 +14,9 @@
       [cwimpieData]="cwimpie"
       class="horizontal-animation"
     ></app-daily-schedule-card>
-  </div>
+  </section>
   <h1
     *ngIf="allCwimpies.length == 0">
   >  <!-- There are no cwimpies !-->
     All the Cwimpies are supa free today !!</h1>
-</div>
+</article>

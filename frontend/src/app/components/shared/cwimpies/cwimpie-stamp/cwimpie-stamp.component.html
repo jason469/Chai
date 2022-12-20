@@ -1,8 +1,8 @@
-<div class="stamp__background" #stamp>
+<article class="stamp__background" #stamp>
   <ng-container
     *ngIf="data.speciesName === 'Bunny'; then bunny; else poodel"
   ></ng-container>
-  <div
+  <section
        class="stamp__species"
   >
     <ng-template #bunny>
@@ -11,5 +11,5 @@
     <ng-template #poodel>
       <i class="fa-solid fa-bone stamp__species__icon"></i>
     </ng-template>
-  </div>
-</div>
+  </section>
+</article>

@@ -1,7 +1,7 @@
 <header>
   <div class="theme-warm-orange">
     <nav class="navigation" [attr.data-visible]="navbarVisible">
-      <div class="primary-header">
+      <section class="primary-header">
         <app-hamburger-close
           [buttonControl]="'primary-navigation'"
           [initialVisibleState]="true"
@@ -12,7 +12,7 @@
           Menu
         </span>
         </app-hamburger-close>
-        <div class="logo">
+        <h1 class="logo">
           <a class=""
              routerLink="/"
              routerLinkActive="active"
@@ -20,14 +20,14 @@
           >
             Chai
           </a>
-        </div>
-      </div>
+        </h1>
+      </section>
 
       <ul id="primary-navigation"
           class="primary-navigation"
           [attr.data-visible]="navbarVisible"
       >
-        <div class="primary-navigation__sub" id="primary-navigation__left">
+        <section class="primary-navigation__sub" id="primary-navigation__left">
           <li class="">
             <a class=""
                routerLink="/cwimpies"
@@ -47,8 +47,8 @@
               GENERATE
             </a>
           </li>
-        </div>
-        <div class="primary-navigation__sub" id="primary-navigation__right">
+        </section>
+        <section class="primary-navigation__sub" id="primary-navigation__right">
           <li class="">
             <a class=""
                routerLink="/auth/login"
@@ -85,7 +85,7 @@
               Logout
             </button>
           </li>
-        </div>
+        </section>
       </ul>
     </nav>
   </div>

@@ -1,31 +1,33 @@
-<div class="modal-header">
-  <h4 class="modal-title pull-left" id="my-modal-title">
-    Update form
-    <app-colour-menu></app-colour-menu>
-  </h4>
-  <span aria-hidden="true" class="visually-hidden">&times;</span>
-</div>
-<div class="modal-body">
-  <div id="my-modal-description">
-    <div id="updateCwimpieForm">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-        <button
-          mat-raised-button
-          type="button"
-          color="primary"
-          (click)="toggleNewColour()"
-        >
-          {{addNewColour ? "Don't add new colour" : "Add new colour"}}
-        </button>
-        <button
-          mat-raised-button
-          type="submit"
-          color="primary"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
+<section>
+  <section class="modal-header">
+    <h1 class="modal-title pull-left" id="my-modal-title">
+      Update form
+      <app-colour-menu></app-colour-menu>
+    </h1>
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </section>
+  <section class="modal-body">
+    <section id="my-modal-description">
+      <section id="updateCwimpieForm">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            (click)="toggleNewColour()"
+          >
+            {{addNewColour ? "Don't add new colour" : "Add new colour"}}
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+          >
+            Submit
+          </button>
+        </form>
+      </section>
+    </section>
+  </section>
+</section>

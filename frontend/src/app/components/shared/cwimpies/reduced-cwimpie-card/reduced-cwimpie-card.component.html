@@ -1,22 +1,22 @@
 <div class="theme-warm-orange">
-  <div class="cwimpie-card">
+  <article class="cwimpie-card">
     <mat-card>
-      <div
+      <section
         class="openModal click cwimpie-card__image"
         (click)="openCwimpieModal()"
         matRipple
       >
         <img class="cwimpie-card__image__photo" src="{{initialData!.photo}}" alt="">
-        <div class="cwimpie-card__image__text">
-          <div class="cwimpie-card__image__text__title">
-            <div>{{initialData!.name}}</div>
-          </div>
-          <div class="cwimpie-card__image__text__body">
+        <section class="cwimpie-card__image__text">
+          <h1 class="cwimpie-card__image__text__title">
+            {{initialData!.name}}
+          </h1>
+          <section class="cwimpie-card__image__text__body">
             <div class="cwimpie-card__image__text__body__species"
                  style="background-image: url('/assets/icons/species/{{initialData!.species!.iconName}}')">
               <div>{{initialData!.species!.name}}</div>
             </div>
-            <div
+            <section
               class="cwimpie-card__image__text__body__species__sex_container">
               <ng-container
                 *ngIf="initialData.sex === 'Male'; then male; else female"
@@ -29,26 +29,26 @@
                   <i class="fa-solid fa-venus"></i>
                 </ng-template>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </section>
+          </section>
+        </section>
+      </section>
       <mat-card-content>
         <mat-tab-group mat-align-tabs="start">
           <mat-tab label="Job" class="job-tab">
-            <div
+            <p
               *ngFor="let job of initialData!.professions"
               [ngClass]="{job__main: job!.type === 'Main'}"
             >
               {{job!.name}}
-            </div>
+            </p>
           </mat-tab>
           <mat-tab label="Hobbies">
-            <div
+            <p
               *ngFor="let hobby of initialData!.hobbies"
             >
               {{hobby!.name}}
-            </div>
+            </p>
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>
@@ -71,5 +71,5 @@
       <mat-card-footer>
       </mat-card-footer>
     </mat-card>
-  </div>
+  </article>
 </div>

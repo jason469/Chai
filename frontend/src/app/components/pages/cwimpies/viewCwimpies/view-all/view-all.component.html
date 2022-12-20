@@ -1,9 +1,9 @@
-<div class="page">
+<article class="page">
   <div class="theme-warm-orange">
-    <div
+    <section
       *ngIf="!loading"
     >
-      <div
+      <section
         class="filter-tabs"
       >
         <!-- Tabs navs -->
@@ -14,7 +14,7 @@
           appActiveTab
           @tabAnimationTrigger
         >
-          <div
+          <section
             #options
             id="{{option.username}}Filter"
             class="filter-tabs__nav__option horizontal-animation"
@@ -30,12 +30,12 @@
             >
               {{option.displayName}}
             </p>
-          </div>
+          </section>
         </div>
         <!-- Tabs navs -->
-      </div>
+      </section>
 
-      <div class="allCwimpies_layout"
+      <section class="allCwimpies_layout"
            [@listAnimationTrigger]="this.allCwimpies.length"
       >
         <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
@@ -50,7 +50,7 @@
         >
           All the cwimpies are sleeping :(
         </h1>
-      </div>
-    </div>
+      </section>
+    </section>
   </div>
-</div>
+</article>

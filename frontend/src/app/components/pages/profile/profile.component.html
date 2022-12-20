@@ -1,24 +1,24 @@
 <div class="theme-warm-orange">
-  <div
+  <article
     class="profile-page"
   >
-    <div class="profile-page__titles">
-      <div class="profile-page__titles__main">Profile</div>
-      <div
+    <section class="profile-page__titles">
+      <h1 class="profile-page__titles__main">Profile</h1>
+      <h2
         *ngIf="currentUser"
         class="profile-page__titles__subtitle"
       >
         Welcome {{currentUser.name}}
-      </div>
-    </div>
-    <div class="profile-page__content">
-      <div class="profile-page__content__navigation">
-        <div
+      </h2>
+    </section>
+    <section class="profile-page__content">
+      <section class="profile-page__content__navigation">
+        <h1
           class="profile-page__content__navigation__title"
         >
           Navigation
-        </div>
-        <div class="profile-page__content__navigation__links">
+        </h1>
+        <article class="profile-page__content__navigation__links">
           <a
             class="black-btn"
             routerLink="/cwimpies"
@@ -61,19 +61,19 @@
           >
             About us
           </a>
-        </div>
-      </div>
-      <div
+        </article>
+      </section>
+      <section
         class="profile-page__content__cwimpies"
         *ngIf="(!isLoading && allCwimpies.length != 0)"
         @loadCarouselAnimationTrigger
       >
-        <div
+        <h2
           class="profile-page__content__cwimpies__title"
         >
           Your cwimpies!
-        </div>
-        <div class="profile-page__content__cwimpies__carousel">
+        </h2>
+        <section class="profile-page__content__cwimpies__carousel">
           <mdb-carousel
             [controls]="true"
             [indicators]="false"
@@ -93,8 +93,8 @@
             *ngIf="allCwimpies.length == 1"
             [cwimpieData]="allCwimpies[0]"
           ></app-profile-cwimpie-card>
-        </div>
-      </div>
-    </div>
-  </div>
+        </section>
+      </section>
+    </section>
+  </article>
 </div>

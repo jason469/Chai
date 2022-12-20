@@ -1,16 +1,18 @@
-<button mat-button
-        (mouseenter)=showMenu()
-        (mouseleave)=hideMenu()
-        type="button"
->
-  Show/hide menu
-</button>
-
-<div #colourMenu class="colourMenu">
-  <div
-    *ngFor="let colour of allColours"
+<article>
+  <button mat-button
+          (mouseenter)=showMenu()
+          (mouseleave)=hideMenu()
+          type="button"
   >
-    <span class="dot" style="background-color: {{colour.hexCode}}"></span>
-    {{colour.name}}
-  </div>
-</div>
+    Show/hide menu
+  </button>
+
+  <section #colourMenu class="colourMenu">
+    <section
+      *ngFor="let colour of allColours"
+    >
+      <span class="dot" style="background-color: {{colour.hexCode}}"></span>
+      {{colour.name}}
+    </section>
+  </section>
+</article>

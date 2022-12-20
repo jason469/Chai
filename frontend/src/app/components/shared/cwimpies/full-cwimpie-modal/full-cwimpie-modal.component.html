@@ -1,45 +1,45 @@
 <div class="theme-warm-orange">
-  <div class="modal-body postcard">
-    <div class="postcard__left">
-      <div class="postcard__left__photo">
+  <article class="modal-body postcard">
+    <section class="postcard__left">
+      <section class="postcard__left__photo">
         <img src="{{data.photo}}" alt="">
-      </div>
-      <div class="postcard__left__welcome">
-        <div class="postcard__left__welcome__start">
+      </section>
+      <section class="postcard__left__welcome">
+        <h2 class="postcard__left__welcome__start">
           Hi there, my name's
-        </div>
-        <div class="postcard__left__welcome__name">
+        </h2>
+        <h1 class="postcard__left__welcome__name">
           {{data.name}}
-        </div>
-      </div>
-      <div class="postcard__left__logo">
+        </h1>
+      </section>
+      <section class="postcard__left__logo">
         Chai
-      </div>
-    </div>
-    <div class="postcard__right">
-      <div class="postcard__right__header">
-        <div class="postcard__right__header__date">
+      </section>
+    </section>
+    <section class="postcard__right">
+      <section class="postcard__right__header">
+        <h3 class="postcard__right__header__date">
           {{currentDateString}}
-        </div>
-        <div class="postcard__right__header__stamp">
+        </h3>
+        <section class="postcard__right__header__stamp">
           <app-cwimpie-stamp
             [stampData]="stampData"
           ></app-cwimpie-stamp>
-        </div>
-      </div>
-      <div class="postcard__right__body">
-        <div class="postcard__right__body__welcome">
-          <div
+        </section>
+      </section>
+      <section class="postcard__right__body">
+        <section class="postcard__right__body__welcome">
+          <h1
             class="postcard__right__body__welcome__title"
             [ngStyle]="{'color': data.colour!.hexCode}"
           >
             Welcome !!
-          </div>
-          <div class="postcard__right__body__welcome__subtitle">
+          </h1>
+          <h2 class="postcard__right__body__welcome__subtitle">
             It's so nice to meet you, my name's {{data.name}}
-          </div>
-        </div>
-        <div class="postcard__right__body__text">
+          </h2>
+        </section>
+        <section class="postcard__right__body__text">
           <section>
             This is my personal postcard to let others know a little more about me. I'd love to hear more about you
             though, so feel free to visit me whenever you have time!
@@ -66,11 +66,11 @@
               </li>
             </ul>
           </section>
-        </div>
-      </div>
+        </section>
+      </section>
       <div class="postcard__right__footer">
         {{addressNumber}} Cwimpies Avenue, JellyCat Boulevard, {{addressNumber}}4
       </div>
-    </div>
-  </div>
+    </section>
+  </article>
 </div>

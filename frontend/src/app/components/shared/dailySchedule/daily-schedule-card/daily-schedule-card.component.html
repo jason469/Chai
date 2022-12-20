@@ -1,61 +1,61 @@
 <div class="theme-warm-orange">
-  <div
+  <section
     *ngIf="!isLoading"
   >
-    <div
+    <section
       *ngIf="this.todayData != undefined"
     >
-      <div
+      <article
         class="card"
       >
         <!--  Left side-->
-        <div class="card__profile">
-          <div class="card__profile__photo">
+        <section class="card__profile">
+          <section class="card__profile__photo">
             <img class="card__profile__photo__image" src="{{data!.photo}}" alt="">
-          </div>
-          <div class="card__profile__name">{{data.name}}</div>
-          <div class="card__profile__jobs">
-            <div class="card__profile__jobs__professions">
+          </section>
+          <h2 class="card__profile__name">{{data.name}}</h2>
+          <section class="card__profile__jobs">
+            <p class="card__profile__jobs__professions">
               {{professionNames}}
-            </div>
-            <div class="card__profile__jobs__hobbies">
-              <div class="card__profile__jobs__hobbies__title">
+            </p>
+            <section class="card__profile__jobs__hobbies">
+              <strong class="card__profile__jobs__hobbies__title">
                 Hobbies:
-              </div>
-              <div class="card__profile__jobs__hobbies__list">
+              </strong>
+              <p class="card__profile__jobs__hobbies__list">
                 {{hobbyNames}}
-              </div>
-            </div>
-          </div>
-          <div class="card__profile__social-media-icons">
+              </p>
+            </section>
+          </section>
+          <section class="card__profile__social-media-icons">
             <i class="fa-brands fa-square-facebook card__profile__social-media-icons__icon"></i>
             <i class="fa-brands fa-linkedin card__profile__social-media-icons__icon"></i>
             <i class="fa-brands fa-youtube card__profile__social-media-icons__icon"></i>
-          </div>
-        </div>
+          </section>
+        </section>
 
         <!--  Right side-->
-        <div class="card__tasks">
-          <div class="card__tasks__date">
+        <section class="card__tasks">
+          <p class="card__tasks__date">
             {{currentDateString}}
-          </div>
+          </p>
 
-          <div class="card__tasks__list">
+          <section class="card__tasks__list">
             <app-task-card
               *ngFor="let task of todayData.tasks"
               class="daily-schedule-card__schedule__tasks__task"
               [taskData]="task"
             >
             </app-task-card>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          </section>
+        </section>
+      </article>
+    </section>
+  </section>
   <!--  There is no schedule data  -->
-  <div
+  <h1
     *ngIf="this.todayData == undefined"
   >
     {{data.name}} doesn't have anything on today!
-  </div>
+  </h1>
 </div>

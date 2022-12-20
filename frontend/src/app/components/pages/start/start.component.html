@@ -1,9 +1,9 @@
 <div class="theme-warm-orange">
-  <div class="start-page">
-    <div class="start-page__cwimpies"
+  <article class="start-page">
+    <section class="start-page__cwimpies"
          *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
     >
-      <div
+      <section
         class="start-page__cwimpies__no-birthdays"
         *ngIf="(allBirthdayCwimpies.length == 0)"
       >
@@ -12,21 +12,21 @@
           src="assets/start-page/all-cwimpies.jpg"
           alt=""
         >
-        <div
+        <section
           class="start-page__cwimpies__no-birthdays__text"
         >
-          <div class="start-page__cwimpies__no-birthdays__text__title">
+          <h1 class="start-page__cwimpies__no-birthdays__text__title">
             No birthdays todayyy
-          </div>
-          <div class="start-page__cwimpies__no-birthdays__text__body">
+          </h1>
+          <section class="start-page__cwimpies__no-birthdays__text__body">
             <button class="white-btn" routerLink="/cwimpies" role="button">
               Visit the cwimpies !
             </button>
-          </div>
-        </div>
-      </div>
+          </section>
+        </section>
+      </section>
 
-      <div
+      <section
         class="start-page__cwimpies__birthdays"
         *ngIf="(allBirthdayCwimpies.length != 0)"
       >
@@ -56,8 +56,8 @@
           *ngIf="allBirthdayCwimpies.length == 1"
           [cwimpieData]="allBirthdayCwimpies[0]"
         ></app-birthday-card>
-      </div>
+      </section>
 
-    </div>
-  </div>
+    </section>
+  </article>
 </div>

@@ -1,25 +1,25 @@
-<div
+<article
   (click)="toggleClicked()"
   [@toggleClick]="clicked"
   class="commandment-item"
 >
-  <div class="commandment-item__icon">
+  <section class="commandment-item__icon">
     <i class="fa-solid fa-{{data.icon}}"></i>
-  </div>
-  <div class="commandment-item__title">
+  </section>
+  <h3 class="commandment-item__title">
     {{data.title}}
-  </div>
-  <div class="commandment-item__rules">
-    <div
+  </h3>
+  <section class="commandment-item__rules">
+    <p
       class="commandment-item__rules__main-rule"
     >
       {{data.rule}}
-    </div>
-    <div
+    </p>
+    <em
       *ngIf="data.sub_rule"
       class="commandment-item__rules__sub-rule"
     >
       {{data.sub_rule}}
-    </div>
-  </div>
-</div>
+    </em>
+  </section>
+</article>

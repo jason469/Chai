@@ -1,20 +1,20 @@
 <div class="theme-warm-orange">
-  <div
+  <article
     class="commandments"
   >
-    <div class="commandments__titles">
+    <section class="commandments__titles">
       <h1
         class="commandments__titles__title"
       >
         Commandments
       </h1>
-      <h3
+      <h2
         class="commandments__titles__subtitle"
       >
-        These commandments were all decreed by Judge Nana. <br>
+        These commandments were all decreed by Judge Nana (Bam Bam!) <br>
         Click on one to toggle its read status
-      </h3>
-    </div>
+      </h2>
+    </section>
     <div
       @commandmentsAnimationTrigger
       *ngIf="!isLoading"
@@ -27,5 +27,5 @@
       >
       </app-commandment-item>
     </div>
-  </div>
+  </article>
 </div>
