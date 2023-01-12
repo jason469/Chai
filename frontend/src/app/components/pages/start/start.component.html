@@ -1,7 +1,7 @@
 <div class="theme-warm-orange">
   <article class="start-page">
     <section class="start-page__cwimpies"
-         *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
+             *ngIf="(!isLoading && allBirthdayCwimpies != undefined)"
     >
       <section
         class="start-page__cwimpies__no-birthdays"
@@ -30,11 +30,13 @@
         class="start-page__cwimpies__birthdays"
         *ngIf="(allBirthdayCwimpies.length != 0)"
       >
-        <h1
-          class="start-page__cwimpies__birthdays__title"
-        >
-          Happy Birthday Cwimpies !!
-        </h1>
+        <header>
+          <h1
+            class="start-page__cwimpies__birthdays__title"
+          >
+            Happy Birthday Cwimpies !!
+          </h1>
+        </header>
         <mdb-carousel
           [controls]="true"
           [indicators]="false"

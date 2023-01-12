@@ -3,6 +3,7 @@
   <main
     class="content"
     [@routeAnimationTrigger]="prepareRoute(outlet)"
+    [attr.data-visible]="navBarVisible"
   >
     <router-outlet
       #outlet="outlet"

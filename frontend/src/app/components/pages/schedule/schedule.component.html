@@ -1,8 +1,10 @@
 <article class="all-schedules"
-     *ngIf="(!loading && allCwimpies != undefined)"
+         *ngIf="(!loading && allCwimpies != undefined)"
 >
   <div class="theme-warm-orange">
-    <h1 class="all-schedules__title">Daily Schedules</h1>
+    <header>
+      <h1 class="all-schedules__title">Daily Schedules</h1>
+    </header>
   </div>
   <section
     *ngIf="allCwimpies.length != 0"
@@ -17,6 +19,6 @@
   </section>
   <h1
     *ngIf="allCwimpies.length == 0">
-  >  <!-- There are no cwimpies !-->
+    >  <!-- There are no cwimpies !-->
     All the Cwimpies are supa free today !!</h1>
 </article>

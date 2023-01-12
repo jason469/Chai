@@ -1,0 +1,27 @@
+$scrollbar-track-colour: hsl(120 75% 50% / 1);
+$scrollbar-thumb-colour: linear-gradient(#FF0000, #1764a2);
+
+body {
+  &::-webkit-scrollbar {
+    width: 2rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $scrollbar-track-colour;
+    border-radius: 100vw;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb-colour;
+    border-radius: 100vw;
+    border: 0.25em solid $scrollbar-track-colour;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar-thumb-colour;
+    cursor: pointer;
+  }
+
+}

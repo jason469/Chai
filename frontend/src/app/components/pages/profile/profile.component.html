@@ -2,7 +2,7 @@
   <article
     class="profile-page"
   >
-    <section class="profile-page__titles">
+    <header class="profile-page__titles">
       <h1 class="profile-page__titles__main">Profile</h1>
       <h2
         *ngIf="currentUser"
@@ -10,7 +10,7 @@
       >
         Welcome {{currentUser.name}}
       </h2>
-    </section>
+    </header>
     <section class="profile-page__content">
       <section class="profile-page__content__navigation">
         <h1

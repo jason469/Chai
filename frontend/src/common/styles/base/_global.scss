@@ -1,3 +1,9 @@
 .click {
   cursor: pointer;
 }
+
+@mixin add-mark-styling($highlight-colour) {
+  mark {
+    background: $highlight-colour;
+  }
+}

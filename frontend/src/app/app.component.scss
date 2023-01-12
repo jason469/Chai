@@ -1,3 +1,9 @@
 body {
   overflow-x: hidden;
 }
+
+main {
+  &[data-visible="true"] {
+    background-image: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0/ 0.8));
+  }
+}

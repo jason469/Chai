@@ -2,6 +2,13 @@
 @use "/src/common/styles/themes/all-themes" as t;
 @use "/src/common/styles/components" as c;
 
+.footer {
+  &[data-visible="true"]::before {
+    content: '';
+    //background-image: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0/ 0.8));
+    background: blue;
+  }
+}
 
 .copyright {
   @include c.hover-link-tooltip(#FFFFFF, #000000);

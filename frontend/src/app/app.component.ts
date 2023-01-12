@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {RouterOutlet} from "@angular/router";
 import {routeAnimation} from "./route-animations.animation";
 import {prepareRoute} from "./shared/constants/animations"
+import {HeaderVisibilityService} from "./services/partials/header/headerVisibility.service";
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,13 @@ import {prepareRoute} from "./shared/constants/animations"
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Chai';
   private autoLoginSub: Subscription | undefined;
+  private headerVisiblitySub: Subscription | undefined;
+
+  navBarVisible:boolean = false
 
   constructor(updates: SwUpdate,
               private authService: AuthService,
+              private headerVisibilityService: HeaderVisibilityService,
   ) {
     updates.versionUpdates.subscribe(event => {
       updates.activateUpdate().then(() => document.location.reload())
@@ -28,6 +33,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authService.autoLogin()?.subscribe()
+    this.headerVisiblitySub = this.headerVisibilityService.getData().subscribe({
+      next: (data: boolean) => {
+        this.navBarVisible = data
+      }
+    });
+
   }
 
   prepareRoute(outlet: RouterOutlet) {
@@ -37,6 +48,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.autoLoginSub) {
       this.autoLoginSub?.unsubscribe()
+    }
+    if (this.headerVisiblitySub) {
+      this.headerVisiblitySub.unsubscribe()
     }
   }
 }

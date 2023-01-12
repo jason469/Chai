@@ -6,7 +6,7 @@
       </section>
       <section class="postcard__left__welcome">
         <h2 class="postcard__left__welcome__start">
-          Hi there, my name's
+          <mark>Hi there, my name's</mark>
         </h2>
         <h1 class="postcard__left__welcome__name">
           {{data.name}}
@@ -17,7 +17,7 @@
       </section>
     </section>
     <section class="postcard__right">
-      <section class="postcard__right__header">
+      <header class="postcard__right__header">
         <h3 class="postcard__right__header__date">
           {{currentDateString}}
         </h3>
@@ -26,7 +26,7 @@
             [stampData]="stampData"
           ></app-cwimpie-stamp>
         </section>
-      </section>
+      </header>
       <section class="postcard__right__body">
         <section class="postcard__right__body__welcome">
           <h1
@@ -45,8 +45,10 @@
             though, so feel free to visit me whenever you have time!
           </section>
           <section>
-            I was born on {{birthDateString}}, in a wonderful shade of {{data.colour?.name}}. <br>
-            Technically speaking, I'm a {{data.species!.name}} but we're all cwimpies here.
+            I was born on
+            <time>{{birthDateString}}</time>
+            , in a wonderful shade of {{data.colour?.name}}. <br>
+            Technically speaking, I'm a {{data.species!.name}}, but we're all cwimpies here.
           </section>
           <section>
             I'm currently in a loving relationship with {{data.partner}}, which always makes me super happy hehe. Aside
@@ -58,13 +60,17 @@
           </section>
           <section>
             Finally, here's just a list of my favourite things in the whole world!
-            <ul class="list">
+            <ul role="list" class="list">
               <li
                 *ngFor="let favourite of data!.favourites"
               >
                 My favourite {{favourite.type|lowercase}} is {{favourite.name|lowercase}}
               </li>
             </ul>
+          </section>
+          <section>
+            Thanks for reading! <br>
+            - {{data.name}}
           </section>
         </section>
       </section>

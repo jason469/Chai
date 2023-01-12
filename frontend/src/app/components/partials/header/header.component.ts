@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
 import {Subscription} from "rxjs";
+import {HeaderVisibilityService} from "../../../services/partials/header/headerVisibility.service";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private headerVisibilityService: HeaderVisibilityService,
   ) {
   }
 
@@ -25,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleNavbar(event:boolean) {
     this.navbarVisible = event
+    this.headerVisibilityService.changeStatus(event)
   }
 
   ngOnInit(): void {

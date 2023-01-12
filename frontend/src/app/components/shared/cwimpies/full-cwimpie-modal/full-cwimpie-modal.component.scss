@@ -8,7 +8,7 @@ $cwimpieColour: #000000;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
-  min-width: 50rem;
+  min-width: 80vw;
   max-height: 100%;
   margin: 0;
   padding: 0;
@@ -117,6 +117,7 @@ $cwimpieColour: #000000;
         white-space: nowrap;
         text-transform: uppercase;
         font-size: 0.6rem;
+        margin: 0;
       }
 
       &__stamp {
@@ -162,6 +163,7 @@ $cwimpieColour: #000000;
         gap: 0.7rem;
 
         section {
+          width: 100%;
           li {
             list-style-type: '💘';
             padding-inline-start: 1ch;

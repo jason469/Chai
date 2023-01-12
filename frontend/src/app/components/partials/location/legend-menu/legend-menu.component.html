@@ -1,30 +1,32 @@
 <article class="trip_legend">
-  <h1 class="trip_legend__title">
-    Legend
-  </h1>
+  <header>
+    <h1 class="trip_legend__title">
+      Legend
+    </h1>
+  </header>
   <section class="trip_legend__items">
     <p class="trip_legend__items__item"
-         appLegendMenuItem
-         [prefix]="'cwimpie'"
-         [isMultiStopItem]="false"
-         (menuItemData)="toggleItem($event)"
+       appLegendMenuItem
+       [prefix]="'cwimpie'"
+       [isMultiStopItem]="false"
+       (menuItemData)="toggleItem($event)"
     >
       Cwimpie Icons
     </p>
     <p class="trip_legend__items__item"
-         appLegendMenuItem
-         [prefix]="'tripOne'"
-         [isMultiStopItem]="false"
-         (menuItemData)="toggleItem($event)"
+       appLegendMenuItem
+       [prefix]="'tripOne'"
+       [isMultiStopItem]="false"
+       (menuItemData)="toggleItem($event)"
     >
       Melbourne to Dunedin
     </p>
     <p class="trip_legend__items__item"
-         appLegendMenuItem
-         *ngFor="let trip of multiStopTrips"
-         [prefix]=trip.pathConfig[0].properties.tripName
-         [isMultiStopItem]="true"
-         (menuItemData)="toggleItem($event)">
+       appLegendMenuItem
+       *ngFor="let trip of multiStopTrips"
+       [prefix]=trip.pathConfig[0].properties.tripName
+       [isMultiStopItem]="true"
+       (menuItemData)="toggleItem($event)">
       {{trip.displayName}}
     </p>
   </section>

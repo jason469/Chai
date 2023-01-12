@@ -12,9 +12,10 @@
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   background: none;
   transition: 200ms ease-in;
+  height: 100%;
 
   @include a.themify(t.$themes) using($theme-map) {
-    @include c.image_with_text_overlay(".card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 0.5rem)
+    @include c.image_with_text_overlay(".cwimpie-card__image", #FFFFFF, a.themed($theme-map, a.$backgroundColour), 0.5rem)
   }
 
   &:hover {
