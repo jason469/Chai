@@ -6,20 +6,26 @@ export class RedisCache {
     host: string;
     port: number;
     dbNumber: number;
+    url: string;
     private client: any;
     private isClientConnected: boolean = false;
     private prefix: string = "";  // Used to prepend each key in the cache
 
-    constructor(username: string, password: string, host: string, port: number, dbNumber: number, prefix:string) {
+    constructor(url: string = '', username: string = '', password: string = '', host: string = '', port: number = 6379, dbNumber: number = 0, prefix: string = '') {
         this.username = username;
         this.password = password;
         this.host = host;
         this.port = port;
         this.dbNumber = dbNumber;
         this.prefix = prefix
+        this.url = url
 
         try {
-            this.client =  new Redis(`redis://${this.host}:${this.port}/${this.dbNumber}`)
+            if (this.url != '') {
+                this.client = new Redis(this.url)
+            } else {
+                this.client = new Redis(`redis://${this.host}:${this.port}/${this.dbNumber}`)
+            }
             this.isClientConnected = true
         } catch {
             console.error('Could not create redis cache')

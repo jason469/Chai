@@ -81,6 +81,15 @@ $white: 0, 0%, 100%;
   }
 }
 
+.logo {
+  a {
+    font-family: "Kavoon", sans-serif;
+    font-size: 3rem;
+    font-style: italic;
+    color: #EF820D
+  }
+}
+
 @media (max-width: 35em) {
   .navigation {
     flex-direction: column;
