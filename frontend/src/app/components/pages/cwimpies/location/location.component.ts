@@ -260,7 +260,7 @@ export class LocationComponent implements OnInit {
 
   async initialiseMap() {
     this.map = new mapboxgl.Map({
-      accessToken: environment.mapbox.accessToken,
+      accessToken: environment.mapbox__accessToken,
       container: 'map',
       style: this.style,
       zoom: 3,

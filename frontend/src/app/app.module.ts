@@ -107,7 +107,7 @@ import {StartModule} from "./shared/customElements/custom-elements.module";
 
     // Global Mapbox Module
     NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapbox.accessToken,
+      accessToken: environment.mapbox__accessToken
     }),
 
     // Global Page Modules
