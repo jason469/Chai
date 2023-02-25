@@ -1,6 +1,6 @@
 # Chai
 > Created by Jason Liu<br>
-> Version 1.0 of this app has been completed, but not yet deployed
+> Version 1.0 of this app has been and deployed
 
 ### What is Chai?
 Chai is a soft-toy tracking application used to track the lives and stories of different soft toys <br>
@@ -22,6 +22,12 @@ This application makes use of the MEAN stack. In more detail, that means:
 Some additional services were also used to create certain features:
 - **_Mapbox_** was used to create the map showcasing each soft toys travel plans
 - **_Redis_** was used to implement caching and improve performance
+
+This application will use the following services for deployment
+- **Mongo Atlas** for the MongoDB Database
+- **Vercel** to host the NodeJS/Express Backend
+- **Netlify** to host the Angular Frontend
+- **Render** to host the Redis Cache
 
 ### Future plans for the app
 The app is currently completed as a standard web application, however it has not yet been deployed. <br>
