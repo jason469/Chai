@@ -27,7 +27,7 @@ dotenv.config()
 require('dotenv').config()
 
 databaseConfig.dbConnect();
-// loadFixtures()
+loadFixtures()
 cacheSetUpConfig()
 createDailySchedules()
 
@@ -55,6 +55,7 @@ app.use(userRouter)
 app.use(dailyScheduleRouter)
 app.use(countryRouter)
 
+if (process.env.API_PORT)
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`connected at port ${PORT}`)
 })
