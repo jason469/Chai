@@ -26,10 +26,10 @@ const databaseConfig = require('./src/config/database.config');
 dotenv.config()
 require('dotenv').config()
 
-databaseConfig.dbConnect();
-loadFixtures()
+// databaseConfig.dbConnect();
+// loadFixtures()
 // cacheSetUpConfig()
-createDailySchedules()
+// createDailySchedules()
 
 const PORT = process.env.PORT || 5000;
 
