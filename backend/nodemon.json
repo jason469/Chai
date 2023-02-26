@@ -3,5 +3,5 @@
   "ignore": [],
   "watch": ["./"],
   "ext": "ts, json",
-  "exec": "ts-node ./server.ts"
+  "exec": "ts-node ./index.ts"
 }

@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "nodemon -L server.ts",
-    "start": "node server.ts"
+    "dev": "nodemon -L index.ts",
+    "start": "node index.ts"
   },
   "keywords": [],
   "author": "",
