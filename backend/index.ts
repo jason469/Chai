@@ -28,7 +28,7 @@ require('dotenv').config()
 
 databaseConfig.dbConnect();
 loadFixtures()
-cacheSetUpConfig()
+// cacheSetUpConfig()
 createDailySchedules()
 
 const PORT = process.env.PORT || 5000;
