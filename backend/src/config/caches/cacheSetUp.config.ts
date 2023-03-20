@@ -1,3 +1,4 @@
+export {};
 import {allColoursCache, allCwimpiesCache} from "./allCaches";
 
 const cwimpieService = require('../../services/cwimpie')

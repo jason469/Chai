@@ -1,10 +1,14 @@
-import * as dotenv from 'dotenv'
-import {loadFixtures} from "./src/config/fixtureCommands";
-import {createDailySchedules} from "./src/utilities/periodicTasks/createDailySchedule";
-import {cacheSetUpConfig} from "./src/config/caches/cacheSetUp.config";
+// import * as dotenv from 'dotenv'
+// import {loadFixtures} from "./src/config/fixtureCommands";
+// import {createDailySchedules} from "./src/utilities/periodicTasks/createDailySchedule";
+// import {cacheSetUpConfig} from "./src/config/caches/cacheSetUp.config";
 
 const express = require('express');
 const cors = require("cors");
+const dotenv = require('dotenv')
+const loadFixtures = require('./src/config/fixtureCommands')
+const createDailySchedules = require('./src/utilities/periodicTasks/createDailySchedule')
+const cacheSetUpConfig = require('./src/config/caches/cacheSetUp.config')
 
 const authRouter = require('./src/routes/auth');
 const cwimpieRouter = require('./src/routes/cwimpie');
@@ -26,7 +30,7 @@ const databaseConfig = require('./src/config/database.config');
 dotenv.config()
 require('dotenv').config()
 
-// databaseConfig.dbConnect();
+databaseConfig.dbConnect();
 // loadFixtures()
 // cacheSetUpConfig()
 // createDailySchedules()

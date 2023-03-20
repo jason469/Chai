@@ -1,3 +1,4 @@
+export {};
 import moment from "moment";
 import {ITask} from "../interfaces/modelInterfaces";
 import {allTaskData} from "../randomValues/taskData";
